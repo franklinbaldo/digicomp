@@ -1,0 +1,17 @@
+# Verificações locais (prek). Sem CI obrigatório no GitHub Actions nesta fase.
+# Instalar o hook: prek install
+default_install_hook_types: [pre-commit]
+repos:
+  - repo: local
+    hooks:
+      - id: okf-check
+        name: okf-parser check (Markdown do acervo)
+        entry: uvx okf-parser==0.48.2 check . --normative-spec --require-spec .okf/specs/{slug}.md
+        language: system
+        pass_filenames: false
+        always_run: true
+      - id: sem-binarios-historicos
+        name: bloqueia ROM/firmware de procedência não esclarecida
+        entry: "Arquivos binários de firmware não podem ser versionados sem análise de procedência (docs/research-plan.md)."
+        language: fail
+        files: '\.(bin|rom|hex|eprom)$'

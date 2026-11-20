@@ -1,0 +1,8 @@
+# Saídas locais e material de procedência não esclarecida nunca entram no Git
+.cache/
+quarentena/
+target/
+public/
+*.bin
+*.rom
+*.hex
