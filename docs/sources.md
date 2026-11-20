@@ -67,3 +67,35 @@ Leitura inicial em 2026-11-20.
 | --- | --- | --- |
 | Ano de lançamento | F1 e F3: 1977; F2: 1981 | Pode ser data de fabricação do exemplar. Conferir anúncios de época. |
 | Uso por Quigley | F3 (de segunda mão); F2 (via Campbell) | Nenhuma fonte primária. |
+
+## F7. Testemunho brasileiro sobre exemplar DR-70 de Zeferino Pina Costa
+
+- URL: https://constelar.com.br/comunidade/astrologos/zeferino-a-sete-maos/
+- Publicação: *Constelar*, 19/08/2018, "Zeferino, um perfil a sete mãos"; compilação de Fernando Fernandse.
+- Trecho relevante: no depoimento atribuído a Carlos Alberto Boton, Zeferino Pina Costa teria trazido ao Brasil "um Digicomp DR-70 versão 1" para cálculos astrológicos.
+- Grau: **relatado por testemunha identificada**, em retrospectiva. A legenda da fotografia retrata um modelo **idêntico** ao aparelho associado a Zeferino, não certifica fotografia do exemplar particular dele.
+- Pistas: possível trilha brasileira de manuais, cartões de comandos, mapas produzidos ou registros do aparelho. Sem abordagem de pessoas sem autorização.
+
+## F8. Computer History Museum: item DR-70
+
+- URL do índice: https://computerhistory.org/playlists/decoding-democracy-election-resources-from-chms-collections/
+- URL do item vinculada pelo museu: https://computerhistory.org/collections/catalog/102746921
+- Natureza: índice de acervo do Computer History Museum que lista "Digicomp DR-70 Astrology Minicomputer, 1978".
+- Grau: **confirmado** quanto à existência da referência catalográfica no museu, não quanto à data exata de fabricação, integridade física, chip ou presença de ROM. A página de detalhe recusou acesso automatizado (HTTP 403) em 20/11/2026.
+- Pista: tentar localizar metadados públicos, fotografias e instrumentos de pesquisa do item 102746921, sem contato externo nesta fase.
+
+## F9. American Federation of Astrologers: índice histórico da série de Richard Nolle
+
+- URL: https://astrologers.com/wp-content/uploads/2025/07/Index-by-Title-41-50.pdf
+- Natureza: índice **retrospectivo** de *Today's Astrologer* / American Federation of Astrologers, volumes XLI–L. A tabela foi inspecionada no PDF (página do índice com as partes 1–21), mas os artigos originais ainda **não** foram obtidos.
+- Entradas específicas: Richard Nolle, *The Astrologer's Computer*, parte 5, XLV/9, setembro de 1983, p. 14 ("Hardware: DR-70"); parte 6, XLV/10, outubro de 1983, p. 9 ("Computers: testing on DR-70, comparison to ACS program"); parte 14, XLVI/6, maio de 1984, p. 13 ("Digicomp DR-70 with printer, Digicomp Astrion 80 computer"); parte 18, XLVI/10, setembro de 1984, p. 10 (consulta sobre "DR-70 or Astrio-80", grafia divergente no índice).
+- Grau: **confirmado** somente quanto às referências bibliográficas no índice; **não** é evidência direta do conteúdo técnico da revista nem de que o Astrion/Astrio 80 reutilize software do DR-70.
+- P0 de pesquisa: recuperar os números originais de setembro/outubro de 1983 e maio/setembro de 1984. A parte 6, com teste comparativo, pode conter observações concretas de saída e erro, úteis ao corpus de fidelidade #7.
+
+## F10. Artigo de 1979, referência textual em índice de busca (continuação de F4)
+
+- URL original: https://ccrsdodona.org/m_dilemma/1979/vir/computer.html
+- Estado em 20/11/2026: o mecanismo de busca apresenta excerto que descreve o DR-70 como já programado e não alterável pelo usuário, com endereço de Digicomp Research Corp em Terrace Hill, Ithaca. A abertura direta falhou por restrição de acesso automatizado; portanto **não é leitura independente do artigo completo**.
+- Grau: **pista indexada, ainda não validada na página original**. Não tomar a expressão "não alterável" como prova do tipo de ROM, de sua impossibilidade de extração ou da arquitetura do aparelho.
+- Próximo passo: Wayback ou fac-símile do periódico para data, contexto, transcrição e custódia.
+
