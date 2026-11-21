@@ -7,17 +7,17 @@ timestamp: 2026-11-20T21:05:00-04:00
 
 # Agentes · Digicomp DR-70
 
-**AVISO À EQUIPE: usar a skill oficial `reverse-engineer-anything` (REA) sempre que a tarefa exigir engenharia reversa de um artefato binário, firmware, pacote ou comportamento executado, e seguir seu procedimento de evidências.**
+**AVISO À EQUIPE: a skill canônica deste projeto é [`.agents/skills/digicomp-rea/SKILL.md`](.agents/skills/digicomp-rea/SKILL.md). LEIA E USE A ADAPTAÇÃO LOCAL EM TODA INVESTIGAÇÃO DO DR-70, com ou sem ROM. Quando o alvo requer análise binária, a adaptação aciona a skill upstream `reverse-engineer-anything` (REA) e as referências técnicas pertinentes.**
 
 - Origem oficial: [morluto/rea](https://github.com/morluto/rea).
 - Skill upstream: `reverse-engineer-anything`. Instalação da *skill*, quando necessária e aprovada no executor: `npx skills add morluto/rea --skill reverse-engineer-anything`. A instalação **não** instala nem conecta o servidor MCP/engines.
-- Procedimento local para o DR-70: [`.agents/skills/digicomp-rea/SKILL.md`](.agents/skills/digicomp-rea/SKILL.md) e [`docs/reverse-engineering.md`](docs/reverse-engineering.md).
-- Antes de cada investigação, leia a skill upstream disponível no agente e a referência pertinente à classe de alvo. A adaptação local não substitui as instruções upstream.
+- Procedimento local **primário e obrigatório**: [skill Digicomp](.agents/skills/digicomp-rea/SKILL.md) (fases 0–5, rotas D1–D3 e H1–H3, caso DR70-CASE-ID e gates) e [protocolo de evidências](docs/reverse-engineering.md).
+- Use a skill original e a referência REA adequada **quando a rota exigir análise de firmware/binário/captura**. Para artigo de 1983, fotografia, cartão de instruções ou inventário sem arquivo executável, use as rotas documentais da skill local. Não instale/configure REA apenas para ler documentos.
 - **Não alegar que a skill, o servidor REA, Ghidra, Binwalk, Unblob ou qualquer provider estão conectados/instalados sem conferência no executor.** Na coordenação ChatGPT desta rodada, ferramentas REA não estavam expostas.
 
 ## Quando usar e quando não usar
 
-O projeto prioriza a **recuperação do software original** e o entendimento da máquina. Pesquisa em anúncios, manuais, inventários de museus, patentes e fotografias sem binário continua com ferramentas comuns, registrando a fonte: a própria skill REA manda **não** iniciar análise de engenharia reversa para leitura rotineira de repositório-fonte ou bibliografia.
+O projeto prioriza a **recuperação do software original** e o entendimento da máquina. Toda frente executa a **fase 0** da skill local: rotas D1 (documentos), D2 (interface/teclado), D3 (saídas/fidelidade) e H1 (placa/chips) funcionam **sem ROM e sem REA MCP**. H2 (dump) e H3 (captura lógica) só são acionadas com arquivo e permissão concretos. Cada observação deve gerar uma ficha `DR70-CASE-ID`; não produzir zeros inventados nem inferir ausência universal de firmware.
 
 Quando houver alvo concreto, escolher a rota:
 
