@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "component": "moira-ascendant-branch",
+  "repository": "https://github.com/TheDaniel166/moira",
+  "commit": "1bb9f66cde48f91cb13ebc5a715dec030d592b44",
+  "license": "MIT",
+  "license_copyright": "Copyright (c) 2026 TheDaniel166",
+  "vendor_purpose": "Research reference for ascendant rising/setting branch selection, NOT DR-70 firmware/algorithm evidence",
+  "source_files": [
+    {
+      "upstream": "moira/_angles.py",
+      "vendored": "vendor/moira/_angles.py",
+      "sha1_git_blob": "0df066cc4f9649be800e07dc784df6bed71cd144",
+      "mode": "exact-copy"
+    },
+    {
+      "upstream": "moira/constants.py",
+      "vendored": "vendor/moira/constants.py",
+      "sha1_git_blob": "0c20adc02e2e4ca966de296106cfb19f9ac64496",
+      "mode": "minimal-adapter-only"
+    },
+    {
+      "upstream": "LICENSE",
+      "vendored": "vendor/moira/LICENSE",
+      "sha1_git_blob": "2deb675af287ed6d137e6b1727cc61e1054d4793",
+      "mode": "exact-copy"
+    }
+  ],
+  "upstream_license_claim": "Moira PROVENANCE.md states its astronomical algorithms are independent of Swiss Ephemeris; this is upstream authorship declaration, not independent legal certification",
+  "restrictions": [
+    "not original DR-70",
+    "no golden evidence",
+    "no Moira JPL kernel or other external assets included",
+    "do not assume package-wide rights extend to third-party data"
+  ]
+}
