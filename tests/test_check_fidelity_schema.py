@@ -79,6 +79,47 @@ class FidelitySchemaTests(unittest.TestCase):
         self.write(case)
         self.assertEqual(check_schema(self.path), 1)
 
+    def test_partial_with_only_whitespace_input_is_rejected(self) -> None:
+        # A blank cell is not an observed input, even when nonempty as a string.
+        case = fake_case()
+        case["as_entered"]["date_literal"] = " \\t"
+        self.write(case)
+        with self.assertRaisesRegex(CorpusError, "JSON Schema violation"):
+            check_schema(self.path)
+
+    def test_partial_with_only_whitespace_output_is_rejected(self) -> None:
+        case = fake_case()
+        case["observed_output"]["literal"] = " \\t"
+        self.write(case)
+        with self.assertRaisesRegex(CorpusError, "JSON Schema violation"):
+            check_schema(self.path)
+
+    def test_replayable_with_whitespace_only_key_is_rejected(self) -> None:
+        case = fake_case()
+        case["status"] = "replayable"
+        case["source"]["directness"] = "device_observation"
+        case["as_entered"]["keys_literal"] = [" \\t"]
+        case["observed_output"] = {"channel": "led", "literal": "FAKE OUTPUT"}
+        self.write(case)
+        with self.assertRaisesRegex(CorpusError, "JSON Schema violation"):
+            check_schema(self.path)
+
+    def test_replayable_with_whitespace_only_output_is_rejected(self) -> None:
+        case = fake_case()
+        case["status"] = "replayable"
+        case["source"]["directness"] = "device_observation"
+        case["as_entered"]["keys_literal"] = ["FAKE KEY"]
+        case["observed_output"] = {"channel": "led", "literal": " \\t"}
+        self.write(case)
+        with self.assertRaisesRegex(CorpusError, "JSON Schema violation"):
+            check_schema(self.path)
+
+    def test_partial_visible_literal_with_surrounding_whitespace_passes(self) -> None:
+        case = fake_case()
+        case["as_entered"]["date_literal"] = "  FAKE DATE  "
+        self.write(case)
+        self.assertEqual(check_schema(self.path), 1)
+
     def test_replayable_synthetic_structure_passes_without_authenticating(self) -> None:
         case = fake_case()
         case["status"] = "replayable"
