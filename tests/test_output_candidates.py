@@ -186,7 +186,7 @@ class CandidateCatalogTest(unittest.TestCase):
     def test_duplicate_json_escaped_property_rejected(self):
         with self.assertRaisesRegex(ValueError, "duplicate JSON property"):
             self._parse_synthetic_catalog(
-                r'{"entries":[],"\\u0065ntries":[{"id":"FAKE"}]}'
+                r'{"entries":[],"\u0065ntries":[{"id":"FAKE"}]}'
             )
 
     def test_duplicate_json_nested_output_rejected(self):
