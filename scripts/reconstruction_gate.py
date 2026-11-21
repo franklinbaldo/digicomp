@@ -11,7 +11,7 @@ import re
 import sys
 from pathlib import Path
 
-_SHA256 = re.compile(r"[0-9a-f]{64}\\Z")
+_SHA256 = re.compile(r"[0-9a-f]{64}\Z")
 
 
 def _present(value: object) -> bool:
