@@ -295,5 +295,14 @@ class FidelitySchemaTests(unittest.TestCase):
         self.assertEqual(check_schema(self.path), 1)
 
 
+    def test_supplementary_plane_glyph_remains_legible(self) -> None:
+        # JSON Schema is also consumed by ECMAScript regex engines, where
+        # a visible astral glyph is encoded by a UTF-16 surrogate pair.
+        case = fake_case()
+        case["as_entered"]["date_literal"] = "\U0001F600"
+        self.write(case)
+        self.assertEqual(check_schema(self.path), 1)
+
+
 if __name__ == "__main__":
     unittest.main()

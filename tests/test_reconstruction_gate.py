@@ -237,5 +237,12 @@ class ReconstructionTriageTests(unittest.TestCase):
         self.assertEqual(result["track"], "B_BEHAVIOR_STUDY")
 
 
+    def test_supplementary_plane_glyph_remains_io_candidate(self) -> None:
+        row = {**FAKE_IO, "output_literal": "\U0001F600"}
+        result = evaluate({"observations": [row]})
+        self.assertEqual(result["candidate_io_cases"], 1)
+        self.assertEqual(result["track"], "B_BEHAVIOR_STUDY")
+
+
 if __name__ == "__main__":
     unittest.main()
