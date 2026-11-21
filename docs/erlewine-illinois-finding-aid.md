@@ -35,11 +35,11 @@ O [inventário institucional *Michael Erlewine Papers* (35/3/419)](https://archo
 | **Box 2 / Folder 27** | *HP-67/HP-97 User’s Library Solutions: Astrology – Programs by James Neely, 1978* | Plataforma HP identificada; não transferir algoritmo ao DR-70. |
 | **Box 2 / Folder 17** | *Rex Shudde, 1977–1979* | O resumo institucional chama Rex Shudde de **“James Neely”** (pseudônimo), útil para localizar documentos, não para imputar autoria Digicomp. |
 | **Box 7 / Folder 37** | *Blue Star User's Guide, 1989* | Controle material catalogado com data **1989** para a narrativa sobre Blue Star usado em **1988**; data do guia não fixa lançamento nem recursos da versão de 1988. |
-| **Box 9 / Folder 23** | *Matrix Magazine Issues 1-3, 1978* | Via física de confronto com a alegação secundária sobre a p. 5 do número I; **página não lida**. |
+| **Box 9 / Folder 23** | *Matrix Magazine Issues 1-3, 1978* | Guarda os fascículos impressos. A p. 5 e o artigo de Tim Smith nas pp. 57–58 do n.º 1 foram conferidos na coletânea digital do editor. [Localizadores no PDF](tim-smith-matrix-1978.md). |
 
-**Estado da consulta (21/11/2026):** descrições públicas de catálogo efetivamente lidas, mas os cinco objetos físicos **NOT_RETRIEVED**. O PDF agregado *Matrix Magazine Issues 1–4* anunciado pelo editor (`https://assets.libsyn.com/show/59251/Matrix_Magazine_1-4.pdf`) não pôde ser aberto pela interface pública de leitura; nenhuma imagem de página, bytes integrais ou SHA-256 foram obtidos. O inventário não identifica DR-70 nos rótulos citados.
+**Estado da consulta (21/11/2026):** descrições públicas de catálogo efetivamente lidas, mas os cinco objetos físicos **NOT_RETRIEVED**. O download da coletânea digital do editor funcionou via redirecionamento, com SHA-256 registrado. Na p. 5 do n.º 1, a revista descreve o trabalho de James Neely para calculadoras HP e a tradução de programas para a TI-59. A atribuição de desenvolvimento do DR-70 aparece na nota editorial ao artigo de Tim Smith, na p. 57. [Conferência do fac-símile](tim-smith-matrix-1978.md).
 
-**Teste discriminante:** cotejar um fac-símile do n.º I (1978), p. 5, para verificar a menção e separar programa HP/PET/TRS-80 de execução DR-70; confrontar o guia Blue Star 1989 com documentação de **1988** antes de atribuir Quick*Maps ou formatação de mapa a McRae/DR-70. Não registrar qualquer caso golden com base nesses localizadores. Nenhum contato, compra ou execução de firmware.
+**Teste discriminante:** localizar documentação que vincule uma rotina específica ao DR-70 para confrontar com os programas HP descritos no n.º 1; confrontar o guia Blue Star 1989 com documentação de **1988** antes de atribuir Quick*Maps ou formatação de mapa a McRae/DR-70. Não registrar qualquer caso golden com base nesses localizadores. Nenhum contato, compra ou execução de firmware.
 
 ## Interpretações concorrentes e corte de confiança
 
