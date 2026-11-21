@@ -45,6 +45,14 @@ Assim, a redação mais sustentada é: **Michaels relatou operar um DR-70 cujos 
 
 **Alerta editorial:** o título da reportagem de 1988 não é uma descrição técnica do equipamento. Testemunhos sobre uso político de astrologia não demonstram validade preditiva; tampouco o texto permite inferir que o DR-70 tinha a mesma CPU do Pascal-100.
 
+## O0: relato contemporâneo de *printout* para um evento datado (1988)
+
+Na [reportagem de Duncan Campbell, *New Statesman & Society*, 14/10/1988, p. impressa 14](https://www.duncancampbell.org/menu/journalism/newstatesman/newstatesman-1988/Reagan%27s%20secret%20computer.pdf#page=2), conferida visualmente na reprodução, o autor relata que Nicky Michaels ligou seu DR-70 e examinou um **`printout`** relativo à assinatura do tratado INF, para uma data e horário que o jornalista registra como **1:33 p.m.** Isso é mais específico que a atribuição genérica de cálculos: registra **o testemunho jornalístico de papel consultado para um evento**, fora da família documental Carlson 1983/1985. Não é fotografia do papel, não confirma independentemente o horário histórico, não fornece data/hora *digitadas*, fuso, comandos, cálculo ou identidade de impressora. A expressão `printout` **não certifica impressão nativa do DR-70**.
+
+Como trilha material distinta, o [guia institucional da Hoover Institution sobre o acervo Reagan](https://guides.hoover.org/c.php?g=1421865&p=10542098) identifica **Joan Quigley papers, Box 3, Folder “Ronnie Nancy Charts”**, com fotografia de documentos, e descreve cartas astrológicas. O acervo é de Quigley, **não de Michaels**: nenhum item foi aqui identificado como o `printout` de 1987 ou como saída DR-70. Um título de pasta ou fotografia de mapa não transfere autoria do software nem custódia do aparelho.
+
+**Hipóteses rivais O0:** (A) papel produzido diretamente por periférico do DR-70; (B) cálculo produzido no DR-70 com apresentação em outro equipamento; (C) gráfico/transcrição manual ou de terceiro posteriormente consultado. **Discriminante:** imagem integral de uma folha com origem, legenda, cabeçalhos, data, identificação do equipamento/periférico e vínculo explícito à operação relatada; cotejar seu formato com Carlson **sem assumir independência instrumental**. **Estado:** `REPORTED_PRINTOUT_NO_ARTIFACT`; `NOT_RUN_NO_GOLDEN`; sem nova entrada no corpus de fidelidade.
+
 ## Próximos testes que podem recuperar o software
 
 1. **Trilha documental:** encontrar edição original de *Prediction* setembro/2004 (pp. 46–48), além de eventual fotografia, anúncio ou nome comercial de quem entregou o DR-70 a Michaels. A transcrição não contém número de série.
