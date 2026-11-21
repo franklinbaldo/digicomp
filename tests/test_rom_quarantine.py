@@ -251,7 +251,7 @@ class QuarantineTests(unittest.TestCase):
             with self.subTest(field=field):
                 # json.dumps escapes lone surrogates, producing syntactically valid JSON.
                 metadata_path.write_text(
-                    json.dumps({**record, field: "\\ud800"}), encoding="utf-8"
+                    json.dumps({**record, field: "\ud800"}), encoding="utf-8"
                 )
                 with self.assertRaisesRegex(CustodyError, "invalid quarantine provenance text"):
                     verify(self.root, record["sha256"])
@@ -268,11 +268,11 @@ class QuarantineTests(unittest.TestCase):
         fresh = self.base / "fresh-quarantine"
         fresh.mkdir(mode=0o700)
         with self.assertRaisesRegex(CustodyError, "UTF-8"):
-            ingest(self.source, fresh, origin="\\ud800")
+            ingest(self.source, fresh, origin="\ud800")
         self.check(not list(fresh.iterdir()), "invalid origin left quarantine artifacts")
         if os.name == "posix":
             # A byte filename decoded with surrogateescape is a real POSIX path.
-            bad_name = self.base / os.fsdecode(b"invalid_\\xff.bin")
+            bad_name = self.base / os.fsdecode(b"invalid_\xff.bin")
             bad_name.write_bytes(b"SYNTHETIC-BYTES")
             with self.assertRaisesRegex(CustodyError, "original_basename"):
                 ingest(bad_name, fresh, origin="valid")
