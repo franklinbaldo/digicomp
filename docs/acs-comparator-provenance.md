@@ -23,6 +23,16 @@ estado: provisorio
 
 Os IDs F9/F13/F14 remetem ao [catálogo do projeto](sources.md). Os rótulos ACS-A/ACS-U/ACS-79 são **locais a esta nota**; não criam uma nova entrada F, nem implicam duas comprovações primárias independentes da identidade ou das atividades da firma. As biografias podem compartilhar fontes, sem genealogia editorial demonstrada. A discrepância de ano **não deve ser resolvida por votação**.
 
+## Controle negativo de atribuição: exemplo de Joyce Wehrman com selo ACS
+
+**Polvo, 21/11/2026, O0/O1.** A reprodução textual de *What Are Winning Transits*, de [Joyce Wehrman no Scribd](https://www.scribd.com/document/38654289/Wehrman-Joyce-What-Are-Winning-Transits), seção **“FORMAT OF THE REPORT”**, apresenta um exemplo que identifica expressamente **Astro Computing Services, White Plains, NY**, com o rótulo **“KOCH TROPICAL”** e uma linha datada **Friday, May 3, 1985**. A autora atribui o cálculo e o relatório ao programa/serviço **Winning Transits** de Astro Computing Services, e menciona que clientes enviavam dados ao fornecedor. A [reprodução textual alternativa](https://pdfcoffee.com/wehrman-joyce-what-are-winning-transits-pdf-free.html) conserva os mesmos elementos; **duas cópias da mesma obra não são dois outputs independentes**.
+
+**Distinguir obras e épocas:** esse exemplo com data de 1985 não pode ser um gráfico original da edição revisada de **1980** de [*Winning!!: Zodiacal Timing*](wehrman-1980-dr70-output-lead.md), nem documenta o teste de Nolle **1983**. Mesmo quando duas peças contêm a palavra `KOCH`, isso não identifica máquina, software, algoritmo ou formatador. A semelhança de campo seria apenas pista para cotejo, não evidência de que o DR-70 gerou a impressão. A ficha bibliográfica [Google Books](https://books.google.com/books/about/Winning.html?id=KoePGwAACAAJ) situa a edição revisada de Wehrman em 1980 (81 páginas), mas não fornece imagem dos mapas.
+
+**Controle discriminante proposto:** diante de qualquer imagem futura ligada a Wehrman, transcrever literalmente `imprint`, cabeçalho, data, campos de entrada, rótulos de casas, bordas e canal. Se o original identificar **ACS** ou **Winning Transits**, classificar como output **atribuído editorialmente ao serviço ACS**, não ao DR-70; se identificar DR-70, exigir ainda a ligação específica ao exemplar/sessão e separar cálculo de composição. Não igualar o programa Winning Transits de data posterior ao “ACS program” não identificado no índice de Nolle.
+
+**Limitação:** inspeção **somente de texto HTML transcrito**, sem fac-símile, hash de bytes originais, imagem da tabela ou registro de operação. O carimbo **03/05/1985** é **data interna do exemplo**, não data de publicação do folheto ou de execução verificada do serviço. Estado científico: **nenhum par DR-70 entrada→saída autenticado; `NOT_RUN_NO_GOLDEN`**.
+
 ## Hipóteses distintas sobre a comparação de 1983
 
 O texto contemporâneo de **Pottenger (1979)** documenta que **ACS** era uma designação em uso, associada a Neil Michelsen, antes do teste indexado de 1983. A mesma matéria trata ACS como sistema de minicomputador e descreve **separadamente** o DR-70, com software pré-programado. É uma fonte contemporânea reproduzida como HTML, **sem fac-símile da revista conferido**, e não fornece código ou resultados de cálculo. [Dossiê contextual de 1979](1979-pottenger-dr70.md).
