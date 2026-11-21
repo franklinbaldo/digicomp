@@ -30,7 +30,8 @@
         "string",
         "null"
       ],
-      "minLength": 1
+      "minLength": 1,
+      "pattern": "\\S"
     },
     "source": {
       "type": "object",
@@ -121,7 +122,8 @@
           ],
           "items": {
             "type": "string",
-            "minLength": 1
+            "minLength": 1,
+            "pattern": "\\S"
           },
           "minItems": 1
         }
