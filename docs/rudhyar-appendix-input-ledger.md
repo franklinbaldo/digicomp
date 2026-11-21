@@ -37,3 +37,19 @@ A lista abaixo é uma **extração curta de fatos de nascimento declarados no li
 4. **Corpus:** não acrescentar registros a `data/fidelity/observations.json`; permanece `observations: []`. Estes seis casos integram a **mesma família documental** dos vinte mapas já catalogados em [plano de holdout](output-catalog-holdout-plan.md). Não são seis sessões instrumentais autenticadas nem seis holdouts.
 
 **Resultado R145:** seis localizadores de dados textuais com anomalias explícitas, sem um único output instrumental recuperado. Estado para fidelidade: `NOT_RUN_NO_GOLDEN`; estado para revisão visual: `FIGURE_NOT_READ`.
+
+## Controle cruzado com a tradução francesa (1982, leitura textual)
+
+**🐝 Abelha · 21/11/2026.** Localizei outra edição, [*Les Aspects astrologiques*, Éditions du Rocher](https://fr.scribd.com/document/978057391/Les-Aspects-Astrologiques-Dane-Rudhyar-Leyla-Rael-Z-Library). A transcrição HTML disponível indica tradução por Marie Cavaignac, copyright original 1980 e copyright francês **1982**; o Scribd anuncia 382 páginas. É **uma tradução derivada**, não testemunha instrumental independente dos cálculos e nem o fac-símile inglês de 1980. **FIGURE_NOT_READ**: só o texto indexado foi acessível; não conferi visualmente qualquer mapa, página impressa, edição física ou hash dos bytes.
+
+Essa versão oferece localizadores editoriais *provisórios* para uma futura conferência visual: abertura do apêndice nas pp. **356–357**, quadro atribuído a **Jimmy Carter na p. 362**, Jerry Brown na p. **360**, Franklin D. Roosevelt na p. **374** e Alan Watts na p. **377** (números mostrados no texto extraído, ainda sem confronto com a imagem). Na introdução do apêndice, a tradução também atribui os exemplos a recálculos no **DR-70/Campanus**; isto não prova que os quadros sejam impressão nativa.
+
+Três diferenças **dentro da transcrição francesa**, entre introdução e legendas dos próprios mapas, desaconselham tratar as entradas de cima como literais canônicos:
+
+| Campo | Introdução francesa (pp. 356–357, OCR) | Legenda francesa (página indicada, OCR) | Estado |
+| --- | --- | --- | --- |
+| Jerry/Edmund G. Brown Jr., latitude | `43°03N` | p. 360: `34°03N` | **Conflito 43 ↔ 34**, confirmar nas imagens |
+| Franklin D. Roosevelt, hora UT | `25h16` | p. 374: `25h15` | **Conflito 16 ↔ 15 minutos**, não normalizar |
+| Alan Watts, data | **6 jan. 1915** | p. 377: **5 jan. 1915** | **Conflito de dia**, não escolher por conveniência |
+
+Os números podem refletir erro editorial, variação entre etapas de composição ou OCR. A transcrição inglesa secundária registra **43N03, 25:16 e 6 jan.**, isto é, concorda com a **introdução** francesa e não resolve o conflito com as **legendas**. **Não** alterar `data/chart-input-candidates/rael-rudhyar-1980.json`, não inferir teclas, não completar valores angulares e não adicionar golden. Próximo teste: verificar, na mesma cópia física autorizada, página de créditos, introdução e as três figuras (360, 374, 377), começando por Carter p. 362; atribuir revisão dupla a qualquer transcrição de glifos.
