@@ -145,6 +145,11 @@ Leitura inicial em 2026-11-20.
 - **Próxima prova:** procurar digitalização autorizada da folha de rosto, créditos, prefácio/metodologia e amostra de uma página tabular; registrar edição, numeração, origem e direitos antes de usar valores no corpus de fidelidade. Sem compra, contato com detentor, transcrição integral ou incorporação de obra protegida.
 - **Pesquisa em 20/11/2026:** os originais dos artigos de Richard Nolle de 1983–1984 (F9/F11) seguem **não recuperados** nesta busca. A referência F15 **não substitui** tais artigos.
 
+## F16. Rudhyar e Rael (1980): recálculo atribuído ao DR-70
+
+- [Finna](https://www.finna.fi/Record/vaari.1172270) cataloga *Astrological Aspects*, Leyla Rael/Dane Rudhyar, 1980, 244 pp. Uma [transcrição de terceiro](https://www.scribd.com/document/205319766/Astrological-Aspects) atribui ao Apêndice I recálculo de mapas no **DR-70** com casas **Campanus**, e ao prefácio de 23/03/1979 agradecimento a **Nicki Michaels**. Mapas desenhados por Tony Milner.
+- **Grau:** exemplar catalogado; trecho técnico **não confrontado** com fac-símile original; desenho editorial não é printout nem output nativo, e tampouco prova CPU/ROM/algoritmo. [Dossiê](rudhyar-1980-dr70-campanus.md). **Nolle XLV/10 1983 permanece pendente**.
+
 ## F17. Concorrência Matrix/DR-70 e publicidade Astrion (1980?–1986)
 
 - [Memória autobiográfica de Michael Erlewine](https://startypes.com/pdf/e-books/matrix_history.pdf), p. 15 do PDF, **inspecionada visualmente**: relata DR-70 na feira e preço aproximado, mas **não confirma local/ano** (Nova Orleans/1980 é dúvida do autor).
