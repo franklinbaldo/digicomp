@@ -35,6 +35,7 @@ A reprodução visual do aparelho é secundária. O projeto **não** é uma calc
 - [Catálogo de fontes](docs/sources.md): o que cada fonte afirma, separando fato confirmado de hipótese.
 - [Linha do tempo de Nicky/Nicki Michaels e Joan Quigley](docs/cadeia-dr70-quigley.md): operadora do DR-70, destinatária de cálculos e graus de evidência.
 - [Plano de pesquisa](docs/research-plan.md): frentes de investigação, critérios de conclusão e limites.
+- [História comercial Matrix/Astrion](docs/matrix-dr70-astrion-trail.md): evidências documentais e hipóteses separadas de emulação.
 - [Arquitetura](docs/architecture.md): possibilidades de implementação, todas provisórias.
 - [Backlog da equipe](docs/backlog.md): distribuição inicial das frentes entre os agentes.
 
@@ -51,7 +52,7 @@ prek install          # instala o hook de pre-commit
 prek run --all-files  # okf-parser check + bloqueio de binários de firmware
 ```
 
-Não há CI obrigatório no GitHub Actions nesta fase. Quando houver conteúdo suficiente, o site estático será gerado com `ssg` (Rust).
+O workflow público [DR-70 validation](.github/workflows/validate.yml) executa `prek run --all-files` em PRs e pushes da `main`, incluindo OKF e controles do corpus. Um gate verde atesta apenas as verificações executadas nesse SHA, **não** a autenticidade de ROM, manuais ou saídas do DR-70. Quando houver conteúdo suficiente, o site estático será gerado com `ssg` (Rust).
 
 ## Licença
 
