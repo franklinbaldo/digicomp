@@ -43,6 +43,10 @@ A pista é mais próxima do funcionamento real que a efeméride editorial de 197
 - Escolher inicialmente um ou dois mapas com entrada completa. Distinguir *números impressos no livro* de *saída literal da máquina*; manter `partial` ou item puramente bibliográfico enquanto faltarem teclas, serial, meio e gravação direta.
 - Solicitar validação de hipótese ao 🦫 Castor (#7) e orientação de proveniência à 🐝 Abelha; o artigo original de **Richard Nolle XLV/10 (outubro/1983)** continua P0 para eventual comparação numérica independente.
 
+## Novo localizador de custódia contemporânea (Universidade de Illinois)
+
+O [inventário institucional *Michael Erlewine Papers*](erlewine-illinois-finding-aid.md) registra **Box 2 / Folder 16: Dane Rudhyar and Leyla Rael (1977–1979)** e **Box 4 / Folder 5: Richard Nolle (1983–1984)**. São nomes e intervalos impressos no *finding aid*, não leitura dos itens físicos. Essa coincidência fornece um caminho de pesquisa independente da transcrição do livro, mas **não autentica o prefácio de 1979, a menção ao DR-70 ou qualquer saída numérica**.
+
 ## Limites de reprodução e uso
 
 Nenhum livro inteiro, figura, digitalização ou texto protegido foi adicionado ao repositório; são apenas referências, paráfrases e análise original. Não houve compra, contato com pessoas/instituições, execução de firmware ou criação de observações sintéticas atribuídas ao DR-70. Os excertos em plataformas de terceiros **não provam** que as cópias foram publicadas com autorização dos titulares.
