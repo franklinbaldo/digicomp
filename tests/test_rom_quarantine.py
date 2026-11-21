@@ -244,5 +244,40 @@ class QuarantineTests(unittest.TestCase):
                    "unchanged synthetic receipt rejected")
 
 
+    def test_v1_lone_surrogates_are_refused_before_cli_serialization(self):
+        record = ingest(self.source, self.root, origin="valid 🦀")
+        metadata_path = self.root / (record["sha256"] + ".json")
+        for field in ("origin_note", "original_basename"):
+            with self.subTest(field=field):
+                # json.dumps escapes lone surrogates, producing syntactically valid JSON.
+                metadata_path.write_text(
+                    json.dumps({**record, field: "\ud800"}), encoding="utf-8"
+                )
+                with self.assertRaisesRegex(CustodyError, "invalid quarantine provenance text"):
+                    verify(self.root, record["sha256"])
+                with self.assertRaisesRegex(CustodyError, "invalid quarantine provenance text"):
+                    ingest(self.source, self.root, origin="duplicate")
+                self.check(
+                    main(["verify", "--root", str(self.root), "--sha256", record["sha256"]]) == 2,
+                    "CLI must refuse rather than raise UnicodeEncodeError",
+                )
+        metadata_path.write_text(json.dumps(record), encoding="utf-8")
+        self.check(verify(self.root, record["sha256"]) == record, "valid Unicode rejected")
+
+    def test_ingest_refuses_unencodable_provenance_before_writing(self):
+        fresh = self.base / "fresh-quarantine"
+        fresh.mkdir(mode=0o700)
+        with self.assertRaisesRegex(CustodyError, "UTF-8"):
+            ingest(self.source, fresh, origin="\ud800")
+        self.check(not list(fresh.iterdir()), "invalid origin left quarantine artifacts")
+        if os.name == "posix":
+            # A byte filename decoded with surrogateescape is a real POSIX path.
+            bad_name = self.base / os.fsdecode(b"invalid_\xff.bin")
+            bad_name.write_bytes(b"SYNTHETIC-BYTES")
+            with self.assertRaisesRegex(CustodyError, "original_basename"):
+                ingest(bad_name, fresh, origin="valid")
+            self.check(not list(fresh.iterdir()), "invalid basename left artifacts")
+
+
 if __name__ == "__main__":
     unittest.main()
