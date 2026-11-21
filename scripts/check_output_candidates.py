@@ -64,6 +64,7 @@ def validate(data):
     ids = set()
     families = {}
     source_regions = {}
+    instrument_sessions = {}
     for i, entry in enumerate(entries):
         if not isinstance(entry, dict):
             errors.append(f"entry {i} is not an object")
@@ -96,6 +97,17 @@ def validate(data):
                 if source_url.strip() and locator.strip():
                     region = (source_url.strip(), locator.strip())
                     source_regions.setdefault(region, set()).add(split)
+            # The same instrument session cannot be both training and holdout,
+            # even if a publisher uses another URL, locator, or family label.
+            # This is a declared identity, not independent authentication.
+            evidence = entry.get("instrumental_evidence")
+            if isinstance(evidence, dict):
+                device = evidence.get("device_identifier")
+                session = evidence.get("session_locator")
+                if (isinstance(device, str) and device.strip()
+                        and isinstance(session, str) and session.strip()):
+                    session_key = (device.strip(), session.strip())
+                    instrument_sessions.setdefault(session_key, set()).add(split)
         if split == "holdout":
             required = ("replayable", "input_complete", "output_complete", "numeric_holdout_eligible")
             if any(entry.get(field) is not True for field in required):
@@ -118,6 +130,9 @@ def validate(data):
     for (url, locator), splits in source_regions.items():
         if len(splits) > 1:
             errors.append(f"source locator leakage across development/holdout: {url} @ {locator}")
+    for (device, session), splits in instrument_sessions.items():
+        if len(splits) > 1:
+            errors.append(f"instrument session leakage across development/holdout: {device} @ {session}")
     return errors
 
 
