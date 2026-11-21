@@ -207,5 +207,42 @@ class QuarantineTests(unittest.TestCase):
             verify(self.root, record["sha256"])
 
 
+    def test_v1_provenance_fields_reject_spoofed_or_missing_claims(self):
+        record = ingest(self.source, self.root, origin="fixture")
+        path = self.root / (record["sha256"] + ".json")
+        cases = [
+            ("missing origin", {k: v for k, v in record.items() if k != "origin_note"},
+             "invalid quarantine v1 metadata fields"),
+            ("nontext origin", {**record, "origin_note": {"claimed": "authentic"}},
+             "invalid quarantine provenance text"),
+            ("blank origin", {**record, "origin_note": "   "},
+             "invalid quarantine provenance text"),
+            ("too long origin", {**record, "origin_note": "x" * 2049},
+             "invalid quarantine provenance text"),
+            ("path basename", {**record, "original_basename": "../unrelated.bin"},
+             "invalid quarantine provenance text"),
+            ("nontext basename", {**record, "original_basename": 12},
+             "invalid quarantine provenance text"),
+            ("naive timestamp", {**record, "ingested_at_utc": "2026-11-21T08:00:00"},
+             "invalid quarantine UTC timestamp"),
+            ("wrong timezone", {**record, "ingested_at_utc": "2026-11-21T08:00:00+02:00"},
+             "invalid quarantine UTC timestamp"),
+            ("invalid timestamp", {**record, "ingested_at_utc": "yesterday"},
+             "invalid quarantine UTC timestamp"),
+            ("extra attestation", {**record, "authentic": True},
+             "invalid quarantine v1 metadata fields"),
+        ]
+        for name, metadata, error in cases:
+            with self.subTest(name=name):
+                path.write_text(json.dumps(metadata), encoding="utf-8")
+                with self.assertRaisesRegex(CustodyError, error):
+                    verify(self.root, record["sha256"])
+                with self.assertRaisesRegex(CustodyError, error):
+                    ingest(self.source, self.root, origin="duplicate source")
+        path.write_text(json.dumps(record), encoding="utf-8")
+        self.check(verify(self.root, record["sha256"]) == record,
+                   "unchanged synthetic receipt rejected")
+
+
 if __name__ == "__main__":
     unittest.main()
