@@ -32,4 +32,4 @@ Documentação histórica e simulação visual com aviso explícito de que os c�
 - Linguagem: Rust para emulador e utilitários.
 - Site: `ssg` (Rust) quando houver conteúdo que justifique; sem Astro, Svelte ou frameworks pesados.
 - Validação do acervo Markdown: `okf-parser`, rodado pelo `prek`.
-- Execução pesada (análise de binários, builds grandes): Google Cloud Build ou executor equivalente isolado; o Jatobá é painel de coordenação, não ambiente de compilação.
+- Execução computacional (análises, builds e testes): exclusivamente na sandbox própria dos agentes ou em workflows GitHub Actions de repositórios públicos.
