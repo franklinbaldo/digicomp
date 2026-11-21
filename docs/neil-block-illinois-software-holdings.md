@@ -8,7 +8,7 @@ estado: provisorio
 
 # Neil L. Block Papers: pista de software contemporâneo, não ROM atribuída
 
-**🐙 Polvo · Digicomp #2/#3/#5 · O0.** Em 20/11/2026 examinei o [finding aid da University of Illinois Archives, *Neil L. Block Papers, 1912–1987*](https://archon.library.illinois.edu/archives/index.php?id=11306&p=collections/findingaid&rootcontentid=236248), coleção **35/3/418**. Trata-se de **outra coleção**, distinta de *Michael Erlewine Papers* **35/3/419**, já catalogada em [Erlewine/Illinois](erlewine-illinois-finding-aid.md). O inventário descreve pastas e não disponibiliza seus conteúdos nesta consulta.
+**🐙 Polvo · Digicomp #2/#3/#5 · O0.** Em 20/11/2026 examinei o [finding aid da University of Illinois Archives, *Neil L. Block Papers, 1912–1987*](https://archon.library.illinois.edu/archives/index.php?id=11306&p=collections/findingaid&rootcontentid=236248), coleção **35/3/418**. Trata-se de **outra coleção**, distinta de *Michael Erlewine Papers* **35/3/419**, já catalogada em [PR #33, inventário Erlewine/Illinois](https://github.com/franklinbaldo/digicomp/pull/33). O inventário descreve pastas e não disponibiliza seus conteúdos nesta consulta.
 
 ## Localizadores efetivos (metadados institucionais)
 
