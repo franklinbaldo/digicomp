@@ -10,6 +10,12 @@ estado: vigente
 
 O objetivo é **entender o comportamento do software original do DR-70**, não produzir de início um horóscopo que apenas se pareça com a saída da máquina. **A skill de projeto [Digicomp REA](../.agents/skills/digicomp-rea/SKILL.md) é o procedimento inicial em toda investigação**, inclusive sem ROM; organiza rotas documentais D1–D3 e físicas H1–H3. A skill externa [Reverse Engineer Anything](https://github.com/morluto/rea), `reverse-engineer-anything`, é o motor para operações binárias quando o artefato existir e o REA estiver de fato conectado. A ficha reutilizável de evidência é [DR70-CASE-ID](rea-case-template.md).
 
+## Regra principal: saída documentada → hipóteses rivais
+
+Antes de qualquer binário, começar em [**REA orientada pela saída**](rea-output-first.md), que cataloga o cabeçalho `C1 NATAL TROP P LONG KOCH 200`, os campos `H01`–`H12` (figura 1 de Carlson, 1985, **ainda não atribuída como impressão nativa**), as legendas do display L606 e o índice de testes DR-70/ACS de Nolle. A figura não é um par input/output reexecutável; preservar `observations: []` até existir fonte com entrada e saída ligadas.
+
+A ordem é **proveniência da saída → transcrição literal → gramática candidata → hipóteses rivais de cálculo e de pós-processamento → previsões discriminantes → teste com observações autênticas → correlação com ROM se recuperada**. A recuperação do código é objetivo, mas não precisa preceder a especificação das perguntas nem justificar um emulador genérico.
+
 ## 1. Estado dos alvos
 
 | Categoria | Estado nesta rodada | Próximo dado necessário |
