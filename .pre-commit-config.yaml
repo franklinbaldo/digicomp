@@ -34,6 +34,12 @@ repos:
         language: system
         pass_filenames: false
         always_run: true
+      - id: rom-quarantine-tests
+        name: DR-70 quarantine fail-closed synthetic tests
+        entry: python3 -B -m unittest discover -s tests -p test_rom_quarantine.py -q
+        language: system
+        pass_filenames: false
+        always_run: true
       - id: sem-binarios-historicos
         name: bloqueia ROM/firmware de procedência não esclarecida
         entry: "Arquivos binários de firmware não podem ser versionados sem análise de procedência (docs/research-plan.md)."
