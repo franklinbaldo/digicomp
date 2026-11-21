@@ -1,0 +1,22 @@
+name: Editorial chart comparison controls
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check negative controls and circular degrees
+        run: python -B -m unittest discover -s tests -p 'test_compare_chart_publication.py' -v
