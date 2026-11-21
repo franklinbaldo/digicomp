@@ -57,6 +57,23 @@ estado: vigente
 
 **PRÓXIMO PASSO:** menor pesquisa com maior ganho de informação.
 
+## Se for output documentado (rota O0–O6)
+
+- ID de candidato: `OUT-...` (não equivale a `DR70-` reexecutável):
+- Literal exatamente transcrito e página/frame (não interpretação):
+- Origem: foto de display | impressão comprovada | figura editorial | índice | relato:
+- Ligação da figura com o DR-70: **provada**, **relatada**, **hipotética** ou **desconhecida**? Qual documento sustenta?
+- Alterações editoriais possíveis (diagrama recomposto, outro formatter, outro aparelho):
+- Separação **tokens / posições / valores / rótulos** e trechos ilegíveis:
+- Semântica da etiqueta: candidato A / candidato B / desconhecida:
+- Hipótese de algoritmo A e hipótese rival B:
+- Predições diferentes sob uma mesma entrada, com unidades e arredondamento explícitos:
+- Qual par de observações do DR-70 permite distingui-las? Já existe?:
+- Status `NOT_RUN_NO_GOLDEN` se faltar entrada+saída autêntica:
+- Registro no `data/fidelity/observations.json`? Apenas após cumprir contrato `partial/replayable` e revisão, jamais por este molde.
+
+Referência: [protocolo output-first](rea-output-first.md), [corpus de fidelidade](fidelity-corpus.md). A figura 1 de Carlson é **pista de formato**; valores calculados por Swiss Ephemeris, ACS presumido, ou intérprete experimental não são output histórico.
+
 ## Se for saída observada do aparelho
 
 - Data/hora/fuso/local **como digitados**:
