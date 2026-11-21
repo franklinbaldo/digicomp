@@ -114,6 +114,36 @@ class FidelitySchemaTests(unittest.TestCase):
         with self.assertRaisesRegex(CorpusError, "JSON Schema violation"):
             check_schema(self.path)
 
+    def test_partial_zero_width_space_is_not_a_literal(self) -> None:
+        case = fake_case()
+        case["as_entered"]["date_literal"] = "\u200b"
+        self.write(case)
+        with self.assertRaisesRegex(CorpusError, "JSON Schema violation"):
+            check_schema(self.path)
+
+    def test_partial_word_joiner_is_not_output(self) -> None:
+        case = fake_case()
+        case["observed_output"]["literal"] = "\u2060"
+        self.write(case)
+        with self.assertRaisesRegex(CorpusError, "JSON Schema violation"):
+            check_schema(self.path)
+
+    def test_replayable_bom_is_not_a_key(self) -> None:
+        case = fake_case()
+        case["status"] = "replayable"
+        case["source"]["directness"] = "device_observation"
+        case["as_entered"]["keys_literal"] = ["\ufeff"]
+        case["observed_output"] = {"channel": "led", "literal": "FAKE OUTPUT"}
+        self.write(case)
+        with self.assertRaisesRegex(CorpusError, "JSON Schema violation"):
+            check_schema(self.path)
+
+    def test_visible_glyph_surrounded_by_controls_still_passes(self) -> None:
+        case = fake_case()
+        case["as_entered"]["date_literal"] = "\u200bFAKE DATE\u2060"
+        self.write(case)
+        self.assertEqual(check_schema(self.path), 1)
+
     def test_partial_visible_literal_with_surrounding_whitespace_passes(self) -> None:
         case = fake_case()
         case["as_entered"]["date_literal"] = "  FAKE DATE  "
