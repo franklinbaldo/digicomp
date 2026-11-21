@@ -17,7 +17,7 @@ estado: provisorio
 3. **Atribuicao instrumental:** pagina impressa **-5-** diz que Michael Caveney e Chris Nelson fizeram os mapas do experimento em **Digicomp DR 70**, com conferencia amostral manual. A frase **nao declara** que a figura 1 reproduz literalmente bytes emitidos por firmware ou impressora do DR-70.
 4. **Artigo posterior:** [Nature 318, 419–425](https://doi.org/10.1038/318419a0), recebido 11/04/1983, aceito 14/10/1985 e publicado 05/12/1985. A figura correspondente **ja estava no preprint de abril/1983**, portanto sua origem nao pode ser atribuida exclusivamente a diagramacao da edicao de 1985.
 
-**Cadeia de custodia:** PDF aberto no visualizador da fonte publica; a pagina foi examinada em imagem, nao apenas por OCR. O GET direto em Ifro retornou **HTTP 403**. Arquivo integral **nao** depositado localmente; tamanho, SHA-256 e identidade dos bytes = **NOT_OBTAINED**. Nao importar imagem ou PDF protegido para Git.
+**Cadeia de custodia:** PDF aberto no visualizador da fonte publica; a pagina foi examinada em imagem, nao apenas por OCR. A tentativa de download direto do arquivo retornou **HTTP 403**. Arquivo integral **nao** depositado localmente; tamanho, SHA-256 e identidade dos bytes = **NOT_OBTAINED**. Nao importar imagem ou PDF protegido para Git.
 
 ## Inventario visual da figura 1 (1983)
 
