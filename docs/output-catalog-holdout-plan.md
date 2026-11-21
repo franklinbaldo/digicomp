@@ -10,6 +10,16 @@ estado: experimental
 
 **Direção do proprietário em 21/11/2026:** recolher e catalogar **todos os exemplos localizados** de output, mesmo incompletos, para orientar a reconstrução Rust e reservar exemplos independentes como testes de holdout. Uma publicação repetida não vira outra amostra. O catálogo inicial executável é [`catalog.json`](../data/output-candidates/catalog.json), ligado ao [ledger visual Carlson](carlson-fig1-token-ledger.md) e ao [corpus de observações](fidelity-corpus.md).
 
+## Regra de captura ampla: primeiro salvar o que apareceu
+
+A prioridade é **recolher resultados astrológicos atribuídos ou possivelmente atribuíveis ao DR-70 que alguém publicou na internet**, não obter de imediato sessões completas. São admissíveis na coleta inicial: tabelas de posições, listas de casas, mapas, relatórios impressos, fotografias de displays com números, fotos de folhas, reprodução em artigos, vídeos, transcrições de usuários, comparações com outras máquinas e recortes cujo conteúdo seja apenas parcialmente legível. Basta um **vestígio material ou textual de resultado** e uma fonte/localização; não são exigidos data/hora de entrada, teclas, série, formato eletrônico nem atribuição comprovada nessa etapa.
+
+Registrar como foi encontrado, inclusive unidades não identificadas, grafia, glifos incertos, números incompletos e condições de acesso. O registro mínimo para triagem é URL, posição na fonte, descrição livre do conteúdo, fragmento legível e grau de dúvida. Caso nem conteúdo de saída esteja disponível, manter registro como **pista a recuperar**, separado da contagem de outputs encontrados. A ficha poderá ser enriquecida ao longo das rodadas, sem reescrever o original.
+
+Na figura Carlson, o ledger já documenta **seis pares candidatos** de grupos numéricos H01/H07 a H06/H12. Esses grupos foram agora inseridos em `catalog.json` como **transcrição secundária pendente de nova inspeção da imagem**, sem completar glifos faltantes, inferir graus absolutos ou criar golden. A figura de 1983 e a republicação de 1985 são uma família, não dois exemplos independentes.
+
+A coleta deve ser ampla e contínua, inclusive fontes que não permitam reproduzir imagens integralmente no Git. Quando os direitos de reprodução não estiverem esclarecidos, conservar link, localizador, transcrição factual breve e metadados, e manter o arquivo original fora da publicação pública quando cabível. Não criar barreiras prematuras para recolher o que há.
+
 ## Duas coleções distintas
 
 1. **Acervo amplo de candidatos:** tudo que possa conter saída, mesmo sem dados de entrada, e também pistas negativas como fotografias sem operação e artigos ainda inacessíveis. Inclui duas versões da figura 1 de Carlson (1983/1985), **uma única família**; fotografia do display L606; índice Nolle; testemunho Devine sobre impressora; vídeo Morris sem quadro legível. Os últimos não são testes numéricos, mas preservam lacunas e evitam redescoberta. URLs, localizadores e pequenos tokens são indexados; não redistribuir PDFs, fotos e figuras de terceiros sem direitos.
