@@ -22,6 +22,29 @@ class CandidateCatalogTest(unittest.TestCase):
         self.assertEqual(len(book), 20)
         self.assertTrue(all(e['sample_split'] == 'unassigned' and not e['numeric_holdout_eligible'] for e in book))
 
+    def test_workflow_selects_shared_lexical_dependencies(self):
+        # Static path-filter regression: a change to the imported lexical
+        # predicate or its normative schema must run the catalog job,
+        # while unrelated files must not trigger this selective workflow.
+        import re
+
+        workflow = (ROOT / ".github/workflows/output-catalog.yml").read_text(
+            encoding="utf-8"
+        )
+        blocks = re.findall(r"(?m)^    paths:\n((?:      - '[^']+'\n)+)", workflow)
+        self.assertEqual(len(blocks), 2, "expected pull_request and push filters")
+        expected = {
+            "data/output-candidates/**",
+            "scripts/check_output_candidates.py",
+            "scripts/reconstruction_gate.py",
+            "data/fidelity/corpus.schema.json",
+            "tests/test_output_candidates.py",
+            ".github/workflows/output-catalog.yml",
+        }
+        for block in blocks:
+            paths = set(re.findall(r"(?m)^      - '([^']+)'$", block))
+            self.assertEqual(paths, expected)
+
     def test_catalog_has_no_partition_violations(self):
         self.assertEqual(validate(self.data), [])
 
