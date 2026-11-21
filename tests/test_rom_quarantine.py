@@ -146,6 +146,24 @@ class QuarantineTests(unittest.TestCase):
         with self.assertRaisesRegex(CustodyError, "JSON object"):
             verify(self.root, record["sha256"])
 
+    def test_duplicate_metadata_keys_refused_on_verify_and_dedup(self):
+        record = ingest(self.source, self.root, origin="fixture")
+        path = self.root / (record["sha256"] + ".json")
+        metadata = path.read_text(encoding="utf-8")
+        self.check('"rights_cleared": false,' in metadata, "missing fixture key")
+        path.write_text(
+            metadata.replace(
+                '"rights_cleared": false,',
+                '"rights_cleared": true,\\n  "rights_cleared": false,',
+                1,
+            ).replace("\\n", "\n"),
+            encoding="utf-8",
+        )
+        with self.assertRaisesRegex(CustodyError, "duplicate quarantine metadata key"):
+            verify(self.root, record["sha256"])
+        with self.assertRaisesRegex(CustodyError, "duplicate quarantine metadata key"):
+            ingest(self.source, self.root, origin="second receipt")
+
     def test_metadata_size_bool_rejected_even_for_one_byte_object(self):
         self.source.write_bytes(b"x")
         record = ingest(self.source, self.root, origin="fixture")
