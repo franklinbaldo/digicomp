@@ -30,7 +30,7 @@ estado: provisorio
 
 ## Cadeia operacional que a versão de 1983 explicita
 
-P83, *Experiment Design*, identifica **Michael Caveney e Chris Nelson** como construtores dos mapas natais no **Digicomp DR 70**, com conferência por cálculo manual em amostras. Em *Double-Blind Procedures*, P83 acrescenta que um assistente atribuiu **códigos aleatórios de cinco dígitos**, sob supervisão de **Richard Muller**, e preparou um terceiro conjunto de cartões **código + dados de nascimento**, entregue aos operadores **em envelopes fechados pelo experimentador**. O texto informa que os operadores receberam os cartões em até cinco dias das sessões de CPI.
+P83, *Experiment Design*, identifica **Michael Caveney e Chris Nelson** como construtores dos mapas natais no **Digicomp DR 70**, com conferência por cálculo manual em amostras. Em *Double-Blind Procedures*, P83 acrescenta que um assistente atribuiu **códigos aleatórios de cinco dígitos**, sob supervisão de **Richard Muller**, e preparou um terceiro conjunto de cartões **código + dados de nascimento**, entregue aos operadores **em envelopes que o experimentador não abriu**. O texto informa que os operadores receberam os cartões em até cinco dias das sessões de CPI.
 
 Isso é uma trilha de **tipos de artefato a procurar**: cartões/envelopes, mapas produzidos, eventuais folhas originais e materiais gráficos de preparação. **Não** demonstra sobrevivência do acervo, nem autoriza associar a anotação do centro à identidade de um sujeito. Nenhum dado pessoal de participantes deve ser extraído ou reidentificado.
 
