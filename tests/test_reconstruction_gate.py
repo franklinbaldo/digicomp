@@ -87,6 +87,35 @@ class ReconstructionTriageTests(unittest.TestCase):
         self.assertEqual(a["track"], "A_INSTRUCTION_STUDY")
         self.assertFalse(a["approved_as_authentic_dr70"])
 
+    def test_duplicate_evidence_region_with_different_ids_is_rejected(self) -> None:
+        # Two claim IDs do not create two observations of one photo/frame.
+        other = {**FAKE_IO, "id": "FAKE-IO-2"}
+        with self.assertRaisesRegex(ValueError, "duplicate candidate IO evidence region"):
+            evaluate({"observations": [FAKE_IO, other]})
+
+    def test_duplicate_id_with_different_regions_is_rejected(self) -> None:
+        other = {**FAKE_IO, "locator": "fake:frame:2"}
+        with self.assertRaisesRegex(ValueError, "duplicate candidate IO id"):
+            evaluate({"observations": [FAKE_IO, other]})
+
+    def test_exact_duplicate_is_rejected(self) -> None:
+        with self.assertRaisesRegex(ValueError, "duplicate candidate IO"):
+            evaluate({"observations": [FAKE_IO, dict(FAKE_IO)]})
+
+    def test_distinct_ids_and_regions_are_two_candidates_not_two_sessions(self) -> None:
+        other = {**FAKE_IO, "id": "FAKE-IO-2", "locator": "fake:frame:2"}
+        result = evaluate({"observations": [FAKE_IO, other]})
+        self.assertEqual(result["candidate_io_cases"], 2)
+        self.assertFalse(result["approved_as_authentic_dr70"])
+        self.assertFalse(result["approved_for_emulation"])
+
+    def test_invalid_candidate_does_not_consume_identity(self) -> None:
+        # A rejected synthetic entry cannot prevent a later valid candidate.
+        synthetic = {**FAKE_IO, "synthetic": True}
+        self.assertEqual(
+            evaluate({"observations": [synthetic, FAKE_IO]})["candidate_io_cases"], 1
+        )
+
     def test_nonlist_observations_is_error(self) -> None:
         with self.assertRaisesRegex(ValueError, "observations must be a list"):
             evaluate({"observations": {}})
