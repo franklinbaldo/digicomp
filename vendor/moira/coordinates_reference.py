@@ -46,23 +46,16 @@ class EquatorialCoordinatesTruth:
     transform_method: str = "spherical_rotation_about_x_axis"
 
 __all__ = [
-    "Vec3", "Mat3",
-    "vec_add", "vec_sub", "vec_scale", "vec_norm", "vec_unit",
-    "mat_vec_mul", "mat_mul",
-    "rot_x_axis", "rot_y_axis", "rot_z_axis", "rot_x", "rot_y", "rot_z",
-    "icrf_to_ecliptic", "icrf_to_true_ecliptic", "icrf_to_equatorial",
-    "true_ecliptic_latitude",
-    "precession_matrix_equatorial", "nutation_matrix_equatorial",
-    "HorizontalCoordinatesTruth", "EquatorialCoordinatesTruth",
-    "equatorial_to_horizontal", "equatorial_to_horizontal_with_truth",
-    "horizontal_to_equatorial",
-    "ecliptic_to_equatorial", "ecliptic_to_equatorial_with_truth",
-    "equatorial_to_ecliptic",
-    "aberration_correction",
-    "cotrans_sp",
-    "atmospheric_refraction", "atmospheric_refraction_extended",
-    "equation_of_time",
-    "normalize_degrees", "angular_distance", "signed_angular_distance",
+    "HorizontalCoordinatesTruth",
+    "EquatorialCoordinatesTruth",
+    "normalize_degrees",
+    "angular_distance",
+    "signed_angular_distance",
+    "equatorial_to_horizontal",
+    "equatorial_to_horizontal_with_truth",
+    "ecliptic_to_equatorial",
+    "ecliptic_to_equatorial_with_truth",
+    "equatorial_to_ecliptic"
 ]
 
 
