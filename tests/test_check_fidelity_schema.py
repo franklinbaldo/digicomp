@@ -82,14 +82,14 @@ class FidelitySchemaTests(unittest.TestCase):
     def test_partial_with_only_whitespace_input_is_rejected(self) -> None:
         # A blank cell is not an observed input, even when nonempty as a string.
         case = fake_case()
-        case["as_entered"]["date_literal"] = " \\t"
+        case["as_entered"]["date_literal"] = "   "
         self.write(case)
         with self.assertRaisesRegex(CorpusError, "JSON Schema violation"):
             check_schema(self.path)
 
     def test_partial_with_only_whitespace_output_is_rejected(self) -> None:
         case = fake_case()
-        case["observed_output"]["literal"] = " \\t"
+        case["observed_output"]["literal"] = "   "
         self.write(case)
         with self.assertRaisesRegex(CorpusError, "JSON Schema violation"):
             check_schema(self.path)
@@ -98,7 +98,7 @@ class FidelitySchemaTests(unittest.TestCase):
         case = fake_case()
         case["status"] = "replayable"
         case["source"]["directness"] = "device_observation"
-        case["as_entered"]["keys_literal"] = [" \\t"]
+        case["as_entered"]["keys_literal"] = ["   "]
         case["observed_output"] = {"channel": "led", "literal": "FAKE OUTPUT"}
         self.write(case)
         with self.assertRaisesRegex(CorpusError, "JSON Schema violation"):
@@ -109,7 +109,7 @@ class FidelitySchemaTests(unittest.TestCase):
         case["status"] = "replayable"
         case["source"]["directness"] = "device_observation"
         case["as_entered"]["keys_literal"] = ["FAKE KEY"]
-        case["observed_output"] = {"channel": "led", "literal": " \\t"}
+        case["observed_output"] = {"channel": "led", "literal": "   "}
         self.write(case)
         with self.assertRaisesRegex(CorpusError, "JSON Schema violation"):
             check_schema(self.path)
