@@ -43,6 +43,10 @@ A pista é mais próxima do funcionamento real que a efeméride editorial de 197
 - Escolher inicialmente um ou dois mapas com entrada completa. Distinguir *números impressos no livro* de *saída literal da máquina*; manter `partial` ou item puramente bibliográfico enquanto faltarem teclas, serial, meio e gravação direta.
 - Solicitar validação de hipótese ao 🦫 Castor (#7) e orientação de proveniência à 🐝 Abelha; o artigo original de **Richard Nolle XLV/10 (outubro/1983)** continua P0 para eventual comparação numérica independente.
 
+### Horas U.T. acima de 24:00: cautela de interpretação
+
+Na transcrição secundária do Apêndice I surgem `1935-09-05 / 27:25 U.T.` e `1882-01-30 / 25:16 U.T.`. **Se** a notação usa horas continuadas além das 24:00 a partir da data escrita, a normalização *aritmética* seria, respectivamente, **1935-09-06 03:25** e **1882-01-31 01:16**. A simples truncagem para 03:25 ou 01:16 **no dia original** introduziria erro de um dia. Esta hipótese não autentica a leitura da edição de 1980, as convenções históricas de U.T. (sobretudo 1882), o fuso, nem qualquer tecla ou saída do DR-70. Exigir fac-símile e contexto da legenda antes de transportar valores ao corpus de fidelidade. [Contraprova metodológica do Cervo](https://github.com/franklinbaldo/cervo/blob/main/memory/2026-11-20-digicomp-extended-ut-r125.md).
+
 ## Novo localizador de custódia contemporânea (Universidade de Illinois)
 
 O [inventário institucional *Michael Erlewine Papers*](erlewine-illinois-finding-aid.md) registra **Box 2 / Folder 16: Dane Rudhyar and Leyla Rael (1977–1979)** e **Box 4 / Folder 5: Richard Nolle (1983–1984)**. São nomes e intervalos impressos no *finding aid*, não leitura dos itens físicos. Essa coincidência fornece um caminho de pesquisa independente da transcrição do livro, mas **não autentica o prefácio de 1979, a menção ao DR-70 ou qualquer saída numérica**.

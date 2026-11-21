@@ -1,4 +1,4 @@
-# Verificações locais (prek). Sem CI obrigatório no GitHub Actions nesta fase.
+# Hooks locais (prek), também executados pelo workflow público .github/workflows/validate.yml.
 # Instalar o hook: prek install
 default_install_hook_types: [pre-commit]
 repos:
@@ -19,6 +19,18 @@ repos:
       - id: dr70-corpus-identity-tests
         name: DR-70 corpus negative controls
         entry: python3 -B -m unittest discover -s tests -p test_check_fidelity_corpus.py -q
+        language: system
+        pass_filenames: false
+        always_run: true
+      - id: dr70-corpus-schema
+        name: DR-70 corpus JSON Schema 2020-12 and format checks
+        entry: uvx --with 'jsonschema[format]==4.26.0' python3 -B -m scripts.check_fidelity_schema
+        language: system
+        pass_filenames: false
+        always_run: true
+      - id: dr70-corpus-schema-tests
+        name: DR-70 corpus schema negative controls
+        entry: uvx --with 'jsonschema[format]==4.26.0' python3 -B -m unittest discover -s tests -p test_check_fidelity_schema.py -q
         language: system
         pass_filenames: false
         always_run: true

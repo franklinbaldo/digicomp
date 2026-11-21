@@ -42,6 +42,7 @@ def _observed_io(value: object) -> bool:
     """A candidate is not proof; a source must be independently inspected."""
     return (
         _record(value, ("id", "evidence_id", "locator", "input_literal", "keys_literal", "output_literal"))
+        and isinstance(value.get("directness"), str)
         and value.get("directness") in {"device_observation", "contemporaneous_report"}
         and value.get("source_reviewed") is True
         and value.get("synthetic") is False
