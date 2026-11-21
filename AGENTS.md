@@ -11,13 +11,15 @@ timestamp: 2026-11-20T21:05:00-04:00
 
 - Origem oficial: [morluto/rea](https://github.com/morluto/rea).
 - Skill upstream: `reverse-engineer-anything`. Instalação da *skill*, quando necessária e aprovada no executor: `npx skills add morluto/rea --skill reverse-engineer-anything`. A instalação **não** instala nem conecta o servidor MCP/engines.
-- Procedimento local **primário e obrigatório**: [skill Digicomp](.agents/skills/digicomp-rea/SKILL.md) (fases 0–5, rotas D1–D3 e H1–H3, caso DR70-CASE-ID e gates), [ficha reutilizável](docs/rea-case-template.md) e [protocolo de evidências](docs/reverse-engineering.md).
+- Procedimento local **primário e obrigatório**: [skill Digicomp](.agents/skills/digicomp-rea/SKILL.md), com [rota O0–O6: engenharia reversa pelas saídas documentadas](docs/rea-output-first.md), [ficha reutilizável](docs/rea-case-template.md) e [protocolo de evidências](docs/reverse-engineering.md).
 - Use a skill original e a referência REA adequada **quando a rota exigir análise de firmware/binário/captura**. Para artigo de 1983, fotografia, cartão de instruções ou inventário sem arquivo executável, use as rotas documentais da skill local. Não instale/configure REA apenas para ler documentos.
 - **Não alegar que a skill, o servidor REA, Ghidra, Binwalk, Unblob ou qualquer provider estão conectados/instalados sem conferência no executor.** Na coordenação ChatGPT desta rodada, ferramentas REA não estavam expostas.
 
 ## Quando usar e quando não usar
 
-O projeto prioriza a **recuperação do software original** e o entendimento da máquina. Toda frente executa a **fase 0** da skill local: rotas D1 (documentos), D2 (interface/teclado), D3 (saídas/fidelidade) e H1 (placa/chips) funcionam **sem ROM e sem REA MCP**. H2 (dump) e H3 (captura lógica) só são acionadas com arquivo e permissão concretos. Cada observação deve gerar uma ficha `DR70-CASE-ID`; não produzir zeros inventados nem inferir ausência universal de firmware.
+O projeto prioriza a **recuperação do software original** e o entendimento da máquina. **Antes de procurar uma ROM ou CPU, a rota O0–O6 parte do output já documentado.** O primeiro alvo é o cabeçalho `C1 NATAL TROP P LONG KOCH 200` e os campos `H01`–`H12`, transcritos em [exemplares-interface](docs/exemplares-interface.md) a partir da figura 1 de Carlson (*Nature*, 1985). **O artigo não certifica que a figura seja uma impressão literal do DR-70**: a hipótese de composição por outro programa precisa permanecer aberta. O segundo alvo são as legendas do display L606 do Calcuseum; elas não provam funções executadas. O corpus `data/fidelity/observations.json` segue vazio; `partial` e `replayable` exigem evidência própria. Não completar seus campos com efemérides modernas.
+
+Cada frente primeiro documenta: fragmento literal, fonte/página, vínculo ao dispositivo, hipóteses A/B sobre formato/algoritmo, observação que as diferenciaria, e próxima prova. As rotas D1–D3 (documentos, interface, saídas) e H1 (placa/chips) funcionam **sem ROM nem REA MCP**. H2 (dump) e H3 (captura lógica) exigem arquivo e permissão concretos. Cada nova evidência gera `DR70-CASE-ID`; não inventar resultados nem inferir ausência universal de firmware.
 
 Quando houver alvo concreto, escolher a rota:
 
