@@ -10,7 +10,7 @@ estado: provisorio
 
 *Digital archaeology, software preservation and emulation of the Digicomp DR-70 astrology computer.*
 
-O Digicomp DR-70 é um computador de mesa dedicado a cálculos astrológicos, fabricado pela Digicomp Research Corporation nos Estados Unidos. O Calcuseum data o lançamento em 1977. Um relato de 2025 atribui aos antigos donos da empresa a afirmação de que a astróloga Joan Quigley, conselheira de Nancy Reagan, usava um DR-70 para levantar mapas. Essa ligação ainda não foi verificada em fonte primária ([fontes](docs/sources.md)).
+O Digicomp DR-70 é um computador de mesa dedicado a cálculos astrológicos, fabricado pela Digicomp Research Corporation nos Estados Unidos. O Calcuseum data o lançamento em 1977. Uma [reportagem contemporânea de 1988](docs/cadeia-dr70-quigley.md) atribui à astróloga **Nicky Michaels**, não a Joan Quigley, a posse e operação de um DR-70 para produzir cálculos destinados a Quigley. Uma entrevista retrospectiva de 2004 reitera esse papel; a posse por Quigley e a identidade de quaisquer impressões permanecem sem prova material ([fontes](docs/sources.md)).
 
 ## Objetivo
 
@@ -28,11 +28,12 @@ A reprodução visual do aparelho é secundária. O projeto **não** é uma calc
 | Display e teclado | Display de LED (Calcuseum); chaves MEI/WEAB lineares e chave de ignição (relato de colecionador). |
 | Software, efemérides, sistemas de casas | **Desconhecidos.** |
 | Manuais | Nenhum localizado; o Calcuseum fotografa um cartão de instruções. |
-| Ligação com Joan Quigley | Alegada pelos antigos donos, segundo relato de terceiro. Acervo Quigley na Hoover Institution ainda não inspecionado. |
+| Ligação com Joan Quigley | Testemunhos atribuídos a Nicky/Nicki Michaels: **ela** operava DR-70 e fornecia mapas a Quigley (1988/2004); sem impressões autenticadas ou posse por Quigley demonstrada. |
 
 ## Documentos
 
 - [Catálogo de fontes](docs/sources.md): o que cada fonte afirma, separando fato confirmado de hipótese.
+- [Linha do tempo de Nicky/Nicki Michaels e Joan Quigley](docs/cadeia-dr70-quigley.md): operadora do DR-70, destinatária de cálculos e graus de evidência.
 - [Plano de pesquisa](docs/research-plan.md): frentes de investigação, critérios de conclusão e limites.
 - [Arquitetura](docs/architecture.md): possibilidades de implementação, todas provisórias.
 - [Backlog da equipe](docs/backlog.md): distribuição inicial das frentes entre os agentes.
