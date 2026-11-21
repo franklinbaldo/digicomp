@@ -116,5 +116,38 @@ class QuarantineTests(unittest.TestCase):
         self.check(code == 0, "CLI failed")
 
 
+    def test_metadata_fifo_rejected_without_waiting_for_writer(self):
+        record = ingest(self.source, self.root, origin="fixture")
+        path = self.root / (record["sha256"] + ".json")
+        path.unlink()
+        os.mkfifo(path)
+        with self.assertRaisesRegex(CustodyError, "regular file"):
+            verify(self.root, record["sha256"])
+
+    def test_metadata_oversize_rejected_on_verify_and_dedup(self):
+        record = ingest(self.source, self.root, origin="fixture")
+        path = self.root / (record["sha256"] + ".json")
+        path.write_bytes(b" " * 8193)
+        with self.assertRaisesRegex(CustodyError, "metadata too large"):
+            verify(self.root, record["sha256"])
+        with self.assertRaisesRegex(CustodyError, "metadata too large"):
+            ingest(self.source, self.root, origin="another")
+
+    def test_metadata_array_is_refused_cleanly(self):
+        record = ingest(self.source, self.root, origin="fixture")
+        path = self.root / (record["sha256"] + ".json")
+        path.write_text('[]', encoding="utf-8")
+        with self.assertRaisesRegex(CustodyError, "JSON object"):
+            verify(self.root, record["sha256"])
+
+    def test_metadata_size_bool_rejected_even_for_one_byte_object(self):
+        self.source.write_bytes(b"x")
+        record = ingest(self.source, self.root, origin="fixture")
+        path = self.root / (record["sha256"] + ".json")
+        path.write_text(json.dumps({**record, "size": True}), encoding="utf-8")
+        with self.assertRaisesRegex(CustodyError, "disagree"):
+            verify(self.root, record["sha256"])
+
+
 if __name__ == "__main__":
     unittest.main()
