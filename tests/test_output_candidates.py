@@ -172,6 +172,49 @@ class CandidateCatalogTest(unittest.TestCase):
         right["sample_split"] = "unassigned"
         self.assertEqual(validate(data), [])
 
+    def test_family_whitespace_alias_cannot_cross_splits(self):
+        # Synthetic distinct sources and sessions: only the provenance family
+        # is shared. Whitespace must not launder a development case into holdout.
+        base = self.data["entries"][0]
+
+        def synthetic(label, family, split):
+            item = copy.deepcopy(base)
+            item.update(
+                id=f"FAKE-{label}", family_id=family,
+                source_url=f"https://example.invalid/{label}",
+                locator=f"independent fake document {label}",
+                kind="device_session_output", status="reviewed",
+                attribution="device_native_session_output",
+                sample_split=split, replayable=True,
+                input_complete=True, output_complete=True,
+                numeric_holdout_eligible=True,
+                literal_fragments=["FAKE-OUTPUT"],
+                instrumental_evidence={
+                    "device_identifier": "FAKE-DEVICE",
+                    "session_locator": f"FAKE-SESSION-{label}",
+                    "input_as_entered": "FAKE-INPUT",
+                    "key_sequence": ["FAKE-KEY"],
+                    "output_channel": "printer",
+                    "output_literal": "FAKE-OUTPUT",
+                    "independent_reviewer": "FAKE-REVIEWER",
+                    "independent_review_reference": "https://example.invalid/review",
+                },
+            )
+            return item
+
+        left = synthetic("DEV", "FAKE-FAMILY", "development")
+        right = synthetic("HELD", "  FAKE-FAMILY \t", "holdout")
+        violations = validate({"entries": [left, right]})
+        self.assertTrue(any("family leakage" in e for e in violations), violations)
+        right["family_id"] = "FAKE-OTHER-FAMILY"
+        self.assertEqual(validate({"entries": [left, right]}), [])
+        right["family_id"] = " \t "
+        self.assertTrue(any("missing provenance family" in e
+                            for e in validate({"entries": [right]})))
+        right["family_id"] = "FAKE-OTHER-FAMILY"
+        right["sample_split"] = "unassigned"
+        self.assertEqual(validate({"entries": [right]}), [])
+
     def test_duplicate_id_is_rejected(self):
         data = copy.deepcopy(self.data)
         data["entries"].append(copy.deepcopy(data["entries"][0]))
