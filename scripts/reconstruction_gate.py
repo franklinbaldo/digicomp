@@ -12,6 +12,9 @@ import sys
 from pathlib import Path
 
 _SHA256 = re.compile(r"[0-9a-f]{64}\Z")
+# Keep this character rule aligned with data/fidelity/corpus.schema.json $defs.unseen.
+# Control-only raw evidence remains in metadata; it is not textual I/O.
+_IO_LEGIBLE = re.compile(r"[^\s\u0000-\u001F\u007F-\u009F\u00AD\u034F\u061C\u180E\u200B-\u200F\u202A-\u202E\u2060-\u206F\uFEFF]")
 
 def _unique_json_properties(pairs: list[tuple[str, object]]) -> dict[str, object]:
     """Reject ambiguous identities before JSON last-wins can erase evidence."""
@@ -52,9 +55,18 @@ def _architecture(value: object) -> bool:
 
 
 def _observed_io(value: object) -> bool:
-    """A candidate is not proof; a source must be independently inspected."""
+    """Only legible transcriptions count; raw control bytes are still evidence.
+
+    keys_literal is readable key notation, not a typed physical key-event stream.
+    Do not coerce raw signals to glyphs or claim custody from metadata flags.
+    """
     return (
-        _record(value, ("id", "evidence_id", "locator", "input_literal", "keys_literal", "output_literal"))
+        _record(value, ("id", "evidence_id", "locator"))
+        and all(
+            isinstance(value.get(field), str)
+            and _IO_LEGIBLE.search(value[field]) is not None
+            for field in ("input_literal", "keys_literal", "output_literal")
+        )
         and isinstance(value.get("directness"), str)
         and value.get("directness") in {"device_observation", "contemporaneous_report"}
         and value.get("source_reviewed") is True

@@ -10,7 +10,7 @@ import unittest
 from contextlib import redirect_stderr, redirect_stdout
 from pathlib import Path
 
-from scripts.reconstruction_gate import evaluate, main
+from scripts.reconstruction_gate import _IO_LEGIBLE, evaluate, main
 
 
 FAKE_FIRMWARE = {
@@ -120,6 +120,55 @@ class ReconstructionTriageTests(unittest.TestCase):
         self.assertEqual(
             evaluate({"observations": [synthetic, FAKE_IO]})["candidate_io_cases"], 1
         )
+
+    def test_io_legibility_matches_fidelity_schema_contract(self) -> None:
+        schema_path = Path(__file__).resolve().parents[1] / "data/fidelity/corpus.schema.json"
+        schema = json.loads(schema_path.read_text(encoding="utf-8"))
+        self.assertEqual(_IO_LEGIBLE.pattern, schema["$defs"]["unseen"]["pattern"])
+
+    def test_control_only_io_fields_are_not_candidates(self) -> None:
+        # A physical control event is not an observed printable glyph.
+        controls = ("\x00", "\x7f", "\x1b", "\u200b", "\u2060", "\ufeff", " \x1b\u200b ")
+        for field in ("input_literal", "keys_literal", "output_literal"):
+            for raw in controls:
+                with self.subTest(field=field, raw=repr(raw)):
+                    record = {**FAKE_IO, field: raw}
+                    result = evaluate({"observations": [record]})
+                    self.assertEqual(result["candidate_io_cases"], 0)
+                    self.assertEqual(result["track"], "C_DOCUMENTATION")
+                    self.assertFalse(result["approved_for_emulation"])
+                    self.assertFalse(result["approved_as_authentic_dr70"])
+
+    def test_readable_text_adjacent_to_controls_remains_candidate(self) -> None:
+        row = {
+            **FAKE_IO,
+            "input_literal": "\x00VISIBLE INPUT\u200b",
+            "keys_literal": "KEY\x1b",
+            "output_literal": "\ufeffVISIBLE OUTPUT\x7f",
+        }
+        metadata = {"observations": [row]}
+        unchanged = copy.deepcopy(metadata)
+        result = evaluate(metadata)
+        self.assertEqual(result["candidate_io_cases"], 1)
+        self.assertEqual(result["track"], "B_BEHAVIOR_STUDY")
+        self.assertEqual(metadata, unchanged)
+
+    def test_raw_capture_is_preserved_but_not_counted_as_text(self) -> None:
+        row = {
+            **FAKE_IO,
+            "input_literal": "\x00",
+            "keys_literal": "\x1b",
+            "output_literal": "\x7f",
+        }
+        metadata = {
+            "observations": [row],
+            "raw_capture": {"bytes_hex": "001b7f", "origin": "synthetic-only"},
+        }
+        unchanged = copy.deepcopy(metadata)
+        result = evaluate(metadata)
+        self.assertEqual(result["candidate_io_cases"], 0)
+        self.assertEqual(result["track"], "C_DOCUMENTATION")
+        self.assertEqual(metadata, unchanged)
 
     def test_cli_rejects_duplicate_json_properties_and_nonfinite(self) -> None:
         # Before parsing, a later observations=[] silently erased a candidate.
