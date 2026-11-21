@@ -115,7 +115,7 @@ def validate(data):
         elif ident in ids:
             errors.append(f"duplicate id: {ident}")
         ids.add(ident)
-        if not isinstance(family, str) or not family:
+        if not isinstance(family, str) or not family.strip():
             errors.append(f"{ident}: missing provenance family")
         if split not in SPLITS:
             errors.append(f"{ident}: invalid split")
@@ -128,8 +128,8 @@ def validate(data):
         if not isinstance(entry.get("literal_fragments"), list):
             errors.append(f"{ident}: literals must be a list")
         if split in {"development", "holdout"}:
-            if isinstance(family, str):
-                families.setdefault(family, set()).add(split)
+            if isinstance(family, str) and family.strip():
+                families.setdefault(family.strip(), set()).add(split)
             source_url, locator = entry.get("source_url"), entry.get("locator")
             if isinstance(source_url, str) and isinstance(locator, str):
                 if source_url.strip() and locator.strip():
