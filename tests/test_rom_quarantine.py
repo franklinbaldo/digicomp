@@ -6,7 +6,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from rom_quarantine import CustodyError, ingest, verify, main
+from tools.rom_quarantine import CustodyError, ingest, verify, main
 
 
 class QuarantineTests(unittest.TestCase):
