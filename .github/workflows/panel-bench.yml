@@ -1,0 +1,26 @@
+name: DR-70 experimental panel bench
+
+on:
+  pull_request:
+    paths:
+      - "experiments/panel-bench/**"
+      - ".github/workflows/panel-bench.yml"
+  push:
+    branches: [main]
+    paths:
+      - "experiments/panel-bench/**"
+      - ".github/workflows/panel-bench.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  panel-test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test bench with Python stdlib
+        run: |
+          python3 -m py_compile experiments/panel-bench/*.py
+          python3 -m unittest discover -s experiments/panel-bench -p 'test_*.py' -v
