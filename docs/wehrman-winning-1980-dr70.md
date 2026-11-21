@@ -25,12 +25,24 @@ estado: provisorio
 
 **Cobertura efetivamente realizada em 21/11/2026:** consulta das transcrições HTML, da passagem textual da p. 29 e das seções e exemplos indicados; **não** leitura visual do fac-símile, dos gráficos ou do PDF original. A paginação digital do Scribd (43 páginas anunciadas) não equivale às páginas impressas (exemplos após p. 56). Não atribuir SHA, formato de impressão ou localizador de imagem não capturada.
 
+## Registro fotográfico parcial de um exemplar físico (Lagarto R156, 21/11/2026)
+
+A livraria antiquária [Peruse the Stacks, ABAA, item #5343](https://www.perusethestacks.com/pages/books/5343/joyce-c-wehrman/winning-zodiacal-timing-revised?soldItem=true) documenta **um exemplar comercial descrito como edição revista de 1980, 80 páginas**, com três fotografias associadas à mesma ficha. O anúncio registra proveniência da biblioteca de Jeanne Long e uma correção manuscrita de endereço na folha de rosto; são **declarações do vendedor**, não comprovação da genealogia das saídas astrológicas nem vínculo com o DR-70. O item consta como vendido; não foi solicitado nem adquirido.
+
+- [Fotografia da capa](https://perusethestacks.cdn.bibliopolis.com/pictures/5343.png?auto=webp&fit=bounds&height=1000&v=1670193248&width=768): lê-se *Winning!! Zodiacal Timing Revised* e Joyce C. Wehrman; é compatível com a edição descrita, mas não apresenta colofão.
+- [Fotografia do sumário](https://perusethestacks.cdn.bibliopolis.com/pictures/5343_2.jpg?auto=webp&fit=bounds&height=427&v=1670193248&width=320): **conferência visual** de `Example charts ........ 56` na tabela impressa. É um localizador, **não a identificação da página da fotografia seguinte**.
+- [Fotografia de páginas interiores](https://perusethestacks.cdn.bibliopolis.com/pictures/5343_3.jpg?auto=webp&fit=bounds&height=427&v=1670193248&width=320): aparecem **duas rodas astrológicas circulares em páginas opostas**, com marcações manuscritas/impressas. Um bilhete manuscrito sobreposto cobre grande parte dos dois gráficos; a imagem disponibilizada tem resolução reduzida. **Não são legíveis com segurança** os números angulares, os cabeçalhos completos, a paginação nem um identificador de sessão/saída do DR-70. Não atribuir o bilhete a Wehrman, Long ou a um operador sem prova.
+
+**Grau:** `PRINTED_BOOK_CHART_PHOTOGRAPH_PARTIAL / UNASSIGNED_DEVICE_ORIGIN`. Esta é a **primeira inspeção visual parcial de gráficos do livro nesta trilha**, não uma leitura integral de carta astrológica e não o fac-símile das pp. 29/56+. A atribuição das fotografias ao exemplar descrito decorre da **mesma ficha comercial**, não de duas fontes independentes. O anúncio, a capa e o sumário formam uma única cadeia editorial. A simples presença de rodas no livro não demonstra que seus valores foram calculados ou impressos pelo DR-70; a origem editorial, manual ou por tabela ACS continua aberta.
+
+**Custódia:** URLs e localizadores preservados; os bytes originais da fotografia e da cópia física **não foram obtidos**, portanto `sha256: desconhecido`. Nada foi copiado/republicado no repositório. A fotografia de detalhe, parcialmente obstruída, não permite transcrição numérica válida nem aceitação no corpus `data/fidelity/observations.json`. Solicitar, apenas se houver **acesso autorizado**, imagem mais legível da folha de rosto, p. 29 e exemplos p. 56+ da **mesma cópia**, preservando paginação e cadeia física; uma segunda leitura independente deve registrar ilegibilidades sem completar lacunas com cálculos modernos. **Estado `NOT_RUN_NO_GOLDEN`.**
+
 ## O que se sustenta, e o que permanece aberto
 
 | Afirmação | Estatuto |
 | --- | --- |
 | A edição revisada de 1980 contém declaração em primeira pessoa de uso de um DR-70 | **Transcrição web identificada; fac-símile pendente** |
-| A edição contém mapas e exemplos, inclusive relacionados a corridas de 1977–1978 | **Texto/índice localizados; imagens não examinadas** |
+| A edição contém mapas e exemplos, inclusive relacionados a corridas de 1977–1978 | **Texto/índice e fotografia parcial de duas rodas em exemplar comercial**; valores e páginas das rodas não identificados |
 | Um mapa específico do livro foi calculado ou impresso no DR-70 | **Não demonstrado** |
 | Os caracteres ou números publicados são os de uma impressora DR-70 | **Não demonstrado** |
 | Uma folha do livro registra entradas, teclas e saída de uma sessão de DR-70 | **Não localizado** |
