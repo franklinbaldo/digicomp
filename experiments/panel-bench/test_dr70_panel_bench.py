@@ -67,6 +67,40 @@ class PanelTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             Panel.replay([{"action": "key", "value": 12}])
 
+    def test_snapshot_is_detached_from_event_history(self):
+        panel = Panel()
+        panel.apply("power", "on")
+        panel.apply("key", "V")
+        exported = panel.snapshot()
+        exported["events"][0]["value"] = "off"
+        exported["events"].append({"action": "key", "value": "FORGED"})
+        exported["sources"].clear()
+        self.assertTrue(panel.power_on)
+        self.assertEqual(panel.events, [
+            {"action": "power", "value": "on"},
+            {"action": "key", "value": "V"},
+        ])
+        self.assertEqual(len(panel.snapshot()["sources"]), 2)
+
+    def test_replay_rejects_non_mapping_event(self):
+        with self.assertRaises(ValueError):
+            Panel.replay([None])
+        with self.assertRaises(ValueError):
+            Panel.replay(["key"])
+
+    def test_direct_key_type_rejected_without_event(self):
+        panel = Panel()
+        with self.assertRaises(ValueError):
+            panel.apply("key", 12)
+        self.assertEqual(panel.events, [])
+
+    def test_replay_detaches_input_event_dicts(self):
+        input_events = [{"action": "power", "value": "on"}]
+        replayed = Panel.replay(input_events)
+        input_events[0]["value"] = "off"
+        self.assertTrue(replayed.power_on)
+        self.assertEqual(replayed.events[0]["value"], "on")
+
     def test_event_cannot_have_unrecognized_action(self):
         panel = Panel()
         with self.assertRaises(ValueError):
