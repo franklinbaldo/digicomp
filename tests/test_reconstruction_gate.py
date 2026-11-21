@@ -68,6 +68,12 @@ class ReconstructionTriageTests(unittest.TestCase):
         x = {**FAKE_IO, "directness": "secondary_report"}
         self.assertEqual(evaluate({"observations": [x]})["track"], "C_DOCUMENTATION")
 
+    def test_unhashable_directness_is_not_observation(self) -> None:
+        for malformed in (["device_observation"], {"value": "device_observation"}):
+            with self.subTest(directness=malformed):
+                x = {**FAKE_IO, "directness": malformed}
+                self.assertEqual(evaluate({"observations": [x]})["track"], "C_DOCUMENTATION")
+
     def test_unreviewed_output_not_observation(self) -> None:
         x = {**FAKE_IO, "source_reviewed": False}
         self.assertEqual(evaluate({"observations": [x]})["track"], "C_DOCUMENTATION")
