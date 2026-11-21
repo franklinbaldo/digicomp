@@ -12,11 +12,16 @@ import os
 import secrets
 import stat
 import sys
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 _CHUNK = 1024 * 1024
 _METADATA_MAX = 16384  # Allow up to 2048 multibyte origin characters in v1 JSON.
+_V1_FIELDS = frozenset({
+    "schema", "sha256", "sha512", "size", "origin_note",
+    "original_basename", "ingested_at_utc",
+    "provenance_verified", "rights_cleared", "executed",
+})
 
 
 class CustodyError(RuntimeError):
@@ -103,6 +108,34 @@ def _read_metadata(path: Path) -> dict:
     return record
 
 
+def _check_provenance_fields(record: dict) -> None:
+    # V1 is a closed schema. Unknown fields must not carry unreviewed
+    # assertions such as "authentic": true while verification returns PASS.
+    if set(record) != _V1_FIELDS:
+        raise CustodyError("invalid quarantine v1 metadata fields")
+    origin = record["origin_note"]
+    if not isinstance(origin, str) or not origin.strip() or len(origin) > 2048:
+        raise CustodyError("invalid quarantine provenance text: origin_note")
+    basename = record["original_basename"]
+    if (
+        not isinstance(basename, str)
+        or not basename
+        or basename in (".", "..")
+        or "/" in basename
+        or chr(0) in basename
+    ):
+        raise CustodyError("invalid quarantine provenance text: original_basename")
+    stamp = record["ingested_at_utc"]
+    if not isinstance(stamp, str):
+        raise CustodyError("invalid quarantine UTC timestamp")
+    try:
+        parsed = datetime.fromisoformat(stamp)
+    except ValueError as exc:
+        raise CustodyError("invalid quarantine UTC timestamp") from exc
+    if parsed.utcoffset() != timedelta(0):
+        raise CustodyError("invalid quarantine UTC timestamp")
+
+
 def verify(root: Path, sha256: str) -> dict:
     root = _root(root)
     path = _object_path(root, sha256)
@@ -123,6 +156,7 @@ def verify(root: Path, sha256: str) -> dict:
     ):
         raise CustodyError("metadata and content disagree")
     # Hash fixity alone must not promote an unverified candidate to trusted.
+    _check_provenance_fields(record)
     if record.get("schema") != "digicomp-quarantine-v1":
         raise CustodyError("invalid quarantine schema")
     for field in ("provenance_verified", "rights_cleared", "executed"):
