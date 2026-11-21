@@ -5,12 +5,14 @@ on:
     paths:
       - "vendor/moira/**"
       - "tests/test_vendor_moira_angles.py"
+      - "tests/test_vendor_moira_geometry_clock.py"
       - ".github/workflows/vendor-moira-reference.yml"
   push:
     branches: [main]
     paths:
       - "vendor/moira/**"
       - "tests/test_vendor_moira_angles.py"
+      - "tests/test_vendor_moira_geometry_clock.py"
       - ".github/workflows/vendor-moira-reference.yml"
 
 permissions:
@@ -24,9 +26,9 @@ jobs:
       - uses: actions/checkout@v4
       - name: Check vendor source and test arithmetic invariants
         run: |
-          python3 -m py_compile vendor/moira/_angles.py vendor/moira/constants.py tests/test_vendor_moira_angles.py
-          python3 -m unittest discover -s tests -p 'test_vendor_moira_angles.py' -v
-          python3 -O -m unittest discover -s tests -p 'test_vendor_moira_angles.py' -v
+          python3 -m py_compile vendor/moira/*.py tests/test_vendor_moira_*.py
+          python3 -m unittest discover -s tests -p 'test_vendor_moira_*.py' -v
+          python3 -O -m unittest discover -s tests -p 'test_vendor_moira_*.py' -v
       - name: Check license and upstream manifest
         run: |
           python3 - <<'PY'
