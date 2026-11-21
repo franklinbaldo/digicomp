@@ -114,6 +114,37 @@ class FidelitySchemaTests(unittest.TestCase):
         with self.assertRaisesRegex(CorpusError, "JSON Schema violation"):
             check_schema(self.path)
 
+    def test_partial_nul_is_not_an_observed_input(self) -> None:
+        # A NUL is non-whitespace but has no visible evidence glyph.
+        case = fake_case()
+        case["as_entered"]["date_literal"] = "\u0000"
+        self.write(case)
+        with self.assertRaisesRegex(CorpusError, "JSON Schema violation"):
+            check_schema(self.path)
+
+    def test_partial_escape_only_output_is_rejected(self) -> None:
+        case = fake_case()
+        case["observed_output"]["literal"] = "\u001b"
+        self.write(case)
+        with self.assertRaisesRegex(CorpusError, "JSON Schema violation"):
+            check_schema(self.path)
+
+    def test_replayable_del_only_key_is_rejected(self) -> None:
+        case = fake_case()
+        case["status"] = "replayable"
+        case["source"]["directness"] = "device_observation"
+        case["as_entered"]["keys_literal"] = ["\u007f"]
+        case["observed_output"] = {"channel": "printer", "literal": "FAKE OUTPUT"}
+        self.write(case)
+        with self.assertRaisesRegex(CorpusError, "JSON Schema violation"):
+            check_schema(self.path)
+
+    def test_visible_literal_next_to_controls_still_passes(self) -> None:
+        case = fake_case()
+        case["as_entered"]["date_literal"] = "\u0000FAKE DATE\u001b"
+        self.write(case)
+        self.assertEqual(check_schema(self.path), 1)
+
     def test_partial_zero_width_space_is_not_a_literal(self) -> None:
         case = fake_case()
         case["as_entered"]["date_literal"] = "\u200b"
