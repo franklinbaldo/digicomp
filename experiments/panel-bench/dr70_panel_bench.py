@@ -32,6 +32,8 @@ class Panel:
         return self.power_on and self.shift_latched
 
     def apply(self, action: Literal["power", "shift", "key"], value: str = "") -> None:
+        if not isinstance(action, str) or not isinstance(value, str):
+            raise ValueError("action and value must be strings")
         if action == "power":
             if value not in ("on", "off"):
                 raise ValueError("power requires on/off")
@@ -52,7 +54,7 @@ class Panel:
     def replay(cls, events: list[dict[str, object]]) -> "Panel":
         panel = cls()
         for item in events:
-            if set(item) != {"action", "value"}:
+            if not isinstance(item, dict) or set(item) != {"action", "value"}:
                 raise ValueError("unsupported event fields")
             action, value = item["action"], item["value"]
             if not isinstance(action, str) or not isinstance(value, str):
@@ -61,13 +63,14 @@ class Panel:
         return panel
 
     def snapshot(self) -> dict[str, object]:
+        """Export a detached view, not a mutable reference to the live event log."""
         return {
             "kind": "EXPERIMENTAL_PANEL_NOT_ORIGINAL_DR70",
             "power_on": self.power_on,
             "shift_latched": self.shift_latched,
             "shift_lamp_hypothesis": self.shift_lamp,
             "observed_dr70_output": None,
-            "events": self.events,
+            "events": [item.copy() for item in self.events],
             "sources": [SOURCE_CALCUSEUM, SOURCE_DESKTHORITY],
         }
 
