@@ -34,6 +34,14 @@ A coleta deve ser ampla e contínua, inclusive fontes que não permitam reproduz
 - Lean 4 formaliza invariantes e impossibilidades condicionais (por exemplo, simetria de pares, limites de quantização, equivalência entre parâmetros sob observações parciais). Prova de teorema de **modelo** não prova que o firmware DR-70 o implementa.
 - Avaliar modelos por cobertura de campos observados, discrepâncias literais e numéricas, e rejeição explícita de casos sem entrada. Nunca maximizar desempenho no holdout e depois apresentá-lo como cego; uma vez consultado para ajuste, aquele conjunto torna-se desenvolvimento e é necessário novo holdout independente.
 
+## Gate de admissão em desenvolvimento versus holdout (R142)
+
+O **acervo exploratório** aceita `sample_split: unassigned` e incompletude; não exigir campos instrumentais para recolher pistas. Para admitir `holdout`, a validação estrutural requer, além dos quatro flags booleanos, `kind: device_session_output`, `status: reviewed`, `attribution: device_native_session_output`, `literal_fragments` não vazio e um objeto `instrumental_evidence` com `device_identifier`, `session_locator`, `input_as_entered`, `key_sequence` não vazia, `output_channel` (display/printer), `output_literal`, `independent_reviewer` e `independent_review_reference` não vazios. Os fragmentos literais devem ocorrer na transcrição bruta. São **declarações sujeitas a auditoria**, não autenticação automática: nenhuma destas marcas por si demonstra máquina, operador, série, papel ou dados reais.
+
+O guard recusa o **mesmo par exato** URL HTTPS + localizador em `development` e `holdout`, mesmo que alguém renomeie a `family_id`. Também mantém a proibição de família compartilhada entre os dois grupos. URLs-espelho, recortes, variações textuais e famílias artificialmente separadas por regiões distintas ainda requerem revisão humana; o validador não infere identidade documental de URLs diferentes. Os testes negativos introduzem casos falsos **apenas em memória** e verificam a recusa das duas tentativas de promoção. Um exemplo positivo também é inteiramente falso para provar somente a capacidade de representar um caso futuro.
+
+A reserva `holdout` não é pontuação de fidelidade: com `observations: []`, não há cálculo comparável nem direito a afirmar aprovação histórica.
+
 ## Execução do catálogo
 
 ```sh
@@ -51,7 +59,7 @@ Em *Astrological Aspects: A Process-Oriented Approach* (Leyla Raël e Dane Rudhy
 
 **Pista adicional de 1988:** Duncan Campbell, [*Reagan's Secret Computer*, New Statesman & Society, 14/10/1988, pp. 14–15](https://www.duncancampbell.org/menu/journalism/newstatesman/newstatesman-1988/Reagan%27s%20secret%20computer.pdf), relata que Nicky Michaels conferiu uma impressão do DR-70 relacionada ao tratado INF. As páginas foram examinadas visualmente; a impressão **não aparece** na reprodução. Guardar como evento de output relatado, sem inventar posições planetárias nem aceitar a hora narrada como input exato. O relato de 1988 não fornece um teste numérico.
 
-**Separação de métricas:** 27 registros de catálogo = 20 mapas listados (ainda sem leitura visual) + duas publicações da mesma figura Carlson + imagem do display L606 + quatro pistas textuais/visuais sem resultados numéricos recuperados. Isso **não** equivale a 27 resultados transcritos nem a 27 golden tests.
+**Separação de métricas:** 30 registros de catálogo = 20 mapas listados (ainda sem leitura visual) + duas publicações da mesma figura Carlson + imagem do display L606 + quatro pistas textuais/visuais anteriores + três URLs de vídeo do mesmo colecionador no Deskthority, ainda sem quadros acessíveis. Isso **não** equivale a 30 resultados transcritos nem a 30 golden tests.
 
 ## Lacunas a fechar na próxima rodada
 
