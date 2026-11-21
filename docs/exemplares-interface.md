@@ -49,6 +49,28 @@ A figura é um **formato de apresentação contemporâneo** e uma pista útil pa
 
 **Resultado R123:** nenhuma ROM, tabela de instruções, foto interna autenticada, saída literal nem novo exemplar individualmente distinguível foi recuperado nesta rechecagem. Priorizar metadados por catálogo, sem cadastro, compra ou contato nesta etapa.
 
+## Auditoria R124 (20/11/2026): canal de impressão e assinatura do output
+
+**Pergunta O0/O3 de [#30](https://github.com/franklinbaldo/digicomp/issues/30):** o leiaute da fig. 1 de Carlson foi impresso diretamente por um DR-70, reformatado a partir de cálculos feitos nele ou montado editorialmente? A declaração de uso do DR-70 no artigo **não distingue** essas três alternativas.
+
+| Controle público examinado | Resultado estrito | Inferência proibida |
+| --- | --- | --- |
+| [Calcuseum L606, cinco fotos](https://www.calcuseum.com/scrapbook/BONUS/10925/1.htm), sobretudo [vista lateral](https://www.calcuseum.com/scrapbook/BITMAP/BONUS/10925/_SMD47725.JPG) e [foto das instruções](https://www.calcuseum.com/scrapbook/BITMAP/BONUS/10925/_SMD47727.JPG) | Imagens externas, de baixa resolução na lateral; não exibem impressora ligada, papel legível ou interior do manual. Não se determina um canal de impressão a partir dos cabos e detalhes visíveis. | A ausência de impressora **nessas cinco fotos** não comprova inexistência de porta, acessório ou função de impressão no modelo. |
+| [AFA, índice por autor dos volumes XLI–L](https://astrologers.com/wp-content/uploads/2025/07/Index-by-Author-41-50.pdf), Richard Nolle, parte 14, *Today's Astrologer*, XLVI/6, **maio de 1984, p. 13** (PDF do índice, p. 42) | O índice bibliográfico contém a expressão **“Digicomp DR-70 with printer”** e referência ao Astrion 80. A entrada já constava do catálogo de [fontes F9](sources.md), não é descoberta de uma nova máquina. | O **artigo original não foi obtido** nesta auditoria. Não há foto de conector, marca/modelo da impressora, impressão literal ou prova de que a fig. 1 de **1983** saiu desse periférico. |
+| [CAELi, *Within Orb*, episódio 6, James Dotson, 31/07/2023](https://caeli.institute/2023/07/31/within-orb-episode-6-with-james-dotson/), transcrição em torno de 06:31–06:48 | Memória retrospectiva de um mapa astrológico impresso no período aproximado do fim dos anos 1970/início dos 1980; conversa também menciona um nome Digicomp, com esclarecimento editorial do DR-70. | **Não existe ligação de custódia** entre aquele papel lembrado e um DR-70 identificado. Não é exemplar novo, nem amostra independente da gramática `C1 NATAL`. |
+
+### Três modelos rivais, todos ainda abertos
+
+- **A — papel nativo:** um DR-70 identificado, por sua interface de saída, gera diretamente os cabeçalhos, símbolos, casas e diagrama. **Contraprova decisiva:** foto/scan de papel original com série, periférico/conector e operação associada; uma montagem posterior identificada derrubaria A para aquela figura.
+- **B — cálculo DR-70, apresentação externa:** resultados são transcritos, exportados ou digitados em outro equipamento ou programa que os formata. **Discriminante:** fichas ou registros brutos do cálculo acompanhados da etapa de transferência e arte-final.
+- **C — figura editorial/terceiro:** parte ou todo o formato publicado vem de processo independente; o relato de cálculo pelo DR-70 pode continuar verdadeiro. **Discriminante:** matriz original, arquivo gráfico, impressor ou registro editorial com procedência da figura.
+
+O [preprint institucional LBL-20480 de 1983](carlson-1983-preprint-figure-custody.md) e a publicação *Nature* de 1985 são **duas versões da mesma obra**, não duas medições instrumentais. A diferença gráfica entre versões restringe a hipótese de uma figura editorial inteiramente inalterada, mas não autentica a origem da tipografia de cada painel.
+
+**Busca negativa delimitada:** consultas públicas por `"C1 NATAL" "KOCH"`, `"C1 SEC" "KOCH"` e `"NATAL TROP" "P.LONG"` não forneceram, nesta rodada, uma **impressão independente com aparelho identificável**; retornos do próprio Carlson/republicações não contam como segundo exemplar. Busca não exaustiva, portanto não prova inexistência de impressos históricos. Sem arquivo original recuperado, não há hash de bytes para estas imagens/documentos e nenhum caso `replayable`: `NOT_RUN_NO_NATIVE_PRINT`, corpus de fidelidade segue sem golden.
+
+**Próximo experimento informativo:** fac-símile do artigo de Nolle de maio/1984 (p. 13), fotografia legível de **impressora, ligação e papel em operação** no mesmo DR-70, e depois cotejo cego dos tokens com Carlson 1983. Sem contato com terceiros, compra, download de firmware ou execução histórica nesta etapa.
+
 ## Próximas verificações, sem contato externo
 
 1. **P0/P1:** localizar páginas internas do cartão do Calcuseum e eventuais impressões originais, com fotografia legível, série e procedência. O negativo atual limita-se às cinco fotos públicas inspecionadas.
