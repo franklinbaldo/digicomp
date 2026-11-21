@@ -72,3 +72,34 @@ irrestritamente sem avaliar sua origem específica.
 **Limite:** se direitos de um arquivo permanecerem ambíguos, usar como
 referência de investigação, sem copiá-lo. Licença "open source" não
 significa "MIT", e visualização pública de código não é autorização irrestrita.
+
+
+## Segunda fatia (21/11/2026): geometria e relógio de referência
+
+**Upstream fixado:** TheDaniel166/moira, commit
+`1bb9f66cde48f91cb13ebc5a715dec030d592b44`, sob a licença MIT
+integral já preservada em `vendor/moira/LICENSE`. As fontes são atribuídas
+ao mantenedor do Moira, sem atestado independente de toda a proveniência.
+
+| Arquivo local | Origem no commit fixado | Tipo de preservação | Fronteira |
+| --- | --- | --- | --- |
+| `vendor/moira/_house_quality.py` | `moira/_house_quality.py`; Git blob `1e3f7f8f001becb0e71f88e1b173f950ecf1db52` | Cópia exata com hash exigido no CI | Validação de ordenação/distorsão de um ciclo de 12 casas; **não calcula** as cúspides do DR-70 |
+| `vendor/moira/coordinates_reference.py` | `moira/coordinates.py`; Git blob `45d1665c089547d87acfef1188bea059e9e2efac` | Definições selecionadas, importações e superfícies reduzidas | Transformações e ângulos com épocas/obliquidade recebidas do chamador, sem efeméride ou precessão implícita |
+| `vendor/moira/sidereal_time_reference.py` | `moira/julian.py`; Git blob `93eaaece31f5071b3e7a97588e73dffb03be48ac` | ERA e GMST extraídos, sem acelerador; wrappers locais | GMST/L MST **médios** IAU 2006. Exige UT1 e TT explicitamente; não converte UTC, não calcula Delta-T ou GAST |
+
+O bloco completo `moira/houses.py` possui aproximadamente 287 kB e muitas
+dependências; `moira/sidereal.py` modela o **zodíaco sideral/ayanamsha**,
+não é um calculador isolado de *tempo sideral*. Não foram copiados.
+Arquivos extraídos/adaptados não têm o hash do arquivo upstream completo,
+por isso o manifesto registra **o hash da fonte** e marca explicitamente
+a diferença, em vez de fingir identidade de blobs.
+
+**Decisão científica:** testes apenas de invariantes matemáticas e fronteiras
+de entrada. Nem correspondência com o Moira nem um CI verde autentica uma saída
+do DR-70. Permanecem `observations: []`, 0 golden e 0 ROM autenticada.
+Uma futura comparação numérica deverá definir relógio, longitude, ramo de
+azimute, sistema de casas e convenções antes de medir diferenças.
+
+**Licenças:** o escopo MIT permanece restrito aos componentes acima,
+com aviso e commit do Moira, sem bancos de efemérides externos.
+O restante das restrições apontadas na tabela original continua valendo.
