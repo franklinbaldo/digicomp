@@ -32,6 +32,17 @@ O relato de Erlewine é **lembrança retrospectiva de concorrente**; as entradas
 
 O autor usa a expressão de que o DR-70 "desapareceu de cena" depois de alguns anos. **Isso deve ser lido como impressão retrospectiva de presença comercial relativa**, não como certidão de encerramento da empresa. A publicidade atribuída a 1986 se refere ao *Astrion*, produto diferente, e por isso não prova nem refuta, isoladamente, a continuidade das vendas do **DR-70**.
 
+
+## Pista posterior: Chris McRae e três componentes de um mapa (1988)
+
+**Localizador:** Martin Davis (org.), *From Here to There: An Astrologer's Guide to Astromapping*, Wessex Astrologer, edição eletrônica de **2008**, capítulo 1, seção *The Geodetic World Map*, cerca da p. 11 na paginação impressa. [Editora](https://www.wessexastrologer.com/product/wafh001/), [ficha e prévia autorizada](https://www.perlego.com/book/1238018/from-here-to-there-an-astrologers-guide-to-astromapping-pdf), [reprodução textual de terceiros para localização da passagem](https://pdfcoffee.com/guide-to-astromappingpdf-pdf-free.html). [Google Books registra *The Geodetic World Map*, de Chris McRae, AFA, **1988**](https://books.google.com/books/about/The_Geodetic_World_Map.html?id=dqN9oAEACAAJ).
+
+A reprodução textual **atribui a Davis** o relato de que Chris McRae teria produzido seu mapa geodético de 1988 recorrendo **ao Digicomp DR-70 e ao IBM XT, juntamente com o programa Blue Star de Michael Erlewine**. O Google Books confirma a **obra de McRae**, não a combinação de equipamentos. Perlego confirma o livro posterior, mas **a prévia aberta termina antes dessa passagem específica**. **Grau: relato retrospectivo não conferido no exemplar integral publicado**; não é log, manual, fonte de programa ou observação operacional contemporânea. Não contar os espelhos como testemunhos independentes.
+
+**Hipóteses rivais (O0–O4):** H1, o DR-70 calculava uma parte dos dados, enquanto IBM XT/Blue Star forneciam outros cálculos ou a montagem; H2, computadores e programa foram usados em etapas independentes, com editoração adicional. Ambas são compatíveis com o relato e **não atribuem interfaces ou formato a qualquer equipamento**. O mapa final não pode ser chamado de output nativo do DR-70. Tampouco há prova de Blue Star executando no DR-70, conexão física entre máquinas, CPU/ROM, formato intermediário ou algoritmo reaproveitado.
+
+**Próximo discriminante:** (1) conferir a passagem na edição integral autorizada de Davis; (2) procurar no exemplar de **1988** de McRae prefácio, créditos de produção, legendas ou anexos que identifiquem **qual etapa** cada máquina/software executou; (3) somente com entrada, comandos, exemplar e saída original admitir eventual caso de fidelidade. Estado atual: `NOT_RUN_NO_NATIVE_OUTPUT`; nenhum novo caso em `data/fidelity/observations.json`. Não comprar nem contatar terceiros.
+
 ## Hipóteses rivais e próxima observação
 
 | Hipótese | Evidência compatível | O que a distinguiria |
