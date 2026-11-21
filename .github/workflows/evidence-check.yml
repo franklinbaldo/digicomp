@@ -1,0 +1,19 @@
+name: Evidence-driven Rust checks
+on:
+  pull_request:
+    paths:
+      - 'experiments/evidence-check/**'
+      - '.github/workflows/evidence-check.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'experiments/evidence-check/**'
+      - '.github/workflows/evidence-check.yml'
+permissions:
+  contents: read
+jobs:
+  rust-evidence:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: cargo test --manifest-path experiments/evidence-check/Cargo.toml
