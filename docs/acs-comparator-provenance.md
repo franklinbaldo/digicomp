@@ -44,6 +44,13 @@ A [entrevista retrospectiva de Michael Erlewine, publicada em 2023](https://thea
 - **F13/F14 → Michaels:** duas publicações e grafias distintas, mas **uma testemunha da própria operação**. Não somar como duas observações instrumentais independentes e não fundir os números de série do Calcuseum com o aparelho de Michaels.
 - **F9/AFA em várias ordenações de índice:** versões por assunto, título e volume são apresentações bibliográficas da **mesma série editorial**, não três testes do DR-70.
 
+## Vias concretas de custódia do artigo de 1983 (consulta de 20/11/2026)
+
+- **Edição digital institucional declarada:** a [American Federation of Astrologers](https://astrologers.com/grant-trust-projects/) informa projeto de digitalização iniciado em 2009. Seu [catálogo do CD *Today's Astrologer* vols. 41–50, SKU A4842](https://astrologers.com/product/todays-astrologer-vols-41-50/) afirma conter os números completos de 1979–1988, intervalo que abrange XLV/10 de outubro de 1983. **Foi consultada a descrição comercial, não o conteúdo nem o arquivo digital**. A página exige aquisição; não foi feita compra ou contato.
+- **Acervo físico listado independentemente:** o [inventário de periódicos Astrolearn](https://www.astrolearn.com/astrology-bibliography/todays-astrologer/) declara posse dos números do volume 45 de 1983, de XLV/1 (14/01/1983) até XLV/12 (04/12/1983). O enunciado de cobertura inclui XLV/10, mas **nenhuma página do exemplar foi examinada**, e não há comprovação de acesso digital aberto.
+
+Esses dois registros são **vias de obtenção**, não duas leituras nem duas confirmações dos resultados de Nolle. O próximo passo é procurar cópia aberta legitimamente acessível; eventual aquisição ou consulta a terceiros exige decisão específica do mantenedor. Se um original for obtido, registrar edição/número/página e proveniência do arquivo antes de extrair entradas, saídas ou números do DR-70.
+
 ## Próxima prova discriminante
 
 1. Recuperar legalmente o artigo original de Richard Nolle, parte 6, *Today's Astrologer* **XLV/10 (outubro/1983), p. 9**; comparar com parte 5, XLV/9 (setembro/1983), p. 14. Consultar as trilhas de custódia já catalogadas em [F11](sources.md), sem compra/contato sem aprovação.
