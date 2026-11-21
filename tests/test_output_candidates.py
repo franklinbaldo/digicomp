@@ -90,6 +90,63 @@ class CandidateCatalogTest(unittest.TestCase):
         violations = validate(data)
         self.assertTrue(any("source locator leakage" in s for s in violations), violations)
 
+    def test_identical_instrument_session_cannot_cross_splits_by_alias(self):
+        # Coruja R132: distinct source URLs, locators, and family names
+        # do not make a declared physical session independent.
+        data = copy.deepcopy(self.data)
+        original = data["entries"][0]
+
+        def synthetic_case(identifier, family, url, split):
+            item = copy.deepcopy(original)
+            item.update(
+                id=identifier,
+                family_id=family,
+                source_url=url,
+                locator=f"{identifier} fictional document",
+                kind="device_session_output",
+                status="reviewed",
+                attribution="device_native_session_output",
+                sample_split=split,
+                replayable=True,
+                input_complete=True,
+                output_complete=True,
+                numeric_holdout_eligible=True,
+                literal_fragments=["FAKE-OUTPUT"],
+                instrumental_evidence={
+                    "device_identifier": "FAKE-DEVICE",
+                    "session_locator": "FAKE-SESSION",
+                    "input_as_entered": "FAKE-INPUT",
+                    "key_sequence": ["FAKE-KEY"],
+                    "output_channel": "printer",
+                    "output_literal": "FAKE-OUTPUT",
+                    "independent_reviewer": "FAKE-REVIEWER",
+                    "independent_review_reference": "https://example.invalid/review",
+                },
+            )
+            return item
+
+        left = synthetic_case(
+            "FAKE-DEV-SESSION", "FAKE-FAMILY-DEV",
+            "https://example.invalid/a", "development"
+        )
+        right = synthetic_case(
+            "FAKE-HOLD-SESSION", "FAKE-FAMILY-HOLD",
+            "https://example.invalid/b", "holdout"
+        )
+        data["entries"].extend((left, right))
+        violations = validate(data)
+        self.assertTrue(any("instrument session leakage" in s for s in violations),
+                        violations)
+
+        # Same device can have truly different declared sessions.
+        right["instrumental_evidence"]["session_locator"] = "FAKE-SESSION-2"
+        self.assertEqual(validate(data), [])
+
+        # The exploratory unassigned collection must stay permissive.
+        right["instrumental_evidence"]["session_locator"] = "FAKE-SESSION"
+        right["sample_split"] = "unassigned"
+        self.assertEqual(validate(data), [])
+
     def test_duplicate_id_is_rejected(self):
         data = copy.deepcopy(self.data)
         data["entries"].append(copy.deepcopy(data["entries"][0]))
