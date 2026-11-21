@@ -35,6 +35,12 @@ O mesmo ISBN é registrado nas descrições de 1980, portanto há **continuidade
 
 O contraste de **três combinações de marca e sede** não permite afirmar que existam exatamente três edições, que se sucederam numa ordem específica ou que tenham os mesmos gráficos. Editora, distribuidor, impressão, endereço comercial e metadado de catálogo são campos distintos. Não tratar **1980** no registro como ano comprovado de cada exemplar; não transportar números ou cabeçalhos entre variantes sem conferi-los.
 
+## Novo localizador de acervo: QFA, Austrália (sem imagem interior)
+
+O [catálogo público da biblioteca da Queensland Federation of Astrologers, versão salva em 2/03/2025](https://qfa.net.au/wp-content/uploads/2025/03/Book-Library-Catalogue-20250302.pdf), **página impressa 32 / PDF página 32**, mostra duas linhas de *Astrological Aspects*: **QFA 615** com autora `Rael, Leyla` e status **`y` em célula verde**, e **QFA 1280** com autores `Rudhyar, Dane & Rael, Leyla` e **status em branco**. Os dois registros foram lidos na imagem da página, não apenas no texto extraído. O catálogo não define de modo suficiente o significado operacional de `y` ou branco para atestar empréstimo, disponibilidade atual ou posse física; não demonstra duas cópias diferentes, tampouco a edição/imprenta de qualquer exemplar.
+
+**Utilidade O0:** são identificadores de busca em acervo nominalmente distinto do Internet Archive e das livrarias já catalogadas. **Limite:** não há fotografia da folha de rosto, página de créditos, Apêndice I ou mapa de Carter; não ocorreu consulta direta à instituição nem solicitação de imagem. Só a inspeção autorizada do mesmo exemplar, com identificação de edição, poderia conectá-lo à família documental e permitir a leitura dupla da figura. **Classe: `CATALOG_LOCATOR_ONLY / FIGURE_NOT_READ`.**
+
 ## Rota para a primeira comparação histórica legítima
 
 1. Recuperar, por meio **autorizado**, a imagem de um **mapa do Apêndice I** (primeiro alvo: Carter), acompanhada de foto de folha de rosto **e verso/créditos do mesmo exemplar**. Preservar relação física/paginação entre imagens.
