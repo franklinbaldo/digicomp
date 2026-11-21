@@ -32,6 +32,12 @@ estado: provisorio
 
 Os fragmentos sao **leituras candidatas**, nao transcricao byte-a-byte. O texto extraido do PDF confunde caracteres, como Cl ~TAL, ZOO e HIS. Nao promover automaticamente o token 200, o significado de KOCH ou H01–H12 a comportamento instrumental. A anotacao aparente pode ser posterior ao calculo; nao prova que todo o layout tenha sido composto fora do aparelho.
 
+## Confronto visual entre as edicoes de 1983 e 1985
+
+Confronto por **inspecao visual de paginas**, em 20/11/2026: na [figura 1 do preprint de 1983, p. -24-](https://escholarship.org/content/qt0b40b045/qt0b40b045_noSplash_aa3bf76a6b22470b8665af02a57d27ae.pdf#page=27), veem-se os digitos **aparentemente manuscritos** `22987` no centro do diagrama esquerdo e a marca `XBL 832-8314` no rodape direito. Na [figura 1 publicada em Nature, p. 419](https://muller.lbl.gov/papers/Astrology-Carlson.pdf#page=1), **nenhum desses dois elementos aparece**; o arranjo geral dos paineis com glifos semelhantes permanece. Esta e uma comparacao visual, **nao** uma comparacao pixel a pixel de arquivos autenticados.
+
+O contraste rejeita somente a tese de que a pagina de 1985 reproduz a pagina de 1983 **integralmente e sem edicao**. Nao identifica quem inseriu ou retirou marcas, nem se houve recorte, recomposicao ou outros tratamentos. **Nao** comprova nem exclui impressao nativa do DR-70, autoria do desenho, hardware, firmware ou veracidade instrumental dos calculos. As duas edicoes nao sao duas observacoes independentes. O codigo `XBL 832-8314` e pista para busca de arte de producao original, nao atribuicao de equipamento.
+
 ## Hipoteses rivais e falsificacao
 
 | Hipotese | Predicao discriminante | Resultado |
