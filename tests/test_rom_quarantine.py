@@ -164,6 +164,40 @@ class QuarantineTests(unittest.TestCase):
         with self.assertRaisesRegex(CustodyError, "duplicate quarantine metadata key"):
             ingest(self.source, self.root, origin="second receipt")
 
+    def test_nested_duplicate_metadata_keys_refused_on_verify_and_dedup(self):
+        record = ingest(self.source, self.root, origin="fixture")
+        path = self.root / (record["sha256"] + ".json")
+        original = path.read_text(encoding="utf-8")
+        needle = '"origin_note": "fixture"'
+        self.check(needle in original, "missing origin fixture")
+        path.write_text(
+            original.replace(needle, '"origin_note": {"nested": 1, "nested": 2}', 1),
+            encoding="utf-8",
+        )
+        with self.assertRaisesRegex(CustodyError, "duplicate quarantine metadata key"):
+            verify(self.root, record["sha256"])
+        with self.assertRaisesRegex(CustodyError, "duplicate quarantine metadata key"):
+            ingest(self.source, self.root, origin="second receipt")
+
+    def test_nonfinite_metadata_constants_refused_on_verify_and_dedup(self):
+        record = ingest(self.source, self.root, origin="fixture")
+        path = self.root / (record["sha256"] + ".json")
+        original = path.read_text(encoding="utf-8")
+        needle = '"origin_note": "fixture"'
+        self.check(needle in original, "missing origin fixture")
+        for constant in ("NaN", "Infinity", "-Infinity"):
+            with self.subTest(constant=constant):
+                path.write_text(
+                    original.replace(needle, f'"origin_note": {constant}', 1),
+                    encoding="utf-8",
+                )
+                with self.assertRaisesRegex(CustodyError, "non-finite quarantine metadata constant"):
+                    verify(self.root, record["sha256"])
+                with self.assertRaisesRegex(CustodyError, "non-finite quarantine metadata constant"):
+                    ingest(self.source, self.root, origin="second receipt")
+        path.write_text(original, encoding="utf-8")
+        self.check(verify(self.root, record["sha256"]) == record, "valid metadata rejected")
+
     def test_metadata_size_bool_rejected_even_for_one_byte_object(self):
         self.source.write_bytes(b"x")
         record = ingest(self.source, self.root, origin="fixture")
