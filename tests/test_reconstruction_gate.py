@@ -3,9 +3,14 @@
 from __future__ import annotations
 
 import copy
+import io
+import json
+import tempfile
 import unittest
+from contextlib import redirect_stderr, redirect_stdout
+from pathlib import Path
 
-from scripts.reconstruction_gate import evaluate
+from scripts.reconstruction_gate import evaluate, main
 
 
 FAKE_FIRMWARE = {
@@ -115,6 +120,45 @@ class ReconstructionTriageTests(unittest.TestCase):
         self.assertEqual(
             evaluate({"observations": [synthetic, FAKE_IO]})["candidate_io_cases"], 1
         )
+
+    def test_cli_rejects_duplicate_json_properties_and_nonfinite(self) -> None:
+        # Before parsing, a later observations=[] silently erased a candidate.
+        fixture = json.dumps(FAKE_IO)
+        nested = fixture.replace(
+            '"id": "FAKE-IO-1"',
+            '"id": "FAKE-IO-1", "id": "FAKE-IO-2"',
+            1,
+        )
+        cases = (
+            ('duplicate root', '{"observations":[' + fixture + '],"observations":[]}', "duplicate JSON property"),
+            ('duplicate nested', '{"observations":[' + nested + ']}', "duplicate JSON property"),
+            ('NaN', '{"observations":[],"value":NaN}', "non-JSON number"),
+            ('Infinity', '{"observations":[],"value":Infinity}', "non-JSON number"),
+        )
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp) / "metadata.json"
+            for label, raw, error in cases:
+                with self.subTest(case=label):
+                    path.write_text(raw, encoding="utf-8")
+                    stdout, stderr = io.StringIO(), io.StringIO()
+                    with redirect_stdout(stdout), redirect_stderr(stderr):
+                        status = main([str(path)])
+                    self.assertEqual(status, 1)
+                    self.assertIn(error, stderr.getvalue())
+                    self.assertEqual(stdout.getvalue(), "")
+
+    def test_cli_accepts_unambiguous_candidate_metadata(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp) / "metadata.json"
+            path.write_text(json.dumps({"observations": [FAKE_IO]}), encoding="utf-8")
+            stdout, stderr = io.StringIO(), io.StringIO()
+            with redirect_stdout(stdout), redirect_stderr(stderr):
+                status = main([str(path)])
+            self.assertEqual(status, 0)
+            self.assertEqual(stderr.getvalue(), "")
+            result = json.loads(stdout.getvalue())
+            self.assertEqual(result["candidate_io_cases"], 1)
+            self.assertFalse(result["approved_as_authentic_dr70"])
 
     def test_nonlist_observations_is_error(self) -> None:
         with self.assertRaisesRegex(ValueError, "observations must be a list"):
