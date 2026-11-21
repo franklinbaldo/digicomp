@@ -25,6 +25,12 @@ estado: provisorio
 
 **Controle epistêmico:** publicações *Electronics* e Erlewine foram consultadas por texto indexado/extraído de PDFs; tentativas de screenshot dessas páginas falharam (403/timeout). A leitura textual do fórum não autentica visualmente as marcações dos chips no Astrion. As fontes inspecionadas **não apresentaram foto interna identificável como DR-70**: negativo deste conjunto de consultas, não prova de ausência em todo o acervo público. Também não se deve tratar catálogo com foto como inspeção física independente do exemplar.
 
+## Placa elétrica fotografada do exemplar L606 (nova observação)
+
+A [foto externa da etiqueta no Calcuseum](https://www.calcuseum.com/scrapbook/BITMAP/BONUS/10925/_SMD47726.JPG), associada pela [página do exemplar L606](https://www.calcuseum.com/scrapbook/BONUS/10925/1.htm), permite ler **115 V**, **60 Hz**, **LINE FUSE 0.75 A** e **60 WATT (MAX)**. A etiqueta também mostra **DIGICOMP RESEARCH CORP.**, **TERRACE HILL, ITHACA, N.Y.** e número de série compatível com **L606**. **Grau:** transcrição visual de imagem publicada por acervo, não medição elétrica, desmontagem ou verificação independente do aparelho; a imagem tem resolução reduzida e a identificação do modelo está parcialmente cortada.
+
+**Consequência de conservação:** uma unidade com essa etiqueta **não deve ser ligada diretamente a uma tomada de 220 V** nem alimentada para testes sem exame prévio por pessoa qualificada da fonte, fusível, isolamento e estado dos componentes. A placa informa a alimentação nominal **do exemplar fotografado**, não as tensões internas, revisão de placa, CPU, ROM ou compatibilidade elétrica de todos os DR-70. O valor do fusível **não é** um limite de corrente para programadores/leitores de memória. Fotos de conectores e da placa (sem energizar) continuam sendo o próximo passo seguro.
+
 ## Estado da arquitetura do DR-70
 
 **Relatado sobre o DR-70:** display LED, switches MEI/WEAB, chave e gabinete fechado. **Desconhecido:** processador/ISA, ROM/EPROM, tamanho e mapa de memória, firmware, barramento, lógica de display, interfaces externas e método seguro de dump. **Observado exclusivamente em outros modelos:** chip 6522/ROM/RAM no Astrion (relato); Z80-type/Pascal Microengine no Pascal-100 e Z80A/68000 no Delphi-100 (imprensa de época). Não iniciar emulador de CPU ou anunciar recuperação de ROM com base nesses outros produtos.
