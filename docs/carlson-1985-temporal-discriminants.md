@@ -20,12 +20,12 @@ A fig. 1 contém *regiões gráficas distintas*, possivelmente de proveniência 
 
 | Região, p. 419 | Tokens legíveis ou leitura provisória | Limitação |
 | --- | --- | --- |
-| Inferior esquerda, abaixo de um desenho retangular | `C1 NATAL TROP P LONG KOCH 200`; `H01`–`H12` | Tokens documentados antes desta inspeção. Não transcrever daqui valores ilegíveis nem lhes atribuir funções sem manual |
+| Inferior esquerda, abaixo de um desenho retangular | `C1 NATAL ... KOCH Z?D` (candidato), `H01`–`H12` | A terminação publicada no catálogo como `200` pode ser `ZOD`, `Z00` ou outra; pontuação de `P.LONG`/`P LONG` também incerta. Ver [leitura independente do Polvo](carlson-1985-output-hypotheses.md); sem atribuir semântica |
 | Ao lado dos campos `Hxx`, parte inferior central | Ao menos um cabeçalho aparentemente com `C1 SEC` | **Leitura visual provisória**; `SEC` não é modo comprovado |
 | Inferior central, próximo do cabeçalho anterior | Campo que parece ler-se `DATE RECA`, seguido de data | **Grafia e números não certificados** pelo scan; desconhecemos se é outro parâmetro temporal |
 | Região alta à direita | Novo cabeçalho que parece conter `C1 NATAL`, junto a tabela gráfica de layout distinto | Nenhuma prova de impressão nativa, sequência de teclas ou operação compartilhada |
 
-O novo controle metodológico é tratar **cabeçalhos, campos de data e regiões como subobservações**, com posições e confiança separadas. A premissa “fig. 1 é um único dump consecutivo de `NATAL`” **não está sustentada**; tampouco há prova de montagem por software externo. `KOCH`, `P`, `LONG`, `200`, `SEC` e `DATE RECA` são **texto de figura**, não sintaxe operacional atribuída ao DR-70.
+O novo controle metodológico é tratar **cabeçalhos, campos de data e regiões como subobservações**, com posições e confiança separadas. A premissa “fig. 1 é um único dump consecutivo de `NATAL`” **não está sustentada**; tampouco há prova de montagem por software externo. `KOCH`, `P.LONG`/`P LONG`, `ZOD`/`Z00`/`200`, `SEC` e `DATE REC[A?]` são **leituras concorrentes da figura**, não sintaxe operacional atribuída ao DR-70.
 
 ## O2/O3: hipóteses rivais
 
