@@ -133,7 +133,7 @@ Antes de PR ou declaração pública:
 5. **Reprodutibilidade:** ambiente, versão/provider, SHA do alvo, caminhos, testes rodados e resultados **PASS/FAIL/NOT_RUN**, sem atribuir execução não realizada.
 6. **Revisão:** Gavião examina claims e Evidence; alterações em `AGENTS.md` exigem seu parecer **ANTES** do merge. Mudanças ordinárias seguem política vigente por SHA.
 
-**Entregável mínimo de qualquer animal:** uma ficha `DR70-CASE-ID` por nova evidência, um resultado negativo delimitado ou positivo sustentado, e o próximo teste mais barato que aumente a informação. Consolidar no [Cafezinho #8](https://github.com/franklinbaldo/digicomp/issues/8), sem abrir issue duplicada.
+**Entregável mínimo de qualquer animal:** uma [ficha `DR70-CASE-ID`](../../../docs/rea-case-template.md) por nova evidência, um resultado negativo delimitado ou positivo sustentado, e o próximo teste mais barato que aumente a informação. Consolidar no [Cafezinho #8](https://github.com/franklinbaldo/digicomp/issues/8), sem abrir issue duplicada.
 
 ## Como REA se encaixa de verdade
 
