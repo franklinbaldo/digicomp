@@ -47,6 +47,7 @@ def check_corpus(path: Path) -> int:
     if not isinstance(observations, list):
         raise CorpusError("observations must be a list")
     seen: set[str] = set()
+    seen_provenance: dict[tuple[str, str], str] = {}
     for position, item in enumerate(observations):
         if not isinstance(item, dict):
             raise CorpusError(f"observations[{position}] must be an object")
@@ -56,6 +57,19 @@ def check_corpus(path: Path) -> int:
         if identifier in seen:
             raise CorpusError(f"duplicate observation ID {identifier!r} at index {position}")
         seen.add(identifier)
+        source = item.get("source")
+        if isinstance(source, dict):
+            url, locator = source.get("url"), source.get("locator")
+            # The schema checks source types; here we guard observational identity.
+            if isinstance(url, str) and url and isinstance(locator, str) and locator:
+                evidence_key = (url, locator)
+                first = seen_provenance.get(evidence_key)
+                if first is not None:
+                    raise CorpusError(
+                        f"duplicate source URL and locator for {identifier!r}; "
+                        f"already used by {first!r} (same cited region is not a new observation)"
+                    )
+                seen_provenance[evidence_key] = identifier
     return len(observations)
 
 
@@ -70,7 +84,7 @@ def main(argv: list[str] | None = None) -> int:
     except CorpusError as exc:
         print(f"FAIL {path}: {exc}", file=sys.stderr)
         return 1
-    print(f"PASS {path}: {count} observation IDs unique; JSON keys unique")
+    print(f"PASS {path}: {count} observation IDs and source URL+locator pairs unique; JSON keys unique")
     return 0
 
 
