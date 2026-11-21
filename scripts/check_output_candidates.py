@@ -4,7 +4,20 @@ import json
 import pathlib
 import sys
 
-PATH = pathlib.Path(__file__).resolve().parents[1] / "data/output-candidates/catalog.json"
+CATALOG_DIR = pathlib.Path(__file__).resolve().parents[1] / "data/output-candidates"
+
+
+def load_all():
+    """Concatenate source shards before validating IDs and family leakage globally."""
+    paths = sorted(CATALOG_DIR.glob("*.json"))
+    if not paths:
+        raise ValueError("no candidate catalogs")
+    entries = []
+    for path in paths:
+        data = json.loads(path.read_text(encoding="utf-8"))
+        entries.extend(data["entries"])
+    return {"entries": entries}
+
 SPLITS = {"unassigned", "development", "holdout"}
 KINDS = {
     "published_chart_candidate", "device_display_photo", "bibliography_only",
@@ -65,7 +78,7 @@ def validate(data):
 
 
 if __name__ == "__main__":
-    errors = validate(json.loads(PATH.read_text(encoding="utf-8")))
+    errors = validate(load_all())
     if errors:
         print("\n".join(errors), file=sys.stderr)
         raise SystemExit(1)
