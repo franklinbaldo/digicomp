@@ -30,7 +30,7 @@ Leitura inicial em 2026-11-20.
 - Natureza: fórum de teclados mecânicos.
 - Título: "Bought a Digicomp DR-70 Astrology Microcomputer [1981]". O ano diverge de F1.
 - Afirma (autor do tópico): compra por cerca de US$ 100; chaves "MEI WEAB" lineares, não compatíveis com MX; teclas double-shot; liga com chave física; shift com trava iluminada.
-- Cita artigo de Duncan Campbell no *New Statesman* ("Reagan's secret computer"), em duncancampbell.org, ainda não lido.
+- Cita reportagem de Duncan Campbell, hoje lida em reprodução paginada ([F13](#f13-reportagem-contemporânea-de-duncan-campbell-1988-operação-do-dr-70-por-nicky-michaels)); o fórum não é testemunho independente.
 - Grau: detalhes de teclado **relatados**; a frase de que Ronald Reagan usava a máquina para decisões políticas é **hipótese** do autor, derivada do artigo.
 
 ## F3. The Only Time, relato de contato com os fabricantes
@@ -41,11 +41,11 @@ Leitura inicial em 2026-11-20.
 - Grau: sede e fundadores **relatados**; ligação com Quigley **relatada de segunda mão**; a prototipagem antes de 1977 é **hipótese** do autor.
 - Pista: o autor do blog tem contato com os antigos donos. Contato externo depende de autorização do mantenedor.
 
-## F4. Documentação contemporânea de 1979 (CCRS Dodona)
+## F4. Mark Pottenger (1979), transcrição CCRS Dodona
 
 - URL: https://ccrsdodona.org/m_dilemma/1979/vir/computer.html
-- Estado: **não lida**. O certificado TLS do site estava expirado em 2026-11-20.
-- Próximo passo: consultar cópia no Internet Archive (Wayback Machine) e registrar a data da captura.
+- **HTML lido em 20/11/2026**, com exceção TLS só para consulta. O [dossiê com hash](1979-pottenger-dr70.md) registra o acesso; **fac-símile da revista não obtido**.
+- Descreve DR-70 pré-programado e memória “permanente”, sem identificar ROM física, CPU ou saídas instrumentais. F10 é **a mesma fonte**, não confirmação independente.
 
 ## F5. Joan Quigley papers, Hoover Institution
 
@@ -65,8 +65,8 @@ Leitura inicial em 2026-11-20.
 
 | Tema | Fontes | Situação |
 | --- | --- | --- |
-| Ano de lançamento | F1 e F3: 1977; F2: 1981 | Pode ser data de fabricação do exemplar. Conferir anúncios de época. |
-| Uso por Quigley | F3 (de segunda mão); F2 (via Campbell) | Nenhuma fonte primária. |
+| Ano de lançamento | F1 e F3: 1977; F2: 1981 no título do fórum | O título não comprova fabricação ou lançamento. |
+| Posse de Quigley | F3/F2 sugerem uso; F13/F14 atribuem cálculos a Michaels | Nenhuma prova da posse ou operação do DR-70 por Quigley. |
 
 ## F7. Testemunho brasileiro sobre exemplar DR-70 de Zeferino Pina Costa
 
@@ -92,12 +92,11 @@ Leitura inicial em 2026-11-20.
 - Grau: **confirmado** somente quanto às referências bibliográficas no índice; **não** é evidência direta do conteúdo técnico da revista nem de que o Astrion/Astrio 80 reutilize software do DR-70.
 - P0 de pesquisa: recuperar os números originais de setembro/outubro de 1983 e maio/setembro de 1984. A parte 6, com teste comparativo, pode conter observações concretas de saída e erro, úteis ao corpus de fidelidade #7.
 
-## F10. Artigo de 1979, referência textual em índice de busca (continuação de F4)
+## F10. Histórico de recuperação de F4 (mesma fonte)
 
-- URL original: https://ccrsdodona.org/m_dilemma/1979/vir/computer.html
-- Estado em 20/11/2026: o mecanismo de busca apresenta excerto que descreve o DR-70 como já programado e não alterável pelo usuário, com endereço de Digicomp Research Corp em Terrace Hill, Ithaca. A abertura direta falhou por restrição de acesso automatizado; portanto **não é leitura independente do artigo completo**.
-- Grau: **pista indexada, ainda não validada na página original**. Não tomar a expressão "não alterável" como prova do tipo de ROM, de sua impossibilidade de extração ou da arquitetura do aparelho.
-- Próximo passo: Wayback ou fac-símile do periódico para data, contexto, transcrição e custódia.
+- A busca inicial forneceu somente excerto indexado. Em 20/11/2026, o corpo HTML foi lido: **HTTP 200, 10.350 bytes**, SHA-256 registrado no [dossiê](1979-pottenger-dr70.md). Consulta sob exceção TLS; autenticidade editorial do impresso não conferida.
+- **Não contar F4 e F10 como testemunhos independentes.** “Permanent memory” não identifica ROM mascarada, CPU nem método de extração.
+- Estado: **HTML_READ_PRINT_FACSIMILE_NOT_OBTAINED**. Falta o original impresso.
 
 
 ## F11. Acervos identificados para os números originais de 1983–1984
