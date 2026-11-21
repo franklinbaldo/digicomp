@@ -1,0 +1,39 @@
+---
+type: Documento
+title: "Raël/Rudhyar: dados publicados em seis cartas do Apêndice I"
+description: "Ledger O0/O1 de dados biográficos textuais associados a mapas atribuídos ao DR-70, preservando anomalias e sem criar golden instrumental."
+timestamp: 2026-11-21T10:15:00-04:00
+estado: provisorio
+---
+
+# Seis entradas declaradas para mapas de Raël/Rudhyar
+
+## Fonte, custódia e classe da evidência
+
+**🦇 Morcego R145 · leitura de texto HTML em 21/11/2026.** A edição de *Astrological Aspects: A Process-Oriented Approach*, de Leyla Raël e Dane Rudhyar (copyright 1980), declara no **Apêndice I, "Example Horoscopes"**, que os exemplos foram recalculados com cúspides Campanus em um computador astrológico DR-70. O prefácio de 23/03/1979 agradece a Nicki Michaels pela conferência dos mapas no computador e a Tony Milner pela caligrafia dos desenhos. **Nenhuma dessas declarações atribui a tipografia dos gráficos a uma impressora DR-70.**
+
+Fonte textual consultada: [Scribd, transcrição do livro, seção Appendix I](https://www.scribd.com/document/633437269/Dane-Rudhyar-Leyla-Rael-Astrological-Aspects-A-Process-Oriented-Approach-Rudhyar-Series-Aurora-Press-Inc-2018-pdf), trecho situado aproximadamente nas linhas **6701–6746** do HTML indexado. [PDF de referência](https://tibetanbuddhistencyclopedia.com/en/images/b/b8/Dokumen.tips_astrological-aspects.pdf) aparece na busca textual, mas não foi possível conferir a imagem da página nesta leitura. Não houve download, hash, screenshot ou inspeção da página impressa; as linhas acima são posições da transcrição HTML, **não paginação editorial**. Cópias textuais do mesmo livro não são fontes independentes.
+
+A lista abaixo é uma **extração curta de fatos de nascimento declarados no livro**, não de teclas ou dados digitados na máquina. O autor diz que estes seis casos são exceções à origem usual (*The Circle Book of Charts*, revisão 1979). Mantive coordenadas e relógios **em sua forma textual**, inclusive anomalias, sem converter fuso, data ou local. O uso de maiúsculas/minúsculas em alguns campos pode refletir o extrator.
+
+## Valores publicados no texto de referência (não certificados no fac-símile)
+
+| Pessoa citada | Data textual | Coordenadas textuais | UT textual | Observação |
+| --- | --- | --- | --- | --- |
+| Edmund G. Brown Jr. | April 7, 1938 | `43N03 118W15` | `20:00 U.T.` | Latitude requer cotejo visual; documento atribui retificação a A. L. Milner |
+| Jimmy Carter | Oct. 1, 1924 | `32N02 84W24` | `13:00 U.T.` | Já usado como pista em [Carter](carter-book-qualitative-houses.md); não duplicar sessão |
+| Werner Erhard | Sept. 5, 1935 | `39N57 75W10` | `27:25 U.T.` | Hora maior que 23 no HTML; **não** inferir dia seguinte nem emendar OCR |
+| Franklin D. Roosevelt | Jan. 30, 1882 | `41N48 73W56` | `25:16 U.T.` | Hora maior que 23 no HTML; **não** corrigir silenciosamente |
+| Albert Schweitzer | Jan. 14, 1875 | `48N45 8E00` | `6:22 U.T.` | Grafia do leste/zeros ainda depende do fac-símile |
+| Alan Watts | Jan. 6, 1915 | `51N25 0W00` | `6:20 U.T.` | Sem confirmação de formato de entrada do DR-70 |
+
+**Alerta editorial:** no [índice textual alternativo](https://pdfcoffee.com/astrological-aspects-pdf-free.html) aparecem variantes como `75WlO` (letra l / algarismo 1) e `8Eoo` (letras o / zeros), enquanto o Scribd indexa `75W10` e `8E00`. É possível que até a aparente precisão da transcrição seja produzida pelo pipeline de cópia/OCR. Nenhuma grafia conflitante deve ser promovida como literal da impressora histórica.
+
+## Próximos testes que esses registros podem orientar
+
+1. **Contrato de ingestão:** uma rotina que espera hora civil de 00–23 deve rejeitar `27:25` e `25:16` de forma explícita, ou classificá-los como `AMBIGUOUS_EXTENDED_UT`; jamais ajustar para datas calculadas sem observação que justifique. Testes com esses literais verificariam o **nosso parser de fontes**, não firmware histórico.
+2. **Distinção de canal:** encontrar o fac-símile de cada gráfico, conferir diretamente a hora/coordenadas impressas e os valores astrológicos do desenho, registrar revisão dupla e separar o que foi **calculado**, **conferido** e **redesenhado** por pessoas diferentes. Ainda será uma saída *editorialmente apresentada*, não saída nativa certificada.
+3. **Hipóteses matemáticas:** somente depois de confirmar os desenhos e seus campos, comparar cenários Campanus alternativos com o Rust; não testar a saída sintética contra uma versão normalizada da própria entrada e denominar isso fidelidade. Reservar famílias independentes **antes** de calibrar.
+4. **Corpus:** não acrescentar registros a `data/fidelity/observations.json`; permanece `observations: []`. Estes seis casos integram a **mesma família documental** dos vinte mapas já catalogados em [plano de holdout](output-catalog-holdout-plan.md). Não são seis sessões instrumentais autenticadas nem seis holdouts.
+
+**Resultado R145:** seis localizadores de dados textuais com anomalias explícitas, sem um único output instrumental recuperado. Estado para fidelidade: `NOT_RUN_NO_GOLDEN`; estado para revisão visual: `FIGURE_NOT_READ`.
