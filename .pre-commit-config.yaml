@@ -1,4 +1,4 @@
-# Verificações locais (prek). Sem CI obrigatório no GitHub Actions nesta fase.
+# Hooks locais (prek), também executados pelo workflow público .github/workflows/validate.yml.
 # Instalar o hook: prek install
 default_install_hook_types: [pre-commit]
 repos:
