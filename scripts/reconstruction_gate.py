@@ -13,6 +13,19 @@ from pathlib import Path
 
 _SHA256 = re.compile(r"[0-9a-f]{64}\Z")
 
+def _unique_json_properties(pairs: list[tuple[str, object]]) -> dict[str, object]:
+    """Reject ambiguous identities before JSON last-wins can erase evidence."""
+    result: dict[str, object] = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError(f"duplicate JSON property {key!r}")
+        result[key] = value
+    return result
+
+
+def _non_json_number(value: str) -> None:
+    raise ValueError(f"non-JSON number {value!r} is forbidden")
+
 
 def _present(value: object) -> bool:
     return isinstance(value, str) and bool(value.strip())
@@ -106,7 +119,11 @@ def main(argv: list[str] | None = None) -> int:
         print("usage: python3 scripts/reconstruction_gate.py metadata.json", file=sys.stderr)
         return 2
     try:
-        data = json.loads(Path(args[0]).read_text(encoding="utf-8"))
+        data = json.loads(
+            Path(args[0]).read_text(encoding="utf-8"),
+            object_pairs_hook=_unique_json_properties,
+            parse_constant=_non_json_number,
+        )
         result = evaluate(data)
     except (OSError, UnicodeError, json.JSONDecodeError, ValueError) as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
