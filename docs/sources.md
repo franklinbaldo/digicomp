@@ -99,3 +99,11 @@ Leitura inicial em 2026-11-20.
 - Grau: **pista indexada, ainda não validada na página original**. Não tomar a expressão "não alterável" como prova do tipo de ROM, de sua impossibilidade de extração ou da arquitetura do aparelho.
 - Próximo passo: Wayback ou fac-símile do periódico para data, contexto, transcrição e custódia.
 
+
+## F11. Acervos identificados para os números originais de 1983–1984
+
+- **Editora e digitalização oficial:** American Federation of Astrologers, [Grant Trust Projects](https://astrologers.com/grant-trust-projects/). O projeto apoiado pelo trust iniciou em 2009 a digitalização em PDF do periódico *Today's Astrologer*. A entidade oferece [CD dos volumes 41–50 (1979–1988)](https://astrologers.com/product/todays-astrologer-vols-41-50/), SKU **A4842**, descrito como contendo o texto completo dos volumes. Página consultada em 20/11/2026: preço anunciado **US$ 24,95**, sujeito a alteração. A referência comercial **não é acesso ao conteúdo**; nenhuma compra foi feita ou autorizada.
+- **Acervo físico identificado:** [Astrolearn, inventário de *Today's Astrologer*](https://www.astrolearn.com/astrology-bibliography/todays-astrologer/) declara guardar exemplares individuais do **volume 45, números 1–12 (1983)**, e do **volume 46, números 1–7 e 9–12 (1984)**. A lista abrange as edições-alvo: **XLV/9 e XLV/10 de 1983**, **XLVI/6 e XLVI/10 de 1984**. É declaração do detentor do acervo, **não inspeção física ou digital de cada fascículo pelo projeto**.
+- **Referência cruzada:** índice AFA F9, inspecionado na versão PDF (páginas 40 e 42 em contagem humana; posições 39 e 41 em índice zero): Richard Nolle, parte 5 (XLV/9, p. 14), parte 6 (XLV/10, p. 9), parte 14 (XLVI/6, p. 13), parte 18 (XLVI/10, p. 10). É evidência bibliográfica; nenhum artigo original foi lido.
+- **Próximo passo:** continuar a procurar acesso aberto e legal a esses fascículos; qualquer compra ou contato com instituições/pessoas requer autorização do mantenedor. Ao obter exemplares, preservar metadados, proveniência e trechos de comportamento técnico, sem incorporar integralmente textos protegidos ao repositório.
+- **Resultado:** agora há dois caminhos de custódia plausíveis para as edições **sem** evidência de ROM, saídas autênticas, algoritmo ou componentes internos do DR-70 recuperados.
