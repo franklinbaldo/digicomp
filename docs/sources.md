@@ -21,7 +21,7 @@ Leitura inicial em 2026-11-20.
 - URL: https://www.calcuseum.com/scrapbook/BONUS/10925/1.htm
 - Natureza: catálogo de museu virtual de calculadoras, com fotografias do exemplar.
 - Afirma: "DIGICOMP RESEARCH CORPORATION: DR70", "MODEL DR-70, ASTROLOGY COMPUTER"; introdução em 1977; origem EUA; display de LED; categoria "Desktop with Display"; número de série L606 na plaqueta; fotos laterais, do display, das instruções e da plaqueta.
-- Grau: exemplar físico **confirmado** pelas fotos; a data de 1977 é **relatada** (o catálogo não cita fonte).
+- Grau: exemplar **descrito e fotografado pelo Calcuseum**, série L606 segundo a página; não houve inspeção física independente; a data de 1977 é **relatada** (o catálogo não cita fonte).
 - Pistas: página da marca no Calcuseum (`BRAND/DIGICOMP-RESEARCH-CORPORATION`) ainda não lida; a foto das instruções pode conter a tabela de comandos.
 
 ## F2. Deskthority, tópico de colecionador
@@ -116,3 +116,21 @@ Leitura inicial em 2026-11-20.
 - **Livro de algoritmos da época:** [Open Library](https://openlibrary.org/works/OL6373938W/Manual_of_Computer_Programming_for_Astrologers) registra Michael Erlewine, *Manual of Computer Programming for Astrologers*, edição junho/1980, ISBN 0-86690-099-3. **Grau: existência bibliográfica confirmada**; não foi obtido o conteúdo nem comprovada influência no DR-70.
 - **Complemento verificado ao F9:** páginas PDF 40 e 42 (índices 39/41), [índice AFA](https://astrologers.com/wp-content/uploads/2025/07/Index-by-Title-41-50.pdf), incluem Matrix M-30 (Nolle parte 4, ago/1983), teste DR-70 vs programa rotulado **ACS** (parte 6, out/1983), Matrix M-65 e AGS AstroStar I (1984). **Grau: confirmado só no índice**, observado por screenshot; identidade de ACS e conteúdo dos artigos não identificados.
 - Pesquisa e guia de preservação: [famílias contemporâneas (Raposa)](astro-software-contemporaries.md). **Resultado negativo delimitado:** nenhum código, ROM, dump ou saída autêntica DR-70 localizado nessas fontes. Nenhum contato, compra ou execução de programas.
+
+
+## F13. Reportagem contemporânea de Duncan Campbell (1988): operação do DR-70 por Nicky Michaels
+
+- Original reproduzido: https://www.duncancampbell.org/menu/journalism/newstatesman/newstatesman-1988/Reagan%27s%20secret%20computer.pdf
+- Documento: Duncan Campbell, “Reagan's secret computer”, *New Statesman & Society*, **14/10/1988**, pp. impressas **14–15**. PDF de três páginas (capa datada + duas páginas do artigo), inspecionado em reprodução paginada em 20/11/2026.
+- Afirmação atribuída: o jornalista relata entrevista presencial com **Nicky Michaels**, astróloga que possuía e operava um **DR-70** na Califórnia e fornecia mapas calculados para **Joan Quigley**. A foto publicada na p.15 retrata Michaels, **não o aparelho**.
+- Grau: **reportagem contemporânea com testemunho atribuído a operadora**; o relato de posse/uso não foi confirmado com nota fiscal, número de série ou mapa físico identificado. A inferência política de que a máquina determinava decisões da presidência **não** é evidência causal comprovada.
+- Valor para a arqueologia: identifica a **operadora e possível cadeia de custódia de impressões**, em vez de presumir que Quigley era proprietária do DR-70. Não contém ROM, CPU, listagem, entrada de teclado nem pares calculados de saída.
+
+## F14. Nicki Michaels entrevistada por Marion Williamson (2004): venda e serviço para Quigley
+
+- Reprodução textual de terceiro: https://doczz.net/doc/5519383/astrology---beyondsunsigns.com
+- Referência editorial declarada: Marion Williamson, entrevista com **Nicki Michaels**, *Prediction*, **setembro/2004**, pp. **46–48**. Nesta rodada foi lida a transcrição hospedada por terceiro, **não** o original paginado da revista.
+- Afirmação da entrevistada: recorda apresentação do computador em **1977** por dois homens, compra por aproximadamente **US$ 3 mil**, atividade de representante de vendas no norte da Califórnia; fornecimento de mapas a Quigley de **1981–1988**; relata que Quigley optou por **não adquirir a máquina**.
+- Grau: **testemunho retrospectivo em transcrição secundária**, parcialmente convergente com o testemunho contemporâneo F13. Datas, preço, volume de mapas, identificação exata do computador e a alegação sobre compra são recordações da entrevistada, não comprovantes independentes.
+- Grafia: **Nicky** em F13, **Nicki** em F14. Não multiplicar as pessoas por variação de grafia nem atribuir autoria do software à operadora.
+- Síntese crítica e linha do tempo: [cadeia DR-70 e Quigley](cadeia-dr70-quigley.md). **Pendente:** imagem da revista original, documentação comercial, serial de Michaels e impressões DR-70 verificáveis.
