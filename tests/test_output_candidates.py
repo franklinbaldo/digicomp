@@ -22,6 +22,25 @@ class CandidateCatalogTest(unittest.TestCase):
         self.assertEqual(len(book), 20)
         self.assertTrue(all(e['sample_split'] == 'unassigned' and not e['numeric_holdout_eligible'] for e in book))
 
+    def test_workflow_checks_out_exact_event_head(self):
+        # Green requires the literal event HEAD, not a synthetic merge ref.
+        # A skipped verification or replaced shell command breaks adjacency.
+        workflow = (ROOT / ".github/workflows/output-catalog.yml").read_text(
+            encoding="utf-8"
+        )
+        required = (
+            "      - uses: actions/checkout@v4\n"
+            "        with:\n"
+            "          ref: ${{ github.event.pull_request.head.sha || github.sha }}\n"
+            "          persist-credentials: false\n"
+            "      - name: Verify exact catalog checkout SHA\n"
+            "        env:\n"
+            "          EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}\n"
+            '        run: test "$(git rev-parse HEAD)" = "$EXPECTED_SHA"\n'
+            "      - name: Catalog checks (not historical authenticity)\n"
+        )
+        self.assertIn(required, workflow)
+
     def test_workflow_selects_shared_lexical_dependencies(self):
         # Static path-filter regression: a change to the imported lexical
         # predicate or its normative schema must run the catalog job,
