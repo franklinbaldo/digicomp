@@ -17,7 +17,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Unit tests (synthetic; not historical fidelity)
-        run: cargo test --manifest-path experiments/rust-output-v0/Cargo.toml --locked
+        run: cargo test --manifest-path experiments/rust-output-v0/Cargo.toml
       - name: Two models, identical input
         run: |
           cargo run --manifest-path experiments/rust-output-v0/Cargo.toml -- --ascendant 15.25 --model equal
