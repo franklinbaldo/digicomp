@@ -38,6 +38,12 @@ A livraria antiquária [Peruse the Stacks, ABAA, item #5343](https://www.peruset
 
 **Custódia:** URLs e localizadores preservados; os bytes originais da fotografia e da cópia física **não foram obtidos**, portanto `sha256: desconhecido`. Nada foi copiado/republicado no repositório. A fotografia de detalhe, parcialmente obstruída, não permite transcrição numérica válida nem aceitação no corpus `data/fidelity/observations.json`. Solicitar, apenas se houver **acesso autorizado**, imagem mais legível da folha de rosto, p. 29 e exemplos p. 56+ da **mesma cópia**, preservando paginação e cadeia física; uma segunda leitura independente deve registrar ilegibilidades sem completar lacunas com cálculos modernos. **Estado `NOT_RUN_NO_GOLDEN`.**
 
+## Fonte independente sobre a circulação posterior do método (Matrix Software, 2004)
+
+O PDF de duas páginas [*Winning Times: The Astrology of Luck*, publicado pela própria Matrix Software](https://astrologysoftware.com/pro/winning_times/pdf/introduction.pdf), traz rodapé **© 2004 Matrix Software**. **As páginas 1 e 2 foram conferidas visualmente no leitor público em 21/11/2026**. Na p. 2, a empresa relata retrospectivamente que Joyce Wehrman **visitou a Matrix para ajudar a projetar o programa de relatório `Winning` para DOS**, ensinando seus métodos e alterações subsequentes; a p. 1 associa a técnica ao panfleto `Winning!` de 1980 e ao sistema de casas Koch. A página comercial do [*Winning Times*](https://astrologysoftware.com/pro/winning_times/index.html) identifica os relatórios como produto da **Matrix Software**, incluindo PDFs de exemplo, não como folhas do DR-70.
+
+**Consequência genealógica:** há uma **alegação primária do desenvolvedor do software posterior** de transmissão de *método astrológico* de Wehrman para programa DOS da Matrix. Ela **não** é prova de transmissão do código, da ROM, das tabelas, da impressora ou do formato do **Digicomp DR-70**. A data de 2004 corresponde ao documento da Matrix, **não** à visita de Wehrman, que o texto não data. Não usar capturas do programa Matrix nem a eventual semelhança de campos `KOCH` para autenticar qualquer output do DR-70. É uma **família de software posterior independente**, não uma sessão histórica nova. **Nenhum golden ou ROM adicionado.**
+
 ## O que se sustenta, e o que permanece aberto
 
 | Afirmação | Estatuto |
