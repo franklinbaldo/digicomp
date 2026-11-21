@@ -2,7 +2,7 @@
 type: Documento
 title: Corpus de fidelidade observacional do Digicomp DR-70 (v1)
 description: Contrato de captura, grau epistemológico e comparação sem fabricar saídas do aparelho.
-timestamp: 2026-11-20T20:00:00-04:00
+timestamp: 2026-11-20T22:01:00-04:00
 estado: provisorio
 ---
 
@@ -33,7 +33,7 @@ A **Swiss Ephemeris é comparador**, não origem de saída DR-70: somente após 
 
 ## Controles do corpus
 
-1. Validar o JSON contra `corpus.schema.json` com validador JSON Schema 2020-12 e formatos ativados; recusar propriedades inesperadas, campos brutos preenchidos com número e `replayable` sem teclas/saída.
+1. **Gate obrigatório no `prek`:** validar o JSON contra `corpus.schema.json` com `jsonschema[format]==4.26.0`, Draft 2020-12 e formatos ativados. Rejeita campos inesperados, tipos incompatíveis e `replayable` sem teclas, canal/saída ou fonte direta/contemporânea. O validador estrutural é necessário, mas não atesta a origem nem a veracidade das strings.
 2. Executar `python3 -B scripts/check_fidelity_corpus.py` para recusar **IDs duplicados, chaves JSON duplicadas em qualquer nível e números inválidos como `NaN`**. O parser JSON comum pode sobrescrever evidências silenciosamente quando uma chave se repete. O controle é local e também roda no `prek`, mas não substitui o JSON Schema nem autentica fontes; o schema continua responsável pelos tipos e pelos campos obrigatórios.
 3. Conferir manualmente que a URL/locator sustentam **exatamente** o que é transcrito, mantendo `partial` quando faltarem teclas ou saída.
 4. Teste negativo obrigatório: caso sintético gerado com Swiss Ephemeris deve ser rejeitado como observação histórica; exemplos inventados ficam fora de `observations.json`. Prova física/visual é diferente de benchmark astronômico.
@@ -44,12 +44,12 @@ Comandos opcionais de validação local, sem adicionar dependências ao projeto:
 python -m json.tool data/fidelity/corpus.schema.json >/dev/null
 python -m json.tool data/fidelity/observations.json >/dev/null
 python3 -B scripts/check_fidelity_corpus.py
+uvx --with 'jsonschema[format]==4.26.0' python3 -B -m scripts.check_fidelity_schema
 python3 -B -m unittest discover -s tests -p test_check_fidelity_corpus.py -q
-# Com jsonschema instalado no executor autorizado:
-python -m jsonschema -i data/fidelity/observations.json data/fidelity/corpus.schema.json
+uvx --with 'jsonschema[format]==4.26.0' python3 -B -m unittest discover -s tests -p test_check_fidelity_schema.py -q
 ```
 
-O validador JSON Schema checa estrutura e formatos. O script adicional recusa perda de identidade por IDs ou chaves duplicados, independentemente do schema. **Nenhum desses controles autentica a fonte ou mede fidelidade numérica**; isso requer exame documental e casos históricos.
+O validador JSON Schema (agora exigido por dois hooks de `prek`) checa estrutura e formatos. O script de identidade independente continua recusando perda de identidade por IDs ou chaves duplicados. **Nenhum desses controles autentica a fonte ou mede fidelidade numérica**; isso requer exame documental e casos históricos.
 
 ## Onde procurar o primeiro par
 
