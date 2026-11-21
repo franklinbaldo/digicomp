@@ -144,3 +144,9 @@ Leitura inicial em 2026-11-20.
 - **Valor para a investigação:** antecedente *editorial* potencial da empresa, relevante a [Digicomp #3](https://github.com/franklinbaldo/digicomp/issues/3) (genealogia) e [#5](https://github.com/franklinbaldo/digicomp/issues/5) (fontes). A expressão *True Lunar Nodes* nomeia assunto da efeméride, não funcionalidade demonstrada no aparelho. Para relacioná-la a software ou saídas reais, seriam necessários manual/código/firmware e pares de entrada/saída autenticados.
 - **Próxima prova:** procurar digitalização autorizada da folha de rosto, créditos, prefácio/metodologia e amostra de uma página tabular; registrar edição, numeração, origem e direitos antes de usar valores no corpus de fidelidade. Sem compra, contato com detentor, transcrição integral ou incorporação de obra protegida.
 - **Pesquisa em 20/11/2026:** os originais dos artigos de Richard Nolle de 1983–1984 (F9/F11) seguem **não recuperados** nesta busca. A referência F15 **não substitui** tais artigos.
+
+## F17. Concorrência Matrix/DR-70 e publicidade Astrion (1980?–1986)
+
+- [Memória autobiográfica de Michael Erlewine](https://startypes.com/pdf/e-books/matrix_history.pdf), p. 15 do PDF, **inspecionada visualmente**: relata DR-70 na feira e preço aproximado, mas **não confirma local/ano** (Nova Orleans/1980 é dúvida do autor).
+- [Imagem de anúncio atribuída a *Dell Horoscope*, maio/1986](https://www.ebay.com/itm/401998053398): mostra “ASTRION System 80”, Digicomp Research. **Fotografia do vendedor**, sem fac-símile paginado completo; não prova CPU, firmware ou sucessão do DR-70.
+- Confrontar com **F9** (índice Nolle, maio/1984), sem supor identidade de software. [Matriz crítica](matrix-dr70-astrion-trail.md).
