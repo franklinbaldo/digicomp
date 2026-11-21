@@ -1,0 +1,289 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/franklinbaldo/digicomp/blob/main/data/fidelity/corpus.schema.json",
+  "title": "DR-70 evidence-bound fidelity corpus v1",
+  "description": "Only historical observations, never synthetic Swiss Ephemeris output presented as DR-70.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format_version",
+    "subject",
+    "observations"
+  ],
+  "properties": {
+    "format_version": {
+      "const": "1.0"
+    },
+    "subject": {
+      "const": "Digicomp DR-70"
+    },
+    "observations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/observation"
+      }
+    }
+  },
+  "$defs": {
+    "unseen": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "catalog_ref",
+        "url",
+        "locator",
+        "medium",
+        "directness"
+      ],
+      "properties": {
+        "catalog_ref": {
+          "type": "string",
+          "pattern": "^F[0-9]+$"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https?://"
+        },
+        "locator": {
+          "type": "string",
+          "minLength": 1
+        },
+        "medium": {
+          "enum": [
+            "photo",
+            "video",
+            "printout",
+            "periodical_facsimile",
+            "transcription",
+            "other"
+          ]
+        },
+        "directness": {
+          "enum": [
+            "device_observation",
+            "contemporaneous_report",
+            "secondary_report"
+          ]
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "capture_date": {
+          "type": "string",
+          "format": "date"
+        }
+      }
+    },
+    "input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "date_literal",
+        "time_literal",
+        "timezone_literal",
+        "place_literal",
+        "latitude_literal",
+        "longitude_literal",
+        "keys_literal"
+      ],
+      "properties": {
+        "date_literal": {
+          "$ref": "#/$defs/unseen"
+        },
+        "time_literal": {
+          "$ref": "#/$defs/unseen"
+        },
+        "timezone_literal": {
+          "$ref": "#/$defs/unseen"
+        },
+        "place_literal": {
+          "$ref": "#/$defs/unseen"
+        },
+        "latitude_literal": {
+          "$ref": "#/$defs/unseen"
+        },
+        "longitude_literal": {
+          "$ref": "#/$defs/unseen"
+        },
+        "keys_literal": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        }
+      }
+    },
+    "output": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "channel",
+        "literal"
+      ],
+      "properties": {
+        "channel": {
+          "enum": [
+            "led",
+            "printer",
+            "other",
+            "unknown"
+          ]
+        },
+        "literal": {
+          "$ref": "#/$defs/unseen"
+        },
+        "visibility_note": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "observation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "status",
+        "source",
+        "device",
+        "as_entered",
+        "observed_output"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^DR70-[A-Z0-9_-]{4,60}$"
+        },
+        "status": {
+          "enum": [
+            "partial",
+            "replayable"
+          ]
+        },
+        "source": {
+          "$ref": "#/$defs/source"
+        },
+        "device": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "model",
+            "serial",
+            "variant"
+          ],
+          "properties": {
+            "model": {
+              "const": "DR-70"
+            },
+            "serial": {
+              "$ref": "#/$defs/unseen"
+            },
+            "variant": {
+              "$ref": "#/$defs/unseen"
+            }
+          }
+        },
+        "as_entered": {
+          "$ref": "#/$defs/input"
+        },
+        "observed_output": {
+          "$ref": "#/$defs/output"
+        },
+        "derived": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "utc_candidates": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "uniqueItems": true
+            },
+            "time_model": {
+              "type": "string",
+              "minLength": 1
+            },
+            "ephemeris_model": {
+              "type": "string",
+              "minLength": 1
+            },
+            "interpretation_note": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "transcription_note": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "replayable"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "source": {
+                "properties": {
+                  "directness": {
+                    "enum": [
+                      "device_observation",
+                      "contemporaneous_report"
+                    ]
+                  }
+                }
+              },
+              "as_entered": {
+                "properties": {
+                  "keys_literal": {
+                    "type": "array",
+                    "minItems": 1
+                  }
+                }
+              },
+              "observed_output": {
+                "properties": {
+                  "literal": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "channel": {
+                    "enum": [
+                      "led",
+                      "printer",
+                      "other"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}
