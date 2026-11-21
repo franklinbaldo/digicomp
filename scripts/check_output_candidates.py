@@ -25,6 +25,37 @@ KINDS = {
 }
 
 
+def _has_instrumental_evidence(entry):
+    """Structural admission only; a reviewer must authenticate these claims."""
+    record = entry.get("instrumental_evidence")
+    if not isinstance(record, dict):
+        return False
+    strings = (
+        "device_identifier", "session_locator", "input_as_entered",
+        "output_literal", "independent_reviewer", "independent_review_reference",
+    )
+    if any(not isinstance(record.get(name), str) or not record[name].strip()
+           for name in strings):
+        return False
+    if record.get("output_channel") not in {"display", "printer"}:
+        return False
+    if not (isinstance(record.get("key_sequence"), list)
+            and record["key_sequence"]
+            and all(isinstance(key, str) and key.strip()
+                    for key in record["key_sequence"])):
+        return False
+    fragments = entry.get("literal_fragments")
+    return (
+        entry.get("status") == "reviewed"
+        and entry.get("attribution") == "device_native_session_output"
+        and isinstance(fragments, list)
+        and bool(fragments)
+        and all(isinstance(fragment, str) and fragment.strip()
+                and fragment in record["output_literal"]
+                for fragment in fragments)
+    )
+
+
 def validate(data):
     errors = []
     entries = data.get("entries")
@@ -32,6 +63,7 @@ def validate(data):
         return ["entries must be a list"]
     ids = set()
     families = {}
+    source_regions = {}
     for i, entry in enumerate(entries):
         if not isinstance(entry, dict):
             errors.append(f"entry {i} is not an object")
@@ -56,24 +88,36 @@ def validate(data):
             errors.append(f"{ident}: missing exact locator")
         if not isinstance(entry.get("literal_fragments"), list):
             errors.append(f"{ident}: literals must be a list")
-        if split in {"development", "holdout"} and isinstance(family, str):
-            families.setdefault(family, set()).add(split)
+        if split in {"development", "holdout"}:
+            if isinstance(family, str):
+                families.setdefault(family, set()).add(split)
+            source_url, locator = entry.get("source_url"), entry.get("locator")
+            if isinstance(source_url, str) and isinstance(locator, str):
+                if source_url.strip() and locator.strip():
+                    region = (source_url.strip(), locator.strip())
+                    source_regions.setdefault(region, set()).add(split)
         if split == "holdout":
             required = ("replayable", "input_complete", "output_complete", "numeric_holdout_eligible")
             if any(entry.get(field) is not True for field in required):
                 errors.append(f"{ident}: holdout without complete, reviewed replayable input/output")
             if entry.get("kind") != "device_session_output":
                 errors.append(f"{ident}: holdout source must be actual device session")
+            if not _has_instrumental_evidence(entry):
+                errors.append(f"{ident}: holdout missing instrumental evidence and independent review")
         if entry.get("numeric_holdout_eligible") is True and (
             entry.get("kind") != "device_session_output"
             or entry.get("replayable") is not True
             or entry.get("input_complete") is not True
             or entry.get("output_complete") is not True
+            or not _has_instrumental_evidence(entry)
         ):
             errors.append(f"{ident}: numeric holdout eligibility unsupported")
     for family, splits in families.items():
         if len(splits) > 1:
             errors.append(f"family leakage across development/holdout: {family}")
+    for (url, locator), splits in source_regions.items():
+        if len(splits) > 1:
+            errors.append(f"source locator leakage across development/holdout: {url} @ {locator}")
     return errors
 
 
