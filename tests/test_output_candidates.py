@@ -205,5 +205,69 @@ class CandidateCatalogTest(unittest.TestCase):
                     )
 
 
+    def test_non_finite_exponent_json_number_rejected_at_loader(self):
+        # JSON syntax accepts an exponent, but Python float conversion may
+        # overflow silently to infinity; it must never enter the catalog.
+        for token in ("1e999", "-1e999", "1e309"):
+            with self.subTest(token=token):
+                with self.assertRaisesRegex(ValueError, "non-finite JSON number"):
+                    self._parse_synthetic_catalog(
+                        '{"entries":[],"extra":' + token + '}'
+                    )
+        self.assertEqual(
+            self._parse_synthetic_catalog('{"entries":[],"extra":1.25e2}'),
+            {"entries": []},
+        )
+
+    def test_invisible_only_instrumental_io_cannot_be_holdout(self):
+        # Entirely fictional case. Controls can be preserved in raw
+        # evidence, but they are not legible input, keys or output.
+        original = self.data["entries"][0]
+        for invisible in ("\\u200b", "\\u2060", "\\ufeff", "\\x00", "\\x1b"):
+            with self.subTest(invisible=repr(invisible)):
+                item = copy.deepcopy(original)
+                item.update(
+                    id="FAKE-CONTROL-ONLY",
+                    family_id="FAKE-INDEPENDENT-FAMILY",
+                    source_url="https://example.invalid/control-only",
+                    locator="fake independent session",
+                    kind="device_session_output",
+                    status="reviewed",
+                    attribution="device_native_session_output",
+                    sample_split="holdout",
+                    replayable=True,
+                    input_complete=True,
+                    output_complete=True,
+                    numeric_holdout_eligible=True,
+                    literal_fragments=[invisible],
+                    instrumental_evidence={
+                        "device_identifier": "FAKE-DEVICE",
+                        "session_locator": "FAKE-SESSION",
+                        "input_as_entered": invisible,
+                        "key_sequence": [invisible],
+                        "output_channel": "printer",
+                        "output_literal": invisible,
+                        "independent_reviewer": "FAKE-REVIEWER",
+                        "independent_review_reference": "https://example.invalid/review",
+                    },
+                )
+                errors = validate({"entries": [item]})
+                self.assertTrue(
+                    any("holdout missing instrumental evidence" in err for err in errors),
+                    errors,
+                )
+                self.assertTrue(
+                    any("numeric holdout eligibility unsupported" in err for err in errors),
+                    errors,
+                )
+
+        # Visible text mixed with raw controls is still a valid transcription.
+        item["instrumental_evidence"]["input_as_entered"] = "FAKE-INPUT\\x00"
+        item["instrumental_evidence"]["key_sequence"] = ["FAKE-KEY\\u200b"]
+        item["instrumental_evidence"]["output_literal"] = "FAKE-OUTPUT\\x1b"
+        item["literal_fragments"] = ["FAKE-OUTPUT"]
+        self.assertEqual(validate({"entries": [item]}), [])
+
+
 if __name__ == "__main__":
     unittest.main()
