@@ -224,6 +224,72 @@
       ],
       "rights": "third-party copyrighted periodical; bibliographic link and description only",
       "notes": "Duncan Campbell article interviews Nicky Michaels who reportedly used DR70 and consulted printout in relation to the 1987 INF treaty signing. PDF pages visually checked; the article itself does not reproduce numeric result. Lead distinct from Carlson, not an output sample."
+    },
+    {
+      "id": "OUT-DESKTHORITY-VIDEO-NYSJU",
+      "family_id": "DESKTHORITY-KANKUROU1010-DR70-VIDEO-POST",
+      "source_url": "https://streamable.com/nysju",
+      "locator": "linked in Deskthority post https://deskthority.net/viewtopic.php?t=20346; clip nysju",
+      "kind": "unreadable_visual_lead",
+      "attribution": "collector_describes_device_operation_video_not_inspected",
+      "status": "LINK_FOUND_VIDEO_NOT_READ",
+      "sample_split": "unassigned",
+      "input_complete": false,
+      "output_complete": false,
+      "replayable": false,
+      "numeric_holdout_eligible": false,
+      "literal_fragments": [],
+      "ambiguous": [
+        "video bytes and frames unavailable",
+        "numeric display transition not verified",
+        "identity of specific device and operation not independently authenticated"
+      ],
+      "rights": "third-party video, reference URL only",
+      "notes": "Key-operated power on (author's description). Three clips are associated with same collector/post; they are not independent astronomical-output sessions. Streamable failed to open; no verified archive snapshot found in checked web searches."
+    },
+    {
+      "id": "OUT-DESKTHORITY-VIDEO-34DNT",
+      "family_id": "DESKTHORITY-KANKUROU1010-DR70-VIDEO-POST",
+      "source_url": "https://streamable.com/34dnt",
+      "locator": "linked in Deskthority post https://deskthority.net/viewtopic.php?t=20346; clip 34dnt",
+      "kind": "unreadable_visual_lead",
+      "attribution": "collector_describes_device_operation_video_not_inspected",
+      "status": "LINK_FOUND_VIDEO_NOT_READ",
+      "sample_split": "unassigned",
+      "input_complete": false,
+      "output_complete": false,
+      "replayable": false,
+      "numeric_holdout_eligible": false,
+      "literal_fragments": [],
+      "ambiguous": [
+        "video bytes and frames unavailable",
+        "numeric display transition not verified",
+        "identity of specific device and operation not independently authenticated"
+      ],
+      "rights": "third-party video, reference URL only",
+      "notes": "Shift lock and indicator light (author's description). Three clips are associated with same collector/post; they are not independent astronomical-output sessions. Streamable failed to open; no verified archive snapshot found in checked web searches."
+    },
+    {
+      "id": "OUT-DESKTHORITY-VIDEO-3IWPE",
+      "family_id": "DESKTHORITY-KANKUROU1010-DR70-VIDEO-POST",
+      "source_url": "https://streamable.com/3iwpe",
+      "locator": "linked in Deskthority post https://deskthority.net/viewtopic.php?t=20346; clip 3iwpe",
+      "kind": "unreadable_visual_lead",
+      "attribution": "collector_describes_device_operation_video_not_inspected",
+      "status": "LINK_FOUND_VIDEO_NOT_READ",
+      "sample_split": "unassigned",
+      "input_complete": false,
+      "output_complete": false,
+      "replayable": false,
+      "numeric_holdout_eligible": false,
+      "literal_fragments": [],
+      "ambiguous": [
+        "video bytes and frames unavailable",
+        "numeric display transition not verified",
+        "identity of specific device and operation not independently authenticated"
+      ],
+      "rights": "third-party video, reference URL only",
+      "notes": "Several key presses; author notes rotated video. Three clips are associated with same collector/post; they are not independent astronomical-output sessions. Streamable failed to open; no verified archive snapshot found in checked web searches."
     }
   ]
 }
