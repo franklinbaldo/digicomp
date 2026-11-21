@@ -49,6 +49,30 @@ def _observed_io(value: object) -> bool:
     )
 
 
+def _count_distinct_io_candidates(records: list[object]) -> int:
+    """Reject duplicate candidate IDs and cited regions before counting.
+
+    Identical source regions are not additional observations. Different regions
+    can still belong to the same device session; this is only a literal guard.
+    """
+    seen_ids: set[str] = set()
+    seen_regions: set[tuple[str, str]] = set()
+    count = 0
+    for item in records:
+        if not _observed_io(item):
+            continue
+        identifier = item["id"]
+        region = (item["evidence_id"], item["locator"])
+        if identifier in seen_ids:
+            raise ValueError(f"duplicate candidate IO id {identifier!r}")
+        if region in seen_regions:
+            raise ValueError(f"duplicate candidate IO evidence region {region!r}")
+        seen_ids.add(identifier)
+        seen_regions.add(region)
+        count += 1
+    return count
+
+
 def evaluate(metadata: object) -> dict[str, object]:
     """Classify *research tracks*, never authorize release or use of an emulator."""
     if not isinstance(metadata, dict):
@@ -58,7 +82,7 @@ def evaluate(metadata: object) -> dict[str, object]:
     raw_observations = metadata.get("observations", [])
     if not isinstance(raw_observations, list):
         raise ValueError("observations must be a list")
-    io_cases = sum(_observed_io(item) for item in raw_observations)
+    io_cases = _count_distinct_io_candidates(raw_observations)
     if firmware_ok and architecture_ok:
         track = "A_INSTRUCTION_STUDY"
     elif io_cases:
