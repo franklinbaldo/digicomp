@@ -7,13 +7,18 @@ import unittest
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
-from check_output_candidates import validate
+from check_output_candidates import validate, load_all
 
 
 class CandidateCatalogTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.data = json.loads((ROOT / "data/output-candidates/catalog.json").read_text(encoding="utf-8"))
+        cls.data = load_all()
+
+    def test_twenty_book_charts_are_inventory_candidates_not_golden(self):
+        book = [e for e in self.data['entries'] if e['id'].startswith('OUT-RUDHYAR-RAEL-')]
+        self.assertEqual(len(book), 20)
+        self.assertTrue(all(e['sample_split'] == 'unassigned' and not e['numeric_holdout_eligible'] for e in book))
 
     def test_catalog_has_no_partition_violations(self):
         self.assertEqual(validate(self.data), [])
