@@ -261,5 +261,39 @@ class FidelitySchemaTests(unittest.TestCase):
             check_schema(self.path)
 
 
+    def test_unpaired_surrogates_are_not_observed_literals(self) -> None:
+        # JSON escape decoding permits these invalid Unicode scalar values.
+        for raw in ("\ud800", "\udfff"):
+            for field in ("date_literal", "time_literal"):
+                with self.subTest(raw=ascii(raw), field=field):
+                    case = fake_case()
+                    case["as_entered"][field] = raw
+                    self.write(case)
+                    with self.assertRaisesRegex(CorpusError, "JSON Schema violation"):
+                        check_schema(self.path)
+            with self.subTest(raw=ascii(raw), field="output"):
+                case = fake_case()
+                case["observed_output"] = {"channel": "led", "literal": raw}
+                self.write(case)
+                with self.assertRaisesRegex(CorpusError, "JSON Schema violation"):
+                    check_schema(self.path)
+
+    def test_unpaired_surrogate_is_not_a_replayable_key(self) -> None:
+        case = fake_case()
+        case["status"] = "replayable"
+        case["source"]["directness"] = "device_observation"
+        case["as_entered"]["keys_literal"] = ["\ud800"]
+        case["observed_output"] = {"channel": "led", "literal": "FAKE OUTPUT"}
+        self.write(case)
+        with self.assertRaisesRegex(CorpusError, "JSON Schema violation"):
+            check_schema(self.path)
+
+    def test_visible_unicode_text_still_counts_as_literal(self) -> None:
+        case = fake_case()
+        case["as_entered"]["date_literal"] = "FAKE \u00c9"
+        self.write(case)
+        self.assertEqual(check_schema(self.path), 1)
+
+
 if __name__ == "__main__":
     unittest.main()

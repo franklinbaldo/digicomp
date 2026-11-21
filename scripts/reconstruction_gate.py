@@ -14,7 +14,7 @@ from pathlib import Path
 _SHA256 = re.compile(r"[0-9a-f]{64}\Z")
 # Keep this character rule aligned with data/fidelity/corpus.schema.json $defs.unseen.
 # Control-only raw evidence remains in metadata; it is not textual I/O.
-_IO_LEGIBLE = re.compile(r"[^\s\u0000-\u001F\u007F-\u009F\u00AD\u034F\u061C\u180E\u200B-\u200F\u202A-\u202E\u2060-\u206F\uFEFF]")
+_IO_LEGIBLE = re.compile(r"[^\s\u0000-\u001F\u007F-\u009F\u00AD\u034F\u061C\u180E\u200B-\u200F\u202A-\u202E\u2060-\u206F\uFEFF\uD800-\uDFFF]")
 
 def _unique_json_properties(pairs: list[tuple[str, object]]) -> dict[str, object]:
     """Reject ambiguous identities before JSON last-wins can erase evidence."""
