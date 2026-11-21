@@ -17,10 +17,25 @@ estado: provisorio
 | F9 | [AFA, índice por título dos volumes XLI–L](https://astrologers.com/wp-content/uploads/2025/07/Index-by-Title-41-50.pdf), Richard Nolle, parte 6, XLV/10, outubro de 1983, p. 9 | **Referência bibliográfica** a teste do DR-70 e comparação com “ACS program”; artigo integral não examinado | `indexa` obra original; **não** `transcreve_resultado` |
 | ACS-A | [Astrodienst, Neil Michelsen](https://www.astro.com/astrowiki/en/ACS), verbete retrospectivo | A sigla ACS designou uma organização de computação astrológica de Michelsen; o verbete atribui fundação a **1973** | `descreve_organizacao`; não identifica o software testado por Nolle |
 | ACS-U | [Urania Trust, Neil Michelsen](https://www.uraniatrust.org/celebrated-astrologers/neil-michelsen), biografia publicada em 2016 | Também usa ACS para Astro Computing Services; atribui fundação a **1972** | `descreve_organizacao`; a divergência 1972/1973 permanece |
+| ACS-79 | [Mark Pottenger, *Computers and Astrology*, *The Mutable Dilemma*, Virgo 1979](https://ccrsdodona.org/m_dilemma/1979/vir/computer.html), [índice da revista](https://www.ccrsdodona.org/m_dilemma/) | Texto contemporâneo identifica o sistema de Neil Michelsen como **Astro Computing Services**, classifica-o como **minicomputador** e descreve, em passagem separada, o DR-70 como aparelho dedicado pré-programado | `cita_sistemas_distintos`; transcrição HTML posterior da revista, **não** fac-símile físico nem programa de 1983 |
 | F13 | [Campbell, *New Statesman & Society*, 14/10/1988, pp. 14–15](cadeia-dr70-quigley.md) | Reportagem atribui a **Nicky Michaels** a operação de um DR-70, com cálculos fornecidos a Quigley | `reporta_testemunho`; não entrega uma saída autenticada |
 | F14 | [Williamson, *Prediction*, setembro de 2004, pp. 46–48](docs/cadeia-dr70-quigley.md), hoje por transcrição secundária | **Nicki Michaels** narra retrospectivamente o mesmo papel de operadora | `reconta_mesma_testemunha`; publicação nova não equivale a segunda operadora |
 
 Os IDs F9/F13/F14 remetem ao [catálogo do projeto](sources.md). Os rótulos ACS-A/ACS-U são **locais a esta nota**; não criam uma nova entrada F, nem implicam duas comprovações primárias independentes da identidade ou das atividades da firma. As biografias podem compartilhar fontes, sem genealogia editorial demonstrada. A discrepância de ano **não deve ser resolvida por votação**.
+
+## Duas arquiteturas de comparação ainda possíveis
+
+O texto de **Pottenger (1979)** é mais próximo dos fatos do que as biografias retrospectivas para demonstrar que **ACS** era uma designação em uso, associada a Neil Michelsen, antes do teste indexado de 1983. A mesma matéria trata ACS como sistema de minicomputador e descreve **separadamente** o DR-70, com software pré-programado. É uma fonte contemporânea reproduzida como HTML, **sem fac-símile da revista conferido**, e não fornece código ou resultados de cálculo. [Dossiê contextual de 1979](1979-pottenger-dr70.md).
+
+A [entrevista retrospectiva de Michael Erlewine, publicada em 2023](https://theastrologypodcast.com/transcripts/tap-ep-408-transcript-the-first-astrology-software-program-with-michael-erlewine/), caracteriza ACS como serviço de cálculo e remessa de mapas a clientes, em contraste com programas vendidos para microcomputadores. É **depoimento tardio sobre um modelo de negócio**, não identificação direta do software usado no ensaio de Nolle.
+
+| Hipótese para o “ACS program” de Nolle | Observação que distinguiria | Estado |
+| --- | --- | --- |
+| H1: resultados gerados pelo sistema/serviço de Michelsen foram comparados com o DR-70 | O original XLV/10 explicita encomenda, fornecimento de mapa, equipamento do prestador e/ou resultados recebidos | **Não testada**; serviço existia, mas o artigo não foi obtido |
+| H2: um programa ACS específico foi operado pelo revisor ou por terceiro durante o teste | O original especifica nome/versão, mídia, plataforma, operador, comandos e/ou saída do programa | **Não testada**; nenhum software identificável foi localizado |
+| H3: “ACS program” era apenas rótulo abreviado de uma referência de resultados sem descrição de execução | O original contém comparação de números sem procedimento ou identificação de programa | **Não testada**; índice não discrimina |
+
+**Controle contra falsa independência:** Pottenger 1979, a entrevista de Erlewine 2023 e os verbetes de Michelsen sustentam aspectos da história de ACS, não são três reproduções do ensaio de Nolle. O índice da AFA permanece **uma** indicação bibliográfica de um teste, sem saída literal ou ROM. Nenhuma das hipóteses autoriza preencher o corpus de fidelidade.
 
 ## Relações que não podem ser promovidas
 
