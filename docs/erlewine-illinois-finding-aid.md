@@ -25,6 +25,22 @@ A **University of Illinois Archives** publica o [finding aid *Michael Erlewine P
 
 Fonte única para todos os localizadores: [inventário institucional, descrição detalhada](https://archon.library.illinois.edu/archives/?id=13321&p=collections/findingaid&q=&rootcontentid=238976). O termo **Digicomp** não aparece nos rótulos pesquisáveis do inventário, mas isso não permite concluir que inexista dentro de qualquer pasta.
 
+## Controles Matrix e cronologia Blue Star (21/11/2026)
+
+O [inventário institucional *Michael Erlewine Papers* (35/3/419)](https://archon.library.illinois.edu/archives/?id=13321&p=collections/findingaid&rootcontentid=238976) identifica localizadores de **software e impressos concorrentes**, relevantes para a [Digicomp #3](https://github.com/franklinbaldo/digicomp/issues/3) sem demonstrar genealogia de ROM do DR-70:
+
+| Localizador | Rótulo do inventário | Limite de atribuição |
+| --- | --- | --- |
+| **Box 1 / Folder 47** | *James Neely Program Listings: House Cusps, True Lunar Nodes, ca. 1976* | Listagens catalogadas, **não código lido nem software DR-70**. |
+| **Box 2 / Folder 27** | *HP-67/HP-97 User’s Library Solutions: Astrology – Programs by James Neely, 1978* | Plataforma HP identificada; não transferir algoritmo ao DR-70. |
+| **Box 2 / Folder 17** | *Rex Shudde, 1977–1979* | O resumo institucional chama Rex Shudde de **“James Neely”** (pseudônimo), útil para localizar documentos, não para imputar autoria Digicomp. |
+| **Box 7 / Folder 37** | *Blue Star User's Guide, 1989* | Controle material catalogado com data **1989** para a narrativa sobre Blue Star usado em **1988**; data do guia não fixa lançamento nem recursos da versão de 1988. |
+| **Box 9 / Folder 23** | *Matrix Magazine Issues 1-3, 1978* | Via física de confronto com a alegação secundária sobre a p. 5 do número I; **página não lida**. |
+
+**Estado da consulta (21/11/2026):** descrições públicas de catálogo efetivamente lidas, mas os cinco objetos físicos **NOT_RETRIEVED**. O PDF agregado *Matrix Magazine Issues 1–4* anunciado pelo editor (`https://assets.libsyn.com/show/59251/Matrix_Magazine_1-4.pdf`) não pôde ser aberto pela interface pública de leitura; nenhuma imagem de página, bytes integrais ou SHA-256 foram obtidos. O inventário não identifica DR-70 nos rótulos citados.
+
+**Teste discriminante:** cotejar um fac-símile do n.º I (1978), p. 5, para verificar a menção e separar programa HP/PET/TRS-80 de execução DR-70; confrontar o guia Blue Star 1989 com documentação de **1988** antes de atribuir Quick*Maps ou formatação de mapa a McRae/DR-70. Não registrar qualquer caso golden com base nesses localizadores. Nenhum contato, compra ou execução de firmware.
+
 ## Interpretações concorrentes e corte de confiança
 
 **H1:** algum item contém comparação numérica, impresso, esquema, programa ou explicação específica do DR-70. **H2:** o material é correspondência pessoal/editorial sem dados do instrumento. **H3:** os nomes fazem referência apenas a programas e sistemas concorrentes. O *finding aid* comprova **custódia catalográfica de pastas**, não seu conteúdo nem H1. As datas atribuídas às pastas não são datas de execução de ensaio. Não há input/output autenticado para `data/fidelity/observations.json`.
