@@ -16,7 +16,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 _CHUNK = 1024 * 1024
-_METADATA_MAX = 8192  # v1 records are <4 KiB: bound untrusted JSON input.
+_METADATA_MAX = 16384  # Allow up to 2048 multibyte origin characters in v1 JSON.
 
 
 class CustodyError(RuntimeError):
