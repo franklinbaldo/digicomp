@@ -53,6 +53,21 @@ Uma origem mista é possível. Mesmo que o DR-70 tenha realizado **cálculos**, 
 | T7 | Pequenos incrementos crescentes e decrescentes no mesmo parâmetro, com repetição | Detectar truncamento, arredondamento e quantização de exibição | Sem escala e resolução autênticas, tolerância não definida |
 | T8 | Fronteiras de dia/ano e calendários, após descobrir a gramática | Distinguir regra de entrada temporal de resultado astronômico | Não presumir calendário ou faixa de anos aceita |
 
+## O4/T8b: origem do dia e escala temporal são variáveis separadas
+
+Uma [reprodução PDF textual de *Astrological Aspects* (Leyla Raël/Dane Rudhyar)](https://tibetanbuddhistencyclopedia.com/en/images/b/b8/Dokumen.tips_astrological-aspects.pdf), na seção `APPENDIX ONE / EXAMPLE HOROSCOPES`, **atribui recálculo das cúspides Campanus ao DR-70** e lista `Sept. 5, 1935 / 27:25 U.T.` (Werner Erhard) e `Jan. 30, 1882 / 25:16 U.T.` (Franklin D. Roosevelt). O prefácio atribuído a **23/03/1979** agradece a verificação computacional por Nicki Michaels e distingue os desenhos caligráficos de Tony Milner. A reprodução **não é o fac-símile da edição de 1980 inspecionado visualmente**, nem documenta as teclas, o estado do hardware ou o papel nativo. Diferentes cópias digitais podem depender de uma única transcrição; **zero golden**.
+
+O [US Naval Observatory](https://aa.usno.navy.mil/faq/UT.html) adverte que o dia de GMT em almanaques astronômicos e náuticos **anteriores a 1925** começava ao **meio-dia**, e diferencia UT1 (rotação terrestre) de UTC (tempo civil atômico). O [NIST](https://www.nist.gov/blogs/taking-measure/everyday-time-and-atomic-time-part-4) documenta a transição astronômica para início à meia-noite em **01/01/1925**. A data de nascimento **1882** não prova que a notação publicada cerca de **1980** reutilize a convenção de um almanaque antigo; nem `U.T.` autoriza chamar a hora de `UTC` exato em 1882.
+
+| Interpretação matemática hipotética | `1882-01-30, 25:16` | Estatuto |
+| --- | --- | --- |
+| Origem no início civil do dia (00h), contando horas estendidas | `1882-01-31 01:16` | Aritmética de rótulo, **não leitura do DR-70** |
+| Origem no meio-dia (12h) de um dia astronômico histórico | `1882-01-31 13:16` | Contrafactual para demonstrar **deslocamento de 12h**; a notação 25h também excede a faixa normal de um dia astronômico e não foi atestada |
+
+Para a outra data, **1935**, a conta com origem civil à meia-noite daria `1935-09-06 03:25`; não existe base documental para importar a convenção astronômica pré-1925. Essa conta não identifica a escala física, o fuso do nascimento, a adoção histórica de horário de verão nem a gramática do firmware. **Não misturar** escolha de início do dia com transporte de fuso ou algoritmo sideral.
+
+**Teste discriminante futuro, condicional ao manual original:** preservar os bytes/glifos de data e hora, a proveniência da data-base e a convenção explicitamente declarada. Só comparar `(D,25:16)`, `(D+1,01:16)` e `(D,01:16)` após confirmar que essas entradas são permitidas; uma rejeição de `25:16` também é resultado observável. Fotografar tecla a tecla, display/papel integral e número/revisão do exemplar. **Status atual: `NOT_RUN_NO_GOLDEN`**, sem conversão automática para UTC ou inserção no corpus.
+
 **Controle de identificabilidade:** o [US Naval Observatory](https://aa.usno.navy.mil/faq/GAST) define tempo sideral local como tempo em Greenwich mais longitude **leste/15**. O [estudo R123](time-longitude-identifiability.md) mostra o alias: apenas um canal angular não identifica instante e longitude livres separadamente. A fig. 1 **não comprova** que o firmware usa esse algoritmo, nem que `SEC` forneça canal independente. O teste só rompe o alias se a grandeza adicional tiver resposta distinta a tempo absoluto, com resolução e formato medidos.
 
 ## O5: limite e próximo dado útil
