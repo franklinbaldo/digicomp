@@ -8,7 +8,7 @@ estado: vigente
 
 # Protocolo de engenharia reversa · DR-70
 
-O objetivo é **entender o comportamento do software original do DR-70**, não produzir de início um horóscopo que apenas se pareça com a saída da máquina. A ferramenta principal, **quando existir um artefato analisável**, é a skill [Reverse Engineer Anything (REA)](https://github.com/morluto/rea), nome `reverse-engineer-anything`; nosso roteamento está em [AGENTS.md](../AGENTS.md) e [skill de projeto](../.agents/skills/digicomp-rea/SKILL.md).
+O objetivo é **entender o comportamento do software original do DR-70**, não produzir de início um horóscopo que apenas se pareça com a saída da máquina. **A skill de projeto [Digicomp REA](../.agents/skills/digicomp-rea/SKILL.md) é o procedimento inicial em toda investigação**, inclusive sem ROM; organiza rotas documentais D1–D3 e físicas H1–H3. A skill externa [Reverse Engineer Anything](https://github.com/morluto/rea), `reverse-engineer-anything`, é o motor para operações binárias quando o artefato existir e o REA estiver de fato conectado. A ficha reutilizável de evidência é [DR70-CASE-ID](rea-case-template.md).
 
 ## 1. Estado dos alvos
 
