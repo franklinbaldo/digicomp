@@ -22,7 +22,8 @@ Assim, a redação mais sustentada é: **Michaels relatou operar um DR-70 cujos 
 
 | Data | Documento ou testemunho | O que sustenta e o que não sustenta |
 | --- | --- | --- |
-| 1975 | [Diretório Cornell de 2004, L3](corporate-patents.md) e [agregador NY DOS, L4](corporate-patents.md) | Digicomp sediada em Ithaca e fundada em 1975 **segundo fontes retrospectivas**; número 363276 ainda depende de registro oficial; Om P. Gupta é presidente documentado **em 2004**, não projetista de 1977 |
+| 1975 | [NY DOS oficial, L11](corporate-patents.md) | Base estadual atual registra primeiro protocolo em **24/02/1975**, ID **363276**, para Digicomp Research Corporation; não é fac-símile do ato de 1975 nem identifica projetista |
+| 1976 | [*Manning’s Ithaca Directory*, pp. 246/292](pessoas-1976-1985.md) | Om P. Gupta consta como presidente de **“Digicomp Inc”**. Identidade jurídica com **“Digicomp Research Corp”** (registrada com Gupta em 1985) ainda depende do histórico de nomes; nada atribui autoria do DR-70 |
 | 1977 | [Calcuseum F1](sources.md) e [entrevista de 2004](https://doczz.net/doc/5519383/astrology---beyondsunsigns.com) | O catálogo data o DR-70 em 1977; Michaels lembra que dois vendedores lhe apresentaram o computador naquele ano. Não há fatura, contrato, série nem nomes dos vendedores conferidos |
 | 1979 | [Artigo contemporâneo L1](corporate-patents.md) | Relata Digicomp Research Corp. em Terrace Hill, Ithaca, e sistema pré-programado; não demonstra tecnologia interna da memória |
 | 1980 | [*Electronics*, SW1](software-archive-trail.md) | Digicomp anuncia **Pascal-100**, produto diferente; sua CPU não identifica o DR-70 |
@@ -58,6 +59,6 @@ Como trilha material distinta, o [guia institucional da Hoover Institution sobre
 1. **Trilha documental:** encontrar edição original de *Prediction* setembro/2004 (pp. 46–48), além de eventual fotografia, anúncio ou nome comercial de quem entregou o DR-70 a Michaels. A transcrição não contém número de série.
 2. **Prova física:** confrontar números de série e cartões do Calcuseum/CHM com eventual registro comercial de Michaels; **não supor** que o exemplar museológico seja o dela.
 3. **Saídas reais:** localizar mapas/impressões com proveniência explícita. O [finding aid de Joan Quigley na Hoover, F5](sources.md) informa mapas astrológicos, **não** que tenham sido produzidos pelo DR-70; conferir item por item antes de alimentar o [corpus #7](https://github.com/franklinbaldo/digicomp/issues/7).
-4. **Identidade societária:** confrontar Cornell 2004 e DOS oficial (nº 363276) com os vendedores lembrados na entrevista de 2004, sem atribuir a Gupta a autoria do aparelho por coincidência de empresa.
+4. **Identidade societária:** buscar histórico oficial de nomes do ID NY DOS 363276 para distinguir “Digicomp Inc” (1976) de “Digicomp Research Corp” (1985). Não atribuir a Gupta a engenharia do DR-70 por coincidência de empresa.
 
 **Limites da rodada:** fontes públicas, leitura da reprodução paginada de 1988 e de transcrição de 2004; sem acesso físico, hash dos bytes da revista, contato com pessoas, compra, execução de software, ROM ou custo. O resultado melhora a atribuição humana, **não recupera software**.
