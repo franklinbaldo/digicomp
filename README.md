@@ -18,7 +18,7 @@ Descobrir, recuperar, compreender e, se possível, executar o **software origina
 
 A reprodução visual do aparelho é secundária. O projeto **não** é uma calculadora astrológica genérica: uma implementação só interessa se reproduzir o comportamento do DR-70, conferido contra saídas de exemplares reais ([testes de fidelidade](docs/research-plan.md#5-testes-de-fidelidade)).
 
-## Estado da pesquisa (2026-11-20)
+## Estado da pesquisa (2026-11-21)
 
 | Questão | Estado |
 | --- | --- |
@@ -27,8 +27,16 @@ A reprodução visual do aparelho é secundária. O projeto **não** é uma calc
 | Processador, memória, ROM | **Desconhecidos.** Não presumir Z80, 6502 nem qualquer outro. |
 | Display e teclado | Display de LED (Calcuseum); chaves MEI/WEAB lineares e chave de ignição (relato de colecionador). |
 | Software, efemérides, sistemas de casas | **Desconhecidos.** |
+| ROM/código original recuperado | **0 artefatos autenticados**; arquitetura de firmware desconhecida. |
+| Observações instrumentais reproduzíveis | **0 casos golden**; [`observations.json`](data/fidelity/observations.json) contém `observations: []`. |
 | Manuais | Nenhum localizado; o Calcuseum fotografa um cartão de instruções. |
 | Ligação com Joan Quigley | Testemunhos atribuídos a Nicky/Nicki Michaels: **ela** operava DR-70 e fornecia mapas a Quigley (1988/2004); sem impressões autenticadas ou posse por Quigley demonstrada. |
+
+## Como examinar uma evidência
+
+O caminho de entrada é o [protocolo REA O0–O6](docs/rea-output-first.md), que exige vincular **exemplar, entrada, operação e saída** antes de propor fidelidade. O [contrato do corpus](docs/fidelity-corpus.md) distingue observação instrumental de transcrição, hipótese e teste sintético. Os candidatos e suas limitações são descritos na [issue #30](https://github.com/franklinbaldo/digicomp/issues/30).
+
+A figura 1 de Carlson (1985) **não está autenticada como impressão literal do DR-70**. A fotografia do LED do Calcuseum mostra legendas, mas não uma sessão operacional. Nenhuma das duas pode preencher o corpus como um caso golden.
 
 ## Documentos
 
