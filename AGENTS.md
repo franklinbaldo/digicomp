@@ -7,6 +7,8 @@ timestamp: 2026-11-20T21:05:00-04:00
 
 # Agentes · Digicomp DR-70
 
+**Política computacional vigente (20/11/2026):** somente sandbox própria do agente e workflows GitHub Actions em repositórios públicos. É vedado executar direta ou indiretamente em qualquer outro ambiente, inclusive para despacho/orquestração. Proteger a confidencialidade de infraestrutura pessoal do proprietário; não publicar detalhes técnicos privados. Esta regra prevalece sobre orientações históricas.
+
 **AVISO À EQUIPE: a skill canônica deste projeto é [`.agents/skills/digicomp-rea/SKILL.md`](.agents/skills/digicomp-rea/SKILL.md). LEIA E USE A ADAPTAÇÃO LOCAL EM TODA INVESTIGAÇÃO DO DR-70, com ou sem ROM. Quando o alvo requer análise binária, a adaptação aciona a skill upstream `reverse-engineer-anything` (REA) e as referências técnicas pertinentes.**
 
 - Origem oficial: [morluto/rea](https://github.com/morluto/rea).
@@ -39,7 +41,7 @@ A lista é orientadora, **não** substitui descobrir os nomes/esquemas realmente
 - Se o MCP já estiver conectado, usar a ferramenta apropriada diretamente e evitar `doctor` repetitivo.
 - Na ausência de ferramentas, verificar o cliente e estado antes de alterar configuração. Exemplo para Codex: `npx -y rea-agents@latest doctor --client codex --json` (pode fazer download da ferramenta).
 - Antes de configurar servidor ou instalar motores, gerar plano **sem escrita**, `npx -y rea-agents@latest setup --client codex --dry-run --json`, substituir o cliente real, registrar caminhos/backup e pedir autorização para alterações de configuração e instalações. Não usar `--yes` nem instalar Hopper/Ghidra/IDA/engenhos por conta própria.
-- Jatobá é **orquestrador**, não o executor de desmontagem. Execuções pesadas usam executor isolado autorizado (Ifro/Cloud Build/outros), sem criar recursos pagos, IAM ou gastos sem permissão.
+- Toda computação deste projeto, inclusive REA, somente pode ocorrer na **sandbox própria do agente** ou em **workflows do GitHub Actions de repositórios públicos**. Instalação/configuração de ferramentas não autoriza outros executores, infraestrutura nova, custos ou ações produtivas.
 
 ## Procedimento e provas
 
