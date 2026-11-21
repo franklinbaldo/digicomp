@@ -40,9 +40,22 @@ class CandidateCatalogTest(unittest.TestCase):
         data = copy.deepcopy(self.data)
         item = copy.deepcopy(data["entries"][0])
         item.update(id="DR70-FUTURE-FAKE-TEST-ONLY", family_id="FAKE-DIFFERENT-SESSION",
-                    kind="device_session_output", status="reviewed", sample_split="holdout",
-                    replayable=True, input_complete=True, output_complete=True,
-                    numeric_holdout_eligible=True)
+                    source_url="https://example.invalid/fictional-session",
+                    locator="test-only synthetic session", kind="device_session_output",
+                    status="reviewed", attribution="device_native_session_output",
+                    sample_split="holdout", replayable=True, input_complete=True,
+                    output_complete=True, numeric_holdout_eligible=True,
+                    literal_fragments=["FAKE-NUMERIC-OUTPUT"],
+                    instrumental_evidence={
+                        "device_identifier": "FAKE-TEST-DEVICE",
+                        "session_locator": "TEST-ONLY-SESSION",
+                        "input_as_entered": "FAKE-INPUT",
+                        "key_sequence": ["FAKE-KEY"],
+                        "output_channel": "display",
+                        "output_literal": "FAKE-NUMERIC-OUTPUT",
+                        "independent_reviewer": "FAKE-REVIEWER",
+                        "independent_review_reference": "https://example.invalid/review",
+                    })
         data["entries"].append(item)
         self.assertEqual(validate(data), [])
 
