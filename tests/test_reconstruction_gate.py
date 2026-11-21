@@ -218,5 +218,31 @@ class ReconstructionTriageTests(unittest.TestCase):
             evaluate([])
 
 
+    def test_unpaired_surrogate_is_not_textual_io(self) -> None:
+        # A surrogate escape is not a rendered glyph or device observation.
+        for field in ("input_literal", "keys_literal", "output_literal"):
+            for raw in ("\ud800", "\udfff"):
+                with self.subTest(field=field, raw=ascii(raw)):
+                    record = {**FAKE_IO, field: raw}
+                    result = evaluate({"observations": [record]})
+                    self.assertEqual(result["candidate_io_cases"], 0)
+                    self.assertEqual(result["track"], "C_DOCUMENTATION")
+                    self.assertFalse(result["approved_for_emulation"])
+                    self.assertFalse(result["approved_as_authentic_dr70"])
+
+    def test_visible_unicode_text_remains_io_candidate(self) -> None:
+        row = {**FAKE_IO, "output_literal": "FAKE \u00c9"}
+        result = evaluate({"observations": [row]})
+        self.assertEqual(result["candidate_io_cases"], 1)
+        self.assertEqual(result["track"], "B_BEHAVIOR_STUDY")
+
+
+    def test_supplementary_plane_glyph_remains_io_candidate(self) -> None:
+        row = {**FAKE_IO, "output_literal": "\U0001F600"}
+        result = evaluate({"observations": [row]})
+        self.assertEqual(result["candidate_io_cases"], 1)
+        self.assertEqual(result["track"], "B_BEHAVIOR_STUDY")
+
+
 if __name__ == "__main__":
     unittest.main()
