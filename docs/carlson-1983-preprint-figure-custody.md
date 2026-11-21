@@ -38,6 +38,14 @@ Confronto por **inspecao visual de paginas**, em 20/11/2026: na [figura 1 do pre
 
 O contraste rejeita somente a tese de que a pagina de 1985 reproduz a pagina de 1983 **integralmente e sem edicao**. Nao identifica quem inseriu ou retirou marcas, nem se houve recorte, recomposicao ou outros tratamentos. **Nao** comprova nem exclui impressao nativa do DR-70, autoria do desenho, hardware, firmware ou veracidade instrumental dos calculos. As duas edicoes nao sao duas observacoes independentes. O codigo `XBL 832-8314` e pista para busca de arte de producao original, nao atribuicao de equipamento.
 
+## Material de interpretacao enviado aos astrologos (O0, nova pista)
+
+O mesmo [preprint LBL-20480 de abril/1983](https://escholarship.org/content/qt0b40b045/qt0b40b045_noSplash_aa3bf76a6b22470b8665af02a57d27ae.pdf#page=17), **pagina impressa -13- / folha PDF 17 (indice zero 16)**, foi conferido em imagem. Na secao *Materials for the astrologers*, Carlson informa que o **primeiro envio** aos participantes profissionais continha uma carta **explicando os simbolos usados nos mapas natais construidos por computador**, alem de modelo de interpretacao e folhas com cabecalhos. O texto afirma que os mapas traziam codigos dos participantes; nao apresenta a carta, nem a legenda integral, nem informa quem diagramou cada painel da figura 1.
+
+**Consequencia para a custodia da figura:** houve ao menos um **documento explicativo separado do mapa**, mencionado pelo proprio autor. Uma copia historica da carta com legenda (sem dados pessoais dos participantes) seria alvo O0 mais discriminante que recontar tokens do mesmo fac-simile: permitiria verificar se os glifos `H01`–`H12`, `C1 SEC`, `ORB` e `KOCH` eram descritos como convencoes do formulario entregue aos astrologos, como saida do aparelho ou se sua origem continuava indeterminada. **A existencia declarada da carta nao demonstra que ela sobreviveu nem que foi gerada pelo DR-70.**
+
+**Hipoteses rivais:** (A) legenda explica representacao nativa do DR-70; (B) legenda explica uma formatacao montada depois dos calculos; (C) documento so traduz simbolos astrologicos sem identificar o formatador. **Contraprova minima:** localizar copia licita da carta/folha de instrucoes datada e vinculada a esse experimento; cotejar glifos e termos com a fig. 1 sem usar nomes ou dados natais dos sujeitos. **Estado:** `DOCUMENTED_LETTER_MENTION`, conteudo da carta `NOT_OBTAINED`, origem da tipografia `NOT_RUN_NO_ORIGINAL`. Nada acrescentar ao corpus de golden outputs.
+
 ## Hipoteses rivais e falsificacao
 
 | Hipotese | Predicao discriminante | Resultado |

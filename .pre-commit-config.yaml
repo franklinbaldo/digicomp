@@ -40,8 +40,8 @@ repos:
         language: system
         pass_filenames: false
         always_run: true
-      - id: dr70-rom-quarantine-tests
-        name: DR-70 offline quarantine negative controls (synthetic)
+      - id: rom-quarantine-tests
+        name: DR-70 quarantine fail-closed synthetic tests
         entry: python3 -B -m unittest discover -s tests -p test_rom_quarantine.py -q
         language: system
         pass_filenames: false

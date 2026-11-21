@@ -1,6 +1,7 @@
 """Synthetic only: no unknown programs downloaded, executed, or stored."""
 from __future__ import annotations
 
+import json
 import os
 import tempfile
 import unittest
@@ -56,6 +57,33 @@ class QuarantineTests(unittest.TestCase):
         meta.write_text('{"size": 0}', encoding="utf-8")
         with self.assertRaisesRegex(CustodyError, "disagree"):
             verify(self.root, record["sha256"])
+
+    def test_metadata_schema_rejects_silent_upgrade(self):
+        record = ingest(self.source, self.root, origin="fixture")
+        path = self.root / (record["sha256"] + ".json")
+        modified = {**record, "schema": "digicomp-quarantine-v2"}
+        path.write_text(json.dumps(modified), encoding="utf-8")
+        with self.assertRaisesRegex(CustodyError, "invalid quarantine schema"):
+            verify(self.root, record["sha256"])
+
+    def test_metadata_safety_flags_cannot_be_promoted(self):
+        record = ingest(self.source, self.root, origin="fixture")
+        path = self.root / (record["sha256"] + ".json")
+        for field in ("rights_cleared", "provenance_verified", "executed"):
+            for value in (True, "false", None):
+                with self.subTest(field=field, value=value):
+                    modified = dict(record)
+                    if value is None:
+                        modified.pop(field)
+                    else:
+                        modified[field] = value
+                    path.write_text(json.dumps(modified), encoding="utf-8")
+                    with self.assertRaisesRegex(CustodyError, "invalid quarantine safety metadata"):
+                        verify(self.root, record["sha256"])
+                    with self.assertRaisesRegex(CustodyError, "invalid quarantine safety metadata"):
+                        ingest(self.source, self.root, origin="duplicate")
+        path.write_text(json.dumps(record), encoding="utf-8")
+        self.check(verify(self.root, record["sha256"]) == record, "restored record failed")
 
     def test_reject_input_symlink(self):
         link = self.base / "linked.bin"
