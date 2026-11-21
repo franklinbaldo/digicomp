@@ -154,3 +154,8 @@ Leitura inicial em 2026-11-20.
 - [Memória autobiográfica de Michael Erlewine](https://startypes.com/pdf/e-books/matrix_history.pdf), p. 15 do PDF, **inspecionada visualmente**: relata DR-70 na feira e preço aproximado, mas **não confirma local/ano** (Nova Orleans/1980 é dúvida do autor).
 - [Imagem de anúncio atribuída a *Dell Horoscope*, maio/1986](https://www.ebay.com/itm/401998053398): mostra “ASTRION System 80”, Digicomp Research. **Fotografia do vendedor**, sem fac-símile paginado completo; não prova CPU, firmware ou sucessão do DR-70.
 - Confrontar com **F9** (índice Nolle, maio/1984), sem supor identidade de software. [Matriz crítica](matrix-dr70-astrion-trail.md).
+
+## F18. Tim Smith descreve o DR-70 na Matrix Magazine (1978)
+
+- Tim Smith, *Digicomp's DR-70: The First Astrological Desktop Computer*, n.º 1, inverno de 1978, pp. 57–58 impressas, folhas 68–69 do PDF. A nota editorial atribui a Smith o desenvolvimento do DR-70. [Fac-símile da coletânea do editor](https://assets.libsyn.com/show/59251/Matrix_Magazine_1-4.pdf#page=68).
+- O artigo descreve CPU de 8 bits, 28K bytes de ROM por máscara, 1K bytes de RAM, firmware escrito majoritariamente em assembly, dois comandos de exemplo, um manual e uma impressora companheira. O modelo da CPU, o conteúdo da ROM, o manual e uma saída instrumental identificada seguem por localizar. [Leitura, contraprovas e custódia do PDF](tim-smith-matrix-1978.md).

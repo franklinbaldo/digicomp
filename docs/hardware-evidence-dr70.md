@@ -8,7 +8,7 @@ estado: provisorio
 
 # DR-70: o que se sabe do hardware
 
-**Frente:** [Digicomp #4](https://github.com/franklinbaldo/digicomp/issues/4). Pesquisa documental realizada em 20/11/2026, sem exame físico, aquisição, contato com colecionadores ou execução de firmware. Este laudo não atribui CPU ao DR-70.
+**Frente:** [Digicomp #4](https://github.com/franklinbaldo/digicomp/issues/4). Pesquisa documental realizada em 20/11/2026, sem exame físico, aquisição, contato com colecionadores ou execução de firmware. A atualização de 21/11/2026 incorpora a descrição técnica publicada por Tim Smith em 1978, com o modelo da CPU ainda em aberto.
 
 ## Fontes e objetos distintos
 
@@ -33,7 +33,7 @@ A [foto externa da etiqueta no Calcuseum](https://www.calcuseum.com/scrapbook/BI
 
 ## Estado da arquitetura do DR-70
 
-**Relatado sobre o DR-70:** display LED, switches MEI/WEAB, chave e gabinete fechado. **Desconhecido:** processador/ISA, ROM/EPROM, tamanho e mapa de memória, firmware, barramento, lógica de display, interfaces externas e método seguro de dump. **Observado exclusivamente em outros modelos:** chip 6522/ROM/RAM no Astrion (relato); Z80-type/Pascal Microengine no Pascal-100 e Z80A/68000 no Delphi-100 (imprensa de época). Não iniciar emulador de CPU ou anunciar recuperação de ROM com base nesses outros produtos.
+**Configuração descrita em 1978:** CPU de 8 bits, 28K bytes de ROM por máscara metálica, 1K bytes de RAM e impressora planejada, ligada por cabo e com fonte própria. A confirmação física da revisão, o modelo da CPU, o mapa de memória, as marcações dos chips e o protocolo da impressora seguem em aberto. [Tim Smith, pp. 57–58](tim-smith-matrix-1978.md). **Observado exclusivamente em outros modelos:** chip 6522/ROM/RAM no Astrion (relato); Z80-type/Pascal Microengine no Pascal-100 e Z80A/68000 no Delphi-100 (imprensa de época). Não iniciar emulador de CPU ou anunciar recuperação de ROM com base nesses outros produtos.
 
 ## Protocolo de identificação futura
 

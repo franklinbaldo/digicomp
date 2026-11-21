@@ -24,12 +24,12 @@ A reprodução visual do aparelho é secundária. O projeto **não** é uma calc
 | --- | --- |
 | Fabricante e data | Digicomp Research Corporation, EUA; 1977 segundo o Calcuseum, 1981 segundo um título de fórum. A conferir. |
 | Sede e fundadores | Ithaca (NY), "estudantes de pós-graduação de Cornell", segundo um único relato secundário. A conferir. |
-| Processador, memória, ROM | **Desconhecidos.** Não presumir Z80, 6502 nem qualquer outro. |
+| Processador e memória | Tim Smith descreve CPU de 8 bits, 28K bytes de ROM por máscara e 1K bytes de RAM em 1978. Modelo da CPU e mapa de memória em aberto. [Artigo e análise](docs/tim-smith-matrix-1978.md). |
 | Display e teclado | Display de LED (Calcuseum); chaves MEI/WEAB lineares e chave de ignição (relato de colecionador). |
-| Software, efemérides, sistemas de casas | **Desconhecidos.** |
+| Software, efemérides, sistemas de casas | A edição de 1978 descreve firmware principalmente em assembly e anuncia seis sistemas de casas. Código e algoritmos ainda por recuperar. [Fonte de 1978](docs/tim-smith-matrix-1978.md). |
 | ROM/código original recuperado | **0 artefatos autenticados**; arquitetura de firmware desconhecida. |
 | Observações instrumentais reproduzíveis | **0 casos golden**; [`observations.json`](data/fidelity/observations.json) contém `observations: []`. |
-| Manuais | Nenhum localizado; o Calcuseum fotografa um cartão de instruções. |
+| Manuais | Smith descreve um manual com mapas de exemplo e apêndices de teclas. O Calcuseum fotografa um impresso de instruções com o L606. O conteúdo do manual segue por recuperar. |
 | Ligação com Joan Quigley | Testemunhos atribuídos a Nicky/Nicki Michaels: **ela** operava DR-70 e fornecia mapas a Quigley (1988/2004); sem impressões autenticadas ou posse por Quigley demonstrada. |
 
 ## Como examinar uma evidência
