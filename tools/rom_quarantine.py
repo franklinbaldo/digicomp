@@ -16,6 +16,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 _CHUNK = 1024 * 1024
+_METADATA_MAX = 8192  # v1 records are <4 KiB: bound untrusted JSON input.
 
 
 class CustodyError(RuntimeError):
@@ -62,6 +63,27 @@ def _root(root: Path) -> Path:
     return resolved
 
 
+def _read_metadata(path: Path) -> dict:
+    # Do not follow a swapped symlink or block on a FIFO/device. Bound the JSON
+    # read even if a writer grows the file between fstat() and read().
+    fd = _regular_fd(path)
+    try:
+        with os.fdopen(fd, "rb") as stream:
+            fd = -1
+            if os.fstat(stream.fileno()).st_size > _METADATA_MAX:
+                raise CustodyError("quarantine metadata too large")
+            data = stream.read(_METADATA_MAX + 1)
+    finally:
+        if fd != -1:
+            os.close(fd)
+    if len(data) > _METADATA_MAX:
+        raise CustodyError("quarantine metadata too large")
+    record = json.loads(data)
+    if not isinstance(record, dict):
+        raise CustodyError("quarantine metadata must be a JSON object")
+    return record
+
+
 def verify(root: Path, sha256: str) -> dict:
     root = _root(root)
     path = _object_path(root, sha256)
@@ -73,13 +95,11 @@ def verify(root: Path, sha256: str) -> dict:
     if actual256 != sha256:
         raise CustodyError("stored content differs from its SHA-256 object ID")
     manifest_path = root / (sha256 + ".json")
-    if manifest_path.is_symlink():
-        raise CustodyError("metadata symlink")
-    with manifest_path.open("r", encoding="utf-8") as stream:
-        record = json.load(stream)
+    record = _read_metadata(manifest_path)
     if (
         record.get("sha256") != actual256
         or record.get("sha512") != actual512
+        or type(record.get("size")) is not int
         or record.get("size") != size
     ):
         raise CustodyError("metadata and content disagree")
