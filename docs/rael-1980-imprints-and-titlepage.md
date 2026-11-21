@@ -27,6 +27,12 @@ estado: provisorio
 | [Finna, vaari.1172270](https://www.finna.fi/Record/vaari.1172270) | **Aurora Press, Nova York, 1980**, 244 páginas | Outra descrição bibliográfica, **não leitura do livro** |
 | [Scribd, texto atribuído à obra](https://www.scribd.com/document/633437269/Dane-Rudhyar-Leyla-Rael-Astrological-Aspects-A-Process-Oriented-Approach-Rudhyar-Series-Aurora-Press-Inc-2018-pdf) | Reprodução apresenta folha de créditos como **Aurora Press, Santa Fe**, **copyright 1980**; título da postagem contém 2018 | Transcrição de terceiro: **copyright não é prova do ano da impressão**, nem do conteúdo gráfico omitido ou modificado |
 
+## Controle primário da editora: catálogo Aurora Press (©2015, PDF servido em 2021)
+
+A própria **Aurora Press**, em seu [catálogo oficial em PDF](https://aurorapress.com/wp-content/uploads/2021/03/Aurora-Catalog-1-21-2021.pdf), **p. 32 impressa / página PDF 32**, lista *Astrological Aspects: A Process Oriented Approach* como obra de **Dane Rudhyar com Leyla Rael Rudhyar**, ISBN **0-943358-00-0** (13 dígitos: **978-0-943358-00-0**), brochura de **244 páginas**, formato **6 × 9 polegadas**. O próprio arquivo exibe **©2015 Aurora Press** e está hospedado sob um caminho com **2021/03**. Conferido visualmente no PDF público em **21/11/2026**; isso é um **catálogo retrospectivo da editora**, não uma impressão de 1980.
+
+O mesmo ISBN é registrado nas descrições de 1980, portanto há **continuidade de identificação bibliográfica**, não prova de que as folhas internas, revisão, prefácio ou mapas sejam idênticos nas cópias de New York, Santa Fe ou ASI. A capa reproduzida pelo catálogo também **não é uma página do Apêndice I**. O catálogo não menciona o DR-70, não oferece valores de Carter, não comprova operação instrumental nem resolve a divergência de imprentas. **Este é um novo registro primário da editora, mas não é uma segunda observação de mapa.**
+
 O contraste de **três combinações de marca e sede** não permite afirmar que existam exatamente três edições, que se sucederam numa ordem específica ou que tenham os mesmos gráficos. Editora, distribuidor, impressão, endereço comercial e metadado de catálogo são campos distintos. Não tratar **1980** no registro como ano comprovado de cada exemplar; não transportar números ou cabeçalhos entre variantes sem conferi-los.
 
 ## Rota para a primeira comparação histórica legítima
