@@ -223,7 +223,7 @@ class CandidateCatalogTest(unittest.TestCase):
         # Entirely fictional case. Controls can be preserved in raw
         # evidence, but they are not legible input, keys or output.
         original = self.data["entries"][0]
-        for invisible in ("\\u200b", "\\u2060", "\\ufeff", "\\x00", "\\x1b"):
+        for invisible in ("\u200b", "\u2060", "\ufeff", "\x00", "\x1b"):
             with self.subTest(invisible=repr(invisible)):
                 item = copy.deepcopy(original)
                 item.update(
@@ -262,9 +262,9 @@ class CandidateCatalogTest(unittest.TestCase):
                 )
 
         # Visible text mixed with raw controls is still a valid transcription.
-        item["instrumental_evidence"]["input_as_entered"] = "FAKE-INPUT\\x00"
-        item["instrumental_evidence"]["key_sequence"] = ["FAKE-KEY\\u200b"]
-        item["instrumental_evidence"]["output_literal"] = "FAKE-OUTPUT\\x1b"
+        item["instrumental_evidence"]["input_as_entered"] = "FAKE-INPUT\x00"
+        item["instrumental_evidence"]["key_sequence"] = ["FAKE-KEY\u200b"]
+        item["instrumental_evidence"]["output_literal"] = "FAKE-OUTPUT\x1b"
         item["literal_fragments"] = ["FAKE-OUTPUT"]
         self.assertEqual(validate({"entries": [item]}), [])
 
