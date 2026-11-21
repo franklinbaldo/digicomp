@@ -3,7 +3,9 @@ import copy
 import json
 import pathlib
 import sys
+import tempfile
 import unittest
+from unittest.mock import patch
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
@@ -151,6 +153,56 @@ class CandidateCatalogTest(unittest.TestCase):
         data = copy.deepcopy(self.data)
         data["entries"].append(copy.deepcopy(data["entries"][0]))
         self.assertTrue(any("duplicate id" in s for s in validate(data)))
+
+
+    def _parse_synthetic_catalog(self, payload):
+        # Only synthetic documents in the temporary sandbox. These are never
+        # output candidates and cannot enter the observational corpus.
+        with tempfile.TemporaryDirectory() as directory:
+            target = pathlib.Path(directory)
+            (target / "fixture.json").write_text(payload, encoding="utf-8")
+            with patch("check_output_candidates.CATALOG_DIR", target):
+                return load_all()
+
+    def test_json_parser_preserves_unique_valid_properties(self):
+        result = self._parse_synthetic_catalog(
+            '{"entries":[{"id":"FAKE","sample_split":"unassigned"}]}'
+        )
+        self.assertEqual(result["entries"][0]["id"], "FAKE")
+
+    def test_duplicate_json_split_rejected_before_validation(self):
+        with self.assertRaisesRegex(ValueError, "duplicate JSON property"):
+            self._parse_synthetic_catalog(
+                '{"entries":[{"id":"FAKE","sample_split":"holdout",'
+                '"sample_split":"unassigned"}]}'
+            )
+
+    def test_duplicate_json_entries_rejected_before_validation(self):
+        with self.assertRaisesRegex(ValueError, "duplicate JSON property"):
+            self._parse_synthetic_catalog(
+                '{"entries":[{"id":"FAKE"}],"entries":[]}'
+            )
+
+    def test_duplicate_json_escaped_property_rejected(self):
+        with self.assertRaisesRegex(ValueError, "duplicate JSON property"):
+            self._parse_synthetic_catalog(
+                r'{"entries":[],"\\u0065ntries":[{"id":"FAKE"}]}'
+            )
+
+    def test_duplicate_json_nested_output_rejected(self):
+        with self.assertRaisesRegex(ValueError, "duplicate JSON property"):
+            self._parse_synthetic_catalog(
+                '{"entries":[{"instrumental_evidence":'
+                '{"output_literal":"FAKE-A","output_literal":"FAKE-B"}}]}'
+            )
+
+    def test_non_json_numeric_constants_rejected(self):
+        for constant in ("NaN", "Infinity", "-Infinity"):
+            with self.subTest(constant=constant):
+                with self.assertRaisesRegex(ValueError, "non-JSON numeric constant"):
+                    self._parse_synthetic_catalog(
+                        '{"entries":[],"extra":' + constant + '}'
+                    )
 
 
 if __name__ == "__main__":
