@@ -45,3 +45,18 @@ Ferramentas candidatas para **etapa posterior**, quando houver bytes com proveni
 As páginas do índice AFA foram inspecionadas visualmente, não os fascículos originais. O objeto Tandy é catalogação museológica, não leitura de fita. A entrevista Matrix é memória do autor, não documento de 1977. **Busca negativa limitada às fontes relacionadas acima:** não apareceu código, ROM, dump, listing ou saída DR-70 autenticada.
 
 O experimento de maior valor é obter o artigo de outubro de 1983, resolver o que “ACS” denota **a partir do original** e verificar se contém os mesmos dados de entrada e resultados comparáveis do DR-70. Evitar construir emulador numérico genérico antes dessas evidências.
+
+## Atualização 21/11/2026: listagens contemporâneas catalogadas
+
+Uma rota mais concreta que pesquisar apenas nomes de programas é procurar **código impresso em publicações da época**, preservando a diferença entre software Matrix e firmware Digicomp.
+
+| Vestígio localizado | Dado consultado | Atribuição e limite |
+| --- | --- | --- |
+| [Alexandria iBase, *Matrix Magazine*, número VII (1980)](https://alexandriaibase.org/matrix-magazine-issue-vii-1980/) | A ficha oferece PDF e **indexa** `Matrix Horoscope Program in BASIC`, Michael Erlewine, **p. 13**, e `Fixed Star Program`, Mark Pottenger, **p. 33**. Também relaciona um `ASTEK I` na **p. 47**. | **Catalogação de arquivo anunciado como digitalizado, não leitura independente da listagem**. Não há relação demonstrada com a ROM/CPU do DR-70. |
+| [Debian Sources, cabeçalho `astrolog/5.40-3/io.c`](https://sources.debian.org/src/astrolog/5.40-3/io.c/) | Aviso de proveniência no código de *Astrolog* declara que suas rotinas planetárias principais são conversão para C de rotinas de **James Neely** publicadas no manual de **Michael Erlewine**, além de indicar restrições autorais ao uso comercial. | **Declaração do próprio software posterior**, não genealogia do DR-70; não autoriza copiar algoritmos ou relicenciar código. |
+
+**Negativo delimitado:** a ficha Alexandria declara **27 páginas**, mas seu sumário indica pelo menos **página 60**; outras páginas de categorias do mesmo acervo descrevem o item como **63 páginas**. Os metadados são inconsistentes. A tentativa de abrir o PDF a partir da ficha encontrou limite de tamanho na ferramenta de leitura, sem inspeção de páginas. Assim, `p. 13`, `p. 33` e `p. 47` são **localizadores do índice**, não páginas de fac-símile verificadas. Não foi confirmada a integridade da edição ou das listagens de BASIC, nem recuperado código-fonte DR-70.
+
+**Experimento e critério de promoção:** conferir o PDF de VII em ambiente autorizado, somente para leitura, registrar URL de custódia, tamanho, hash dos bytes efetivamente obtidos, página impressa e página PDF. Verificar se cada listagem está completa, se possui continuação e qual dialeto BASIC usa. Respeitar direitos, não incorporar listagens integrais sem autorização nem executar código desconhecido. Só confrontar funções, formatos e algoritmos Matrix com o DR-70 quando existir manual/saída/ROM autênticos deste aparelho.
+
+**Estado:** uma pista pública de custódia de listagens Matrix, **zero ROM/CPU e zero pares entrada/saída DR-70** autenticados. Nenhuma compra, contato ou gasto.
