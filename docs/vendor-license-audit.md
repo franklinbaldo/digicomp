@@ -35,22 +35,22 @@ relicenciamento e **não** prova de que o DR-70 utilizava a rotina.
 
 ## Componente admitido como referência matemática
 
-- **Cópia exata:** \`vendor/moira/_angles.py\`, do commit
-  \`1bb9f66cde48f91cb13ebc5a715dec030d592b44\` de Moira; Git blob
-  \`0df066cc4f9649be800e07dc784df6bed71cd144\`.
-- **Adaptador local mínimo:** \`vendor/moira/constants.py\` reproduz somente
+- **Cópia exata:** `vendor/moira/_angles.py`, do commit
+  `1bb9f66cde48f91cb13ebc5a715dec030d592b44` de Moira; Git blob
+  `0df066cc4f9649be800e07dc784df6bed71cd144`.
+- **Adaptador local mínimo:** `vendor/moira/constants.py` reproduz somente
   os fatores de conversão grau/radiano necessários; adaptado de
-  \`moira/constants.py\` (Git blob
-  \`0c20adc02e2e4ca966de296106cfb19f9ac64496\`).
-- **Direitos preservados:** \`vendor/moira/LICENSE\` mantém integralmente MIT
-  do titular \`TheDaniel166\`; \`vendor/moira/UPSTREAM.json\` registra commit,
+  `moira/constants.py` (Git blob
+  `0c20adc02e2e4ca966de296106cfb19f9ac64496`).
+- **Direitos preservados:** `vendor/moira/LICENSE` mantém integralmente MIT
+  do titular `TheDaniel166`; `vendor/moira/UPSTREAM.json` registra commit,
   arquivos e hashes.
 - **Objetivo:** referência independente para a seleção entre dois ramos de
   interseção ascendente/descendente do horizonte, não atribuição ao DR-70.
 - **Fora de escopo:** ROM, dados JPL, kernels externos, tabelas proprietárias,
   código Swiss, interfaces GPL/AGPL e módulos Moira não revisados.
-- **Fidelidade histórica:** \`NOT_RUN_NO_GOLDEN\`; nada ingressa em
-  \`data/fidelity/observations.json\`.
+- **Fidelidade histórica:** `NOT_RUN_NO_GOLDEN`; nada ingressa em
+  `data/fidelity/observations.json`.
 
 A licença permite cópia e modificações **com preservação de avisos**. O código
 do Moira declara derivação independente de fontes astronômicas primárias, mas
