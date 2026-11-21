@@ -116,6 +116,12 @@ class QuarantineTests(unittest.TestCase):
         self.check(code == 0, "CLI failed")
 
 
+    def test_multibyte_origin_at_limit_roundtrips(self):
+        origin = "🦀" * 2048
+        record = ingest(self.source, self.root, origin=origin)
+        self.check(verify(self.root, record["sha256"])["origin_note"] == origin,
+                   "valid multibyte origin rejected")
+
     def test_metadata_fifo_rejected_without_waiting_for_writer(self):
         record = ingest(self.source, self.root, origin="fixture")
         path = self.root / (record["sha256"] + ".json")
@@ -127,7 +133,7 @@ class QuarantineTests(unittest.TestCase):
     def test_metadata_oversize_rejected_on_verify_and_dedup(self):
         record = ingest(self.source, self.root, origin="fixture")
         path = self.root / (record["sha256"] + ".json")
-        path.write_bytes(b" " * 8193)
+        path.write_bytes(b" " * 16385)
         with self.assertRaisesRegex(CustodyError, "metadata too large"):
             verify(self.root, record["sha256"])
         with self.assertRaisesRegex(CustodyError, "metadata too large"):
