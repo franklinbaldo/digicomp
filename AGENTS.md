@@ -1,0 +1,66 @@
+---
+type: AgentContract
+title: "Digicomp DR-70 — contrato de agentes e uso do REA"
+description: "Pesquisa histórica, engenharia reversa orientada por evidências e controles para o computador astrológico Digicomp DR-70."
+timestamp: 2026-11-20T21:05:00-04:00
+---
+
+# Agentes · Digicomp DR-70
+
+**AVISO À EQUIPE: usar a skill oficial `reverse-engineer-anything` (REA) sempre que a tarefa exigir engenharia reversa de um artefato binário, firmware, pacote ou comportamento executado, e seguir seu procedimento de evidências.**
+
+- Origem oficial: [morluto/rea](https://github.com/morluto/rea).
+- Skill upstream: `reverse-engineer-anything`. Instalação da *skill*, quando necessária e aprovada no executor: `npx skills add morluto/rea --skill reverse-engineer-anything`. A instalação **não** instala nem conecta o servidor MCP/engines.
+- Procedimento local para o DR-70: [`.agents/skills/digicomp-rea/SKILL.md`](.agents/skills/digicomp-rea/SKILL.md) e [`docs/reverse-engineering.md`](docs/reverse-engineering.md).
+- Antes de cada investigação, leia a skill upstream disponível no agente e a referência pertinente à classe de alvo. A adaptação local não substitui as instruções upstream.
+- **Não alegar que a skill, o servidor REA, Ghidra, Binwalk, Unblob ou qualquer provider estão conectados/instalados sem conferência no executor.** Na coordenação ChatGPT desta rodada, ferramentas REA não estavam expostas.
+
+## Quando usar e quando não usar
+
+O projeto prioriza a **recuperação do software original** e o entendimento da máquina. Pesquisa em anúncios, manuais, inventários de museus, patentes e fotografias sem binário continua com ferramentas comuns, registrando a fonte: a própria skill REA manda **não** iniciar análise de engenharia reversa para leitura rotineira de repositório-fonte ou bibliografia.
+
+Quando houver alvo concreto, escolher a rota:
+
+| Alvo e pergunta | Rota REA, somente se disponibilizada pelo servidor atual |
+| --- | --- |
+| Dump de ROM/EPROM, firmware e regiões | `inspect_firmware_regions`; extração somente quando pedida e em diretório novo isolado, com `extract_firmware` se anunciado |
+| Executável nativo e código desconhecido | `open_binary` e, conforme provider disponível, funções/pseudocódigo e referências específicas |
+| ZIP/pacote de programa ou acervo digital | `open_binary` para inventário; não executar conteúdo ou supor que arquivos sejam firmware |
+| Captura lógica ou de sinais já gravada | `inspect_signal_decoders` e `decode_signal_recording`, com parâmetros, canais, fonte e digest explícitos |
+| Captura de rede fornecida | `inspect_web_network_capture` ou ferramenta compatível anunciada, sem reproduzir tráfego |
+| Foto de placa, manual, anúncio ou saída impressa | Inspeção documental; não inferir CPU/ROM a partir de título ou aparência |
+
+A lista é orientadora, **não** substitui descobrir os nomes/esquemas realmente anunciados no MCP. Se REA não estiver disponível, documentar `NOT_CONFIGURED`, continuar pesquisa que não requer REA e encaminhar somente a configuração necessária.
+
+## Setup controlado
+
+- Se o MCP já estiver conectado, usar a ferramenta apropriada diretamente e evitar `doctor` repetitivo.
+- Na ausência de ferramentas, verificar o cliente e estado antes de alterar configuração. Exemplo para Codex: `npx -y rea-agents@latest doctor --client codex --json` (pode fazer download da ferramenta).
+- Antes de configurar servidor ou instalar motores, gerar plano **sem escrita**, `npx -y rea-agents@latest setup --client codex --dry-run --json`, substituir o cliente real, registrar caminhos/backup e pedir autorização para alterações de configuração e instalações. Não usar `--yes` nem instalar Hopper/Ghidra/IDA/engenhos por conta própria.
+- Jatobá é **orquestrador**, não o executor de desmontagem. Execuções pesadas usam executor isolado autorizado (Ifro/Cloud Build/outros), sem criar recursos pagos, IAM ou gastos sem permissão.
+
+## Procedimento e provas
+
+1. **Identidade:** declarar pergunta, origem/licença do artefato, permissão de análise, dispositivo/exemplar, tamanho, SHA-256 dos bytes, formato e caminho local de quarentena fora do Git.
+2. **Hipóteses:** distinguir `CONFIRMADO`, `RELATADO`, `INFERIDO` e `DESCONHECIDO`; nenhuma suposição automática de Z80, 6502, sistemas de casas ou efemérides.
+3. **Inventário mínimo:** primeiro identificação estrutural e visão resumida; aprofundar apenas função/região/feature específica. Reutilizar Evidence e sessão, não repetir análise idêntica.
+4. **Proveniência do resultado:** guardar operação, versão da ferramenta/provider, Evidence ID, offset/endereço/range do artefato, fragmento relevante, limites, conclusões e contraprovas em `docs/sources.md` ou issue.
+5. **Comportamento e fidelidade:** pseudocódigo é reconstrução, não código original. Static ≠ execução; saída real exige registro de exemplar, teclas, data/hora/fuso, foto ou impressão. Se não há saída real, não anunciar emulador fiel.
+6. **Encerramento:** marcar cada pergunta como respondida/parcial/não resolvida; anexar índice de evidências à issue, pedir segunda opinião. Uma busca negativa é limitada aos acervos, versões e datas consultados.
+
+## Responsáveis e colaboração
+
+- 🦦 Lontra (#2, #3): proveniência de ROMs, imagens, eventuais sucessores; triagem de formatos e direitos, sem executar.
+- 🐙 Polvo (#4): arquitetura baseada em chips e dumps, escolha de provider apenas depois da identificação do alvo.
+- 🐢 Tartaruga (#5): documentação original, manuais e saídas de época; pesquisa bibliográfica não deve disparar REA desnecessariamente.
+- 🦫 Castor (#7): corpus de entradas/saídas, testes negativos, limites e concordância com artefato original.
+- 🦀 Caranguejo: quarentena, hashing, ambiente isolado, plano de setup REA; não habilitar ferramentas pagas sem autorização.
+- 🦊 Raposa: reconstrução Rust **após** evidência de firmware ou casos de comportamento suficientes; distinguir emulação de reimplementação.
+- 🦅 Gavião: revisão de autenticidade, Evidence, custos e afirmações. Todas as mudanças deste `AGENTS.md` exigem **revisão prévia ao merge**.
+- 🦉 Coruja, 🦇 Morcego, 🦌 Cervo, 🦡 Texugo, 🦎 Lagarto e 🐝 Abelha: documentação, fotos, interfaces e crítica de hipóteses dentro da própria competência, compartilhando fontes por issue.
+
+## Limites gerais
+
+Sem compra de aparelhos, contato com terceiros, acesso físico não autorizado, distribuição de ROM proprietária, execução de firmware desconhecido em ambiente sensível, provisionamento de custo novo ou alegação de software encontrado sem cadeia de custódia. O Git não guarda dumps históricos sem direitos esclarecidos. Provas textuais ficam no acervo OKF.
+
+Toda mudança de produto/documentação usa PR e os testes `prek`/`okf-parser`. PR ordinária com CI verde no SHA exato pode ser integrada sem aguardar Gavião, com revisão retrospectiva; **alterações em `AGENTS.md` são exceção: parecer do Gavião ANTES do merge**. Não falsificar resultado `prek`/OKF nem usar ausência de GitHub Actions como aprovação.
