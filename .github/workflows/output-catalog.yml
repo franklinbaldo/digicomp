@@ -4,6 +4,8 @@ on:
     paths:
       - 'data/output-candidates/**'
       - 'scripts/check_output_candidates.py'
+      - 'scripts/reconstruction_gate.py'
+      - 'data/fidelity/corpus.schema.json'
       - 'tests/test_output_candidates.py'
       - '.github/workflows/output-catalog.yml'
   push:
@@ -11,6 +13,8 @@ on:
     paths:
       - 'data/output-candidates/**'
       - 'scripts/check_output_candidates.py'
+      - 'scripts/reconstruction_gate.py'
+      - 'data/fidelity/corpus.schema.json'
       - 'tests/test_output_candidates.py'
       - '.github/workflows/output-catalog.yml'
 permissions:
