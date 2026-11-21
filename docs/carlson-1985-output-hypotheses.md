@@ -8,14 +8,14 @@ estado: provisorio
 
 # Carlson 1985: output-first sem confundir figura e firmware
 
-**Responsável:** 🐙 Polvo · [Digicomp #30](https://github.com/franklinbaldo/digicomp/issues/30) / [#4](https://github.com/franklinbaldo/digicomp/issues/4). **Método:** O0–O4 da [proposta REA de projeto](https://github.com/franklinbaldo/digicomp/pull/28), ainda sob revisão pré-merge. Este estudo pode ser lido independentemente da aprovação dessa PR. Não houve acesso à máquina nem análise de ROM.
+**Responsável:** 🐙 Polvo · [Digicomp #30](https://github.com/franklinbaldo/digicomp/issues/30) / [#4](https://github.com/franklinbaldo/digicomp/issues/4). **Método:** O0–O4 do [protocolo REA integrado na PR #28](https://github.com/franklinbaldo/digicomp/pull/28). Este estudo documental foi originalmente preparado antes daquela integração. Não houve acesso à máquina nem análise de ROM.
 
 ## O0. O que a fonte primária permite associar ao DR-70
 
 Fonte: Shawn Carlson, [*A double-blind test of astrology*](https://doi.org/10.1038/318419a0), *Nature* **318**, pp. 419–425, **5 dez. 1985**; [fac-símile PDF mantido pelo laboratório de Richard Muller](https://muller.lbl.gov/papers/Astrology-Carlson.pdf), **p. 419, fig. 1 e p. 420, coluna de método**. Consulta visual da página 419 em 20/11/2026, com confrontação do texto da página seguinte.
 
 - **Observação documental, p. 419:** a fig. 1 apresenta um diagrama de mapa, uma listagem de posições/casas e uma matriz de aspectos. A legenda chama o conjunto de mapa natal produzido por computador. A figura **não identifica o modelo ou número de série do equipamento**.
-- **Declaração explícita do artigo, p. 420:** Michael Caveney e Chris Nelson produziram todos os mapas natais do experimento em um aparelho referido pelo artigo como **"Digicom DR 70"**, conferindo amostras à mão. O texto estabelece o método geral, **não a cadeia de custódia da imagem da fig. 1**.
+- **Declaração explícita do artigo, p. 420:** Michael Caveney e Chris Nelson produziram todos os mapas natais do experimento em um aparelho referido pelo artigo como **"Digicomp DR 70 Astrological Computer"**, conferindo amostras à mão. O texto estabelece o método geral, **não a cadeia de custódia da imagem da fig. 1**.
 - **Separação essencial:** "mapas calculados no DR-70" não implica "cada caractere, símbolo, diagrama ou coluna da figura impresso diretamente pelo DR-70". Edição, recomposição, transferência ou saída de outro programa continuam hipóteses abertas.
 - **Identidade física:** nada associa a figura ao exemplar **L606** fotografado no Calcuseum. A foto de painel L606 e os artigos Nolle são **controles de proveniência distintos**.
 
