@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 """Check documentary candidate catalog and prevent leakage into future holdout."""
 import json
+import math
 import pathlib
 import sys
+
+from reconstruction_gate import _IO_LEGIBLE
 
 CATALOG_DIR = pathlib.Path(__file__).resolve().parents[1] / "data/output-candidates"
 
@@ -22,6 +25,14 @@ def _reject_non_json_constant(token):
     raise ValueError(f"non-JSON numeric constant: {token}")
 
 
+def _finite_json_float(token):
+    """Reject valid JSON exponents whose Python float overflows to infinity."""
+    value = float(token)
+    if not math.isfinite(value):
+        raise ValueError(f"non-finite JSON number: {token}")
+    return value
+
+
 def load_all():
     """Read every shard strictly before validating ID and partition leakage."""
     paths = sorted(CATALOG_DIR.glob("*.json"))
@@ -34,6 +45,7 @@ def load_all():
                 path.read_text(encoding="utf-8"),
                 object_pairs_hook=_unique_json_properties,
                 parse_constant=_reject_non_json_constant,
+                parse_float=_finite_json_float,
             )
         except ValueError as exc:
             raise ValueError(f"{path.name}: {exc}") from exc
@@ -53,17 +65,21 @@ def _has_instrumental_evidence(entry):
     if not isinstance(record, dict):
         return False
     strings = (
-        "device_identifier", "session_locator", "input_as_entered",
-        "output_literal", "independent_reviewer", "independent_review_reference",
+        "device_identifier", "session_locator",
+        "independent_reviewer", "independent_review_reference",
     )
     if any(not isinstance(record.get(name), str) or not record[name].strip()
            for name in strings):
+        return False
+    if any(not isinstance(record.get(name), str)
+           or _IO_LEGIBLE.search(record[name]) is None
+           for name in ("input_as_entered", "output_literal")):
         return False
     if record.get("output_channel") not in {"display", "printer"}:
         return False
     if not (isinstance(record.get("key_sequence"), list)
             and record["key_sequence"]
-            and all(isinstance(key, str) and key.strip()
+            and all(isinstance(key, str) and _IO_LEGIBLE.search(key)
                     for key in record["key_sequence"])):
         return False
     fragments = entry.get("literal_fragments")
@@ -72,7 +88,7 @@ def _has_instrumental_evidence(entry):
         and entry.get("attribution") == "device_native_session_output"
         and isinstance(fragments, list)
         and bool(fragments)
-        and all(isinstance(fragment, str) and fragment.strip()
+        and all(isinstance(fragment, str) and _IO_LEGIBLE.search(fragment)
                 and fragment in record["output_literal"]
                 for fragment in fragments)
     )
