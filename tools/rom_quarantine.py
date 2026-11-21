@@ -73,6 +73,11 @@ def _reject_duplicate_json_keys(pairs: list[tuple[str, object]]) -> dict:
     return record
 
 
+def _reject_nonfinite_metadata_constant(value: str) -> None:
+    """The Python JSON decoder otherwise admits NaN/Infinity, unlike JSON."""
+    raise CustodyError(f"non-finite quarantine metadata constant: {value}")
+
+
 def _read_metadata(path: Path) -> dict:
     # Do not follow a swapped symlink or block on a FIFO/device. Bound the JSON
     # read even if a writer grows the file between fstat() and read().
@@ -88,7 +93,11 @@ def _read_metadata(path: Path) -> dict:
             os.close(fd)
     if len(data) > _METADATA_MAX:
         raise CustodyError("quarantine metadata too large")
-    record = json.loads(data, object_pairs_hook=_reject_duplicate_json_keys)
+    record = json.loads(
+        data,
+        object_pairs_hook=_reject_duplicate_json_keys,
+        parse_constant=_reject_nonfinite_metadata_constant,
+    )
     if not isinstance(record, dict):
         raise CustodyError("quarantine metadata must be a JSON object")
     return record
