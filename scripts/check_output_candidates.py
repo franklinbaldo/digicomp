@@ -7,14 +7,36 @@ import sys
 CATALOG_DIR = pathlib.Path(__file__).resolve().parents[1] / "data/output-candidates"
 
 
+def _unique_json_properties(pairs):
+    """Reject last-wins parsing, including escaped duplicate keys and nested objects."""
+    result = {}
+    for name, value in pairs:
+        if name in result:
+            raise ValueError(f"duplicate JSON property: {name!r}")
+        result[name] = value
+    return result
+
+
+def _reject_non_json_constant(token):
+    """Python's default JSON decoder accepts non-finite numbers; JSON does not."""
+    raise ValueError(f"non-JSON numeric constant: {token}")
+
+
 def load_all():
-    """Concatenate source shards before validating IDs and family leakage globally."""
+    """Read every shard strictly before validating ID and partition leakage."""
     paths = sorted(CATALOG_DIR.glob("*.json"))
     if not paths:
         raise ValueError("no candidate catalogs")
     entries = []
     for path in paths:
-        data = json.loads(path.read_text(encoding="utf-8"))
+        try:
+            data = json.loads(
+                path.read_text(encoding="utf-8"),
+                object_pairs_hook=_unique_json_properties,
+                parse_constant=_reject_non_json_constant,
+            )
+        except ValueError as exc:
+            raise ValueError(f"{path.name}: {exc}") from exc
         entries.extend(data["entries"])
     return {"entries": entries}
 
