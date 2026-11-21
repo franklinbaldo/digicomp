@@ -28,6 +28,15 @@ class CustodyError(RuntimeError):
     pass
 
 
+def _valid_utf8_text(value: str) -> bool:
+    # json.loads accepts escaped lone surrogates, which cannot be written as UTF-8.
+    try:
+        value.encode("utf-8")
+    except UnicodeEncodeError:
+        return False
+    return True
+
+
 def _regular_fd(path: Path) -> int:
     flags = os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0) | getattr(os, "O_CLOEXEC", 0) | getattr(os, "O_NONBLOCK", 0)
     if path.is_symlink():
@@ -114,7 +123,12 @@ def _check_provenance_fields(record: dict) -> None:
     if set(record) != _V1_FIELDS:
         raise CustodyError("invalid quarantine v1 metadata fields")
     origin = record["origin_note"]
-    if not isinstance(origin, str) or not origin.strip() or len(origin) > 2048:
+    if (
+        not isinstance(origin, str)
+        or not origin.strip()
+        or len(origin) > 2048
+        or not _valid_utf8_text(origin)
+    ):
         raise CustodyError("invalid quarantine provenance text: origin_note")
     basename = record["original_basename"]
     if (
@@ -123,6 +137,7 @@ def _check_provenance_fields(record: dict) -> None:
         or basename in (".", "..")
         or "/" in basename
         or chr(0) in basename
+        or not _valid_utf8_text(basename)
     ):
         raise CustodyError("invalid quarantine provenance text: original_basename")
     stamp = record["ingested_at_utc"]
@@ -166,8 +181,10 @@ def verify(root: Path, sha256: str) -> dict:
 
 
 def ingest(source: Path, root: Path, *, origin: str) -> dict:
-    if not origin.strip():
-        raise CustodyError("origin/provenance is required; unknown is an acceptable literal")
+    if not isinstance(origin, str) or not origin.strip() or not _valid_utf8_text(origin):
+        raise CustodyError("origin/provenance must be valid nonempty UTF-8 text")
+    if not _valid_utf8_text(source.name):
+        raise CustodyError("invalid quarantine provenance text: original_basename")
     root = _root(root)
     if len(origin) > 2048:
         raise CustodyError("origin note too long")
