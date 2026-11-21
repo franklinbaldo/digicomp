@@ -1,0 +1,28 @@
+name: Modern Campanus reference (not DR-70)
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  modern-reference:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install external research-only ephemeris binding
+        run: python -m pip install 'pyswisseph==2.10.3.2'
+      - name: Test modern output, without DR-70 fidelity claims
+        run: python -B -m unittest discover -s tests -p 'test_compute_chart_reference.py' -v
+      - name: Produce an explicitly labelled modern result
+        run: |
+          python -m scripts.compute_chart_reference --id RAEL1980-CARTER > /tmp/carter-modern.json
+          python -c "import json; x=json.load(open('/tmp/carter-modern.json')); assert x['classification']=='MODERN_REFERENCE_NOT_DR70' and x['dr70_fidelity']=='NOT_RUN_NO_GOLDEN' and len(x['cusps_deg'])==12"
