@@ -16,9 +16,54 @@ from dataclasses import dataclass
 from .constants import DEG2RAD, RAD2DEG
 
 @dataclass(frozen=True, slots=True)
+class HorizontalCoordinatesTruth:
+    """Inspectable equatorial-to-horizontal reduction without changing tuple APIs."""
+
+    right_ascension_deg: float
+    declination_deg: float
+    local_sidereal_time_deg: float
+    observer_latitude_deg: float
+    hour_angle_deg: float
+    azimuth_deg: float
+    altitude_deg: float
+    azimuth_defined: bool
+    source_frame: str = "equatorial_spherical_caller_frame"
+    target_frame: str = "observer_horizontal_at_caller_lst"
+    azimuth_convention: str = "north_zero_clockwise"
 
 
 @dataclass(frozen=True, slots=True)
+class EquatorialCoordinatesTruth:
+    """Inspectable ecliptic-to-equatorial reduction without changing tuple APIs."""
+
+    ecliptic_longitude_deg: float
+    ecliptic_latitude_deg: float
+    obliquity_deg: float
+    right_ascension_deg: float
+    declination_deg: float
+    source_frame: str = "ecliptic_spherical_caller_epoch"
+    target_frame: str = "equatorial_spherical_same_epoch"
+    transform_method: str = "spherical_rotation_about_x_axis"
+
+__all__ = [
+    "Vec3", "Mat3",
+    "vec_add", "vec_sub", "vec_scale", "vec_norm", "vec_unit",
+    "mat_vec_mul", "mat_mul",
+    "rot_x_axis", "rot_y_axis", "rot_z_axis", "rot_x", "rot_y", "rot_z",
+    "icrf_to_ecliptic", "icrf_to_true_ecliptic", "icrf_to_equatorial",
+    "true_ecliptic_latitude",
+    "precession_matrix_equatorial", "nutation_matrix_equatorial",
+    "HorizontalCoordinatesTruth", "EquatorialCoordinatesTruth",
+    "equatorial_to_horizontal", "equatorial_to_horizontal_with_truth",
+    "horizontal_to_equatorial",
+    "ecliptic_to_equatorial", "ecliptic_to_equatorial_with_truth",
+    "equatorial_to_ecliptic",
+    "aberration_correction",
+    "cotrans_sp",
+    "atmospheric_refraction", "atmospheric_refraction_extended",
+    "equation_of_time",
+    "normalize_degrees", "angular_distance", "signed_angular_distance",
+]
 
 
 def _clamp_unit(x: float) -> float:
