@@ -11,7 +11,7 @@ timestamp: 2026-11-20T21:05:00-04:00
 
 - Origem oficial: [morluto/rea](https://github.com/morluto/rea).
 - Skill upstream: `reverse-engineer-anything`. Instalação da *skill*, quando necessária e aprovada no executor: `npx skills add morluto/rea --skill reverse-engineer-anything`. A instalação **não** instala nem conecta o servidor MCP/engines.
-- Procedimento local **primário e obrigatório**: [skill Digicomp](.agents/skills/digicomp-rea/SKILL.md) (fases 0–5, rotas D1–D3 e H1–H3, caso DR70-CASE-ID e gates) e [protocolo de evidências](docs/reverse-engineering.md).
+- Procedimento local **primário e obrigatório**: [skill Digicomp](.agents/skills/digicomp-rea/SKILL.md) (fases 0–5, rotas D1–D3 e H1–H3, caso DR70-CASE-ID e gates), [ficha reutilizável](docs/rea-case-template.md) e [protocolo de evidências](docs/reverse-engineering.md).
 - Use a skill original e a referência REA adequada **quando a rota exigir análise de firmware/binário/captura**. Para artigo de 1983, fotografia, cartão de instruções ou inventário sem arquivo executável, use as rotas documentais da skill local. Não instale/configure REA apenas para ler documentos.
 - **Não alegar que a skill, o servidor REA, Ghidra, Binwalk, Unblob ou qualquer provider estão conectados/instalados sem conferência no executor.** Na coordenação ChatGPT desta rodada, ferramentas REA não estavam expostas.
 
