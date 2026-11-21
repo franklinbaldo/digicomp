@@ -1,6 +1,6 @@
 {
   "format_version": "0.1",
-  "purpose": "Inventory source fragments, not authenticated DR-70 input/output pairs",
+  "purpose": "Capture any publicly shared candidate DR-70 calculation or displayed/printed output first, even if attribution, input and formatting are incomplete; preserve lead-only records separately",
   "holdout_policy": "partition_by_instrument_session_not_document_or_url",
   "entries": [
     {
@@ -40,7 +40,54 @@
       ],
       "related_ledger": "docs/carlson-fig1-token-ledger.md",
       "rights": "external copyrighted figure; link and short factual tokens only",
-      "notes": "figure shows production markings absent from 1985 edition; do not treat as machine print"
+      "notes": "figure shows production markings absent from 1985 edition; do not treat as machine print",
+      "raw_excerpt_status": "secondary_transcription_pending_image_recheck",
+      "raw_excerpt_reference": "docs/carlson-fig1-token-ledger.md",
+      "reported_numeric_fragments": [
+        {
+          "pair": "H01/H07",
+          "groups": [
+            "09",
+            "08"
+          ]
+        },
+        {
+          "pair": "H02/H08",
+          "groups": [
+            "05",
+            "59"
+          ]
+        },
+        {
+          "pair": "H03/H09",
+          "groups": [
+            "09",
+            "38"
+          ]
+        },
+        {
+          "pair": "H04/H10",
+          "groups": [
+            "25",
+            "08"
+          ]
+        },
+        {
+          "pair": "H05/H11",
+          "groups": [
+            "19",
+            "58"
+          ]
+        },
+        {
+          "pair": "H06/H12",
+          "groups": [
+            "14",
+            "29"
+          ]
+        }
+      ],
+      "raw_excerpt_warning": "Candidate degree/minute glyph groups from a published figure; signs, full values, input and DR-70-native output status unresolved. Not golden."
     },
     {
       "id": "OUT-CARLSON-F85",
@@ -67,7 +114,8 @@
       ],
       "related_ledger": "docs/carlson-fig1-token-ledger.md",
       "rights": "external copyrighted figure; no facsimile in repo",
-      "notes": "derived from same editorial family as F83; never independent holdout"
+      "notes": "derived from same editorial family as F83; never independent holdout",
+      "raw_excerpt_reference": "OUT-CARLSON-F83 (same graphic lineage; no independent numeric vector)"
     },
     {
       "id": "OUT-CALCUSEUM-L606",
