@@ -156,12 +156,12 @@ def verify(root: Path, sha256: str) -> dict:
     ):
         raise CustodyError("metadata and content disagree")
     # Hash fixity alone must not promote an unverified candidate to trusted.
-    _check_provenance_fields(record)
     if record.get("schema") != "digicomp-quarantine-v1":
         raise CustodyError("invalid quarantine schema")
     for field in ("provenance_verified", "rights_cleared", "executed"):
         if record.get(field) is not False:
             raise CustodyError(f"invalid quarantine safety metadata: {field}")
+    _check_provenance_fields(record)
     return record
 
 
