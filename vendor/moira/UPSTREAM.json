@@ -24,6 +24,48 @@
       "vendored": "vendor/moira/LICENSE",
       "sha1_git_blob": "2deb675af287ed6d137e6b1727cc61e1054d4793",
       "mode": "exact-copy"
+    },
+    {
+      "upstream": "moira/_house_quality.py",
+      "vendored": "vendor/moira/_house_quality.py",
+      "sha1_git_blob": "1e3f7f8f001becb0e71f88e1b173f950ecf1db52",
+      "mode": "exact-copy",
+      "purpose": "House-cycle ordering and distortion validation, not cusp generation"
+    },
+    {
+      "upstream": "moira/coordinates.py",
+      "vendored": "vendor/moira/coordinates_reference.py",
+      "sha1_git_blob": "45d1665c089547d87acfef1188bea059e9e2efac",
+      "mode": "selected-definitions",
+      "source_function_names": [
+        "_clamp_unit",
+        "_require_finite_coordinate",
+        "_require_latitude",
+        "normalize_degrees",
+        "angular_distance",
+        "signed_angular_distance",
+        "equatorial_to_horizontal",
+        "equatorial_to_horizontal_with_truth",
+        "ecliptic_to_equatorial",
+        "ecliptic_to_equatorial_with_truth",
+        "equatorial_to_ecliptic"
+      ],
+      "source_classes": [
+        "HorizontalCoordinatesTruth",
+        "EquatorialCoordinatesTruth"
+      ],
+      "purpose": "Limited angular and spherical coordinate comparator, without ephemeris or precession"
+    },
+    {
+      "upstream": "moira/julian.py",
+      "vendored": "vendor/moira/sidereal_time_reference.py",
+      "sha1_git_blob": "93eaaece31f5071b3e7a97588e73dffb03be48ac",
+      "mode": "selected-definitions-plus-wrappers",
+      "source_function_names": [
+        "earth_rotation_angle",
+        "_greenwich_mean_sidereal_time_at_tt"
+      ],
+      "purpose": "IAU 2000 ERA and IAU 2006 GMST with explicitly supplied UT1 and TT; not a clock binding implementation"
     }
   ],
   "upstream_license_claim": "Moira PROVENANCE.md states its astronomical algorithms are independent of Swiss Ephemeris; this is upstream authorship declaration, not independent legal certification",
@@ -31,6 +73,8 @@
     "not original DR-70",
     "no golden evidence",
     "no Moira JPL kernel or other external assets included",
-    "do not assume package-wide rights extend to third-party data"
+    "do not assume package-wide rights extend to third-party data",
+    "Mean sidereal time only (no apparent-time correction, IERS Earth orientation, UTC/TT conversion)",
+    "Upstream houses.py/sidereal.py/coordinates.py/julian.py are not vendored in full; selected and adapted extracts carry MIT notice"
   ]
 }
