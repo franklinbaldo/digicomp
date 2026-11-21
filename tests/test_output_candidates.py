@@ -46,6 +46,37 @@ class CandidateCatalogTest(unittest.TestCase):
         data["entries"].append(item)
         self.assertEqual(validate(data), [])
 
+
+    def test_holdout_flagged_lead_with_no_literal_is_rejected(self):
+        # RED regression: booleans cannot certify a source that still says
+        # "no output recovered", even if kind was relabeled as a session.
+        data = copy.deepcopy(self.data)
+        item = copy.deepcopy(data["entries"][3])
+        item.update(id="DR70-FAKE-FLAG-TEST", family_id="FAKE-LEAD-FAMILY",
+                    kind="device_session_output", status="lead_only",
+                    attribution="no_output_recovered", sample_split="holdout",
+                    replayable=True, input_complete=True, output_complete=True,
+                    numeric_holdout_eligible=True, literal_fragments=[])
+        data["entries"].append(item)
+        violations = validate(data)
+        self.assertTrue(any("holdout missing instrumental evidence" in s for s in violations), violations)
+
+    def test_same_url_and_locator_cannot_cross_families_into_holdout(self):
+        # RED regression: renaming the family must not launder a duplicate
+        # source region into a supposedly independent holdout.
+        data = copy.deepcopy(self.data)
+        left = copy.deepcopy(data["entries"][0])
+        right = copy.deepcopy(data["entries"][0])
+        left.update(id="DR70-FAKE-DEV", family_id="FAKE-DEVELOPMENT",
+                    sample_split="development")
+        right.update(id="DR70-FAKE-HELD", family_id="FAKE-HELD",
+                     kind="device_session_output", status="reviewed",
+                     sample_split="holdout", replayable=True, input_complete=True,
+                     output_complete=True, numeric_holdout_eligible=True)
+        data["entries"].extend([left, right])
+        violations = validate(data)
+        self.assertTrue(any("source locator leakage" in s for s in violations), violations)
+
     def test_duplicate_id_is_rejected(self):
         data = copy.deepcopy(self.data)
         data["entries"].append(copy.deepcopy(data["entries"][0]))
