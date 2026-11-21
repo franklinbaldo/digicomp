@@ -283,7 +283,43 @@
             }
           }
         }
-      ]
+      ],
+      "not": {
+        "properties": {
+          "as_entered": {
+            "properties": {
+              "date_literal": {
+                "const": null
+              },
+              "time_literal": {
+                "const": null
+              },
+              "timezone_literal": {
+                "const": null
+              },
+              "place_literal": {
+                "const": null
+              },
+              "latitude_literal": {
+                "const": null
+              },
+              "longitude_literal": {
+                "const": null
+              },
+              "keys_literal": {
+                "const": null
+              }
+            }
+          },
+          "observed_output": {
+            "properties": {
+              "literal": {
+                "const": null
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
