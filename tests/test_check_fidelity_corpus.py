@@ -32,6 +32,36 @@ class FidelityIdentityTests(unittest.TestCase):
         with self.assertRaisesRegex(CorpusError, "duplicate observation ID"):
             check_corpus(self.path)
 
+    def test_distinct_ids_same_source_locator_fail(self) -> None:
+        # Two made-up IDs for one image region are not independent observations.
+        shared = {"url": "https://example.org/FAKE-scan", "locator": "page 1 / frame A"}
+        self.write(json.dumps({"observations": [
+            {"id": "DR70-FAKE1", "source": {**shared, "catalog_ref": "F1"}},
+            {"id": "DR70-FAKE2", "source": {**shared, "catalog_ref": "F99"}},
+        ]}))
+        with self.assertRaisesRegex(CorpusError, "duplicate source URL and locator"):
+            check_corpus(self.path)
+
+    def test_same_url_separate_locator_passes(self) -> None:
+        self.write(json.dumps({"observations": [
+            {"id": "DR70-FAKE1", "source": {"url": "https://example.org/FAKE-scan", "locator": "frame A"}},
+            {"id": "DR70-FAKE2", "source": {"url": "https://example.org/FAKE-scan", "locator": "frame B"}},
+        ]}))
+        self.assertEqual(check_corpus(self.path), 2)
+
+    def test_same_locator_distinct_url_passes_structurally(self) -> None:
+        # This is not proof of independence: mirrors can still share a payload.
+        self.write(json.dumps({"observations": [
+            {"id": "DR70-FAKE1", "source": {"url": "https://example.org/FAKE-A", "locator": "frame A"}},
+            {"id": "DR70-FAKE2", "source": {"url": "https://example.org/FAKE-B", "locator": "frame A"}},
+        ]}))
+        self.assertEqual(check_corpus(self.path), 2)
+
+    def test_different_sources_not_assigned_when_missing(self) -> None:
+        # Structural source validation remains the responsibility of JSON Schema.
+        self.write(json.dumps({"observations": [{"id": "DR70-FAKE1"}, {"id": "DR70-FAKE2"}]}))
+        self.assertEqual(check_corpus(self.path), 2)
+
     def test_duplicate_nested_key_fails(self) -> None:
         self.write('{"observations": [{"id": "DR70-FAKE1", "as_entered": {"date_literal": "A", "date_literal": "B"}}]}')
         with self.assertRaisesRegex(CorpusError, "duplicate JSON property 'date_literal'"):
