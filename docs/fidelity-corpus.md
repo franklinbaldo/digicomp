@@ -20,7 +20,7 @@ No JSON, `null` significa **não observado**; não significa zero nem ausência 
 
 ## Parcial versus reexecutável
 
-- `partial`: aceita registro autêntico incompleto, inclusive foto só do display, mas **não** entra em testes de precisão. Não preencher saídas quando a fonte não as mostra.
+- `partial`: aceita registro autêntico incompleto, inclusive foto só do display, mas **não** entra em testes de precisão. Não preencher saídas quando a fonte não as mostra. O esquema agora recusa **casos vazios de observação**: se todos os sete campos `as_entered` e `observed_output.literal` forem `null`, uma URL, foto de gabinete ou referência bibliográfica sozinha não constitui caso do corpus. Um único literal de entrada **ou** saída basta apenas para a validação estrutural, não para autenticação histórica.
 - `replayable`: exige sequência literal de teclas, canal de saída conhecido e saída literal não vazia, extraídos de observação direta ou relato contemporâneo. O esquema bloqueia a promoção de relato secundário a caso reexecutável. Além disso, revisão humana deve comprovar que todos os campos relevantes (data, hora, fuso e local, quando aplicáveis à função) foram realmente vistos; o esquema sozinho não deduz sua completude.
 
 IDs estáveis e únicos no corpus, prefixo `DR70-`. Duplicata de mesma imagem ou citação cruzada não vira amostra independente: use um ID, cite as outras fontes nas notas ou registre a relação em issue. Uma correção de transcrição preserva histórico Git e justifica mudança; não altera silenciosamente a observação.
@@ -37,7 +37,7 @@ A **Swiss Ephemeris é comparador**, não origem de saída DR-70: somente após 
 
 1. **Gate obrigatório no `prek`:** validar o JSON contra `corpus.schema.json` com `jsonschema[format]==4.26.0`, Draft 2020-12 e formatos ativados. Rejeita campos inesperados, tipos incompatíveis e `replayable` sem teclas, canal/saída ou fonte direta/contemporânea. O validador estrutural é necessário, mas não atesta a origem nem a veracidade das strings.
 2. Executar `python3 -B scripts/check_fidelity_corpus.py` para recusar **IDs duplicados, pares literais `source.url` + `source.locator` duplicados, chaves JSON duplicadas em qualquer nível e números inválidos como `NaN`**. O parser JSON comum pode sobrescrever evidências silenciosamente quando uma chave se repete. O controle é local e também roda no `prek`, mas não substitui o JSON Schema nem autentica fontes; o schema continua responsável pelos tipos e pelos campos obrigatórios.
-3. Conferir manualmente que a URL/locator sustentam **exatamente** o que é transcrito, mantendo `partial` quando faltarem teclas ou saída.
+3. Conferir manualmente que a URL/locator sustentam **exatamente** o que é transcrito, mantendo `partial` quando faltarem teclas ou saída. Uma figura editorial (inclusive Carlson 1983/1985) sem vínculo demonstrado com o canal de saída do DR-70 **não** ganha status `partial` ou `replayable` por passar no esquema. As duas edições da mesma figura não são duas sessões independentes.
 4. Teste negativo obrigatório: caso sintético gerado com Swiss Ephemeris deve ser rejeitado como observação histórica; exemplos inventados ficam fora de `observations.json`. Prova física/visual é diferente de benchmark astronômico.
 
 Comandos opcionais de validação local, sem adicionar dependências ao projeto:

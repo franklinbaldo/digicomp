@@ -60,8 +60,23 @@ class FidelitySchemaTests(unittest.TestCase):
         self.write(None)
         self.assertEqual(check_schema(self.path), 0)
 
-    def test_partial_synthetic_structure_passes_without_authenticating(self) -> None:
+    def test_partial_with_no_input_and_no_output_is_rejected(self) -> None:
+        # A source citation alone is not an observed DR-70 input/output.
         self.write(fake_case())
+        with self.assertRaisesRegex(CorpusError, "JSON Schema violation"):
+            check_schema(self.path)
+
+    def test_partial_with_only_a_literal_input_passes_structurally(self) -> None:
+        # This remains synthetic: the gate does not authenticate the device.
+        case = fake_case()
+        case["as_entered"]["date_literal"] = "FAKE DATE"
+        self.write(case)
+        self.assertEqual(check_schema(self.path), 1)
+
+    def test_partial_with_only_a_literal_output_passes_structurally(self) -> None:
+        case = fake_case()
+        case["observed_output"] = {"channel": "led", "literal": "FAKE DISPLAY"}
+        self.write(case)
         self.assertEqual(check_schema(self.path), 1)
 
     def test_replayable_synthetic_structure_passes_without_authenticating(self) -> None:
