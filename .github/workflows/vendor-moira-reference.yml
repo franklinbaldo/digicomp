@@ -26,11 +26,13 @@ jobs:
         run: |
           python3 -m py_compile vendor/moira/_angles.py vendor/moira/constants.py tests/test_vendor_moira_angles.py
           python3 -m unittest discover -s tests -p 'test_vendor_moira_angles.py' -v
+          python3 -O -m unittest discover -s tests -p 'test_vendor_moira_angles.py' -v
       - name: Check license and upstream manifest
         run: |
           python3 - <<'PY'
           import json
           from pathlib import Path
+          import subprocess
 
           base = Path("vendor/moira")
           manifest = json.loads((base / "UPSTREAM.json").read_text())
@@ -39,6 +41,9 @@ jobs:
           assert (base / "LICENSE").read_text().startswith("MIT License")
           assert "TheDaniel166" in (base / "LICENSE").read_text()
           assert all(Path(row["vendored"]).is_file() for row in manifest["source_files"])
-          assert manifest["source_files"][0]["mode"] == "exact-copy"
+          for row in manifest["source_files"]:
+              if row["mode"] == "exact-copy":
+                  blob = subprocess.check_output(["git", "hash-object", row["vendored"]], text=True).strip()
+                  assert blob == row["sha1_git_blob"], (row["vendored"], blob)
           print("Vendor notice + manifest: PASS")
           PY
