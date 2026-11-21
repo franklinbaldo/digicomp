@@ -11,6 +11,21 @@ estado: vigente
 
 **Esta é a skill canônica do projeto.** O ponto de partida é **o que queremos provar sobre o DR-70**, não qual ferramenta parece interessante. Foi concebida a partir da [skill REA `reverse-engineer-anything`, versão 63 consultada](https://github.com/morluto/rea/blob/main/.agents/skills/reverse-engineer-anything/SKILL.md) e de suas referências. Usar a skill oficial como manual técnico do motor, lendo a referência pertinente **quando** uma análise REA for necessária. Esta adaptação é própria do Digicomp; não copia nem substitui a implementação REA.
 
+## PRIORIDADE ZERO — saída primeiro, ROM depois
+
+**Rota padrão: [O0–O6, REA orientada pelo output](../../../docs/rea-output-first.md).** Antes de buscar uma CPU ou descompilar qualquer coisa, partir dos fragmentos que **já constam** em [exemplares-interface](../../../docs/exemplares-interface.md) e do [corpus de fidelidade](../../../docs/fidelity-corpus.md). A rota O0–O6 é a metodologia da equipe e tem precedência sobre as rotas de firmware H2–H3, que ficam condicionais.
+
+- **Alvo O1:** figura 1 de Shawn Carlson, *Nature* 318 (1985), p. 419: o inventário do projeto transcreve o cabeçalho `C1 NATAL TROP P LONG KOCH 200` e marcadores `H01`–`H12`; o artigo relata uso do DR-70, mas **não certifica que a figura seja o printout literal do aparelho**. Registrar como candidata de formato, não golden output nem função identificada.
+- **Alvo O2:** foto do display do Calcuseum L606: legendas `NATAL`, `TROP`, `PRIM`, `SEC`, `TERT`, `SOLAR`, `LUNAR`, `DIR`, `CONV`, `ERROR`, `OFLOW`. Sem entrada/estado observado, rótulo não determina operação.
+- **Alvo O3:** o índice Nolle (outubro/1983) refere comparação com ACS, mas **não contém os números do teste**. A investigação é recuperar a página original, não gerar saída hipotética.
+- **Controle:** Pottenger (1979) fala de programas e capacidades, sem output numérico, portanto não constitui observação reexecutável.
+
+**Pipeline obrigatório**: autenticar elo fonte↔aparelho (O0) → congelar transcrição literal (O1) → separar sintaxe de semântica (O2) → registrar hipóteses rivais, incluindo **pós-processamento por outro software** (O3) → escrever previsões e experimentos discriminantes **antes** de executar (O4) → confrontar com observações independentes (O5) → só então, se houver ROM identificada, usar REA para localizar funções que expliquem as saídas (O6).
+
+O arquivo `data/fidelity/observations.json` ainda possui **zero** observações; não inseri-las por conveniência. `partial` e `replayable` são estados do [contrato do Castor](../../../docs/fidelity-corpus.md), não graus atribuídos pelo agente por palpite. Valores calculados por Swiss Ephemeris, USNO ou modelo sintético **nunca** são amostras do DR-70.
+
+**Entrega mínima agora:** uma ficha `DR70-CASE-ID` com fragmento literal, localizador, tipo de ligação à máquina, hipótese A/B, previsão que as distingue, lacunas e próximo documento/teste. **Não escrever emulador para "validar" uma saída ainda não autenticada.**
+
 ## Missão e perguntas investigativas
 
 A pergunta central é: **qual software executava o DR-70, por quais operações e com que saídas?** Trabalhar de trás para a frente a partir dos artefatos e observações que existem.
@@ -139,4 +154,4 @@ Antes de PR ou declaração pública:
 
 A skill oficial possui ferramentas de investigação e orientação de conexão. O uso local preserva seu contrato: **skill instalada ≠ MCP conectado ≠ provider disponível**. Ler a [skill original](https://github.com/morluto/rea/blob/main/.agents/skills/reverse-engineer-anything/SKILL.md) e a [referência de firmware](https://github.com/morluto/rea/blob/main/docs/guides/firmware/firmware-analysis.md) na operação binária pertinente. Se REA estiver conectado, usar schemas reais; não rodar `doctor` antes de cada inspeção. Se faltar, verificar bloqueio e ler o [guia de recuperação](https://github.com/morluto/rea/blob/main/.agents/skills/reverse-engineer-anything/references/connection-and-recovery.md), preparar plano sem escrita e pedir aprovação para instalação/configuração.
 
-Execução pesada: Ifro ou executor isolado autorizado, Jatobá somente como orquestrador. Nenhuma instalação de software pago, MCP, IAM ou infraestrutura nova sem autorização. Documentação [protocolo](../../../docs/reverse-engineering.md), [fontes](../../../docs/sources.md), [plano](../../../docs/research-plan.md), [backlog](../../../docs/backlog.md).
+Execução pesada: Ifro ou executor isolado autorizado, Jatobá somente como orquestrador. Nenhuma instalação de software pago, MCP, IAM ou infraestrutura nova sem autorização. Documentação [rota output-first](../../../docs/rea-output-first.md), [protocolo](../../../docs/reverse-engineering.md), [fontes](../../../docs/sources.md), [plano](../../../docs/research-plan.md), [backlog](../../../docs/backlog.md).
