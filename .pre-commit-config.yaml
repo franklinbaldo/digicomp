@@ -34,6 +34,12 @@ repos:
         language: system
         pass_filenames: false
         always_run: true
+      - id: dr70-reconstruction-gate-tests
+        name: DR-70 reconstruction triage negative controls (synthetic)
+        entry: python3 -B -m unittest discover -s tests -p test_reconstruction_gate.py -q
+        language: system
+        pass_filenames: false
+        always_run: true
       - id: rom-quarantine-tests
         name: DR-70 quarantine fail-closed synthetic tests
         entry: python3 -B -m unittest discover -s tests -p test_rom_quarantine.py -q
