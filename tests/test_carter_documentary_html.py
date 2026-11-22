@@ -46,7 +46,7 @@ class CarterDocumentaryHtmlTest(unittest.TestCase):
         self.assertEqual(parser.tags.count("h2"), 4)
         self.assertEqual(parser.tags.count("table"), 2)
         self.assertEqual(parser.tags.count("caption"), 2)
-        self.assertEqual(parser.tags.count("th"), 19)  # 9 modern + 4 historical row headers + 10 column headers
+        self.assertEqual(parser.tags.count("th"), 23)  # 9 modern + 4 historical row headers + 10 column headers
         self.assertTrue(parser.csp)
         self.assertEqual(len(parser.regions), 2)
         self.assertTrue(all(r.get("tabindex") == "0" for r in parser.regions))
