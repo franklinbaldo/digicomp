@@ -108,6 +108,56 @@ class PublishedClockSourceContractTest(unittest.TestCase):
         )
 
 
+    def test_page_twelve_nine_published_angles_are_pinned(self):
+        """Independent test oracle: fixed transcription from the rendered p. 12.
+
+        The nine calculated values and an adjustable tolerance are otherwise
+        compared against fields loaded from the very same JSON fixture.
+        Mutating both fixture fields and tolerance must never count as a pass.
+        This pins a single 2023 publication, NOT nine DR-70 observations.
+        """
+        control = strict_json(CONTROL_PATH)
+        self.assertEqual(control["source"]["publication_year"], 2023)
+        self.assertEqual(control["source"]["chart_date"], "2023-02-19")
+        self.assertIn("PDF printed p. 12", control["source"]["locator"])
+        self.assertEqual(control["chart_house_system"], "Whole Signs")
+        self.assertEqual(
+            control["input_as_published"],
+            {
+                "date": "1924-10-01",
+                "universal_time": "13:00",
+                "latitude": "32N02",
+                "longitude": "84W24",
+            },
+        )
+        self.assertEqual(control["scope"]["tolerance_arcseconds"], 1)
+        self.assertEqual(set(control["scope"]["comparison_only"]), set(FIELDS))
+        # Read directly from the image of Naomi Rabinowitz's printed p. 12;
+        # no value here is calculated using Swiss Ephemeris.
+        expected = {
+            "ascendant": ("Libra", 26, 5, 38, "26° 5′ 38″"),
+            "midheaven": ("Cancer", 28, 27, 53, "28° 27′ 53″"),
+            "sun": ("Libra", 8, 3, 42, "8° 3′ 42″"),
+            "moon": ("Scorpio", 13, 47, 47, "13° 47′ 47″"),
+            "mercury": ("Virgo", 21, 11, 20, "21° 11′ 20″"),
+            "venus": ("Leo", 23, 19, 54, "23° 19′ 54″"),
+            "mars": ("Aquarius", 25, 53, 5, "25° 53′ 5″"),
+            "jupiter": ("Sagittarius", 14, 25, 51, "14° 25′ 51″"),
+            "saturn": ("Scorpio", 1, 54, 52, "1° 54′ 52″"),
+        }
+        self.assertEqual(set(control["positions"]), set(expected))
+        for name, fixed in expected.items():
+            with self.subTest(name=name):
+                item = control["positions"][name]
+                self.assertEqual(
+                    (
+                        item["sign"], item["degrees"], item["minutes"],
+                        item["seconds"], item["literal"],
+                    ),
+                    fixed,
+                )
+
+
 @unittest.skipUnless(swe is not None, "optional Swiss Ephemeris binding absent")
 class CarterModernControlTest(unittest.TestCase):
     @classmethod
