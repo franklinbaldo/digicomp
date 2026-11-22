@@ -92,6 +92,30 @@ class DocumentaryCarlsonBridgeTest(unittest.TestCase):
         )
         self.assertEqual(rust_pairs(self.document), expected)
 
+    def test_coordinated_candidate_drift_changes_frozen_export_fingerprint(self):
+        # Both copies of one pair and its catalog source can drift together:
+        # validate() still accepts the reconciled values, so 6/6 is tautological.
+        altered_doc = copy.deepcopy(self.document)
+        altered_catalog = copy.deepcopy(self.catalog)
+        for index in (0, 6):
+            altered_doc["readings"][index]["candidate_groups"] = ["10", "08"]
+        source = next(e for e in altered_catalog["entries"]
+                      if e["id"] == "OUT-CARLSON-F83")
+        source["reported_numeric_fragments"][0]["groups"] = ["10", "08"]
+        self.assertEqual(validate(altered_doc, altered_catalog, self.golden), [])
+        changed_report = report(altered_doc)
+        self.assertIn("apparent_pair_matches=6\n", changed_report)
+        self.assertNotEqual(changed_report, self.baseline)
+
+        # Negative ablation: without the new digest the old report is identical,
+        # even though the emitted TSV has different literal candidate groups.
+        def without_digest(value):
+            return "\n".join(line for line in value.splitlines()
+                              if not line.startswith("candidate_pairs_sha256="))
+        self.assertEqual(without_digest(changed_report),
+                         without_digest(self.baseline))
+        self.assertNotEqual(rust_pairs(altered_doc), rust_pairs(self.document))
+
     def test_mutant_of_one_house_is_visible_despite_same_family(self):
         tampered = copy.deepcopy(self.document)
         tampered["readings"][9]["candidate_groups"][0] = "26"
