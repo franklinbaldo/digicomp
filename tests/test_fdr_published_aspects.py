@@ -38,6 +38,25 @@ class AngularControlTest(unittest.TestCase):
                          "NOT_EVALUATED_LATER_HOUR_UNSPECIFIED")
         self.assertEqual(result["dr70_fidelity"], "NOT_RUN_NO_GOLDEN")
 
+    def test_integer_editorial_angles_do_not_identify_a_birth_minute(self):
+        # Modern engine counterexample: two instants 90 minutes apart.
+        # This asserts neither the historical rounding nor a DR-70 result.
+        try:
+            from scripts.probe_fdr_published_aspects import run
+            result = run()
+        except RuntimeError as exc:
+            self.skipTest(str(exc))
+        early = result["hypotheses"]["same_integer_01h00"]
+        late = result["hypotheses"]["same_integer_02h30"]
+        expected = {"moon_pluto": True, "mars_uranus": True}
+        self.assertEqual(early["nearest_integer_matches"], expected)
+        self.assertEqual(late["nearest_integer_matches"], expected)
+        minutes_apart = (late["julian_day_ut"] - early["julian_day_ut"]) * 1440
+        self.assertAlmostEqual(minutes_apart, 90, places=3)
+        self.assertEqual(result["source_edition"], "UNRESOLVED")
+        self.assertEqual(result["rounding_policy"],
+                         "HYPOTHETICAL_NEAREST_INTEGER_NOT_HISTORICALLY_ATTESTED")
+
     def test_no_nonfinite_or_invalid_longitude(self):
         for invalid in (-1, 360, float("nan"), float("inf")):
             with self.subTest(value=invalid):
