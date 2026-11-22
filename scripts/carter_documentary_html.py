@@ -13,7 +13,7 @@ import sys
 from string import Template
 
 from scripts.carter_historical_house_claims import HOUSE_CLAIMS, TEXT_URL
-from scripts.carter_modern_table import FIELDS, load_control
+from scripts.carter_modern_table import FIELDS, FULL_CIRCLE_ARCSEC, load_control, published_arcsec
 
 CLASSIFICATION = "DOCUMENTARY_TWO_TIER_RESEARCH_OUTPUT_NOT_DR70_FIDELITY"
 HISTORICAL_STATUS = "INDEXED_SECONDARY_TEXT_NOT_CHECKED_AGAINST_1980_PAGE"
@@ -68,6 +68,18 @@ def _validate(data: dict) -> tuple[dict, dict, str]:
                 or row["within_declared_tolerance"] is not (abs(residual) <= 1)
                 or not isinstance(row.get("published_2023"), str)):
             raise ValueError("Invalid modern comparison row")
+        # Recompute the displayed delta from the canonical versioned DMS.
+        # Range/count checks alone would accept a forged residual and 9/9 badge.
+        published_entry = control["positions"][row["field"]]
+        expected_printed = f'{published_entry["sign"]} {published_entry["literal"]}'
+        printed_arcsec = published_arcsec(published_entry)
+        expected_delta = (
+            (angle * 3600 - printed_arcsec + FULL_CIRCLE_ARCSEC / 2)
+            % FULL_CIRCLE_ARCSEC
+        ) - FULL_CIRCLE_ARCSEC / 2
+        if (row["published_2023"] != expected_printed
+                or not math.isclose(residual, expected_delta, rel_tol=0, abs_tol=1e-6)):
+            raise ValueError("Documentary 2023 literal or angular residual disagrees with canonical source")
         matches += row["within_declared_tolerance"]
     if modern.get("within_tolerance") != matches:
         raise ValueError("Modern match total differs from rows")
