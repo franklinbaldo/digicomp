@@ -34,6 +34,8 @@ class DocumentaryCarlsonBridgeTest(unittest.TestCase):
         self.assertEqual(report(self.document), self.baseline)
         self.assertIn("angular_numeric_comparisons=0", self.baseline)
         self.assertIn("independent_holdout=0", self.baseline)
+        self.assertIn("additional_unparsed_candidates=4", self.baseline)
+        self.assertIn("additional_interpreted_values=0", self.baseline)
         self.assertIn("device_fidelity=NOT_RUN_NO_GOLDEN", self.baseline)
 
     def test_undeclared_certainty_fields_are_rejected(self):
@@ -58,7 +60,8 @@ class DocumentaryCarlsonBridgeTest(unittest.TestCase):
         # One nonblind reading of the same F83/F85 editorial family.
         rows = self.document["additional_literal_candidates"]
         self.assertEqual([r["literal_candidate"] for r in rows],
-                         ["4.01.1981", "07 54 47"])
+                         ["4.01.1981", "07 54 47",
+                          "17 […] 47 05", "05 […] 52"])
         self.assertTrue(all(r["interpreted_value"] is None for r in rows))
         for i, field, value in (
             (0, "semantic_role", "verified_birth_date"),
@@ -67,6 +70,11 @@ class DocumentaryCarlsonBridgeTest(unittest.TestCase):
             (1, "semantic_role", "verified_aspect_angle"),
             (1, "literal_candidate", "07 54 48"),
             (1, "reading_status", "two_independent_blind_reads"),
+            (2, "semantic_role", "verified_planetary_longitude"),
+            (2, "interpreted_value", 137.7847),
+            (2, "literal_candidate", "17 ♌ 47 05"),
+            (3, "interpreted_value", 5.8667),
+            (3, "reading_status", "two_independent_blind_reads"),
         ):
             with self.subTest(row=i, field=field):
                 tampered = copy.deepcopy(self.document)
