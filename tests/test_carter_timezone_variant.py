@@ -152,6 +152,46 @@ class CarterTimezoneSourceVariantTest(unittest.TestCase):
                       "instrument_output_verified"):
             self.assertIs(evidence[field], False)
 
+    def test_official_1950_opinion_keeps_postbirth_statutory_changes_separate(self):
+        """Official later quotation, not the 1941/1943 original or a 1924 clock."""
+        evidence = self.variant["historical_civil_time_evidence"]
+        chronology = evidence["subsequent_change_context"]
+        official = chronology["official_1950_opinion"]
+        self.assertEqual(
+            official["url"],
+            "https://dlg.usg.edu/record/dlg_ggpd_y-ga-bl310-b-ps1-bo6-b1950-h51",
+        )
+        self.assertEqual(official["document_title"],
+                         "Georgia Department of Law, Opinions of the Attorney General 1950-1951")
+        self.assertEqual(official["opinion_classification"],
+                         "UNOFFICIAL_OPINION_PUBLISHED_BY_STATE_DEPARTMENT_OF_LAW")
+        self.assertEqual(official["printed_pages"], "4-5")
+        self.assertEqual(official["quoted_1941_act"], {
+            "approval_date": "1941-03-21",
+            "georgia_laws_page": 427,
+            "statewide_standard": "Eastern Standard Time",
+        })
+        self.assertEqual(official["quoted_1943_amendment"], {
+            "approval_date": "1943-01-18",
+            "georgia_laws_page": 430,
+            "statewide_standard": "Central Standard Time",
+            "conditional_on_federal_war_or_daylight_saving_time": True,
+            "reversion_to_eastern_when_condition_ends": True,
+        })
+        self.assertTrue(official["opinion_says_1941_act_in_force_in_1950"])
+        self.assertEqual(official["opinion_date"], "1950-05-30")
+        self.assertLess(datetime.fromisoformat(evidence["date_in_question"]),
+                        datetime.fromisoformat(official["quoted_1941_act"]["approval_date"]))
+        self.assertLess(datetime.fromisoformat(official["quoted_1941_act"]["approval_date"]),
+                        datetime.fromisoformat(official["quoted_1943_amendment"]["approval_date"]))
+        self.assertLess(datetime.fromisoformat(official["quoted_1943_amendment"]["approval_date"]),
+                        datetime.fromisoformat(official["opinion_date"]))
+        for flag in ("original_1941_1943_acts_facsimiles_inspected",
+                     "1950_opinion_page_image_inspected"):
+            self.assertIs(official[flag], False)
+        self.assertIs(evidence["actual_birth_clock_convention_independently_verified"], False)
+        self.assertEqual(chronology["evidence_type"], "SECONDARY_HISTORICAL_ACCOUNT")
+
     def test_four_displayed_angle_gaps_are_minute_resolution_only(self):
         # Deliberately discard seconds from the AstroDienst control too.
         # This reports differences BETWEEN DISPLAYED MINUTE COMPONENTS,
