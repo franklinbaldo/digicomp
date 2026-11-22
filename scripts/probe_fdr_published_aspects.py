@@ -26,6 +26,13 @@ def minimum_separation_deg(a: float, b: float) -> float:
     return min(difference, 360 - difference)
 
 
+def directed_advance_deg(a: float, b: float) -> float:
+    """Directed zodiacal advance from b to a in [0,360)."""
+    if not all(math.isfinite(v) and 0 <= v < 360 for v in (a, b)):
+        raise ValueError("Both longitude arguments must be finite in [0,360)")
+    return (a - b) % 360
+
+
 def calculate_hypothesis(swe, year: int, month: int, day: int, utc_hour: float) -> dict:
     """Use geocentric tropical longitudes with the explicit Moshier flag."""
     jd_ut = swe.julday(year, month, day, utc_hour)
@@ -34,6 +41,8 @@ def calculate_hypothesis(swe, year: int, month: int, day: int, utc_hour: float) 
         for name, planet in (
             ("moon", swe.MOON), ("pluto", swe.PLUTO),
             ("mars", swe.MARS), ("uranus", swe.URANUS),
+            ("saturn", swe.SATURN), ("neptune", swe.NEPTUNE),
+            ("jupiter", swe.JUPITER),
         )
     }
     observed_modern = {
@@ -43,6 +52,11 @@ def calculate_hypothesis(swe, year: int, month: int, day: int, utc_hour: float) 
     return {
         "julian_day_ut": jd_ut,
         "modern_separations_deg": observed_modern,
+        "modern_septile_diagnostics_deg": {
+            "moon_neptune_short_arc": minimum_separation_deg(longitudes["moon"], longitudes["neptune"]),
+            "mars_ahead_saturn_directed": directed_advance_deg(longitudes["mars"], longitudes["saturn"]),
+            "moon_jupiter_short_arc": minimum_separation_deg(longitudes["moon"], longitudes["jupiter"]),
+        },
         "modern_minus_published_rounded_deg": {
             name: angle - PUBLISHED_ROUNDED_ANGLES[name]
             for name, angle in observed_modern.items()
@@ -63,7 +77,15 @@ def run() -> dict:
         "classification": "SECONDARY_EDITORIAL_ANGLES_VS_MODERN_EPHEMERIS_NOT_DR70",
         "historical_facsimile": "NOT_INSPECTED",
         "historical_values": PUBLISHED_ROUNDED_ANGLES,
-        "source": "Rael/Rudhyar indexed text, novile section; original printed page not checked",
+        "source": "Rael/Rudhyar indexed novile and septile prose; facsimile not inspected",
+        "septile_textual_controls": {
+            "moon_neptune": "about 52 degrees",
+            "mars_ahead_saturn": "just short of 51 degrees, directed",
+            "moon_jupiter": "conditional on unspecified later birth hour",
+            "author_textual_septile_interval_deg": [50, 53],
+            "moon_jupiter_conditional_verdict": "NOT_EVALUATED_LATER_HOUR_UNSPECIFIED",
+            "source_family": "SAME_EDITORIAL_BOOK_NOT_INDEPENDENT_HOLDOUT",
+        },
         "engine": f"Swiss Ephemeris {swe.version}, Moshier, geocentric tropical",
         "dr70_fidelity": "NOT_RUN_NO_GOLDEN",
         "hypotheses": {
