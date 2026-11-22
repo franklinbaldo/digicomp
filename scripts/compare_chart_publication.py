@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import re
 from pathlib import Path
 
 DEFAULT_PUBLICATION = (
@@ -34,8 +35,14 @@ def strict_json(path: Path) -> dict:
     def no_nonfinite(text):
         raise ValueError(f"Invalid JSON numeric constant: {text}")
 
+    def finite_float(token):
+        number = float(token)
+        if not math.isfinite(number):
+            raise ValueError(f"Non-finite JSON numeric literal: {token}")
+        return number
+
     return json.loads(path.read_text(encoding="utf-8"), object_pairs_hook=no_duplicate_keys,
-                      parse_constant=no_nonfinite)
+                      parse_constant=no_nonfinite, parse_float=finite_float)
 
 
 def signed_circular_residual(observed: float, reference: float) -> float:
@@ -56,14 +63,25 @@ def modern_value(reference: dict, field: str) -> float:
 
 
 def validate_notation(field: str, observed: float, notation: dict) -> None:
-    """Require traceable printed notation; never guess a missing zodiac sign."""
+    """Check the printed literal against its declared interpretation.
+
+    Only deliberately narrow spellings are supported. Abbreviations, glyphs
+    and illegible characters must remain unresolved, never become residuals
+    merely because asserted metadata says they match.
+    """
     signed_circular_residual(observed, 0)
     if not isinstance(notation, dict) or not isinstance(notation.get("literal"), str) or not notation["literal"].strip():
         raise ValueError(f"{field}: printed literal is required for review")
     kind = notation.get("kind")
+    literal = notation["literal"].strip()
     if kind == "absolute_longitude_0_360_deg":
         if set(notation) != {"kind", "literal"}:
             raise ValueError(f"{field}: unexpected absolute-notation keys")
+        match = re.fullmatch(r"(\d+(?:\.\d+)?)°?", literal)
+        if match is None:
+            raise ValueError(f"{field}: unrecognized absolute printed literal")
+        if not math.isclose(observed, float(match.group(1)), rel_tol=0, abs_tol=1e-9):
+            raise ValueError(f"{field}: absolute longitude disagrees with printed literal")
         return
     if kind != "zodiac_sign_degree":
         raise ValueError(f"{field}: unknown zodiac notation kind")
@@ -75,9 +93,24 @@ def validate_notation(field: str, observed: float, notation: dict) -> None:
         raise ValueError(f"{field}: invalid sign or within-sign degree")
     if not math.isfinite(degree) or not 0 <= degree < 30:
         raise ValueError(f"{field}: within-sign degree must be in [0,30)")
+
+    # Accepted: "15 Taurus", "7.5 Libra", "7°30 Libra",
+    # "7°30' Libra", "7°30′ Libra". No implicit OCR repair.
+    match = re.fullmatch(r"(\d{1,2}(?:\.\d+)?)(?:°(\d{1,2})(?:['′])?)?\s+([A-Za-z]+)", literal)
+    if match is None:
+        raise ValueError(f"{field}: unrecognized zodiac printed literal")
+    printed_degrees, printed_minutes, printed_sign = match.groups()
+    if printed_sign != sign:
+        raise ValueError(f"{field}: printed literal sign disagrees with declared sign")
+    if printed_minutes is not None and ("." in printed_degrees or int(printed_minutes) >= 60):
+        raise ValueError(f"{field}: invalid printed degree-minute notation")
+    printed_within_sign = float(printed_degrees)
+    if printed_minutes is not None:
+        printed_within_sign += int(printed_minutes) / 60
+    if not math.isclose(printed_within_sign, degree, rel_tol=0, abs_tol=1e-9):
+        raise ValueError(f"{field}: printed literal degree disagrees with declared within-sign degree")
     if not math.isclose(observed, 30 * _SIGNS.index(sign) + degree, rel_tol=0, abs_tol=1e-9):
         raise ValueError(f"{field}: absolute longitude disagrees with printed sign+degree")
-
 
 def compare(reference: dict, publication: dict) -> dict:
     if reference.get("classification") != "MODERN_REFERENCE_NOT_DR70":

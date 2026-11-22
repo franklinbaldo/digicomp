@@ -102,6 +102,51 @@ class EditorialComparatorTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "notation"):
             compare(self.reference, self.publication)
 
+    def test_literal_sign_must_match_declared_sign(self):
+        self.publication["published_values_deg"] = {"sun": 45.0}
+        self.publication["source_notation"] = {
+            "sun": {"kind": "zodiac_sign_degree", "literal": "15 Aries",
+                    "sign": "Taurus", "degree_within_sign": 15.0}
+        }
+        with self.assertRaisesRegex(ValueError, "literal sign"):
+            compare(self.reference, self.publication)
+        self.publication["source_notation"]["sun"]["literal"] = "15 Taurus"
+        result = compare(self.reference, self.publication)
+        self.assertEqual(result["status"], "PUBLISHED_MAP_RESIDUALS_NOT_DR70_FIDELITY")
+
+    def test_literal_degree_and_absolute_number_must_match(self):
+        self.publication["source_notation"]["cusp_1"]["literal"] = "2°"
+        with self.assertRaisesRegex(ValueError, "printed literal"):
+            compare(self.reference, self.publication)
+        self.publication["source_notation"]["cusp_1"]["literal"] = "not a number at all"
+        with self.assertRaisesRegex(ValueError, "unrecognized absolute"):
+            compare(self.reference, self.publication)
+        self.publication["source_notation"]["cusp_1"]["literal"] = "1°"
+        self.publication["source_notation"]["sun"]["literal"] = "8°30 Libra"
+        with self.assertRaisesRegex(ValueError, "literal degree"):
+            compare(self.reference, self.publication)
+
+    def test_unrecognized_glyph_and_invalid_minutes_fail_closed(self):
+        self.publication["source_notation"]["sun"]["literal"] = "7°30 ♎"
+        with self.assertRaisesRegex(ValueError, "unrecognized zodiac"):
+            compare(self.reference, self.publication)
+        self.publication["source_notation"]["sun"]["literal"] = "7°90 Libra"
+        with self.assertRaisesRegex(ValueError, "degree-minute"):
+            compare(self.reference, self.publication)
+        self.publication["source_notation"]["sun"]["literal"] = "7.5 Libra"
+        result = compare(self.reference, self.publication)
+        self.assertEqual(len(result["residuals_deg"]), 2)
+
+    def test_reject_json_float_overflow_even_in_ignored_fields(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "overflow.json"
+            for text in ('{"ignored":1e999}', '{"ignored":{"value":-1e999}}'):
+                path.write_text(text, encoding="utf-8")
+                with self.assertRaisesRegex(ValueError, "Non-finite JSON numeric"):
+                    strict_json(path)
+            path.write_text('{"safe":1.5}', encoding="utf-8")
+            self.assertEqual(strict_json(path)["safe"], 1.5)
+
     def test_reject_duplicate_json_keys(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "duplicate.json"
