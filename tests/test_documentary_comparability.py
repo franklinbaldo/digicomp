@@ -33,6 +33,25 @@ class DocumentaryComparabilityTest(unittest.TestCase):
         self.assertEqual(report["complete_historical_angles_compared"], 0)
         self.assertEqual(report["independent_holdout_scores_computed"], 0)
 
+    def test_whitespace_alias_does_not_inflate_documentary_family_count(self):
+        # The catalog holdout guard already uses family.strip() as identity.
+        rows = [entry("F83", "CARLSON", PAIRS),
+                entry("F85", "  CARLSON  ", PAIRS)]
+        report = reporter.summarize(rows, GOLDEN)
+        self.assertEqual(report["distinct_documentary_families"], 1)
+        self.assertEqual(report["families_with_numeric_group_candidates"], 1)
+        self.assertEqual(report["unique_candidate_pairs_within_families"], 2)
+        self.assertEqual(report["family_coverage"][0]["family_id"], "CARLSON")
+        self.assertEqual(report["family_coverage"][0]["catalog_ids"], ["F83", "F85"])
+        self.assertEqual(report["independent_holdout_scores_computed"], 0)
+
+    def test_conflict_across_whitespace_alias_is_still_rejected(self):
+        conflicting = copy.deepcopy(PAIRS)
+        conflicting[0]["groups"] = ["09", "09"]
+        with self.assertRaisesRegex(ValueError, "conflicting editorial readings"):
+            reporter.summarize([entry("F83", "CARLSON", PAIRS),
+                                entry("F85", " CARLSON ", conflicting)], GOLDEN)
+
     def test_distinct_family_still_not_a_fidelity_score(self):
         rows = [entry("F83", "CARLSON", PAIRS), entry("SECOND", "OTHER", PAIRS)]
         report = reporter.summarize(rows, GOLDEN)
