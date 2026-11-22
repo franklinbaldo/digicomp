@@ -12,7 +12,7 @@ estado: provisorio
 
 **Classe:** publicação moderna de outro serviço, **não saída instrumental do DR-70**. **Fonte:** Naomi Rabinowitz, *Jimmy Carter and the Knight of Pentacles Card* (2023), apêndice «Natal chart» que reproduz mapa AstroDienst datado **19/02/2023**. [PDF do editor](https://static1.squarespace.com/static/625588022bac29595ab0c386/t/652c6205bd50527fa4e8778a/1697407494104/Jimmy%2BCarter%2Band%2Bthe%2BKnight%2Bof%2BPentacles_final.pdf). O PDF está protegido por direitos autorais; armazenam-se apenas os nove campos mínimos, atribuição e link, não as páginas ou imagens.
 
-**Cadeia de leitura:** os campos e a tabela foram inspecionados por camada de texto/descrição estruturada de PDF acessível na web. A captura de pixels do fac-símile retornou erro e os bytes originais não foram preservados localmente; SHA-256 do PDF **NOT_OBTAINED**. Portanto **não** atribuir dupla transcrição visual nem alegar documento original da década de 1980.
+**Cadeia de leitura (atualizada em 22/11/2026):** após a extração inicial via texto indexado, conferi diretamente a **imagem renderizada da página impressa 12 (índice PDF 11)**. ASC, MC, Sol, Lua, Mercúrio, Vênus, Marte, Júpiter, Saturno, UT, coordenadas, Whole Signs e data da carta são legíveis e concordam com o JSON. A 🦎 Lagarto registrou uma **segunda conferência visual** de 9/9 campos na [PR #148](https://github.com/franklinbaldo/digicomp/pull/148#issuecomment-7075573819); ambas consultam **a mesma publicação**, não dois documentos independentes. A tentativa de baixar os bytes do PDF falhou no executor, por isso o **SHA-256 do arquivo original continua NOT_OBTAINED**. A imagem de 2023 não autentica a edição de 1980.
 
 ## Observação documental
 
@@ -33,6 +33,14 @@ Na página **12 impressa** do PDF de Naomi Rabinowitz (a página de índice 11 d
 A verificação exploratória na sandbox, com `swisseph` 2.10.03, usa `(sidtime(JD_UT) + longitude_leste/15) mod 24`: para 01/10/1924 13:00 UT e 84°24′ W obtive **08:02:19,456**, diferença **+0,456 s** diante do valor publicado, dentro de tolerância predefinida de ±1 s. Contraprovas: inverter o sinal da longitude produz **19:17:31,456**; aumentar UT em uma hora produz **09:02:29,313**. A suíte verifica o relógio e essas duas mutações usando os dados normalizados pela mesma referência moderna, com teste independente dos nove ângulos.
 
 Este cruzamento não prova independência de motor, pois AstroDienst e o binding podem utilizar Swiss Ephemeris, nem certifica as convenções de entrada do DR-70, uma carta da edição de 1980 ou qualquer saída instrumental.
+
+## Controle histórico qualitativo já testável: septil Lua–Mercúrio
+
+A transcrição textual secundária de *Astrological Aspects* (Raël/Rudhyar, obra catalogada em 1980) descreve na discussão de septis a **Lua de Carter na primeira casa** e um **septil entre Mercúrio e Lua**; a mesma transcrição atribui o recálculo dos mapas do Apêndice I ao DR-70. [Passagem textual](https://tibetanbuddhistencyclopedia.com/en/images/b/b8/Dokumen.tips_astrological-aspects.pdf) (linhas indexadas 3011–3015; sem página impressa ou imagem verificadas). A qualificação «septil» **não é um número instrumental publicado** e o livro não fornece nessa passagem uma tolerância angular para o termo.
+
+Como controle moderno de coerência, os **dois campos do próprio fac-símile AstroDienst de 2023** resultam em Mercúrio **171°11′20″** (Virgem 21°11′20″) e Lua **223°47′47″** (Escorpião 13°47′47″); separação orientada Lua menos Mercúrio **52°36′27″**. O septil matemático exato vale **360°/7 = 51°25′42,857″**; o desvio para esse ideal é **+1°10′44,143″**, usando os DMS publicados em 2023. Um cálculo Swiss/Moshier moderno no mesmo instante obtém separação aproximada **52,607450°**, corroborando a aritmética moderna sem independência de motor.
+
+**Interpretação permitida:** a descrição histórica é *compatível em sentido astrológico aproximado* com as longitudes modernas, mas, **sem orb definido pelo autor, ela não estabelece teste histórico PASS/FAIL nem resíduo de DR-70**. A comparação se refere à mesma família editorial Raël/Rudhyar e a uma fonte moderna com possível motor compartilhado. Não acrescentar essa relação a `data/fidelity/observations.json`, não contar como mais uma sessão nem inventar graus a partir da ilustração do livro.
 
 ## Resultado inicial e limites
 
