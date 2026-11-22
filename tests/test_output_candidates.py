@@ -57,9 +57,13 @@ class CandidateCatalogTest(unittest.TestCase):
         expected = {
             "data/output-candidates/**",
             "scripts/check_output_candidates.py",
+            "data/documentary-observations/**",
+            "scripts/check_documentary_observations.py",
             "scripts/reconstruction_gate.py",
             "data/fidelity/corpus.schema.json",
             "tests/test_output_candidates.py",
+            "tests/test_documentary_observations.py",
+            "data/fidelity/observations.json",
             ".github/workflows/output-catalog.yml",
         }
         for block in blocks:

@@ -81,6 +81,64 @@ class DocumentaryCarlsonBridgeTest(unittest.TestCase):
         self.assertTrue(any("certainty" in e for e in errors), errors)
         self.assertTrue(any("two unparsed" in e for e in errors), errors)
 
+    def test_1985_republication_cannot_be_relabelled_as_independent_holdout(self):
+        # F83 and F85 are one editorial family; two PDFs are not two cases.
+        mutations = (
+            ("family_id", "FAKE-SECOND-SESSION"),
+            ("status", "native"),
+            ("kind", "native_output"),
+            ("attribution", "native_dr70_output"),
+            ("sample_split", "holdout"),
+            ("numeric_holdout_eligible", True),
+            ("replayable", True),
+            ("input_complete", True),
+            ("output_complete", True),
+        )
+        for key, value in mutations:
+            with self.subTest(key=key):
+                catalog = copy.deepcopy(self.catalog)
+                alias = next(e for e in catalog["entries"]
+                             if e["id"] == "OUT-CARLSON-F85")
+                alias[key] = value
+                errors = validate(self.document, catalog, self.golden)
+                self.assertTrue(any("publication lineage alias" in e
+                                    for e in errors), errors)
+
+        for change in ("missing", "duplicate"):
+            with self.subTest(change=change):
+                catalog = copy.deepcopy(self.catalog)
+                if change == "missing":
+                    catalog["entries"] = [
+                        e for e in catalog["entries"]
+                        if e["id"] != "OUT-CARLSON-F85"
+                    ]
+                else:
+                    alias = next(e for e in catalog["entries"]
+                                 if e["id"] == "OUT-CARLSON-F85")
+                    catalog["entries"].append(copy.deepcopy(alias))
+                errors = validate(self.document, catalog, self.golden)
+                self.assertIn("publication lineage alias must resolve exactly once", errors)
+
+    def test_1983_source_catalog_cannot_be_relabelled_as_device_output(self):
+        for key, value in (
+            ("status", "native"),
+            ("kind", "native_output"),
+            ("attribution", "native_dr70_output"),
+            ("input_complete", True),
+            ("output_complete", True),
+            ("replayable", True),
+        ):
+            with self.subTest(key=key):
+                catalog = copy.deepcopy(self.catalog)
+                source = next(e for e in catalog["entries"]
+                              if e["id"] == "OUT-CARLSON-F83")
+                source[key] = value
+                errors = validate(self.document, catalog, self.golden)
+                self.assertIn(
+                    "catalog source cannot be promoted to native/replayable output",
+                    errors,
+                )
+
     def test_cli_executes_real_documentary_dataset(self):
         run = subprocess.run(
             [sys.executable, "-B", str(ROOT / "scripts/check_documentary_observations.py")],
