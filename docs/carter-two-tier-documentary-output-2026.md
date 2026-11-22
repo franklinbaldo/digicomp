@@ -35,3 +35,19 @@ O prefácio de Raël/Rudhyar, datado de 23/03/1979, agradece a Nicki Michaels po
 - Zero golden instrumental, zero ROM original. O JSON e o texto declaram expressamente `NOT_RUN_NO_INSPECTED_1980_CHART` e `NOT_RUN_NO_GOLDEN`.
 - Um teste que altera categoria, hora de referência ou classificação para `PASS` deve falhar, não se converter silenciosamente em evidência.
 - Continuar a busca de uma carta com graus e cúspides legíveis para alcançar uma comparação histórica quantitativa real.
+
+## Saída HTML local e acessível (Raposa R171)
+
+O mesmo JSON de duas classes pode ser apresentado numa **página HTML estática offline**:
+
+```bash
+set -o pipefail
+python -B -m scripts.carter_documentary_dashboard --format json |
+  python -S -B -m scripts.carter_documentary_html > carter-documentary.html
+```
+
+O segundo processo usa somente Python padrão e os dados versionados. Não consulta serviços externos, não executa JavaScript nem usa bibliotecas de interface. A página mostra tabelas com cabeçalhos semânticos e captions, regiões roláveis por teclado, CSP que bloqueia conteúdos remotos, CSS para 320 px e impressão, links às duas fontes e estados explícitos de ausência de comparação instrumental. O HTML é um relatório de pesquisa **gerado**, não substitui o site público, não autoriza incorporar uma carta proprietária nem comprova acessibilidade em dispositivos assistivos reais.
+
+O parser de entrada rejeita chaves JSON duplicadas, `NaN`, `Infinity` e `1e999`; o renderer recusa promoção a `PASS`, alteração na família documental, campos ausentes, totais inconsistentes e longitudes não finitas. Valores textuais são escapados e as URLs têm origem limitada às duas fontes documentadas. A regressão usa fixtures **sintéticas somente para testar apresentação**; a exportação no workflow usa o cálculo moderno executado contra os dados versionados e arquiva o HTML por sete dias como artefato da execução. A etapa só passa se esse pipeline terminar com 9/9, 4/4 e 2/4, sem substituir categorias por graus não inspecionados.
+
+**Limite:** sem teste físico de zoom nativo/VoiceOver/TalkBack e sem medição de output real de DR-70. A visualização não cria uma terceira família de evidência.
