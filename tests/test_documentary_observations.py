@@ -85,6 +85,9 @@ class DocumentaryCarlsonBridgeTest(unittest.TestCase):
         # F83 and F85 are one editorial family; two PDFs are not two cases.
         mutations = (
             ("family_id", "FAKE-SECOND-SESSION"),
+            ("status", "native"),
+            ("kind", "native_output"),
+            ("attribution", "native_dr70_output"),
             ("sample_split", "holdout"),
             ("numeric_holdout_eligible", True),
             ("replayable", True),
@@ -119,6 +122,7 @@ class DocumentaryCarlsonBridgeTest(unittest.TestCase):
     def test_1983_source_catalog_cannot_be_relabelled_as_device_output(self):
         for key, value in (
             ("status", "native"),
+            ("kind", "native_output"),
             ("attribution", "native_dr70_output"),
             ("input_complete", True),
             ("output_complete", True),
