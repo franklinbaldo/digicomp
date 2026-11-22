@@ -43,8 +43,31 @@ def rust_pairs(doc):
         for i in range(6)
     )
 
+DOCUMENTARY_FIELDS = frozenset({
+    "format_version", "id", "source_catalog_id", "source_family_id",
+    "source_url", "source_locator", "transcription_reference",
+    "publication_lineage_alias", "classification", "transcription_review",
+    "sample_split", "native_print_authenticated", "input_complete",
+    "output_complete", "numeric_holdout_eligible", "complete_published_angles",
+    "notes", "readings", "additional_literal_candidates",
+})
+READING_FIELDS = frozenset({
+    "house", "pair_id", "candidate_groups", "zodiac_glyph",
+    "interpreted_longitude_deg", "reading_status",
+})
+
+def _reject_undeclared_fields(value, fields, label, errors):
+    """Certainty must not enter the documentary artifact via silent extras."""
+    extras = set(value).difference(fields)
+    if extras:
+        errors.append(f"{label}: undeclared fields: {', '.join(sorted(extras))}")
+
+
 def validate(doc, catalog, golden):
     errors = []
+    if not isinstance(doc, dict):
+        return ["document must be an object"]
+    _reject_undeclared_fields(doc, DOCUMENTARY_FIELDS, "document", errors)
     entries = catalog.get("entries", [])
     matches = [item for item in entries
                if item.get("id") == doc.get("source_catalog_id")]
@@ -142,6 +165,7 @@ def validate(doc, catalog, golden):
         if not isinstance(row, dict):
             errors.append(f"row {position}: not an object")
             continue
+        _reject_undeclared_fields(row, READING_FIELDS, f"row {position}", errors)
         house = f"H{position+1:02d}"
         pair_pos = position % 6
         pair = f"H{pair_pos+1:02d}/H{pair_pos+7:02d}"
