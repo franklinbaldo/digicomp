@@ -2,11 +2,19 @@ name: Evidence-driven Rust checks
 on:
   pull_request:
     paths:
+      - 'data/output-candidates/**'
+      - 'data/documentary-observations/**'
+      - 'scripts/check_documentary_observations.py'
+      - 'scripts/check_output_candidates.py'
       - 'experiments/evidence-check/**'
       - '.github/workflows/evidence-check.yml'
   push:
     branches: [main]
     paths:
+      - 'data/output-candidates/**'
+      - 'data/documentary-observations/**'
+      - 'scripts/check_documentary_observations.py'
+      - 'scripts/check_output_candidates.py'
       - 'experiments/evidence-check/**'
       - '.github/workflows/evidence-check.yml'
 permissions:
