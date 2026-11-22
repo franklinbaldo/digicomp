@@ -1,7 +1,7 @@
 ---
 type: Documento
 title: "Raël/Rudhyar: primeiro controle numérico editorial para Roosevelt"
-description: "Duas separações angulares presentes em transcrição secundária do livro, comparadas a cenários modernos de hora UT, sem atribuição de output instrumental DR-70."
+description: "Controles editoriais de novil e septil, com interpretação de hora, limites documentais e confronto moderno, sem golden DR-70."
 timestamp: 2026-11-22T06:18:00-04:00
 estado: provisorio
 ---
@@ -33,6 +33,22 @@ Executei [o script isolado](../scripts/probe_fdr_published_aspects.py) com Swiss
 
 Diferenças modernas relativas aos números publicados no cenário `25:16`: **−0,325834°** (Lua–Plutão) e **−0,082870°** (Marte–Urano). A primeira relação **discrimina as duas interpretações de data/hora nesse modelo**; a segunda não. A alteração 25:16→25:15 tampouco discrimina na resolução de um grau. Esse resultado é coerente com o uso de hora UT estendida no apêndice, **não prova que o DR-70 gerou a prosa** e não define tolerância/orb astrológico para os aspectos.
 
+## Controle textual de septil: mesmo livro, não outro holdout
+
+A [cópia indexada em PDF](https://tibetanbuddhistencyclopedia.com/en/images/b/b8/Dokumen.tips_astrological-aspects.pdf), seção *The Septile*, linhas **2969–2977** do índice, atribui à carta de Roosevelt Lua–Netuno **“about 52°”**, Marte **pouco aquém de 51° adiante de Saturno**, e Lua–Júpiter como septil **se adotada hora posterior** atribuída com ressalva ao diário do pai. A faixa textual de septil é **50° a 53°**. Essas são restrições de prosa do **mesmo cluster editorial** dos 39°/81°; não há três holdouts adicionais nem leitura nativa da máquina.
+
+A captura de página por ferramenta de PDF falhou após redirecionamento. Portanto **PDF_TEXT_INDEXED / FACSIMILE_NOT_INSPECTED**: números, diagrama e página física não foram conferidos visualmente. O horário posterior mencionado na passagem **não está numericamente identificado**.
+
+| Controle moderno Swiss Ephemeris 2.10.03/Moshier | `25:16 UT` com rollover | `01:16 UT` sem rollover |
+| --- | ---: | ---: |
+| Lua–Netuno, menor arco | **52,250656°** | **40,054870°** |
+| Marte adiante de Saturno, arco **dirigido** módulo 360° | **50,916592°** | **51,000669°** |
+| Lua–Júpiter, menor arco | **49,104161°** | **36,971882°** |
+
+Os dois primeiros controles do cenário 25:16 são coerentes com as expressões textuais sob **convenções modernas**. Lua–Júpiter fica abaixo da faixa textual em 25:16, **mas não contradiz nem confirma a cláusula para outra hora**. O teste registra apenas o valor e a condição `NOT_EVALUATED_LATER_HOUR_UNSPECIFIED`, sem fabricar um PASS/FAIL. A diferença de convenção **arco dirigido vs. menor arco** é testada separadamente. Nem os números nem o intervalo editorial caracterizam precisão instrumental ou regra de arredondamento original.
+
+Próximo passo: conferir visualmente **folha de rosto, copyright, passagem do novil, passagem do septil e Apêndice I na mesma cópia** com páginas físicas e duas leituras independentes. Não incluir esses números em `data/fidelity/observations.json`.
+
 ## Como reproduzir e falsificar
 
 Na raiz do repositório, em ambiente de pesquisa com `pyswisseph` instalado (motor opcional, **não** dependência de produção):
@@ -43,7 +59,7 @@ python -m unittest discover -s tests -p 'test_fdr_published_aspects.py'
 python -O -m unittest discover -s tests -p 'test_fdr_published_aspects.py'
 ```
 
-Na sandbox da Coruja: **4/4 testes PASS** no Python normal e **4/4 PASS** em `-O`, além da execução do gerador JSON; sem contato com dispositivo original. O teste com efemérides é explicitamente **SKIP** caso a dependência opcional não esteja instalada. A versão 2.10.03 foi observada localmente, não fixada nem testada em todas as plataformas. Nenhum workflow do GitHub foi ainda usado como prova desta execução.
+Na sandbox da Coruja: **4/4 testes PASS** no Python normal e **4/4 PASS** em `-O`, além da execução do gerador JSON; sem contato com dispositivo original. O teste com efemérides é explicitamente **SKIP** caso a dependência opcional não esteja instalada. A versão 2.10.03 foi observada localmente, não fixada nem testada em todas as plataformas. O [workflow público original da #155](https://github.com/franklinbaldo/digicomp/actions/runs/45012551372) aprovou os quatro testes anteriores no HEAD `162a0253`. Os controles suplementares dependem de novos gates SHA-exatos.
 
 **Hipótese H1:** as separações foram lidas de um mapa editorial cujo instante era UT contínua; o cálculo moderno concorda com os inteiros relatados. **Hipótese H2:** a prosa foi derivada de outra efeméride/programa ou arredondada a partir de outro suporte e a mesma concordância era esperada. **Hipótese H3:** a extração online alterou números, edição, dia ou fuso. As três seguem abertas; a hipótese `01:16` no mesmo dia **não** reproduz a primeira grandeza sob estas convenções modernas.
 
