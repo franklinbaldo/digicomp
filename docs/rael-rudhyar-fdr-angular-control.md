@@ -19,6 +19,8 @@ Em [*Astrological Aspects: A Process-Oriented Approach*](https://www.scribd.com/
 
 Esses números são **dados documentais textuais de uma única obra**. Não são dois registros independentes, nem duas longitudes planetárias, nem valores vistos na impressora/LED do DR-70. A página **física** exata e os algarismos **visualmente** impressos não foram inspecionados: **TEXT_INDEX_ONLY / FACSIMILE_NOT_READ**. A [edição bibliográfica de 1980, Aurora Press, 244 páginas](https://www.finna.fi/Record/vaari.1172270) não autentica que a cópia textual online corresponde folha a folha àquela edição. Também não há hash de PDF original nem permissão para republicá-lo.
 
+A **transcrição textual secundária** do prefácio (índice PDF, aproximadamente linhas 91–98) atribui a **Nicki Michaels** conferência de cálculos em “seu computador” e a **Tony Milner** a caligrafia dos horóscopos do Apêndice I. A identidade do computador e a ordem operacional exata não estão estabelecidas; não se pode equiparar automaticamente o equipamento de Nicki ao DR-70. Prefácio, prosa de ângulos e apêndice pertencem à **mesma cadeia editorial**, não a três testemunhas. A edição da cópia online permanece **`source_edition=UNRESOLVED`** mesmo diante dos catálogos Aurora Press e da fotografia da folha de rosto de outro exemplar. Esses créditos também precisam de leitura visual das páginas originais.
+
 O [Apêndice I na mesma transcrição](https://www.scribd.com/document/633437269/Dane-Rudhyar-Leyla-Rael-Astrological-Aspects-A-Process-Oriented-Approach-Rudhyar-Series-Aurora-Press-Inc-2018-pdf), aprox. linhas 6701–6733, **atribui** recálculos de mapas Campanus a um computador DR-70, mas as etapas editoriais de cálculo, conferência e desenho não estão vinculadas a uma impressão original. Para Roosevelt, a lista apresenta **30/01/1882; 41N48, 73W56; 25:16 U.T.**; a [extração da edição francesa mencionada no ledger](rudhyar-appendix-input-ledger.md) traz **25h15** na legenda, a conferir em imagem. O número de linha online não é página impressa.
 
 ## Experimento numérico reproduzido na sandbox (22/11/2026)
@@ -32,6 +34,12 @@ Executei [o script isolado](../scripts/probe_fdr_published_aspects.py) com Swiss
 | `01:16 UT` em **30/01** (sem avanço de dia) | **26,470695°** | **80,907931°** | **não / sim** |
 
 Diferenças modernas relativas aos números publicados no cenário `25:16`: **−0,325834°** (Lua–Plutão) e **−0,082870°** (Marte–Urano). A primeira relação **discrimina as duas interpretações de data/hora nesse modelo**; a segunda não. A alteração 25:16→25:15 tampouco discrimina na resolução de um grau. Esse resultado é coerente com o uso de hora UT estendida no apêndice, **não prova que o DR-70 gerou a prosa** e não define tolerância/orb astrológico para os aspectos.
+
+## Contraprova de resolução temporal: coincidência de inteiros não identifica minuto
+
+Sob a hipótese **adicional, não autenticada editorialmente**, de arredondar ambos os arcos modernos ao grau inteiro mais próximo, `31/01/1882 01:00 UT` fornece **38,539345° / 80,917103°**, enquanto `31/01/1882 02:30 UT` fornece **39,297515° / 80,917233°**. São instantes separados por **90 minutos** e ambos seriam exibidos como **39° / 81°**. Este par de contraexemplos é testado no código, sem estimar a fronteira exata da janela. A [ablação independente de Morcego R165](https://github.com/franklinbaldo/digicomp/pull/155#issuecomment-7078344244) estimou por bisseção uma janela de cerca de 118,7 minutos, mas sua varredura não demonstra monotonicidade contínua; não incorporamos o intervalo como prova formal nem como tolerância histórica.
+
+Portanto os dois números editoriais, por si, **não estabelecem minuto de nascimento, algoritmo ou precisão do DR-70**. Eles permitem no máximo discriminar algumas leituras de mudança de dia **sob o motor, calendário e hipótese de arredondamento declarados**.
 
 ## Controle textual de septil: mesmo livro, não outro holdout
 
