@@ -115,7 +115,7 @@ class CarterDocumentaryHtmlTest(unittest.TestCase):
     def test_json_stdin_generates_same_offline_html(self) -> None:
         with patch("sys.stdin", StringIO(json.dumps(self.report))), patch("sys.stdout", new_callable=StringIO) as output:
             main()
-        self.assertEqual(output.getvalue().rstrip("\n"), render_html(self.report))
+        self.assertEqual(output.getvalue(), render_html(self.report) + "\n")
 
 
 if __name__ == "__main__":
