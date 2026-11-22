@@ -101,6 +101,34 @@ def validate(doc, catalog, golden):
     if golden.get("observations") != []:
         errors.append("golden corpus changed; documentary baseline cannot certify it")
 
+    # Separate *unparsed* visual candidates from the known twelve house rows.
+    # The date-like string is not a birth date; the aspect-grid numbers are
+    # not typed as an angle. F83/F85 are one editorial family, not two reads.
+    expected_regions = (
+        ("left-secondary-date-block", "4.01.1981",
+         "DATE REC[...] alongside C1 SEC", "unresolved_not_birth_input"),
+        ("right-aspect-grid-first-data-row", "07 54 47",
+         "C1 NATAL aspect grid under ORB", "unresolved_not_angular_comparison"),
+    )
+    candidates = doc.get("additional_literal_candidates")
+    if not isinstance(candidates, list) or len(candidates) != len(expected_regions):
+        errors.append("additional candidate regions must have two unparsed entries")
+    else:
+        allowed = {"region", "literal_candidate", "context", "reading_status",
+                   "semantic_role", "interpreted_value"}
+        for i, (region, literal, context, meaning) in enumerate(expected_regions):
+            candidate = candidates[i]
+            if not isinstance(candidate, dict) or set(candidate) != allowed:
+                errors.append(f"additional candidate {i}: unexpected fields")
+                continue
+            if (candidate.get("region") != region
+                    or candidate.get("literal_candidate") != literal
+                    or candidate.get("context") != context
+                    or candidate.get("reading_status") != "single_nonblind_visual_candidate"
+                    or candidate.get("semantic_role") != meaning
+                    or candidate.get("interpreted_value") is not None):
+                errors.append(f"additional candidate {i}: value or certainty changed")
+
     rows = doc.get("readings")
     if not isinstance(rows, list) or len(rows) != 12:
         return errors + ["readings: expected twelve individually addressable rows"]
@@ -148,6 +176,8 @@ def report(doc):
         "candidate_house_slots=12\n"
         "candidate_numeric_groups=24\n"
         "candidate_pairs=6\n"
+        "additional_unparsed_candidates=2\n"
+        "additional_interpreted_values=0\n"
         f"apparent_pair_matches={matching}\n"
         f"apparent_pair_differences={6-matching}\n"
         "complete_published_angles=0\n"
