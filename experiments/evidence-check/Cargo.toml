@@ -3,3 +3,4 @@ name = "dr70-evidence-check"
 version = "0.1.0"
 edition = "2021"
 publish = false
+default-run = "dr70-evidence-check"
