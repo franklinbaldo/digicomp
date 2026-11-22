@@ -66,7 +66,31 @@
     "subsequent_change_context": {
       "source": "https://www.pasttensega.com/blog/georgia-was-in-two-time-zones",
       "described_statewide_eastern_time_change_date": "1941-03-21",
-      "evidence_type": "SECONDARY_HISTORICAL_ACCOUNT"
+      "evidence_type": "SECONDARY_HISTORICAL_ACCOUNT",
+      "official_1950_opinion": {
+        "document_title": "Georgia Department of Law, Opinions of the Attorney General 1950-1951",
+        "url": "https://dlg.usg.edu/record/dlg_ggpd_y-ga-bl310-b-ps1-bo6-b1950-h51",
+        "opinion_date": "1950-05-30",
+        "printed_pages": "4-5",
+        "opinion_classification": "UNOFFICIAL_OPINION_PUBLISHED_BY_STATE_DEPARTMENT_OF_LAW",
+        "quoted_1941_act": {
+          "approval_date": "1941-03-21",
+          "georgia_laws_page": 427,
+          "statewide_standard": "Eastern Standard Time"
+        },
+        "quoted_1943_amendment": {
+          "approval_date": "1943-01-18",
+          "georgia_laws_page": 430,
+          "statewide_standard": "Central Standard Time",
+          "conditional_on_federal_war_or_daylight_saving_time": true,
+          "reversion_to_eastern_when_condition_ends": true
+        },
+        "opinion_says_1941_act_in_force_in_1950": true,
+        "evidence_type": "LATER_OFFICIAL_PUBLICATION_QUOTING_LEGISLATION_UNOFFICIAL_OPINION",
+        "original_1941_1943_acts_facsimiles_inspected": false,
+        "1950_opinion_page_image_inspected": false,
+        "scope_note": "Retrospective legislative context; dates after 1924 cannot authenticate the birthplace clock or a DR-70 output"
+      }
     },
     "independent_birth_chart_catalogue": {
       "name": "Astro-Databank Jimmy Carter",
