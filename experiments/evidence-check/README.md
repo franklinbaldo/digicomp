@@ -21,6 +21,8 @@ cargo test --manifest-path experiments/evidence-check/Cargo.toml
 cargo run --manifest-path experiments/evidence-check/Cargo.toml -- experiments/evidence-check/fragments.tsv caminho/para/saida-candidata.txt
 ```
 
+O crate possui dois binários; `default-run = "dr70-evidence-check"` preserva o comando original sem `--bin`. O workflow executa esse caminho com uma previsão descartável e verifica cinco resultados `Inconclusive`, nunca um suposto acerto da máquina. Para selecionar explicitamente o comparador lexical: `cargo run --manifest-path experiments/evidence-check/Cargo.toml --bin dr70-evidence-check -- FRAGMENTS.tsv PREDICTED.txt`.
+
 Quando houver outputs numéricos conferidos, construir adaptadores por campo, unidade, glifo, precisão e incerteza antes de medir resíduos circulares. A divisão development/holdout será por família documental, sessão e exemplar, e não por páginas da mesma obra. Lean 4 formalizará propriedades dos modelos, não a autoria histórica da figura.
 
 ## Sondagem de layout publicado (Carlson, uma família)
@@ -34,4 +36,4 @@ cargo test --manifest-path experiments/evidence-check/Cargo.toml
 cargo run --manifest-path experiments/evidence-check/Cargo.toml --bin published_layout
 ```
 
-Próxima ponte: o verificador de candidatos desta pasta ([PR #98](https://github.com/franklinbaldo/digicomp/pull/98)) e o [catálogo canônico](../../data/output-candidates/catalog.json) devem compartilhar ID, família e localizador para evitar transcrições paralelas. A sonda não promove os pares a `literal` ou ao holdout. A direção atual consta da [issue #130](https://github.com/franklinbaldo/digicomp/issues/130).
+A [PR #133](https://github.com/franklinbaldo/digicomp/pull/133) incorporou na `main` uma representação documental canônica com os doze slots e um exportador `python3 -B scripts/check_documentary_observations.py --emit-rust-tsv`. A [PR #134](https://github.com/franklinbaldo/digicomp/pull/134), empilhada após esta, verifica a ponte com o catálogo. **Até sincronizar a stack #98 → #131 → #134 com a main e executar a integração SHA-exata, a sonda ainda depende da cópia TSV secundária desta branch**: o workflow atual não deve ser anunciado como prova integrada com o catálogo. A sonda não promove os pares a `literal` nem ao holdout. A direção atual consta da [issue #130](https://github.com/franklinbaldo/digicomp/issues/130).
