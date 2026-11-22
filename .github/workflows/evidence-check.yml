@@ -24,6 +24,15 @@ jobs:
           EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
         run: test "$(git rev-parse HEAD)" = "$EXPECTED_SHA"
       - run: cargo test --manifest-path experiments/evidence-check/Cargo.toml
+      - name: Smoke documented default evidence CLI (no historical match claim)
+        shell: bash
+        run: |
+          printf 'H01\n' > "$RUNNER_TEMP/candidate-prediction.txt"
+          cargo run --quiet --manifest-path experiments/evidence-check/Cargo.toml -- \
+            experiments/evidence-check/fragments.tsv "$RUNNER_TEMP/candidate-prediction.txt" > "$RUNNER_TEMP/evidence-report.txt"
+          test "$(grep -c $'\tInconclusive\t' "$RUNNER_TEMP/evidence-report.txt")" -eq 5
+          ! grep -Eq $'\t(Present|Missing)\t' "$RUNNER_TEMP/evidence-report.txt"
+          grep -Fq 'These are lexical diagnostics, NOT an assessment of DR-70 fidelity.' "$RUNNER_TEMP/evidence-report.txt"
       - name: Verify published candidate layout snapshot
         run: |
           cargo run --quiet --manifest-path experiments/evidence-check/Cargo.toml --bin published_layout > /tmp/published-layout.txt
