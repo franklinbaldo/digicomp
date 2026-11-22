@@ -16,4 +16,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - name: Verify literal HEAD before running tests
+        env:
+          EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: test "$(git rev-parse HEAD)" = "$EXPECTED_SHA"
       - run: cargo test --manifest-path experiments/evidence-check/Cargo.toml
+      - name: Verify published candidate layout snapshot
+        run: |
+          cargo run --quiet --manifest-path experiments/evidence-check/Cargo.toml --bin published_layout > /tmp/published-layout.txt
+          diff -u experiments/evidence-check/published-layout-baseline.txt /tmp/published-layout.txt
