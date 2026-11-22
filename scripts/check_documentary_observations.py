@@ -7,6 +7,7 @@ angular comparison, independent visual review or golden case.
 """
 import hashlib
 import json
+import math
 import pathlib
 import sys
 
@@ -27,10 +28,19 @@ def _unique_properties(pairs):
 def _reject_constant(token):
     raise ValueError(f"non-JSON numeric constant: {token}")
 
+def _finite_float(token):
+    """Prevent exponent overflow in even unused documentary metadata."""
+    value = float(token)
+    if not math.isfinite(value):
+        raise ValueError(f"non-finite JSON number: {token}")
+    return value
+
+
 def load_json(path):
     return json.loads(path.read_text(encoding="utf-8"),
                       object_pairs_hook=_unique_properties,
-                      parse_constant=_reject_constant)
+                      parse_constant=_reject_constant,
+                      parse_float=_finite_float)
 
 def rust_pairs(doc):
     """Emit only paired textual candidates, never degrees/minutes or firmware."""
