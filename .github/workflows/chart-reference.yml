@@ -82,3 +82,20 @@ jobs:
           grep -F 'Historical-category consistency at 13 UT: 4/4' /tmp/carter-documentary.txt
           grep -F 'At 12 UT counterfactual: 2/4' /tmp/carter-documentary.txt
           grep -F 'DR-70 instrument fidelity: NOT_RUN_NO_GOLDEN' /tmp/carter-documentary.txt
+
+      - name: Test accessible HTML output contract without third-party modules
+        run: python -S -B -m unittest discover -s tests -p 'test_carter_documentary_html.py' -v
+      - name: Export standalone Carter documentary HTML from real versioned inputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B -m scripts.carter_documentary_dashboard --format json |
+            python -S -B -m scripts.carter_documentary_html > /tmp/carter-documentary.html
+          python -c "from pathlib import Path; t=Path('/tmp/carter-documentary.html').read_text(); assert t.startswith('<!doctype html>') and '<table>' in t and '9/9' in t and '4/4' in t and '2/4' in t and 'NOT_RUN_NO_GOLDEN' in t and 'NOT_RUN_NO_INSPECTED_1980_CHART' in t"
+      - name: Attach standalone research report (not a published site)
+        uses: actions/upload-artifact@v4
+        with:
+          name: carter-two-tier-offline-html
+          path: /tmp/carter-documentary.html
+          if-no-files-found: error
+          retention-days: 7
