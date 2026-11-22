@@ -92,6 +92,22 @@ def signed_arcseconds_delta(expected: float, actual: float) -> float:
     return ((actual - expected + 180) % 360 - 180) * 3600
 
 
+class PublishedClockSourceContractTest(unittest.TestCase):
+    def test_page_twelve_clock_and_tolerance_are_pinned(self):
+        """The source record must not silently authorize its own tolerance.
+
+        Without this fixed oracle, changing both the clock literal and
+        tolerance_seconds can still pass the nine-field/clock suite.
+        """
+        control = strict_json(CONTROL_PATH)
+        self.assertEqual(control["sidereal_clock"]["literal"], "8:02:19")
+        self.assertEqual(control["sidereal_clock"]["tolerance_seconds"], 1)
+        self.assertEqual(
+            control["sidereal_clock"]["locator"],
+            "PDF printed p. 12, Natal chart header: Sid. Time",
+        )
+
+
 @unittest.skipUnless(swe is not None, "optional Swiss Ephemeris binding absent")
 class CarterModernControlTest(unittest.TestCase):
     @classmethod
