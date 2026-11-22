@@ -106,7 +106,8 @@ def summarize(entries: list[dict], golden: dict) -> dict:
         ),
         "complete_historical_angles_compared": 0,
         "angular_residuals_computed": 0,
-        "golden_instrumental_observations": len(observed),
+        # The corpus list is not provenance-validated here; this is a raw count.
+        "fidelity_corpus_records_unvalidated": len(observed),
         "independent_holdout_scores_computed": 0,
         "family_coverage": by_family,
     }
