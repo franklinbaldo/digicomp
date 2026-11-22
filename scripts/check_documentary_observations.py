@@ -73,6 +73,7 @@ def validate(doc, catalog, golden):
     if source.get("sample_split") != "unassigned" or source.get("numeric_holdout_eligible") is not False:
         errors.append("catalog cannot authorize documentary numeric holdout")
     if (source.get("status") != "candidate"
+            or source.get("kind") != "published_chart_candidate"
             or source.get("attribution") != "attributed_calculations_not_native_output"
             or any(source.get(flag) is not False
                    for flag in ("input_complete", "output_complete", "replayable"))):
@@ -89,7 +90,10 @@ def validate(doc, catalog, golden):
         alias = aliases[0]
         if alias.get("family_id") != source.get("family_id"):
             errors.append("publication lineage alias cannot be an independent family")
-        if (alias.get("sample_split") != "unassigned"
+        if (alias.get("status") != "candidate"
+                or alias.get("kind") != "published_chart_candidate"
+                or alias.get("attribution") != "attributed_calculations_not_native_output"
+                or alias.get("sample_split") != "unassigned"
                 or alias.get("numeric_holdout_eligible") is not False
                 or any(alias.get(flag) is not False
                        for flag in ("input_complete", "output_complete", "replayable"))):
