@@ -166,6 +166,22 @@
       "reading_status": "single_nonblind_visual_candidate",
       "semantic_role": "unresolved_not_angular_comparison",
       "interpreted_value": null
+    },
+    {
+      "region": "left-secondary-c1-sec-first-row",
+      "literal_candidate": "17 […] 47 05",
+      "context": "first printed row beneath C1 SEC TROP P.LONG KOCH; intermediate glyph unresolved",
+      "reading_status": "single_nonblind_visual_candidate",
+      "semantic_role": "unresolved_not_longitude",
+      "interpreted_value": null
+    },
+    {
+      "region": "left-secondary-c1-sec-second-row",
+      "literal_candidate": "05 […] 52",
+      "context": "second printed row beneath C1 SEC TROP P.LONG KOCH; intermediate glyph unresolved",
+      "reading_status": "single_nonblind_visual_candidate",
+      "semantic_role": "unresolved_not_longitude",
+      "interpreted_value": null
     }
   ]
 }
