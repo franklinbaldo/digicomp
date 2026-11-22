@@ -29,3 +29,12 @@ jobs:
         run: python -B -m unittest discover -s tests -p 'test_chart_input_candidates.py' -v
       - name: Produce a strictly labelled normalized candidate
         run: python scripts/chart_input_candidates.py --id RAEL1980-CARTER
+      - name: FDR indexed editorial angles negative controls without ephemeris
+        run: python -B -m unittest discover -s tests -p 'test_fdr_published_aspects.py' -v
+      - name: Install optional research-only Swiss Ephemeris binding
+        run: python -m pip install 'pyswisseph==2.10.3.2'
+      - name: Compare indexed editorial FDR angles to modern Moshier scenarios
+        run: |
+          python -B -m unittest discover -s tests -p 'test_fdr_published_aspects.py' -v
+          python -O -B -m unittest discover -s tests -p 'test_fdr_published_aspects.py' -v
+          python -B scripts/probe_fdr_published_aspects.py
