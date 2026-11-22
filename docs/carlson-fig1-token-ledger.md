@@ -28,10 +28,14 @@ As letras entre colchetes exprimem **incerteza de leitura**, não caracteres do 
 | Esquerda inferior, coluna de índices | ambas | `H01` até `H12`, em ordem, com marca de atribuição e glifos | alto para sequência de IDs; parcial para valores | Sistema de casas, arredondamento e canal de saída |
 | Esquerda inferior, bloco adjacente | ambas | `C1 SEC TROP P[.]LONG KOCH`; `DATE REC[...]` | parcial | Se `SEC` é modo, título ou estágio externo; complemento do rótulo de data |
 | Direita superior e tabela | ambas | outro `C1 NATAL ... KOCH`; `ORB` e grade triangular de glifos | parcial | Se grade e colunas nasceram no mesmo software que os índices H |
+| Esquerda inferior, sequência semelhante a uma data | F83/F85 | `4.01.1981` adjacente a `DATE REC[...]` (**candidata, não normalizada**) | uma leitura visual não cega; rótulo incompleto | Dia/mês, significado da data e se é entrada de nascimento; **não** atribuir data de nascimento |
+| Direita, primeira linha numérica sob a grade de aspectos | F83/F85 | `07 54 47` (**grupos candidatos**) | uma leitura visual não cega | Relação entre grupos, símbolos, geometria e instrumento; **não** calcular ângulo |
 | Centro do diagrama esquerdo | F83 apenas | `22987`, aparentemente manuscrito | médio para os algarismos | Se etiqueta de sujeito, anotação de produção ou outra coisa; **não buscar identificação pessoal** |
 | Rodapé da figura | F83 apenas | `XBL 832-8314` | alto | Natureza da arte-fonte, transformações editoriais e origem do formatter |
 
 **Controle editorial já confirmado pelo dossiê:** `22987` e `XBL 832-8314` não aparecem em F85. Isso rejeita cópia **integralmente inalterada da página F83**, não rejeita output nativo anterior à montagem. A figura original pode conter uma ou várias camadas de processamento.
+
+O acréscimo documental de 21/11/2026 conserva **dois fragmentos literais candidatos adicionais** (data aparente e primeira linha de números da grade). Conferência visual nos [pixels de F83](https://escholarship.org/content/qt0b40b045/qt0b40b045.pdf#page=28) e [F85](https://muller.lbl.gov/papers/Astrology-Carlson.pdf#page=1); os dois PDFs reproduzem a **mesma arte editorial**. Não houve leitura cega, hash dos PDFs, nem prova do significado dos campos. Os fragmentos são mantidos não interpretados em [observação documental](../data/documentary-observations/carlson-fig1-f83.json), com regressões que recusam convertê-los em data de nascimento, ângulo, sessão instrumental ou golden. A data aparente não é entrada suficiente para efemérides, e a sequência numérica sem unidade/glifo não admite residual angular.
 
 ## O1: simetria visível, sem inferência algorítmica
 
