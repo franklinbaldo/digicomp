@@ -18,6 +18,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Test source contracts without third-party packages
+        # -S disables site-packages even on runners with cached installations.
+        # Modern numerical comparisons remain in the following full-engine step.
+        run: python -S -B -m unittest discover -s tests -p 'test_carter_modern_crosscheck.py' -v
       - name: Install external research-only ephemeris binding
         run: python -m pip install 'pyswisseph==2.10.3.2'
       - name: Test modern output, without DR-70 fidelity claims
