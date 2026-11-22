@@ -36,6 +36,32 @@ class DocumentaryCarlsonBridgeTest(unittest.TestCase):
         self.assertIn("independent_holdout=0", self.baseline)
         self.assertIn("device_fidelity=NOT_RUN_NO_GOLDEN", self.baseline)
 
+    def test_additional_visual_regions_are_not_interpretable_inputs(self):
+        # One nonblind reading of the same F83/F85 editorial family.
+        rows = self.document["additional_literal_candidates"]
+        self.assertEqual([r["literal_candidate"] for r in rows],
+                         ["4.01.1981", "07 54 47"])
+        self.assertTrue(all(r["interpreted_value"] is None for r in rows))
+        for i, field, value in (
+            (0, "semantic_role", "verified_birth_date"),
+            (0, "interpreted_value", "1981-01-04"),
+            (0, "literal_candidate", "4.01.1982"),
+            (1, "semantic_role", "verified_aspect_angle"),
+            (1, "literal_candidate", "07 54 48"),
+            (1, "reading_status", "two_independent_blind_reads"),
+        ):
+            with self.subTest(row=i, field=field):
+                tampered = copy.deepcopy(self.document)
+                tampered["additional_literal_candidates"][i][field] = value
+                self.assertTrue(any("additional candidate" in e
+                                    for e in self.check(tampered)),
+                                self.check(tampered))
+
+        injected = copy.deepcopy(self.document)
+        injected["additional_literal_candidates"][0]["parsed_as_birth"] = True
+        self.assertTrue(any("additional candidate" in e
+                            for e in self.check(injected)))
+
     def test_export_is_exactly_the_published_rust_candidate_rows(self):
         # Literal groups from Carlson secondary ledger, one editorial family.
         expected = (
