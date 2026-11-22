@@ -42,6 +42,18 @@ Como controle moderno de coerência, os **dois campos do próprio fac-símile As
 
 **Interpretação permitida:** a descrição histórica é *compatível em sentido astrológico aproximado* com as longitudes modernas, mas, **sem orb definido pelo autor, ela não estabelece teste histórico PASS/FAIL nem resíduo de DR-70**. A comparação se refere à mesma família editorial Raël/Rudhyar e a uma fonte moderna com possível motor compartilhado. Não acrescentar essa relação a `data/fidelity/observations.json`, não contar como mais uma sessão nem inventar graus a partir da ilustração do livro.
 
+## Limite numérico executável da alegação qualitativa (R159)
+
+O módulo de **biblioteca padrão**, `python -S -B -m scripts.carter_qualitative_relation`, transforma apenas os **DMS publicados no mapa moderno de 2023** em uma medida exata de sensibilidade para a **alegação textual histórica** de septil Lua–Mercúrio. Ele **não** calcula nem inventa os graus do mapa impresso em 1980. O texto de época está atualmente disponível por **transcrição secundária**, não por cotejo visual da página da edição de 1980.
+
+- Separação menor Lua–Mercúrio do controle moderno: `189387″` = `52°36′27″`.
+- Um septil exato: `1296000/7″` = `51°25′42,857142…″`.
+- **Orb mínimo condicional para abranger esse par moderno:** `29709/7″` = `1°10′44,142857…″`, sem arredondar os componentes DMS de entrada.
+
+O relatório JSON mantém `orb_declared_by_historical_text: null`, `historical_relation_test: INDETERMINATE_ORB_NOT_SPECIFIED`, `historical_chart_residual: NOT_RUN_NO_INSPECTED_1980_NUMBERS` e `dr70_fidelity: NOT_RUN_NO_GOLDEN`. Se a convenção histórica exigisse orb de até `0°30′`, esse par **moderno** ficaria fora; com `2°`, entraria. **Nenhuma dessas tolerâncias foi atribuída aos autores**. São cenários contrafactuais que mostram qual documento faltaria para decidir a afirmação histórica. O limite numérico **não** comprova o que o DR-70 calculou, a precisão de seu firmware nem qual carta foi impressa.
+
+O teste `tests/test_carter_qualitative_relation.py` fixa a fração racional exata, rejeita DMS/literais adulterados, verifica uma mutação de +1 segundo de arco e impede promover metadados do controle a `DR70_NATIVE_GOLDEN` ou `PASS`. Ele roda **antes da instalação opcional do Swiss** no workflow `chart-reference.yml`, sob `python -S`, e devolve uma saída inconclusiva por definição. O documento histórico com graus angulares ainda precisa ser inspecionado independentemente; esse teste não aumenta o total de saídas instrumentais.
+
 ## Resultado inicial e limites
 
 Na sandbox (biblioteca `swisseph` **2.10.03**), nove diferenças calculadas em segundos de arco: ASC +0,013; MC -0,499; Sol +0,418; Lua +0,274; Mercúrio +0,453; Vênus +0,132; Marte +0,594; Júpiter -0,431; Saturno -0,184. **9/9 dentro de ±1″**, sempre com o rótulo `MODERN_CHART_CONTROL_NOT_DR70_OUTPUT`. A verificação da suite completa e da árvore de PR por CI precisa ser relatada **no HEAD exato**.
