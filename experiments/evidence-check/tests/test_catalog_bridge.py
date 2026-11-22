@@ -124,6 +124,14 @@ class CatalogBridgeTest(unittest.TestCase):
         with self.assertRaises(CatalogDrift):
             check(self.catalog_text, bad_tsv)
 
+    def test_rejects_non_json_numeric_constants_even_in_unused_fields(self) -> None:
+        for token in ("NaN", "Infinity", "-Infinity"):
+            with self.subTest(token=token):
+                malformed = self.catalog_text.replace("{", '{"unused_probe": ' + token + ",", 1)
+                self.assertNotEqual(malformed, self.catalog_text)
+                with self.assertRaisesRegex(CatalogDrift, "non-JSON numeric constant"):
+                    check(malformed, self.pairs_text)
+
     def test_rejects_ambiguous_duplicate_json_keys(self) -> None:
         ambiguous = self.catalog_text.replace(
             '"format_version": "0.1",',

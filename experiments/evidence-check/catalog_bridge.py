@@ -33,10 +33,14 @@ def _unique_object(pairs: list[tuple[str, object]]) -> dict:
     return result
 
 
+def _reject_constant(value: str) -> None:
+    raise CatalogDrift(f"non-JSON numeric constant: {value}")
+
+
 def check(catalog_text: str, pairs_text: str) -> str:
     """Cross-check exact candidate groups, provenance and holdout boundaries."""
     try:
-        catalog = json.loads(catalog_text, object_pairs_hook=_unique_object)
+        catalog = json.loads(catalog_text, object_pairs_hook=_unique_object, parse_constant=_reject_constant)
     except (ValueError, TypeError) as error:
         raise CatalogDrift(f"invalid catalog JSON: {error}") from error
     _require(isinstance(catalog, dict) and catalog.get("format_version") == "0.1", "unsupported catalog schema")
