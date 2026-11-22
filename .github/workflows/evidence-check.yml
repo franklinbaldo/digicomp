@@ -28,3 +28,8 @@ jobs:
         run: |
           cargo run --quiet --manifest-path experiments/evidence-check/Cargo.toml --bin published_layout > /tmp/published-layout.txt
           diff -u experiments/evidence-check/published-layout-baseline.txt /tmp/published-layout.txt
+      - name: Verify candidate catalog bridge (positive and adversarial)
+        run: |
+          python3 -m unittest discover -s experiments/evidence-check/tests -p 'test_catalog_bridge.py' -v
+          python3 experiments/evidence-check/catalog_bridge.py > /tmp/catalog-bridge.txt
+          diff -u experiments/evidence-check/catalog-bridge-baseline.txt /tmp/catalog-bridge.txt
