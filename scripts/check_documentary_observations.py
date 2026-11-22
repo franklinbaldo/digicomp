@@ -35,10 +35,10 @@ def rust_pairs(doc):
     """Emit only paired textual candidates, never degrees/minutes or firmware."""
     rows = doc["readings"]
     return "".join(
-        "\\t".join([
+        "\t".join([
             rows[i]["house"], rows[i + 6]["house"],
             *rows[i]["candidate_groups"], *rows[i + 6]["candidate_groups"],
-        ]) + "\\n"
+        ]) + "\n"
         for i in range(6)
     )
 
