@@ -1,0 +1,13 @@
+# Documentary interpretation of Carlson fig.1, not a native DR-70 printout.
+# Source: Shawn Carlson, LBL-20480 (1983), fig.1, printed p. -24-.
+# https://escholarship.org/content/qt0b40b045/qt0b40b045_noSplash_aa3bf76a6b22470b8665af02a57d27ae.pdf#page=27
+# Secondary visual ledger: docs/carlson-fig1-token-ledger.md (21 Nov 2026).
+# Same graphic family as Nature 318 (1985), p.419; NOT independent holdout.
+# These are candidate two-digit groups, NOT authenticated degrees/minutes; zodiac glyph unknown.
+# left_id<TAB>right_id<TAB>left_group_1<TAB>left_group_2<TAB>right_group_1<TAB>right_group_2
+H01	H07	09	08	09	08
+H02	H08	05	59	05	59
+H03	H09	09	38	09	38
+H04	H10	25	08	25	08
+H05	H11	19	58	19	58
+H06	H12	14	29	14	29
