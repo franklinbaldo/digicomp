@@ -132,6 +132,22 @@ class CatalogBridgeTest(unittest.TestCase):
                 with self.assertRaisesRegex(CatalogDrift, "non-JSON numeric constant"):
                     check(malformed, self.pairs_text)
 
+    def test_rejects_exponent_overflow_in_unused_catalog_metadata(self) -> None:
+        # Valid JSON syntax can overflow Python float to infinity; the source
+        # must be rejected before any documentary traceability claim.
+        for token in ("1e999", "-1e999", "1e309"):
+            with self.subTest(token=token):
+                malformed = self.catalog_text.replace(
+                    "{", '{"unused_probe": ' + token + ",", 1
+                )
+                with self.assertRaisesRegex(CatalogDrift, "non-finite JSON number"):
+                    check(malformed, self.pairs_text)
+
+        finite = self.catalog_text.replace("{", '{"unused_probe": 1.25e2,', 1)
+        self.assertEqual(
+            check(finite, self.pairs_text), check(self.catalog_text, self.pairs_text)
+        )
+
     def test_rejects_ambiguous_duplicate_json_keys(self) -> None:
         ambiguous = self.catalog_text.replace(
             '"format_version": "0.1",',
