@@ -2,11 +2,19 @@ name: Evidence-driven Rust checks
 on:
   pull_request:
     paths:
+      - 'data/output-candidates/**'
+      - 'data/documentary-observations/**'
+      - 'scripts/check_documentary_observations.py'
+      - 'scripts/check_output_candidates.py'
       - 'experiments/evidence-check/**'
       - '.github/workflows/evidence-check.yml'
   push:
     branches: [main]
     paths:
+      - 'data/output-candidates/**'
+      - 'data/documentary-observations/**'
+      - 'scripts/check_documentary_observations.py'
+      - 'scripts/check_output_candidates.py'
       - 'experiments/evidence-check/**'
       - '.github/workflows/evidence-check.yml'
 permissions:
@@ -37,3 +45,13 @@ jobs:
         run: |
           cargo run --quiet --manifest-path experiments/evidence-check/Cargo.toml --bin published_layout > /tmp/published-layout.txt
           diff -u experiments/evidence-check/published-layout-baseline.txt /tmp/published-layout.txt
+      - name: Verify canonical documentary exporter against published Rust pairs (same checkout)
+        run: |
+          python3 -B scripts/check_documentary_observations.py --emit-rust-tsv > /tmp/carlson-canonical.tsv
+          grep -v '^#' experiments/evidence-check/published-pairs.tsv > /tmp/carlson-rust-pairs.tsv
+          diff -u /tmp/carlson-canonical.tsv /tmp/carlson-rust-pairs.tsv
+      - name: Verify candidate catalog bridge (positive and adversarial)
+        run: |
+          python3 -m unittest discover -s experiments/evidence-check/tests -p 'test_catalog_bridge.py' -v
+          python3 experiments/evidence-check/catalog_bridge.py > /tmp/catalog-bridge.txt
+          diff -u experiments/evidence-check/catalog-bridge-baseline.txt /tmp/catalog-bridge.txt
