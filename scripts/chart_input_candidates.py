@@ -9,6 +9,7 @@ from __future__ import annotations
 import argparse
 from datetime import datetime, timedelta, timezone
 import json
+import math
 from pathlib import Path
 import re
 
@@ -79,8 +80,34 @@ def normalize(case: dict) -> dict:
     }
 
 
+def _unique_json_keys(pairs: list[tuple[str, object]]) -> dict:
+    """Reject ambiguous repeated source fields, including in nested cases."""
+    result = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError(f"Duplicate chart-input JSON property: {key}")
+        result[key] = value
+    return result
+
+
+def _finite_json_float(token: str) -> float:
+    value = float(token)
+    if not math.isfinite(value):
+        raise ValueError(f"Non-finite chart-input JSON number: {token}")
+    return value
+
+
+def _reject_json_constant(token: str) -> None:
+    raise ValueError(f"Non-JSON numeric constant in chart inputs: {token}")
+
+
 def load(path: Path = DEFAULT_INPUT) -> dict:
-    data = json.loads(path.read_text(encoding="utf-8"))
+    data = json.loads(
+        path.read_text(encoding="utf-8"),
+        object_pairs_hook=_unique_json_keys,
+        parse_constant=_reject_json_constant,
+        parse_float=_finite_json_float,
+    )
     if data["classification"] != "PUBLISHED_INPUT_CANDIDATES_NOT_DR70_OUTPUT":
         raise ValueError("Not the published-input candidate collection")
     cases = data["cases"]

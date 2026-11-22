@@ -1,6 +1,8 @@
 """Negative controls for candidate chart inputs. No golden samples here."""
 
+import tempfile
 import unittest
+from pathlib import Path
 
 from scripts.chart_input_candidates import coordinate, hypothetical_utc, load, normalize
 
@@ -51,6 +53,37 @@ class ChartInputCandidatesTest(unittest.TestCase):
         original["observed_chart_values"] = {"house_1": 0.0}
         with self.assertRaises(ValueError):
             normalize(original)
+
+    def test_rejects_duplicate_json_keys_in_nested_input_and_source(self):
+        # A later duplicate can silently replace an inspected date/coordinate.
+        # These are synthetic mutations, not readings from the publication.
+        examples = (
+            '{"classification":"PUBLISHED_INPUT_CANDIDATES_NOT_DR70_OUTPUT",'
+            '"source":{"locator":"page A","locator":"page B"},"cases":[]}',
+            '{"classification":"PUBLISHED_INPUT_CANDIDATES_NOT_DR70_OUTPUT",'
+            '"cases":[{"id":"same","id":"rewritten"}]}',
+        )
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / "candidate.json"
+            for content in examples:
+                with self.subTest(content=content):
+                    path.write_text(content, encoding="utf-8")
+                    with self.assertRaisesRegex(ValueError, "Duplicate chart-input JSON property"):
+                        load(path)
+
+    def test_rejects_non_json_constants_and_float_overflow(self):
+        # Prevent differing JSON decoders from interpreting NaN/Infinity or 1e999.
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / "candidate.json"
+            for number in ("NaN", "Infinity", "-Infinity", "1e999"):
+                with self.subTest(number=number):
+                    path.write_text(
+                        '{"classification":"PUBLISHED_INPUT_CANDIDATES_NOT_DR70_OUTPUT",'
+                        '"source":{"unverified_value":' + number + '},"cases":[]}',
+                        encoding="utf-8",
+                    )
+                    with self.assertRaisesRegex(ValueError, "Non-"):
+                        load(path)
 
     def test_three_unique_candidates_and_no_output(self):
         cases = load()["cases"]
