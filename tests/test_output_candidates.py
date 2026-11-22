@@ -59,6 +59,8 @@ class CandidateCatalogTest(unittest.TestCase):
             "scripts/check_output_candidates.py",
             "data/documentary-observations/**",
             "scripts/check_documentary_observations.py",
+            "scripts/report_documentary_comparability.py",
+            "tests/test_documentary_comparability.py",
             "scripts/reconstruction_gate.py",
             "data/fidelity/corpus.schema.json",
             "tests/test_output_candidates.py",
