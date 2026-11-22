@@ -1,0 +1,171 @@
+{
+  "format_version": "1.0",
+  "id": "DOC-CARLSON-F83-FIG1",
+  "source_catalog_id": "OUT-CARLSON-F83",
+  "source_family_id": "CARLSON-FIG1-1983-1985",
+  "source_url": "https://escholarship.org/content/qt0b40b045/qt0b40b045.pdf",
+  "source_locator": "printed p. -24-, fig. 1; PDF page 28 in this URL",
+  "transcription_reference": "docs/carlson-fig1-token-ledger.md",
+  "publication_lineage_alias": "OUT-CARLSON-F85",
+  "classification": "SECONDARY_VISUAL_CANDIDATE_NOT_DEVICE_OUTPUT",
+  "transcription_review": "NONBLIND_SECONDARY_REPORT_NOT_12_INDEPENDENT_READINGS",
+  "sample_split": "unassigned",
+  "native_print_authenticated": false,
+  "input_complete": false,
+  "output_complete": false,
+  "numeric_holdout_eligible": false,
+  "complete_published_angles": 0,
+  "notes": "The 12 rows unpack the six paired reports in the existing ledger. Each repeated pair is a reported visual candidate within ONE editorial figure, not two independent visual readings. Digits are strings, not verified degrees or minutes. No zodiac glyph, full angle, device input, native printout or ROM was recovered. The 1985 variant is the same documentary family.",
+  "readings": [
+    {
+      "house": "H01",
+      "pair_id": "H01/H07",
+      "candidate_groups": [
+        "09",
+        "08"
+      ],
+      "zodiac_glyph": null,
+      "interpreted_longitude_deg": null,
+      "reading_status": "secondary_pair_report_not_independently_transcribed"
+    },
+    {
+      "house": "H02",
+      "pair_id": "H02/H08",
+      "candidate_groups": [
+        "05",
+        "59"
+      ],
+      "zodiac_glyph": null,
+      "interpreted_longitude_deg": null,
+      "reading_status": "secondary_pair_report_not_independently_transcribed"
+    },
+    {
+      "house": "H03",
+      "pair_id": "H03/H09",
+      "candidate_groups": [
+        "09",
+        "38"
+      ],
+      "zodiac_glyph": null,
+      "interpreted_longitude_deg": null,
+      "reading_status": "secondary_pair_report_not_independently_transcribed"
+    },
+    {
+      "house": "H04",
+      "pair_id": "H04/H10",
+      "candidate_groups": [
+        "25",
+        "08"
+      ],
+      "zodiac_glyph": null,
+      "interpreted_longitude_deg": null,
+      "reading_status": "secondary_pair_report_not_independently_transcribed"
+    },
+    {
+      "house": "H05",
+      "pair_id": "H05/H11",
+      "candidate_groups": [
+        "19",
+        "58"
+      ],
+      "zodiac_glyph": null,
+      "interpreted_longitude_deg": null,
+      "reading_status": "secondary_pair_report_not_independently_transcribed"
+    },
+    {
+      "house": "H06",
+      "pair_id": "H06/H12",
+      "candidate_groups": [
+        "14",
+        "29"
+      ],
+      "zodiac_glyph": null,
+      "interpreted_longitude_deg": null,
+      "reading_status": "secondary_pair_report_not_independently_transcribed"
+    },
+    {
+      "house": "H07",
+      "pair_id": "H01/H07",
+      "candidate_groups": [
+        "09",
+        "08"
+      ],
+      "zodiac_glyph": null,
+      "interpreted_longitude_deg": null,
+      "reading_status": "secondary_pair_report_not_independently_transcribed"
+    },
+    {
+      "house": "H08",
+      "pair_id": "H02/H08",
+      "candidate_groups": [
+        "05",
+        "59"
+      ],
+      "zodiac_glyph": null,
+      "interpreted_longitude_deg": null,
+      "reading_status": "secondary_pair_report_not_independently_transcribed"
+    },
+    {
+      "house": "H09",
+      "pair_id": "H03/H09",
+      "candidate_groups": [
+        "09",
+        "38"
+      ],
+      "zodiac_glyph": null,
+      "interpreted_longitude_deg": null,
+      "reading_status": "secondary_pair_report_not_independently_transcribed"
+    },
+    {
+      "house": "H10",
+      "pair_id": "H04/H10",
+      "candidate_groups": [
+        "25",
+        "08"
+      ],
+      "zodiac_glyph": null,
+      "interpreted_longitude_deg": null,
+      "reading_status": "secondary_pair_report_not_independently_transcribed"
+    },
+    {
+      "house": "H11",
+      "pair_id": "H05/H11",
+      "candidate_groups": [
+        "19",
+        "58"
+      ],
+      "zodiac_glyph": null,
+      "interpreted_longitude_deg": null,
+      "reading_status": "secondary_pair_report_not_independently_transcribed"
+    },
+    {
+      "house": "H12",
+      "pair_id": "H06/H12",
+      "candidate_groups": [
+        "14",
+        "29"
+      ],
+      "zodiac_glyph": null,
+      "interpreted_longitude_deg": null,
+      "reading_status": "secondary_pair_report_not_independently_transcribed"
+    }
+  ],
+  "additional_literal_candidates": [
+    {
+      "region": "left-secondary-date-block",
+      "literal_candidate": "4.01.1981",
+      "context": "DATE REC[...] alongside C1 SEC",
+      "reading_status": "single_nonblind_visual_candidate",
+      "semantic_role": "unresolved_not_birth_input",
+      "interpreted_value": null
+    },
+    {
+      "region": "right-aspect-grid-first-data-row",
+      "literal_candidate": "07 54 47",
+      "context": "C1 NATAL aspect grid under ORB",
+      "reading_status": "single_nonblind_visual_candidate",
+      "semantic_role": "unresolved_not_angular_comparison",
+      "interpreted_value": null
+    }
+  ]
+}

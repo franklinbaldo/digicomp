@@ -67,8 +67,30 @@ class CatalogBridgeTest(unittest.TestCase):
                 with self.assertRaises(CatalogDrift):
                     check(changed, self.pairs_text)
 
+    def test_documentary_export_matches_published_pairs_on_same_tree(self) -> None:
+        import subprocess
+
+        result = subprocess.run(
+            [sys.executable, "-B", str(ROOT / "scripts/check_documentary_observations.py"),
+             "--emit-rust-tsv"],
+            cwd=ROOT, capture_output=True, text=True, check=False,
+        )
+        self.assertEqual(result.returncode, 0, result.stderr)
+        rust_rows = "".join(
+            line for line in self.pairs_text.splitlines(keepends=True)
+            if not line.startswith("#")
+        )
+        self.assertEqual(result.stdout, rust_rows)
+
     def test_evidence_workflow_is_triggered_by_all_bridge_inputs(self) -> None:
         workflow = (ROOT / ".github/workflows/evidence-check.yml").read_text(encoding="utf-8")
+        self.assertNotIn("Stage pinned canonical catalog", workflow)
+        self.assertNotIn("git fetch --no-tags", workflow)
+        self.assertIn("check_documentary_observations.py --emit-rust-tsv", workflow)
+        self.assertIn(
+            "diff -u /tmp/carlson-canonical.tsv /tmp/carlson-rust-pairs.tsv",
+            workflow,
+        )
         expected = {
             "experiments/evidence-check/**",
             ".github/workflows/evidence-check.yml",

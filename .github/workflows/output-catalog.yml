@@ -1,0 +1,49 @@
+name: DR-70 output catalog guard
+on:
+  pull_request:
+    paths:
+      - 'data/output-candidates/**'
+      - 'scripts/check_output_candidates.py'
+      - 'data/documentary-observations/**'
+      - 'scripts/check_documentary_observations.py'
+      - 'scripts/reconstruction_gate.py'
+      - 'data/fidelity/corpus.schema.json'
+      - 'tests/test_output_candidates.py'
+      - 'tests/test_documentary_observations.py'
+      - 'data/fidelity/observations.json'
+      - '.github/workflows/output-catalog.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'data/output-candidates/**'
+      - 'scripts/check_output_candidates.py'
+      - 'data/documentary-observations/**'
+      - 'scripts/check_documentary_observations.py'
+      - 'scripts/reconstruction_gate.py'
+      - 'data/fidelity/corpus.schema.json'
+      - 'tests/test_output_candidates.py'
+      - 'tests/test_documentary_observations.py'
+      - 'data/fidelity/observations.json'
+      - '.github/workflows/output-catalog.yml'
+permissions:
+  contents: read
+jobs:
+  catalog:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - name: Verify exact catalog checkout SHA
+        env:
+          EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: test "$(git rev-parse HEAD)" = "$EXPECTED_SHA"
+      - name: Catalog checks (not historical authenticity)
+        run: |
+          python3 -B scripts/check_output_candidates.py
+          python3 -B -m unittest discover -s tests -p test_output_candidates.py -v
+      - name: Documentary Carlson source and holdout guard (not native fidelity)
+        run: |
+          python3 -B scripts/check_documentary_observations.py
+          python3 -B -m unittest discover -s tests -p test_documentary_observations.py -v

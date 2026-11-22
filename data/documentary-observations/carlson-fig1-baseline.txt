@@ -1,0 +1,17 @@
+DOCUMENTARY_TEXT_BASELINE_NOT_DR70_OUTPUT
+source_catalog_id=OUT-CARLSON-F83
+family=CARLSON-FIG1-1983-1985
+reading_basis=NONBLIND_SECONDARY_PAIR_REPORT
+candidate_house_slots=12
+candidate_numeric_groups=24
+candidate_pairs=6
+additional_unparsed_candidates=2
+additional_interpreted_values=0
+apparent_pair_matches=6
+apparent_pair_differences=0
+complete_published_angles=0
+angular_numeric_comparisons=0
+angular_tolerance=NOT_APPLICABLE
+independent_holdout=0
+modern_reference_comparison=NOT_RUN_NO_COMPLETE_ANGLE
+device_fidelity=NOT_RUN_NO_GOLDEN
