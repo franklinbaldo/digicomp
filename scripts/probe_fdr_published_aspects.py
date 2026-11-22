@@ -13,6 +13,9 @@ import math
 INPUT_HYPOTHESES = {
     "extended_25h16": (1882, 1, 30, 25 + 16 / 60),
     "extended_25h15_variant": (1882, 1, 30, 25 + 15 / 60),
+    # Modern counterexamples to unique minute identification, not historical input.
+    "same_integer_01h00": (1882, 1, 31, 1),
+    "same_integer_02h30": (1882, 1, 31, 2.5),
     "same_date_01h16": (1882, 1, 30, 1 + 16 / 60),
 }
 PUBLISHED_ROUNDED_ANGLES = {"moon_pluto": 39, "mars_uranus": 81}
@@ -76,6 +79,8 @@ def run() -> dict:
     return {
         "classification": "SECONDARY_EDITORIAL_ANGLES_VS_MODERN_EPHEMERIS_NOT_DR70",
         "historical_facsimile": "NOT_INSPECTED",
+        "source_edition": "UNRESOLVED",
+        "rounding_policy": "HYPOTHETICAL_NEAREST_INTEGER_NOT_HISTORICALLY_ATTESTED",
         "historical_values": PUBLISHED_ROUNDED_ANGLES,
         "source": "Rael/Rudhyar indexed novile and septile prose; facsimile not inspected",
         "septile_textual_controls": {
