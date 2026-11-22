@@ -36,6 +36,24 @@ class DocumentaryCarlsonBridgeTest(unittest.TestCase):
         self.assertIn("independent_holdout=0", self.baseline)
         self.assertIn("device_fidelity=NOT_RUN_NO_GOLDEN", self.baseline)
 
+    def test_undeclared_certainty_fields_are_rejected(self):
+        # An unreviewed extension must not silently enter the real document.
+        # These mutations are synthetic negative controls, not observations.
+        cases = (
+            ("root", "native_device_output", True),
+            ("root", "birth_date_verified", "1981-01-04"),
+            ("row", "angular_tolerance_deg", 0.1),
+            ("row", "interpreted_zodiac_sign", "FAKE"),
+        )
+        self.assertEqual(self.check(self.document), [])
+        for location, field, value in cases:
+            with self.subTest(location=location, field=field):
+                changed = copy.deepcopy(self.document)
+                target = changed if location == "root" else changed["readings"][0]
+                target[field] = value
+                errors = self.check(changed)
+                self.assertTrue(any("undeclared fields" in err for err in errors), errors)
+
     def test_additional_visual_regions_are_not_interpretable_inputs(self):
         # One nonblind reading of the same F83/F85 editorial family.
         rows = self.document["additional_literal_candidates"]
