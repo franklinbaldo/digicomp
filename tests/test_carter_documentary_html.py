@@ -10,7 +10,8 @@ import unittest
 from unittest.mock import patch
 
 from scripts.carter_documentary_dashboard import assemble
-from scripts.carter_documentary_html import main, render_html
+from scripts.carter_documentary_html import _text, main, render_html
+from scripts.carter_modern_table import load_control, published_arcsec
 from test_carter_documentary_dashboard import CarterDocumentaryDashboardTest
 
 
@@ -35,6 +36,13 @@ class CarterDocumentaryHtmlTest(unittest.TestCase):
         fixture = CarterDocumentaryDashboardTest()
         fixture.setUp()
         self.report = assemble(fixture.modern, fixture.historical, fixture.counterfactual)
+        # A source-consistent STDlib-only fixture: not a computed Swiss result.
+        # The HTML renderer checks source literals and residual arithmetic.
+        control = load_control()
+        for row in self.report["modern_2023"]["rows"]:
+            entry = control["positions"][row["field"]]
+            row["published_2023"] = f'{entry["sign"]} {entry["literal"]}'
+            row["model_longitude_deg"] = published_arcsec(entry) / 3600
 
     def test_semantic_readable_two_tier_report_with_source_and_limits(self) -> None:
         out = render_html(self.report)
@@ -59,14 +67,24 @@ class CarterDocumentaryHtmlTest(unittest.TestCase):
         self.assertNotIn("<script", out)
         self.assertNotIn("http://", out)
 
-    def test_html_escaping_is_not_a_source_validation_substitute(self) -> None:
+    def test_html_escaping_and_changed_literal_fail_closed(self) -> None:
         bad_literal = '<img src=x onerror="alert(1)"> & "'
+        self.assertIn("&lt;img", _text(bad_literal))
+        self.assertIn("&amp;", _text(bad_literal))
         self.report["modern_2023"]["rows"][0]["published_2023"] = bad_literal
-        out = render_html(self.report)
-        self.assertNotIn(bad_literal, out)
-        self.assertNotIn("<img", out)
-        self.assertIn("&lt;img", out)
-        self.assertIn("&amp;", out)
+        with self.assertRaises(ValueError):
+            render_html(self.report)
+
+    def test_rejects_angular_row_inconsistency_even_when_counts_unchanged(self) -> None:
+        for column, changed in (
+            ("published_2023", "Aries 0° 0′ 0″"),
+            ("model_longitude_deg", 0.0),
+            ("residual_arcsec", 0.5),
+        ):
+            bad = deepcopy(self.report)
+            bad["modern_2023"]["rows"][0][column] = changed
+            with self.subTest(column=column), self.assertRaises(ValueError):
+                render_html(bad)
 
     def test_cannot_promote_uninspected_or_fabricate_counts(self) -> None:
         cases = [
@@ -99,6 +117,7 @@ class CarterDocumentaryHtmlTest(unittest.TestCase):
 
     def test_mismatch_remains_visible_instead_of_forced_success(self) -> None:
         bad = deepcopy(self.report)
+        bad["modern_2023"]["rows"][0]["model_longitude_deg"] += 1.5 / 3600
         bad["modern_2023"]["rows"][0]["residual_arcsec"] = 1.5
         bad["modern_2023"]["rows"][0]["within_declared_tolerance"] = False
         bad["modern_2023"]["within_tolerance"] = 8
