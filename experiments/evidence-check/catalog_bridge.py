@@ -6,6 +6,7 @@ The catalog and the probe share a documentary source and can drift together.
 from __future__ import annotations
 
 import json
+import math
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -37,10 +38,23 @@ def _reject_constant(value: str) -> None:
     raise CatalogDrift(f"non-JSON numeric constant: {value}")
 
 
+def _finite_json_float(token: str) -> float:
+    """Reject exponent overflow in metadata as well as compared fields."""
+    value = float(token)
+    if not math.isfinite(value):
+        raise CatalogDrift(f"non-finite JSON number: {token}")
+    return value
+
+
 def check(catalog_text: str, pairs_text: str) -> str:
     """Cross-check exact candidate groups, provenance and holdout boundaries."""
     try:
-        catalog = json.loads(catalog_text, object_pairs_hook=_unique_object, parse_constant=_reject_constant)
+        catalog = json.loads(
+            catalog_text,
+            object_pairs_hook=_unique_object,
+            parse_constant=_reject_constant,
+            parse_float=_finite_json_float,
+        )
     except (ValueError, TypeError) as error:
         raise CatalogDrift(f"invalid catalog JSON: {error}") from error
     _require(isinstance(catalog, dict) and catalog.get("format_version") == "0.1", "unsupported catalog schema")
