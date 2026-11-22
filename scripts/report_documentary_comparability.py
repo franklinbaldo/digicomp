@@ -63,6 +63,10 @@ def summarize(entries: list[dict], golden: dict) -> dict:
         ids.add(ident)
         if not isinstance(family, str) or not family.strip():
             raise ValueError(f"missing family for {ident}")
+        # Match the candidate/holdout guard's family.strip() identity rule.
+        # Editorial aliases with accidental outer whitespace are one family,
+        # not independent evidence or additional numeric candidates.
+        family = family.strip()
         item = families.setdefault(family, {"catalog_ids": [], "candidate_pairs": {}})
         item["catalog_ids"].append(ident)
         fragments = entry.get("reported_numeric_fragments", [])
