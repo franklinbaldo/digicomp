@@ -71,3 +71,14 @@ jobs:
           grep -F 'Modern comparison: 9/9 within ±1 arcsecond' /tmp/carter-modern-table.txt
           grep -F '1980 printed chart: NOT_RUN_NO_INSPECTED_1980_NUMBERS' /tmp/carter-modern-table.txt
           grep -F 'DR-70 instrument fidelity: NOT_RUN_NO_GOLDEN' /tmp/carter-modern-table.txt
+
+      - name: Test two-tier Carter output guards without Swiss
+        run: python -S -B -m unittest discover -s tests -p 'test_carter_documentary_dashboard.py' -v
+      - name: Render documentary 1980 house prose alongside modern 2023 chart
+        run: |
+          python -B -m scripts.carter_documentary_dashboard --format json > /tmp/carter-documentary.json
+          python -c "import json; x=json.load(open('/tmp/carter-documentary.json')); h=x['historical_house_prose']; assert x['classification']=='DOCUMENTARY_TWO_TIER_RESEARCH_OUTPUT_NOT_DR70_FIDELITY' and x['modern_2023']['within_tolerance']==9 and h['matches_13_ut']==4 and h['matches_12_ut_counterfactual']==2 and h['independent_editorial_families']==1 and x['dr70_instrumental_comparison']=='NOT_RUN_NO_GOLDEN' and x['historical_chart_numeric_comparison']=='NOT_RUN_NO_INSPECTED_1980_CHART'"
+          python -B -m scripts.carter_documentary_dashboard > /tmp/carter-documentary.txt
+          grep -F 'Historical-category consistency at 13 UT: 4/4' /tmp/carter-documentary.txt
+          grep -F 'At 12 UT counterfactual: 2/4' /tmp/carter-documentary.txt
+          grep -F 'DR-70 instrument fidelity: NOT_RUN_NO_GOLDEN' /tmp/carter-documentary.txt
