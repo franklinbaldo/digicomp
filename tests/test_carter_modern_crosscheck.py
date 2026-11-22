@@ -10,7 +10,10 @@ from __future__ import annotations
 
 from copy import deepcopy
 import json
+import math
 from pathlib import Path
+import re
+import tempfile
 import unittest
 
 from scripts.chart_input_candidates import load
@@ -36,6 +39,33 @@ FIELDS = (
 )
 
 
+def strict_json(path: Path) -> dict:
+    """Reject ambiguous or non-finite source fields, including nested objects."""
+    def unique_pairs(pairs):
+        result = {}
+        for key, value in pairs:
+            if key in result:
+                raise ValueError(f"Duplicate modern-control JSON key: {key!r}")
+            result[key] = value
+        return result
+
+    def reject_constant(value):
+        raise ValueError(f"Invalid modern-control JSON constant: {value}")
+
+    def finite_float(value):
+        parsed = float(value)
+        if not math.isfinite(parsed):
+            raise ValueError(f"Non-finite modern-control JSON number: {value}")
+        return parsed
+
+    return json.loads(
+        path.read_text(encoding="utf-8"),
+        object_pairs_hook=unique_pairs,
+        parse_constant=reject_constant,
+        parse_float=finite_float,
+    )
+
+
 def published_longitude(entry: dict) -> float:
     """Decode a sign/degree/minute/second field, never degrees-within-sign alone."""
     if entry["sign"] not in ZODIAC_OFFSETS:
@@ -47,6 +77,14 @@ def published_longitude(entry: dict) -> float:
         raise ValueError("DMS must be integral")
     if not 0 <= degree < 30 or not 0 <= minute < 60 or not 0 <= second < 60:
         raise ValueError("Out-of-range zodiac DMS")
+    # Unlike the zodiac sign (supplied as metadata), the printed literal
+    # contains DMS digits. Ensure that they agree with the interpreted fields.
+    literal = entry.get("literal")
+    if not isinstance(literal, str):
+        raise ValueError("Missing printed DMS literal")
+    match = re.fullmatch(r"\s*(\d{1,2})\s*°\s*(\d{1,2})\s*[′']\s*(\d{1,2})\s*[″\"]\s*", literal)
+    if match is None or tuple(map(int, match.groups())) != (degree, minute, second):
+        raise ValueError("Printed DMS literal disagrees with interpreted fields")
     return ZODIAC_OFFSETS[entry["sign"]] + degree + minute / 60 + second / 3600
 
 
@@ -58,7 +96,7 @@ def signed_arcseconds_delta(expected: float, actual: float) -> float:
 class CarterModernControlTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.control = json.loads(CONTROL_PATH.read_text(encoding="utf-8"))
+        cls.control = strict_json(CONTROL_PATH)
         cls.case = next(
             c for c in load()["cases"] if c["id"] == "RAEL1980-CARTER"
         )
@@ -129,6 +167,32 @@ class CarterModernControlTest(unittest.TestCase):
             published_longitude(dict(mars, degrees=30))
         with self.assertRaises(ValueError):
             published_longitude(dict(mars, sign="Unknown"))
+
+    def test_literal_mutations_fail_closed(self):
+        sun = self.control["positions"]["sun"]
+        self.assertIsInstance(published_longitude(sun), float)
+        for wrong in ("19° 59′ 59″", "8° 3′ 43″", "8° 3′", "8° 3′ 42″ extra"):
+            with self.subTest(literal=wrong), self.assertRaises(ValueError):
+                published_longitude(dict(sun, literal=wrong))
+        with self.assertRaises(ValueError):
+            published_longitude(dict(sun, literal=None))
+
+    def test_ambiguous_json_rejected_even_in_unused_metadata(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "control.json"
+            for payload in (
+                '{"positions":{"sun":{"literal":"x","literal":"y"}}}',
+                '{"ignored":{"nested":NaN}}',
+                '{"ignored":Infinity}',
+                '{"ignored":1e999}',
+                '{"ignored":-1e999}',
+            ):
+                with self.subTest(payload=payload):
+                    path.write_text(payload, encoding="utf-8")
+                    with self.assertRaises(ValueError):
+                        strict_json(path)
+            path.write_text('{"safe":{"number":1.5}}', encoding="utf-8")
+            self.assertEqual(strict_json(path)["safe"]["number"], 1.5)
 
 
 if __name__ == "__main__":
