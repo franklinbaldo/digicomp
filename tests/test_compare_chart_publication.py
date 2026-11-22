@@ -24,7 +24,13 @@ class EditorialComparatorTest(unittest.TestCase):
             "candidate_id": "RAEL1980-CARTER",
             "source": {"image_inspected": True, "page_locator": "SYNTHETIC TEST ONLY",
                        "reviewed_by": "unit-test", "source_url": "synthetic://unit-test"},
-            "published_values_deg": {"cusp_1": 1.0, "sun": 187.5}
+            "angular_convention": "ecliptic_longitude_0_360_deg",
+            "published_values_deg": {"cusp_1": 1.0, "sun": 187.5},
+            "source_notation": {
+                "cusp_1": {"kind": "absolute_longitude_0_360_deg", "literal": "1°"},
+                "sun": {"kind": "zodiac_sign_degree", "literal": "7°30 Libra",
+                        "sign": "Libra", "degree_within_sign": 7.5}
+            }
         }
 
     def test_unread_candidate_runs_no_comparison(self):
@@ -37,6 +43,7 @@ class EditorialComparatorTest(unittest.TestCase):
         self.assertAlmostEqual(signed_circular_residual(359, 1), -2)
         result = compare(self.reference, self.publication)
         self.assertEqual(result["status"], "PUBLISHED_MAP_RESIDUALS_NOT_DR70_FIDELITY")
+        self.assertEqual(result["source_locator"], "SYNTHETIC TEST ONLY")
         self.assertEqual([x["circular_difference_deg"] for x in result["residuals_deg"]], [2, -.5])
 
     def test_no_unreviewed_numbers(self):
@@ -58,6 +65,41 @@ class EditorialComparatorTest(unittest.TestCase):
         self.publication["candidate_id"] = "RAEL1980-CARTER"
         self.publication["published_values_deg"] = {"unknown": 44}
         with self.assertRaises(ValueError):
+            compare(self.reference, self.publication)
+
+    def test_reject_missing_or_unresolved_convention(self):
+        del self.publication["angular_convention"]
+        with self.assertRaisesRegex(ValueError, "Explicit"):
+            compare(self.reference, self.publication)
+        self.publication["angular_convention"] = "zodiac_degrees_within_sign_0_30"
+        with self.assertRaisesRegex(ValueError, "Explicit"):
+            compare(self.reference, self.publication)
+
+    def test_reject_equal_numeric_value_but_wrong_zodiac_sign(self):
+        self.reference["planet_longitudes"]["sun"]["longitude_deg"] = 15.0
+        self.publication["published_values_deg"] = {"sun": 15.0}
+        self.publication["source_notation"] = {
+            "sun": {"kind": "zodiac_sign_degree", "literal": "15 Taurus",
+                    "sign": "Taurus", "degree_within_sign": 15.0}
+        }
+        with self.assertRaisesRegex(ValueError, "disagrees"):
+            compare(self.reference, self.publication)
+
+    def test_unresolved_sign_has_pending_fields_and_no_residuals(self):
+        self.publication["angular_convention"] = "unresolved_zodiac_notation"
+        self.publication["published_values_deg"] = {}
+        self.publication["unresolved_fields"] = ["sun"]
+        result = compare(self.reference, self.publication)
+        self.assertEqual(result["status"], "NOT_COMPARABLE_UNRESOLVED_ZODIAC_NOTATION")
+        self.assertEqual(result["unresolved_fields"], ["sun"])
+        self.assertEqual(result["residuals_deg"], [])
+        self.publication["published_values_deg"] = {"sun": 0.0}
+        with self.assertRaisesRegex(ValueError, "Unresolved"):
+            compare(self.reference, self.publication)
+
+    def test_reject_unrecorded_source_notation(self):
+        del self.publication["source_notation"]["sun"]
+        with self.assertRaisesRegex(ValueError, "notation"):
             compare(self.reference, self.publication)
 
     def test_reject_duplicate_json_keys(self):
