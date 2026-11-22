@@ -151,6 +151,42 @@ class CarterModernControlTest(unittest.TestCase):
         )
         self.assertGreater(abs(delta), 60, "One-hour mutant escaped the control")
 
+    def test_published_sidereal_clock_checks_utc_and_west_longitude(self):
+        """A tenth, auxiliary clock control: NOT a DR-70 output or ephemeris gold."""
+        clock = self.control["sidereal_clock"]
+        self.assertEqual(
+            clock["classification"], "MODERN_PUBLISHED_AUXILIARY_CLOCK_NOT_DR70"
+        )
+        self.assertEqual(
+            clock["locator"], "PDF printed p. 12, Natal chart header: Sid. Time"
+        )
+        literal = clock["literal"]
+        self.assertIsInstance(literal, str)
+        self.assertRegex(literal, r"^(?:[01]?\d|2[0-3]):[0-5]\d:[0-5]\d$")
+        hour, minute, second = map(int, literal.split(":"))
+        printed_seconds = hour * 3600 + minute * 60 + second
+
+        def local_sidereal_seconds(jd_ut, longitude_east):
+            return (swe.sidtime(jd_ut) + longitude_east / 15.0) % 24 * 3600
+
+        def signed_delta_seconds(actual):
+            return (actual - printed_seconds + 43200) % 86400 - 43200
+
+        jd = self.modern["julian_day_ut"]
+        longitude_east = self.modern["longitude_deg_east"]
+        actual = local_sidereal_seconds(jd, longitude_east)
+        self.assertLessEqual(
+            abs(signed_delta_seconds(actual)),
+            clock["tolerance_seconds"],
+            "Printed 2023 local sidereal clock disagrees with modern input",
+        )
+
+        # Opposite longitude sign and one-hour UTC shift must not pass.
+        flipped = local_sidereal_seconds(jd, -longitude_east)
+        shifted = local_sidereal_seconds(jd + 1 / 24, longitude_east)
+        self.assertGreater(abs(signed_delta_seconds(flipped)), 3600)
+        self.assertGreater(abs(signed_delta_seconds(shifted)), 3600)
+
     def test_sign_and_range_errors_fail_closed(self):
         mars = self.control["positions"]["mars"]
         self.assertEqual(mars["sign"], "Aquarius")
