@@ -54,6 +54,20 @@ O módulo de **biblioteca padrão**, `python -S -B -m scripts.carter_qualitative
 
 O teste `tests/test_carter_qualitative_relation.py` fixa a fração racional exata, rejeita DMS/literais adulterados, verifica uma mutação de +1 segundo de arco e impede promover metadados do controle a `DR70_NATIVE_GOLDEN` ou `PASS`. Ele roda **antes da instalação opcional do Swiss** no workflow `chart-reference.yml`, sob `python -S`, e devolve **coerência nominal moderna e teste histórico inconclusivo**. O documento histórico com graus angulares ainda precisa ser inspecionado independentemente; esse teste não aumenta o total de saídas instrumentais.
 
+## Três relações qualitativas adicionais, exclusivamente modernas (R161)
+
+A mesma **transcrição textual secundária** de Raël/Rudhyar cita para Carter um *novil Vênus–Plutão* (linhas indexadas 3357–3359), um *semiquintil Sol–Lua* e um *quintil Marte–Júpiter* (3412–3413). São posições do extrator de texto, **não páginas físicas conferidas**. Isso registra nomes de aspectos atribuídos à prosa da obra, não as longitudes desenhadas na carta de 1980, nem valores emitidos pelo DR-70. [Fonte textual secundária](https://tibetanbuddhistencyclopedia.com/en/images/b/b8/Dokumen.tips_astrological-aspects.pdf).
+
+No quadro AstroDienst da **página impressa 12 do PDF de Rabinowitz (2023)**, o campo adicional Plutão é **Câncer 13°31′31″**. Ele permanece em `auxiliary_qualitative_positions` e **não** aumenta os nove campos do controle com motor moderno. A biblioteca padrão calcula os menores arcos da própria publicação de 2023 e os resíduos assinados em relação a ângulos **nominais**, sem estabelecer um orb/limiar histórico:
+
+| Prosa histórica (ainda por conferir no fac-símile) | Par na carta moderna 2023 | Separação moderna | Ângulo nominal | Desvio moderno |
+| --- | --- | ---: | ---: | ---: |
+| Novil Vênus–Plutão | Leão 23°19′54″, Câncer 13°31′31″ | 39°48′23″ | 40° | −697″ |
+| Semiquintil Sol–Lua | Libra 08°03′42″, Escorpião 13°47′47″ | 35°44′05″ | 36° | −955″ |
+| Quintil Marte–Júpiter | Aquário 25°53′05″, Sagitário 14°25′51″ | 71°27′14″ | 72° | −1966″ |
+
+A sonda `scripts/carter_qualitative_additional.py` e a regressão `tests/test_carter_qualitative_additional.py` exigem rótulos de origem, nove campos intactos, DMS válidos e status inconclusivo histórico. São **três pares do mesmo único documento moderno**, com **uma única fonte textual histórica secundária**; não três impressões, motores independentes ou holdouts. A leitura de Plutão veio da imagem de 2023, mas seu PDF integral continua sem SHA-256. A futura leitura da edição de 1980 poderá contradizer todas essas coerências modernas sem invalidar o teste de aritmética.
+
 ## Resultado inicial e limites
 
 Na sandbox (biblioteca `swisseph` **2.10.03**), nove diferenças calculadas em segundos de arco: ASC +0,013; MC -0,499; Sol +0,418; Lua +0,274; Mercúrio +0,453; Vênus +0,132; Marte +0,594; Júpiter -0,431; Saturno -0,184. **9/9 dentro de ±1″**, sempre com o rótulo `MODERN_CHART_CONTROL_NOT_DR70_OUTPUT`. A verificação da suite completa e da árvore de PR por CI precisa ser relatada **no HEAD exato**.

@@ -10,7 +10,7 @@
     "chart_date": "2023-02-19",
     "url": "https://static1.squarespace.com/static/625588022bac29595ab0c386/t/652c6205bd50527fa4e8778a/1697407494104/Jimmy%2BCarter%2Band%2Bthe%2BKnight%2Bof%2BPentacles_final.pdf",
     "locator": "PDF printed p. 12 (file page index 11), Natal chart, planetary positions and house cusps/angles",
-    "extraction": "Text/indexed PDF plus direct rendered-page inspection (22 Nov 2026) of printed p. 12: all nine planetary/ASC/MC values, UT, coordinates, Whole Signs and chart date visually corroborated; corroborating independent visual check by Lagarto on digicomp PR #148. PDF bytes not downloaded locally; original-file SHA-256 NOT_OBTAINED.",
+    "extraction": "Text/indexed PDF plus direct rendered-page inspection (22 Nov 2026) of printed p. 12: all nine planetary/ASC/MC values, UT, coordinates, Whole Signs and chart date visually corroborated; corroborating independent visual check by Lagarto on digicomp PR #148. PDF bytes not downloaded locally; original-file SHA-256 NOT_OBTAINED. Pluto (Cancer 13°31′31″) additionally read from the same modern chart for qualitative arithmetic only; it is NOT an added modern-reference comparison field.",
     "source_pdf_sha256": null
   },
   "input_as_published": {
@@ -111,5 +111,14 @@
     "golden_instrumental": false,
     "historical_chart_residuals": "NOT_RUN_NO_INSPECTED_1980_NUMBERS",
     "dr70_fidelity": "NOT_RUN_NO_GOLDEN"
+  },
+  "auxiliary_qualitative_positions": {
+    "pluto": {
+      "sign": "Cancer",
+      "degrees": 13,
+      "minutes": 31,
+      "seconds": 31,
+      "literal": "13° 31′ 31″"
+    }
   }
 }
