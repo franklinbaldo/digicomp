@@ -72,6 +72,28 @@ def validate(doc, catalog, golden):
             errors.append(f"{name}: unsupported change of provenance or certainty")
     if source.get("sample_split") != "unassigned" or source.get("numeric_holdout_eligible") is not False:
         errors.append("catalog cannot authorize documentary numeric holdout")
+    if (source.get("status") != "candidate"
+            or source.get("attribution") != "attributed_calculations_not_native_output"
+            or any(source.get(flag) is not False
+                   for flag in ("input_complete", "output_complete", "replayable"))):
+        errors.append("catalog source cannot be promoted to native/replayable output")
+
+    # The 1983 preprint and the 1985 republication reproduce the same
+    # editorial figure. A separate URL or PDF cannot become an independent
+    # numeric holdout by silently rewriting just the catalog alias.
+    aliases = [item for item in entries if isinstance(item, dict)
+               and item.get("id") == doc.get("publication_lineage_alias")]
+    if len(aliases) != 1:
+        errors.append("publication lineage alias must resolve exactly once")
+    else:
+        alias = aliases[0]
+        if alias.get("family_id") != source.get("family_id"):
+            errors.append("publication lineage alias cannot be an independent family")
+        if (alias.get("sample_split") != "unassigned"
+                or alias.get("numeric_holdout_eligible") is not False
+                or any(alias.get(flag) is not False
+                       for flag in ("input_complete", "output_complete", "replayable"))):
+            errors.append("publication lineage alias cannot become numeric holdout/replayable")
     if golden.get("observations") != []:
         errors.append("golden corpus changed; documentary baseline cannot certify it")
 
