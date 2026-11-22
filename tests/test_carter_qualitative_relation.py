@@ -1,4 +1,4 @@
-"""Historical qualitative relation stays unresolved despite modern numeric inputs."""
+"""Separate book's secondary-text septile heuristic from the unknown 1980 chart."""
 
 from __future__ import annotations
 
@@ -29,9 +29,12 @@ class CarterSeptileSensitivityTest(unittest.TestCase):
                          {"numerator": 1296000, "denominator": 7})
         self.assertEqual(result["minimum_orb_arcseconds"],
                          {"numerator": 29709, "denominator": 7})
-        self.assertIsNone(result["orb_declared_by_historical_text"])
+        self.assertEqual(result["secondary_text_nominal_range_degrees"], [50, 53])
+        self.assertEqual(result["secondary_text_range_status"],
+                         "HEURISTIC_WITH_EXCEPTIONS_NOT_STRICT_ORB")
+        self.assertTrue(result["modern_pair_in_secondary_nominal_range"])
         self.assertEqual(result["historical_relation_test"],
-                         "INDETERMINATE_ORB_NOT_SPECIFIED")
+                         "INDETERMINATE_NO_INSPECTED_1980_CHART")
         self.assertEqual(result["historical_chart_residual"],
                          "NOT_RUN_NO_INSPECTED_1980_NUMBERS")
         self.assertEqual(result["dr70_fidelity"], "NOT_RUN_NO_GOLDEN")
@@ -44,8 +47,9 @@ class CarterSeptileSensitivityTest(unittest.TestCase):
         self.assertEqual(mutated["separation_arcseconds"], 189388)
         self.assertEqual(mutated["minimum_orb_arcseconds"],
                          {"numerator": 29716, "denominator": 7})
+        self.assertTrue(mutated["modern_pair_in_secondary_nominal_range"])
         self.assertEqual(mutated["historical_relation_test"],
-                         "INDETERMINATE_ORB_NOT_SPECIFIED")
+                         "INDETERMINATE_NO_INSPECTED_1980_CHART")
 
     def test_unresolved_historical_data_cannot_be_promoted(self):
         for key, value in (
@@ -83,16 +87,26 @@ class CarterSeptileSensitivityTest(unittest.TestCase):
             with self.subTest(patch=patch), self.assertRaises(ValueError):
                 longitude_seconds(dict(moon, **patch))
 
-    def test_orb_is_not_assumed_by_parser(self):
+    def test_nominal_text_range_is_dynamic_and_not_an_historical_pass(self):
         result = compare(self.control)
-        # 0.5° is too narrow and 2° sufficient for the modern pair.
-        # Neither changes the status without a historical declared orb.
         threshold = (result["minimum_orb_arcseconds"]["numerator"] /
                      result["minimum_orb_arcseconds"]["denominator"])
         self.assertGreater(threshold, 30 * 60)
         self.assertLess(threshold, 2 * 3600)
-        self.assertEqual(result["historical_relation_test"],
-                         "INDETERMINATE_ORB_NOT_SPECIFIED")
+        # A modern pair outside 53° fails only the *nominal* textual range,
+        # not an undocumented strict instrument or chart-fidelity test.
+        outside = deepcopy(self.control)
+        outside["positions"]["moon"]["degrees"] = 14
+        outside["positions"]["moon"]["literal"] = "14° 47′ 47″"
+        outside_result = compare(outside)
+        self.assertEqual(outside_result["separation_arcseconds"], 192987)
+        self.assertFalse(outside_result["modern_pair_in_secondary_nominal_range"])
+        self.assertEqual(outside_result["secondary_text_range_status"],
+                         "HEURISTIC_WITH_EXCEPTIONS_NOT_STRICT_ORB")
+        for candidate in (result, outside_result):
+            self.assertEqual(candidate["historical_relation_test"],
+                             "INDETERMINATE_NO_INSPECTED_1980_CHART")
+            self.assertEqual(candidate["dr70_fidelity"], "NOT_RUN_NO_GOLDEN")
 
 
 if __name__ == "__main__":
