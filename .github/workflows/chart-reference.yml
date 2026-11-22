@@ -53,6 +53,12 @@ jobs:
           python -B -m scripts.carter_house_time_envelope > /tmp/carter-house-window.json
           python -c "import json; r=json.load(open('/tmp/carter-house-window.json')); assert r['center_all_four_intervals_utc_minutes_inclusive']==[[755,843]] and len(r['coordinate_controls'])==9 and all(c['matches_12_00_ut']==2 and c['matches_13_00_ut']==4 for c in r['coordinate_controls']) and r['dr70_fidelity']=='NOT_RUN_NO_GOLDEN'"
 
+      - name: Refine non-unique modern house interval to one-second samples
+        run: |
+          python -B -m unittest discover -s tests -p 'test_carter_house_subminute_edges.py' -v
+          python -B -m scripts.carter_house_subminute_edges > /tmp/carter-subminute.json
+          python -c "import json; r=json.load(open('/tmp/carter-subminute.json')); assert r['all_four_sampled_utc_seconds_inclusive']==[[45270,50602]] and r['matching_sample_count']==5333 and r['dr70_fidelity']=='NOT_RUN_NO_GOLDEN'"
+
       - name: Produce an explicitly labelled modern result
         run: |
           python -m scripts.compute_chart_reference --id RAEL1980-CARTER > /tmp/carter-modern.json
