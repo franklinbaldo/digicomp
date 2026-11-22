@@ -59,6 +59,10 @@ class CarterOneVariableTimeShiftTest(unittest.TestCase):
         cls.case = next(c for c in load()["cases"] if c["id"] == "RAEL1980-CARTER")
         cls.case12 = deepcopy(cls.case)
         cls.case12["utc_time_as_printed"] = "12:00"
+        cls.case12["time_interpretation"] = (
+            "COUNTERFACTUAL 12:00 UT at unchanged date/coordinates; "
+            "not the 1980 book's literal input"
+        )
         cls.reference13 = calculate(cls.case, swe)
         cls.reference12 = calculate(cls.case12, swe)
 
