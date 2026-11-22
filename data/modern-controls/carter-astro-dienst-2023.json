@@ -19,6 +19,12 @@
     "latitude": "32N02",
     "longitude": "84W24"
   },
+  "sidereal_clock": {
+    "classification": "MODERN_PUBLISHED_AUXILIARY_CLOCK_NOT_DR70",
+    "literal": "8:02:19",
+    "locator": "PDF printed p. 12, Natal chart header: Sid. Time",
+    "tolerance_seconds": 1
+  },
   "chart_house_system": "Whole Signs",
   "positions": {
     "ascendant": {
