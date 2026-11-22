@@ -22,6 +22,11 @@ jobs:
         # -S disables site-packages even on runners with cached installations.
         # Modern numerical comparisons remain in the following full-engine step.
         run: python -S -B -m unittest discover -s tests -p 'test_carter_modern_crosscheck.py' -v
+      - name: Quantify historical qualitative relation without Swiss
+        run: |
+          python -S -B -m unittest discover -s tests -p 'test_carter_qualitative_relation.py' -v
+          python -S -B -m scripts.carter_qualitative_relation > /tmp/carter-septile.json
+          python -c "import json; r=json.load(open('/tmp/carter-septile.json')); assert r['historical_relation_test']=='INDETERMINATE_ORB_NOT_SPECIFIED' and r['dr70_fidelity']=='NOT_RUN_NO_GOLDEN' and r['minimum_orb_arcseconds']=={'numerator':29709,'denominator':7}"
       - name: Install external research-only ephemeris binding
         run: python -m pip install 'pyswisseph==2.10.3.2'
       - name: Test modern output, without DR-70 fidelity claims
