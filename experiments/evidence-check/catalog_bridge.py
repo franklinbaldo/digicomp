@@ -58,6 +58,15 @@ def check(catalog_text: str, pairs_text: str) -> str:
     f85 = [entry for entry in entries if isinstance(entry, dict) and entry.get("id") == "OUT-CARLSON-F85"]
     _require(len(f85) == 1 and f85[0].get("family_id") == FAMILY, "F85 editorial family is not independent")
     _require(f85[0].get("numeric_holdout_eligible") is False, "F85 cannot be used as independent holdout")
+    _require(f85[0].get("sample_split") == "unassigned", "F85 cannot be assigned a separate holdout split")
+    _require(
+        f85[0].get("attribution") == "attributed_calculations_not_native_output"
+        and f85[0].get("kind") == "published_chart_candidate"
+        and f85[0].get("status") == "candidate",
+        "F85 remains an editorial candidate, not native DR-70 output",
+    )
+    for flag in ("input_complete", "output_complete", "replayable"):
+        _require(f85[0].get(flag) is False, f"F85 {flag} must remain false pending independent evidence")
 
     reported = f83.get("reported_numeric_fragments")
     _require(isinstance(reported, list) and len(reported) == 6, "F83 catalog requires six candidate pairs")
