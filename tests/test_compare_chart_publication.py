@@ -1,6 +1,7 @@
 """All numbers in these test fixtures are synthetic and never a DR-70 output."""
 
 from pathlib import Path
+import copy
 import tempfile
 import unittest
 
@@ -23,7 +24,7 @@ class EditorialComparatorTest(unittest.TestCase):
             "classification": "PUBLISHED_CHART_MANUAL_TRANSCRIPTION",
             "candidate_id": "RAEL1980-CARTER",
             "source": {"image_inspected": True, "page_locator": "SYNTHETIC TEST ONLY",
-                       "reviewed_by": "unit-test", "source_url": "synthetic://unit-test"},
+                       "reviewed_by": "unit-test", "source_url": "https://example.invalid/synthetic-fixture"},
             "angular_convention": "ecliptic_longitude_0_360_deg",
             "published_values_deg": {"cusp_1": 1.0, "sun": 187.5},
             "source_notation": {
@@ -50,6 +51,39 @@ class EditorialComparatorTest(unittest.TestCase):
         self.publication["source"]["image_inspected"] = False
         with self.assertRaises(ValueError):
             compare(self.reference, self.publication)
+
+    def test_reject_untyped_blank_or_unresolvable_inspection_metadata(self):
+        cases = (
+            ("page_locator", 123), ("page_locator", ["page 1"]),
+            ("page_locator", "  "), ("reviewed_by", "  "),
+            ("reviewed_by", 7), ("source_url", {"bogus": True}),
+            ("source_url", 123), ("source_url", "  "),
+            ("source_url", "ftp://example.org/scan"),
+            ("source_url", "synthetic://unit-test"),
+            ("source_url", "https://"),
+            ("source_url", "https://reader:secret@example.org/image"),
+            ("source_url", "https://example.org/scan page"),
+        )
+        for field, invalid in cases:
+            with self.subTest(field=field, invalid=invalid):
+                published = copy.deepcopy(self.publication)
+                published["source"][field] = invalid
+                with self.assertRaises(ValueError):
+                    compare(self.reference, published)
+        for url in ("http://example.invalid/fixture", "https://example.invalid/fixture"):
+            with self.subTest(accepted_url=url):
+                published = copy.deepcopy(self.publication)
+                published["source"]["source_url"] = url
+                self.assertEqual(
+                    compare(self.reference, published)["status"],
+                    "PUBLISHED_MAP_RESIDUALS_NOT_DR70_FIDELITY",
+                )
+        for invalid_source in (None, 3, ["source"], {"image_inspected": 1}):
+            with self.subTest(invalid_source=invalid_source):
+                published = copy.deepcopy(self.publication)
+                published["source"] = invalid_source
+                with self.assertRaises(ValueError):
+                    compare(self.reference, published)
 
     def test_reject_false_golden_and_nonfinite(self):
         self.reference["dr70_fidelity"] = "PASS"
