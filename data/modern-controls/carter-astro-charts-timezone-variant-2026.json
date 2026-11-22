@@ -1,0 +1,36 @@
+{
+  "format_version": "0.1",
+  "classification": "MODERN_SECONDARY_WEB_CHART_TIMEZONE_VARIANT_NOT_DR70",
+  "case_id": "RAEL1980-CARTER",
+  "source": {
+    "name": "Astro-Charts: Jimmy Carter birth chart",
+    "url": "https://www.astro-charts.com/persons/chart/jimmy-carter/",
+    "accessed_date": "2026-11-22",
+    "locator": "Birth details, Planets, Beyond the planets and Houses sections",
+    "angle_resolution": "whole arcminute shown (no seconds)",
+    "house_system": "Placidus"
+  },
+  "input_as_displayed": {
+    "date": "1924-10-01",
+    "local_time": "07:00",
+    "timezone_literal": "UTC −5:00",
+    "utc_offset": "-05:00",
+    "place": "Plains, Georgia, United States"
+  },
+  "positions_as_displayed": {
+    "ascendant": {"sign": "Libra", "degrees": 13, "minutes": 19},
+    "midheaven": {"sign": "Cancer", "degrees": 14, "minutes": 19},
+    "sun": {"sign": "Libra", "degrees": 8, "minutes": 1},
+    "moon": {"sign": "Scorpio", "degrees": 13, "minutes": 11}
+  },
+  "comparison_scope": {
+    "astrodienst_2023_source_local_time": "07:00",
+    "astrodienst_2023_source_utc_time": "13:00",
+    "source_timezone_convention_disagreement": true,
+    "resolution": "UNRESOLVED_WHICH_HISTORICAL_TIMEZONE_APPLIES",
+    "cannot_attribute_angular_difference_only_to_timezone": true,
+    "historical_1980_chart": "NOT_RUN_NO_INSPECTED_1980_NUMBERS",
+    "dr70_fidelity": "NOT_RUN_NO_GOLDEN",
+    "golden_instrumental": false
+  }
+}
