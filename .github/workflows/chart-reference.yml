@@ -40,6 +40,8 @@ jobs:
         run: python -B -m unittest discover -s tests -p 'test_compute_chart_reference.py' -v
       - name: Test nine published modern positions (never historical DR-70)
         run: python -B -m unittest discover -s tests -p 'test_carter_modern_crosscheck.py' -v
+      - name: Isolate one-hour UTC shift against both modern source charts
+        run: python -B -m unittest discover -s tests -p 'test_carter_one_variable_utc.py' -v
       - name: Produce an explicitly labelled modern result
         run: |
           python -m scripts.compute_chart_reference --id RAEL1980-CARTER > /tmp/carter-modern.json
