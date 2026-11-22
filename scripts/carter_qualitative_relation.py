@@ -1,8 +1,8 @@
-"""Quantify a 1980 qualitative septile claim using a 2023 MODERN chart.
+"""Compare a 2023 MODERN Carter pair with the book's secondary-text septile range.
 
-This is a minimum-orb sensitivity calculation, not a historical chart
-measurement, a DR-70 result, or confirmation that the 1980 edition
-used any particular orb. No astronomy package or network access needed.
+The OCR/transcription reports a nominal 50°–53° septile range, but also
+mentions examples outside it. Neither these words nor 2023 positions are
+an inspected 1980 chart, DR-70 output, or a fidelity oracle. Stdlib only.
 """
 
 from __future__ import annotations
@@ -22,6 +22,9 @@ ZODIAC = {
     "Sagittarius": 8, "Capricorn": 9, "Aquarius": 10, "Pisces": 11,
 }
 FULL_CIRCLE_SECONDS = 360 * 3600
+# The book's text (not its checked page image) says 50°–53° nominally,
+# yet describes 53½° and almost 54° as possible septiles. Not a hard bound.
+SECONDARY_TEXT_NOMINAL_RANGE_DEGREES = (50, 53)
 
 
 def longitude_seconds(position: dict) -> int:
@@ -40,7 +43,7 @@ def longitude_seconds(position: dict) -> int:
 
 
 def compare(control: dict) -> dict:
-    """Report an exact rational threshold, WITHOUT choosing an orb."""
+    """Report modern geometry and secondary textual heuristic, never fidelity."""
     if (
         control.get("classification") != "MODERN_CHART_CONTROL_NOT_DR70_OUTPUT"
         or control.get("case_id") != "RAEL1980-CARTER"
@@ -58,6 +61,7 @@ def compare(control: dict) -> dict:
     separation = min(directed, FULL_CIRCLE_SECONDS - directed)
     exact_septile = Fraction(FULL_CIRCLE_SECONDS, 7)
     difference = abs(Fraction(separation) - exact_septile)
+    lower, upper = (degree * 3600 for degree in SECONDARY_TEXT_NOMINAL_RANGE_DEGREES)
     return {
         "classification": "MODERN_POSITIONS_VS_SECONDARY_HISTORICAL_QUALITATIVE_CLAIM",
         "relation": "Moon-Mercury septile (historical text, not chart numbers)",
@@ -72,8 +76,11 @@ def compare(control: dict) -> dict:
             "numerator": difference.numerator,
             "denominator": difference.denominator,
         },
-        "orb_declared_by_historical_text": None,
-        "historical_relation_test": "INDETERMINATE_ORB_NOT_SPECIFIED",
+        "secondary_text_nominal_range_degrees": list(SECONDARY_TEXT_NOMINAL_RANGE_DEGREES),
+        "secondary_text_range_status": "HEURISTIC_WITH_EXCEPTIONS_NOT_STRICT_ORB",
+        "secondary_text_range_evidence": "SECONDARY_TEXT_NOT_VERIFIED_AGAINST_1980_PAGE_IMAGE",
+        "modern_pair_in_secondary_nominal_range": lower <= separation <= upper,
+        "historical_relation_test": "INDETERMINATE_NO_INSPECTED_1980_CHART",
         "historical_chart_residual": "NOT_RUN_NO_INSPECTED_1980_NUMBERS",
         "dr70_fidelity": "NOT_RUN_NO_GOLDEN",
     }
