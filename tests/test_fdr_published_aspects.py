@@ -6,6 +6,7 @@ from scripts.probe_fdr_published_aspects import (
     INPUT_HYPOTHESES,
     PUBLISHED_ROUNDED_ANGLES,
     minimum_separation_deg,
+    directed_advance_deg,
 )
 
 
@@ -14,6 +15,28 @@ class AngularControlTest(unittest.TestCase):
         self.assertEqual(minimum_separation_deg(359, 1), 2)
         self.assertEqual(minimum_separation_deg(10, 190), 180)
         self.assertEqual(minimum_separation_deg(45, 45), 0)
+
+    def test_directed_advance_not_minimum_arc(self):
+        self.assertEqual(directed_advance_deg(10, 350), 20)
+        self.assertEqual(directed_advance_deg(350, 10), 340)
+        with self.assertRaises(ValueError):
+            directed_advance_deg(float("inf"), 0)
+
+    def test_septile_diagnostics_if_dependency_installed(self):
+        from scripts.probe_fdr_published_aspects import run
+        try:
+            result = run()
+        except RuntimeError as exc:
+            self.skipTest(str(exc))
+        extended = result["hypotheses"]["extended_25h16"]["modern_septile_diagnostics_deg"]
+        same_day = result["hypotheses"]["same_date_01h16"]["modern_septile_diagnostics_deg"]
+        self.assertAlmostEqual(extended["moon_neptune_short_arc"], 52.25065565, places=5)
+        self.assertAlmostEqual(extended["mars_ahead_saturn_directed"], 50.91659187, places=5)
+        self.assertAlmostEqual(extended["moon_jupiter_short_arc"], 49.10416102, places=5)
+        self.assertAlmostEqual(same_day["moon_neptune_short_arc"], 40.05487028, places=5)
+        self.assertEqual(result["septile_textual_controls"]["moon_jupiter_conditional_verdict"],
+                         "NOT_EVALUATED_LATER_HOUR_UNSPECIFIED")
+        self.assertEqual(result["dr70_fidelity"], "NOT_RUN_NO_GOLDEN")
 
     def test_no_nonfinite_or_invalid_longitude(self):
         for invalid in (-1, 360, float("nan"), float("inf")):
