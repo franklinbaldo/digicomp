@@ -7,6 +7,7 @@ import json
 import math
 import re
 from pathlib import Path
+from urllib.parse import urlsplit
 
 DEFAULT_PUBLICATION = (
     Path(__file__).resolve().parents[1]
@@ -130,10 +131,22 @@ def compare(reference: dict, publication: dict) -> dict:
         }
     if publication.get("classification") != "PUBLISHED_CHART_MANUAL_TRANSCRIPTION":
         raise ValueError("Only an unread or manually transcribed editorial chart is supported")
-    source = publication.get("source") or {}
-    if not (source.get("image_inspected") is True and source.get("page_locator")
-            and source.get("reviewed_by") and source.get("source_url")):
-        raise ValueError("Published values require visual inspection, exact page and reviewer")
+    source = publication.get("source")
+    if not isinstance(source, dict) or source.get("image_inspected") is not True:
+        raise ValueError("Published values require declared visual inspection")
+    # Structural checks only: these self-reported fields do not authenticate a facsimile.
+    for key in ("page_locator", "reviewed_by", "source_url"):
+        value = source.get(key)
+        if not isinstance(value, str) or not value.strip():
+            raise ValueError(f"Source {key} must be nonblank text")
+    url = source["source_url"]
+    if any(char.isspace() for char in url) or url != url.strip():
+        raise ValueError("Source URL must not contain whitespace")
+    parsed = urlsplit(url)
+    # Only web facsimile locators are accepted here; a local file needs a
+    # separately identified/publicly resolvable source before comparison.
+    if parsed.scheme not in ("http", "https") or not parsed.hostname or parsed.username or parsed.password:
+        raise ValueError("Source URL must be an HTTP(S) facsimile locator without credentials")
     values = publication.get("published_values_deg")
     convention = publication.get("angular_convention")
     if convention == _UNRESOLVED:
