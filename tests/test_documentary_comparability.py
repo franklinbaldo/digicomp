@@ -38,7 +38,7 @@ class DocumentaryComparabilityTest(unittest.TestCase):
         report = reporter.summarize(rows, GOLDEN)
         self.assertEqual(report["unique_candidate_pairs_within_families"], 4)
         self.assertEqual(report["angular_residuals_computed"], 0)
-        self.assertEqual(report["golden_instrumental_observations"], 0)
+        self.assertEqual(report["fidelity_corpus_records_unvalidated"], 0)
 
     def test_conflicting_same_family_readings_are_rejected(self):
         changed = copy.deepcopy(PAIRS)
@@ -57,12 +57,18 @@ class DocumentaryComparabilityTest(unittest.TestCase):
                         [entry("X", "A", [{"pair": "A", "groups": groups}])], GOLDEN
                     )
 
-    def test_counting_synthetic_golden_does_not_claim_comparison(self):
-        # Synthetic API witness only; never persisted as a golden observation.
-        report = reporter.summarize([entry("F83", "CARLSON", PAIRS)],
-                                    {"observations": [{"fake": True}]})
-        self.assertEqual(report["golden_instrumental_observations"], 1)
-        self.assertEqual(report["independent_holdout_scores_computed"], 0)
+    def test_unvalidated_fidelity_rows_do_not_claim_instrumental_provenance(self):
+        # API-only synthetic rows: neither status nor record count certifies a device.
+        for row in ({"fake": True}, {"status": "partial"}, {"status": "replayable"}):
+            with self.subTest(row=row):
+                report = reporter.summarize([entry("F83", "CARLSON", PAIRS)],
+                                            {"observations": [row]})
+                self.assertEqual(report["fidelity_corpus_records_unvalidated"], 1)
+                self.assertNotIn("golden_instrumental_observations", report)
+                self.assertFalse(any("certified" in key or "authenticated" in key
+                                     for key in report))
+                self.assertEqual(report["angular_residuals_computed"], 0)
+                self.assertEqual(report["independent_holdout_scores_computed"], 0)
 
     def test_malformed_gold_list_is_rejected(self):
         with self.assertRaisesRegex(ValueError, "golden"):
@@ -88,7 +94,7 @@ class DocumentaryComparabilityTest(unittest.TestCase):
         self.assertEqual(report["distinct_documentary_families"], 8)
         self.assertEqual(report["families_with_numeric_group_candidates"], 1)
         self.assertEqual(report["unique_candidate_pairs_within_families"], 6)
-        self.assertEqual(report["golden_instrumental_observations"], 0)
+        self.assertEqual(report["fidelity_corpus_records_unvalidated"], 0)
         self.assertEqual(report["angular_residuals_computed"], 0)
         self.assertEqual(report["independent_holdout_scores_computed"], 0)
 
