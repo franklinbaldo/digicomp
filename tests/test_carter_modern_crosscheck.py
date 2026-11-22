@@ -253,6 +253,17 @@ class CarterModernControlTest(unittest.TestCase):
         self.assertGreater(abs(signed_delta_seconds(flipped)), 3600)
         self.assertGreater(abs(signed_delta_seconds(shifted)), 3600)
 
+class CarterModernInputContractTest(unittest.TestCase):
+    """Guard published data and JSON parsing even without optional swisseph.
+
+    These validation tests must run on standard-library-only installations;
+    only the astronomical comparisons need the external ephemeris engine.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        cls.control = strict_json(CONTROL_PATH)
+
     def test_sign_and_range_errors_fail_closed(self):
         mars = self.control["positions"]["mars"]
         self.assertEqual(mars["sign"], "Aquarius")
