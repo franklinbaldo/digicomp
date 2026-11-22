@@ -54,6 +54,40 @@ class CatalogBridgeTest(unittest.TestCase):
                 with self.assertRaises(CatalogDrift):
                     check(self.mutate(mutation), self.pairs_text)
 
+    def test_f85_cannot_be_independent_holdout_or_native_output(self) -> None:
+        for field, replacement in (
+            ("sample_split", "holdout"),
+            ("attribution", "device_native_session_output"),
+            ("input_complete", True),
+            ("output_complete", True),
+            ("replayable", True),
+        ):
+            with self.subTest(field=field):
+                changed = self.mutate(lambda f83, f85: f85.update({field: replacement}))
+                with self.assertRaises(CatalogDrift):
+                    check(changed, self.pairs_text)
+
+    def test_evidence_workflow_is_triggered_by_all_bridge_inputs(self) -> None:
+        workflow = (ROOT / ".github/workflows/evidence-check.yml").read_text(encoding="utf-8")
+        expected = {
+            "experiments/evidence-check/**",
+            ".github/workflows/evidence-check.yml",
+            "data/output-candidates/**",
+            "data/documentary-observations/**",
+            "scripts/check_documentary_observations.py",
+            "scripts/check_output_candidates.py",
+        }
+        pr_paths = workflow.split("  pull_request:\n", 1)[1].split("  push:\n", 1)[0]
+        push_paths = workflow.split("  push:\n", 1)[1].split("permissions:\n", 1)[0]
+        for event, section in (("pull_request", pr_paths), ("push", push_paths)):
+            with self.subTest(event=event):
+                active = {
+                    line.strip().removeprefix("- ").strip("'")
+                    for line in section.splitlines()
+                    if line.startswith("      - '")
+                }
+                self.assertTrue(expected <= active, f"{event} missing {sorted(expected - active)}")
+
     def test_rejects_missing_or_duplicate_pairs(self) -> None:
         bad = self.mutate(
             lambda a, b: a["reported_numeric_fragments"].append(
