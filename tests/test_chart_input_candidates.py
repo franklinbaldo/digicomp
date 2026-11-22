@@ -29,6 +29,23 @@ class ChartInputCandidatesTest(unittest.TestCase):
             with self.subTest(time=time), self.assertRaises(ValueError):
                 hypothetical_utc("1924-10-01", time)
 
+    def test_rejects_datetime_or_offset_disguised_as_calendar_date(self):
+        # fromisoformat accepts compact dates and midnight datetimes; replacing
+        # their tzinfo would silently discard an explicit UTC offset.
+        for date in (
+            "19241001",
+            "1924-10-01T00:00:00",
+            "1924-10-01T00:00:00Z",
+            "1924-10-01T00:00:00+05:00",
+            "1924-10-01 00:00:00",
+            "1924-02-30",
+        ):
+            with self.subTest(date=date), self.assertRaises(ValueError):
+                hypothetical_utc(date, "13:00")
+        self.assertEqual(
+            hypothetical_utc("1924-10-01", "13:00"), "1924-10-01T13:00:00Z"
+        )
+
     def test_no_observed_values_can_be_loaded_as_inputs(self):
         original = load()["cases"][0].copy()
         original["observed_chart_values"] = {"house_1": 0.0}
