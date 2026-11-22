@@ -207,6 +207,27 @@ class DocumentaryCarlsonBridgeTest(unittest.TestCase):
                     errors,
                 )
 
+    def test_json_exponent_overflow_is_rejected_even_in_unused_metadata(self):
+        # A finite provenance ledger may not hide IEEE Infinity in an extra
+        # catalog or source field. JSON NaN/Infinity and duplicate keys were
+        # already refused; overflow via a valid 1e999 token must also fail.
+        import tempfile
+        with tempfile.TemporaryDirectory() as folder:
+            path = pathlib.Path(folder) / "document.json"
+            for payload in (
+                '{"ignored":{"unrelated":1e999}}',
+                '{"ignored":{"unrelated":-1e999}}',
+                '{"source":{"nested":[0.5,1e999]}}',
+                '{"ignored":NaN}',
+                '{"ignored":1,"ignored":2}',
+            ):
+                with self.subTest(payload=payload):
+                    path.write_text(payload, encoding="utf-8")
+                    with self.assertRaises(ValueError):
+                        load_json(path)
+            path.write_text('{"source":{"fraction":0.5}}', encoding="utf-8")
+            self.assertEqual(load_json(path)["source"]["fraction"], 0.5)
+
     def test_cli_executes_real_documentary_dataset(self):
         run = subprocess.run(
             [sys.executable, "-B", str(ROOT / "scripts/check_documentary_observations.py")],
