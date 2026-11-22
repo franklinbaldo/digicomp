@@ -10,6 +10,8 @@ from unittest.mock import patch
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 from check_output_candidates import validate, load_all
+# Reuse the existing SHA-exact catalog workflow for documentary validation.
+from test_documentary_observations import DocumentaryCarlsonBridgeTest  # noqa: F401
 
 
 class CandidateCatalogTest(unittest.TestCase):
