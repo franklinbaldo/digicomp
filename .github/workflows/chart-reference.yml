@@ -26,7 +26,7 @@ jobs:
         run: |
           python -S -B -m unittest discover -s tests -p 'test_carter_qualitative_relation.py' -v
           python -S -B -m scripts.carter_qualitative_relation > /tmp/carter-septile.json
-          python -c "import json; r=json.load(open('/tmp/carter-septile.json')); assert r['historical_relation_test']=='INDETERMINATE_ORB_NOT_SPECIFIED' and r['dr70_fidelity']=='NOT_RUN_NO_GOLDEN' and r['minimum_orb_arcseconds']=={'numerator':29709,'denominator':7}"
+          python -c "import json; r=json.load(open('/tmp/carter-septile.json')); assert r['historical_relation_test']=='INDETERMINATE_NO_INSPECTED_1980_CHART' and r['dr70_fidelity']=='NOT_RUN_NO_GOLDEN' and r['minimum_orb_arcseconds']=={'numerator':29709,'denominator':7} and r['secondary_text_nominal_range_degrees']==[50,53] and r['modern_pair_in_secondary_nominal_range'] is True"
       - name: Install external research-only ephemeris binding
         run: python -m pip install 'pyswisseph==2.10.3.2'
       - name: Test modern output, without DR-70 fidelity claims
