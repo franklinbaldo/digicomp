@@ -18,6 +18,7 @@ DEFAULT_INPUT = (
 )
 _COORD_RE = re.compile(r"^(\d{1,3})([NSEW])(\d{2})$")
 _TIME_RE = re.compile(r"^(\d{1,2}):(\d{2})$")
+_DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 
 
 def coordinate(text: str, axis: str) -> float:
@@ -45,6 +46,8 @@ def hypothetical_utc(date_text: str, time_text: str) -> str:
     hours, minutes = int(match[1]), int(match[2])
     if hours > 47 or minutes > 59:
         raise ValueError(f"Out-of-range hours:minutes: {time_text!r}")
+    if _DATE_RE.fullmatch(date_text) is None:
+        raise ValueError(f"Expected calendar date YYYY-MM-DD without time or offset: {date_text!r}")
     midnight = datetime.fromisoformat(date_text).replace(tzinfo=timezone.utc)
     if midnight.hour or midnight.minute or midnight.second:
         raise ValueError("Date must be YYYY-MM-DD without a time")
