@@ -38,42 +38,8 @@ jobs:
           printf 'H01\n' > "$RUNNER_TEMP/candidate-prediction.txt"
           cargo run --quiet --manifest-path experiments/evidence-check/Cargo.toml -- \
             experiments/evidence-check/fragments.tsv "$RUNNER_TEMP/candidate-prediction.txt" > "$RUNNER_TEMP/evidence-report.txt"
-          test "$(grep -c         run: |
-          cargo run --quiet --manifest-path experiments/evidence-check/Cargo.toml --bin published_layout > /tmp/published-layout.txt
-          diff -u experiments/evidence-check/published-layout-baseline.txt /tmp/published-layout.txt
-      - name: Stage pinned canonical catalog for stacked branch without #94
-        run: |
-          if test ! -f data/output-candidates/catalog.json; then
-            git fetch --no-tags --depth=1 origin b4bbb8d034bdd2dfeccb2dde40f901717bb525a1
-            test "$(git rev-parse FETCH_HEAD:data/output-candidates/catalog.json)" = "b037faf3f481ab49872b2bdd6b9f757f096c950a"
-            mkdir -p data/output-candidates
-            git show FETCH_HEAD:data/output-candidates/catalog.json > data/output-candidates/catalog.json
-            echo "Temporary, pinned catalog from main@b4bbb8d; branch tree itself has no #94 catalog"
-          fi
-      - name: Verify candidate catalog bridge (positive and adversarial)
-        run: |
-          python3 -m unittest discover -s experiments/evidence-check/tests -p 'test_catalog_bridge.py' -v
-          python3 experiments/evidence-check/catalog_bridge.py > /tmp/catalog-bridge.txt
-          diff -u experiments/evidence-check/catalog-bridge-baseline.txt /tmp/catalog-bridge.txt
-\tInconclusive\t' "$RUNNER_TEMP/evidence-report.txt")" -eq 5
-          ! grep -Eq         run: |
-          cargo run --quiet --manifest-path experiments/evidence-check/Cargo.toml --bin published_layout > /tmp/published-layout.txt
-          diff -u experiments/evidence-check/published-layout-baseline.txt /tmp/published-layout.txt
-      - name: Stage pinned canonical catalog for stacked branch without #94
-        run: |
-          if test ! -f data/output-candidates/catalog.json; then
-            git fetch --no-tags --depth=1 origin b4bbb8d034bdd2dfeccb2dde40f901717bb525a1
-            test "$(git rev-parse FETCH_HEAD:data/output-candidates/catalog.json)" = "b037faf3f481ab49872b2bdd6b9f757f096c950a"
-            mkdir -p data/output-candidates
-            git show FETCH_HEAD:data/output-candidates/catalog.json > data/output-candidates/catalog.json
-            echo "Temporary, pinned catalog from main@b4bbb8d; branch tree itself has no #94 catalog"
-          fi
-      - name: Verify candidate catalog bridge (positive and adversarial)
-        run: |
-          python3 -m unittest discover -s experiments/evidence-check/tests -p 'test_catalog_bridge.py' -v
-          python3 experiments/evidence-check/catalog_bridge.py > /tmp/catalog-bridge.txt
-          diff -u experiments/evidence-check/catalog-bridge-baseline.txt /tmp/catalog-bridge.txt
-\t(Present|Missing)\t' "$RUNNER_TEMP/evidence-report.txt"
+          test "$(grep -c $'\tInconclusive\t' "$RUNNER_TEMP/evidence-report.txt")" -eq 5
+          ! grep -Eq $'\t(Present|Missing)\t' "$RUNNER_TEMP/evidence-report.txt"
           grep -Fq 'These are lexical diagnostics, NOT an assessment of DR-70 fidelity.' "$RUNNER_TEMP/evidence-report.txt"
       - name: Verify published candidate layout snapshot
         run: |
