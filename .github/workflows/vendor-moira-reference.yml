@@ -1,0 +1,51 @@
+name: Third-party math reference checks
+
+on:
+  pull_request:
+    paths:
+      - "vendor/moira/**"
+      - "tests/test_vendor_moira_angles.py"
+      - "tests/test_vendor_moira_geometry_clock.py"
+      - ".github/workflows/vendor-moira-reference.yml"
+  push:
+    branches: [main]
+    paths:
+      - "vendor/moira/**"
+      - "tests/test_vendor_moira_angles.py"
+      - "tests/test_vendor_moira_geometry_clock.py"
+      - ".github/workflows/vendor-moira-reference.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  source-and-test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check vendor source and test arithmetic invariants
+        run: |
+          python3 -m py_compile vendor/moira/*.py tests/test_vendor_moira_*.py
+          python3 -m unittest discover -s tests -p 'test_vendor_moira_*.py' -v
+          python3 -O -m unittest discover -s tests -p 'test_vendor_moira_*.py' -v
+      - name: Check license and upstream manifest
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          import subprocess
+
+          base = Path("vendor/moira")
+          manifest = json.loads((base / "UPSTREAM.json").read_text())
+          assert manifest["license"] == "MIT"
+          assert len(manifest["commit"]) == 40
+          assert (base / "LICENSE").read_text().startswith("MIT License")
+          assert "TheDaniel166" in (base / "LICENSE").read_text()
+          assert all(Path(row["vendored"]).is_file() for row in manifest["source_files"])
+          for row in manifest["source_files"]:
+              if row["mode"] == "exact-copy":
+                  blob = subprocess.check_output(["git", "hash-object", row["vendored"]], text=True).strip()
+                  assert blob == row["sha1_git_blob"], (row["vendored"], blob)
+          print("Vendor notice + manifest: PASS")
+          PY

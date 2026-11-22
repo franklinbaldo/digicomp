@@ -10,7 +10,7 @@ estado: provisorio
 
 ## Achado e custódia documental
 
-O catálogo bibliográfico da [Finna / Varastokirjasto](https://www.finna.fi/Record/vaari.1172270) registra **Leyla Rael e Dane Rudhyar, *Astrological Aspects: A Process-Oriented Approach*, Aurora Press, Nova York, 1980, 244 páginas, ISBN 0-943358-00-0**. Esta é uma confirmação de edição e existência bibliográfica, não uma inspeção do exemplar.
+O catálogo bibliográfico da [Finna / Varastokirjasto](https://www.finna.fi/Record/vaari.1172270) registra **Leyla Rael e Dane Rudhyar, *Astrological Aspects: A Process-Oriented Approach*, Aurora Press, Nova York, 1980, 244 páginas, ISBN 0-943358-00-0**. É confirmação **catalográfica**, não inspeção desse exemplar. Uma [fotografia pública de folha de rosto](rael-1980-imprints-and-titlepage.md) mostra Aurora Press **Nova York** e crédito de Tony Milner, mas o próprio ano não aparece na foto; há também registros distintos **ASI Publishers/Nova York** e **Aurora Press/Santa Fe**. Não atribuir uma única edição a todas as transcrições.
 
 Uma [transcrição disponibilizada por terceiro no Scribd](https://www.scribd.com/document/205319766/Astrological-Aspects) contém duas declarações atribuídas à publicação:
 

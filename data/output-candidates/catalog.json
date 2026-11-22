@@ -1,0 +1,295 @@
+{
+  "format_version": "0.1",
+  "purpose": "Capture any publicly shared candidate DR-70 calculation or displayed/printed output first, even if attribution, input and formatting are incomplete; preserve lead-only records separately",
+  "holdout_policy": "partition_by_instrument_session_not_document_or_url",
+  "entries": [
+    {
+      "id": "OUT-CARLSON-F83",
+      "family_id": "CARLSON-FIG1-1983-1985",
+      "source_url": "https://escholarship.org/content/qt0b40b045/qt0b40b045.pdf",
+      "locator": "printed p. -24-, fig. 1; PDF page 28 in this URL",
+      "kind": "published_chart_candidate",
+      "attribution": "attributed_calculations_not_native_output",
+      "status": "candidate",
+      "sample_split": "unassigned",
+      "input_complete": false,
+      "output_complete": false,
+      "replayable": false,
+      "numeric_holdout_eligible": false,
+      "literal_fragments": [
+        "NATAL",
+        "TROP",
+        "KOCH",
+        "H01",
+        "H02",
+        "H03",
+        "H04",
+        "H05",
+        "H06",
+        "H07",
+        "H08",
+        "H09",
+        "H10",
+        "H11",
+        "H12"
+      ],
+      "ambiguous": [
+        "P[.]LONG",
+        "Z[OD/OO/00] versus 200",
+        "zodiac glyphs and numbers not yet independently verified"
+      ],
+      "related_ledger": "docs/carlson-fig1-token-ledger.md",
+      "rights": "external copyrighted figure; link and short factual tokens only",
+      "notes": "figure shows production markings absent from 1985 edition; do not treat as machine print",
+      "raw_excerpt_status": "secondary_transcription_pending_image_recheck",
+      "raw_excerpt_reference": "docs/carlson-fig1-token-ledger.md",
+      "reported_numeric_fragments": [
+        {
+          "pair": "H01/H07",
+          "groups": [
+            "09",
+            "08"
+          ]
+        },
+        {
+          "pair": "H02/H08",
+          "groups": [
+            "05",
+            "59"
+          ]
+        },
+        {
+          "pair": "H03/H09",
+          "groups": [
+            "09",
+            "38"
+          ]
+        },
+        {
+          "pair": "H04/H10",
+          "groups": [
+            "25",
+            "08"
+          ]
+        },
+        {
+          "pair": "H05/H11",
+          "groups": [
+            "19",
+            "58"
+          ]
+        },
+        {
+          "pair": "H06/H12",
+          "groups": [
+            "14",
+            "29"
+          ]
+        }
+      ],
+      "raw_excerpt_warning": "Candidate degree/minute glyph groups from a published figure; signs, full values, input and DR-70-native output status unresolved. Not golden."
+    },
+    {
+      "id": "OUT-CARLSON-F85",
+      "family_id": "CARLSON-FIG1-1983-1985",
+      "source_url": "https://muller.lbl.gov/papers/Astrology-Carlson.pdf",
+      "locator": "Nature 318, p. 419, fig. 1; PDF page 1",
+      "kind": "published_chart_candidate",
+      "attribution": "attributed_calculations_not_native_output",
+      "status": "candidate",
+      "sample_split": "unassigned",
+      "input_complete": false,
+      "output_complete": false,
+      "replayable": false,
+      "numeric_holdout_eligible": false,
+      "literal_fragments": [
+        "NATAL",
+        "TROP",
+        "KOCH",
+        "H01",
+        "H12"
+      ],
+      "ambiguous": [
+        "last header token 200/ZOD unresolved"
+      ],
+      "related_ledger": "docs/carlson-fig1-token-ledger.md",
+      "rights": "external copyrighted figure; no facsimile in repo",
+      "notes": "derived from same editorial family as F83; never independent holdout",
+      "raw_excerpt_reference": "OUT-CARLSON-F83 (same graphic lineage; no independent numeric vector)"
+    },
+    {
+      "id": "OUT-CALCUSEUM-L606",
+      "family_id": "CALCUSEUM-L606-UNSPECIFIED-SESSION",
+      "source_url": "https://www.calcuseum.com/scrapbook/BITMAP/BONUS/10925/_SMD47724.JPG",
+      "locator": "display photograph, model DR70, catalog serial L606",
+      "kind": "device_display_photo",
+      "attribution": "device_identified_but_input_unknown",
+      "status": "interface_only",
+      "sample_split": "unassigned",
+      "input_complete": false,
+      "output_complete": false,
+      "replayable": false,
+      "numeric_holdout_eligible": false,
+      "literal_fragments": [
+        "NATAL",
+        "TROP",
+        "PRIM",
+        "SEC",
+        "TERT",
+        "SOLAR",
+        "LUNAR",
+        "DIR",
+        "CONV",
+        "ERROR",
+        "OFLOW"
+      ],
+      "ambiguous": [
+        "numeric LED reading not associated with initial state or keys"
+      ],
+      "rights": "third-party museum photograph, reference link only",
+      "notes": "fixed legends are not calculated output"
+    },
+    {
+      "id": "OUT-NOLLE-1983-INDEX",
+      "family_id": "NOLLE-1983-COMPARISON-UNRECOVERED",
+      "source_url": "https://astrologers.com/wp-content/uploads/2025/07/Index-by-Title-41-50.pdf",
+      "locator": "bibliographic reference to Today's Astrologer XLV/10, Oct. 1983, p. 9",
+      "kind": "bibliography_only",
+      "attribution": "no_output_recovered",
+      "status": "lead_only",
+      "sample_split": "unassigned",
+      "input_complete": false,
+      "output_complete": false,
+      "replayable": false,
+      "numeric_holdout_eligible": false,
+      "literal_fragments": [],
+      "ambiguous": [],
+      "rights": "index only; article not retrieved",
+      "notes": "comparison allegedly DR-70 versus ACS, but index contains no readings"
+    },
+    {
+      "id": "OUT-DEVINE-PRINTER-REPORT",
+      "family_id": "DEVINE-MEMOIR-2005-2012",
+      "source_url": "https://www.astrokot.kiev.ua/biblos/periodika/Karyera_astrologa-2_2012.pdf",
+      "locator": "republished testimony, printed p. 29",
+      "kind": "report_without_output",
+      "attribution": "reported_use_of_printer",
+      "status": "lead_only",
+      "sample_split": "unassigned",
+      "input_complete": false,
+      "output_complete": false,
+      "replayable": false,
+      "numeric_holdout_eligible": false,
+      "literal_fragments": [],
+      "ambiguous": [],
+      "rights": "reference only",
+      "notes": "printer mentioned; no printed sheet, keys or numeric output"
+    },
+    {
+      "id": "OUT-MORRIS-2025",
+      "family_id": "MORRIS-CLAIM-2025",
+      "source_url": "https://www.youtube.com/watch?v=ycv90Ab5C7g&t=1197s",
+      "locator": "19:57–20:30",
+      "kind": "unreadable_visual_lead",
+      "attribution": "possession_claim_only",
+      "status": "frame_not_read",
+      "sample_split": "unassigned",
+      "input_complete": false,
+      "output_complete": false,
+      "replayable": false,
+      "numeric_holdout_eligible": false,
+      "literal_fragments": [],
+      "ambiguous": [],
+      "rights": "video, reference only",
+      "notes": "no readable frames tied to output"
+    },
+    {
+      "id": "OUT-CAMPBELL-INF-PRINT-1988",
+      "family_id": "NICKI-MICHAELS-INF-1987-REPORTED-EVENT",
+      "source_url": "https://www.duncancampbell.org/menu/journalism/newstatesman/newstatesman-1988/Reagan%27s%20secret%20computer.pdf",
+      "locator": "New Statesman & Society, 14 Oct 1988, pp.14–15, p.14 right column / p.15 left column",
+      "kind": "report_without_output",
+      "attribution": "interview_reports_printout_checked_on_DR70",
+      "status": "documented_printout_not_reproduced",
+      "sample_split": "unassigned",
+      "input_complete": false,
+      "output_complete": false,
+      "replayable": false,
+      "numeric_holdout_eligible": false,
+      "literal_fragments": [],
+      "ambiguous": [
+        "physical printed sheet not published or transcribed",
+        "event timestamp reported 13:33 conflicts with independent contemporaneous chronology; not accepted as input",
+        "planetary qualitative commentary not literal machine output"
+      ],
+      "rights": "third-party copyrighted periodical; bibliographic link and description only",
+      "notes": "Duncan Campbell article interviews Nicky Michaels who reportedly used DR70 and consulted printout in relation to the 1987 INF treaty signing. PDF pages visually checked; the article itself does not reproduce numeric result. Lead distinct from Carlson, not an output sample."
+    },
+    {
+      "id": "OUT-DESKTHORITY-VIDEO-NYSJU",
+      "family_id": "DESKTHORITY-KANKUROU1010-DR70-VIDEO-POST",
+      "source_url": "https://streamable.com/nysju",
+      "locator": "linked in Deskthority post https://deskthority.net/viewtopic.php?t=20346; clip nysju",
+      "kind": "unreadable_visual_lead",
+      "attribution": "collector_describes_device_operation_video_not_inspected",
+      "status": "LINK_FOUND_VIDEO_NOT_READ",
+      "sample_split": "unassigned",
+      "input_complete": false,
+      "output_complete": false,
+      "replayable": false,
+      "numeric_holdout_eligible": false,
+      "literal_fragments": [],
+      "ambiguous": [
+        "video bytes and frames unavailable",
+        "numeric display transition not verified",
+        "identity of specific device and operation not independently authenticated"
+      ],
+      "rights": "third-party video, reference URL only",
+      "notes": "Key-operated power on (author's description). Three clips are associated with same collector/post; they are not independent astronomical-output sessions. Streamable failed to open; no verified archive snapshot found in checked web searches."
+    },
+    {
+      "id": "OUT-DESKTHORITY-VIDEO-34DNT",
+      "family_id": "DESKTHORITY-KANKUROU1010-DR70-VIDEO-POST",
+      "source_url": "https://streamable.com/34dnt",
+      "locator": "linked in Deskthority post https://deskthority.net/viewtopic.php?t=20346; clip 34dnt",
+      "kind": "unreadable_visual_lead",
+      "attribution": "collector_describes_device_operation_video_not_inspected",
+      "status": "LINK_FOUND_VIDEO_NOT_READ",
+      "sample_split": "unassigned",
+      "input_complete": false,
+      "output_complete": false,
+      "replayable": false,
+      "numeric_holdout_eligible": false,
+      "literal_fragments": [],
+      "ambiguous": [
+        "video bytes and frames unavailable",
+        "numeric display transition not verified",
+        "identity of specific device and operation not independently authenticated"
+      ],
+      "rights": "third-party video, reference URL only",
+      "notes": "Shift lock and indicator light (author's description). Three clips are associated with same collector/post; they are not independent astronomical-output sessions. Streamable failed to open; no verified archive snapshot found in checked web searches."
+    },
+    {
+      "id": "OUT-DESKTHORITY-VIDEO-3IWPE",
+      "family_id": "DESKTHORITY-KANKUROU1010-DR70-VIDEO-POST",
+      "source_url": "https://streamable.com/3iwpe",
+      "locator": "linked in Deskthority post https://deskthority.net/viewtopic.php?t=20346; clip 3iwpe",
+      "kind": "unreadable_visual_lead",
+      "attribution": "collector_describes_device_operation_video_not_inspected",
+      "status": "LINK_FOUND_VIDEO_NOT_READ",
+      "sample_split": "unassigned",
+      "input_complete": false,
+      "output_complete": false,
+      "replayable": false,
+      "numeric_holdout_eligible": false,
+      "literal_fragments": [],
+      "ambiguous": [
+        "video bytes and frames unavailable",
+        "numeric display transition not verified",
+        "identity of specific device and operation not independently authenticated"
+      ],
+      "rights": "third-party video, reference URL only",
+      "notes": "Several key presses; author notes rotated video. Three clips are associated with same collector/post; they are not independent astronomical-output sessions. Streamable failed to open; no verified archive snapshot found in checked web searches."
+    }
+  ]
+}
