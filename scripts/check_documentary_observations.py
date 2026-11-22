@@ -5,6 +5,7 @@ The TSV exporter can feed the separate Rust prototype in Digicomp PR #131.
 Only text from one editorial figure is checked; not a DR-70 calculation,
 angular comparison, independent visual review or golden case.
 """
+import hashlib
 import json
 import pathlib
 import sys
@@ -176,6 +177,8 @@ def report(doc):
         "candidate_house_slots=12\n"
         "candidate_numeric_groups=24\n"
         "candidate_pairs=6\n"
+        # A frozen fingerprint, not a second transcription or a DR-70 result.
+        f"candidate_pairs_sha256={hashlib.sha256(rust_pairs(doc).encode('utf-8')).hexdigest()}\n"
         "additional_unparsed_candidates=2\n"
         "additional_interpreted_values=0\n"
         f"apparent_pair_matches={matching}\n"
