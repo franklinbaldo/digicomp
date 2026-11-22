@@ -1,0 +1,49 @@
+{
+  "format_version": "0.1",
+  "classification": "PUBLISHED_INPUT_CANDIDATES_NOT_DR70_OUTPUT",
+  "source": {
+    "work": "Astrological Aspects: A Process-Oriented Approach",
+    "authors": ["Leyla Rael", "Dane Rudhyar"],
+    "publication_year_catalogued": 1980,
+    "locator": "Appendix I, secondary transcription; printed page not verified",
+    "url": "https://www.scribd.com/document/633437269/Dane-Rudhyar-Leyla-Rael-Astrological-Aspects-A-Process-Oriented-Approach-Rudhyar-Series-Aurora-Press-Inc-2018-pdf",
+    "directness": "secondary_transcription",
+    "attribution": "Appendix reportedly says example charts were recalculated using DR-70 and Campanus; published drawings are not native printouts",
+    "edition_checked": false
+  },
+  "cases": [
+    {
+      "id": "RAEL1980-CARTER",
+      "subject": "Jimmy Carter",
+      "date_as_printed": "1924-10-01",
+      "utc_time_as_printed": "13:00",
+      "latitude_as_printed": "32N02",
+      "longitude_as_printed": "84W24",
+      "time_interpretation": "assume_utc_hours_from_start_of_written_date",
+      "observed_chart_values": null,
+      "status": "INPUT_TRANSCRIPTION_UNVERIFIED"
+    },
+    {
+      "id": "RAEL1980-ERHARD",
+      "subject": "Werner Erhard",
+      "date_as_printed": "1935-09-05",
+      "utc_time_as_printed": "27:25",
+      "latitude_as_printed": "39N57",
+      "longitude_as_printed": "75W10",
+      "time_interpretation": "hypothesis_continuous_utc_hours_not_confirmed",
+      "observed_chart_values": null,
+      "status": "INPUT_TRANSCRIPTION_UNVERIFIED"
+    },
+    {
+      "id": "RAEL1980-FDR",
+      "subject": "Franklin D. Roosevelt",
+      "date_as_printed": "1882-01-30",
+      "utc_time_as_printed": "25:16",
+      "latitude_as_printed": "41N48",
+      "longitude_as_printed": "73W56",
+      "time_interpretation": "hypothesis_continuous_utc_hours_not_confirmed",
+      "observed_chart_values": null,
+      "status": "INPUT_TRANSCRIPTION_UNVERIFIED"
+    }
+  ]
+}

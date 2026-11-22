@@ -1,0 +1,58 @@
+{
+  "format_version": "0.1",
+  "id": "GE-MCRAE-CH8-MC-REFERENCE",
+  "classification": "published_geodetic_geometry_reference_NOT_DR70_OUTPUT",
+  "source": {
+    "work": "Martin Davis (ed.), From Here to There: An Astrologer's Guide to Astromapping",
+    "chapter": "Chris McRae, Looking at the World Geodetically",
+    "printed_page": 113,
+    "pdf_page_1based": 117,
+    "source_pdf_sha256": "6de749dc820f28ede9ddfb04a05af1f86e17fa1b783dd051cca36a3421678530",
+    "source_status": "owner_supplied_secondary_pdf; original_1988_book_not_inspected"
+  },
+  "conventions": {
+    "longitude": "integer arcminutes, east positive, west negative",
+    "geodetic_mc": "longitude_east_arcminutes modulo 21600; 0 corresponds to 0 Aries",
+    "signs": "Aries, Taurus, Gemini, Cancer, Leo, Virgo, Libra, Scorpio, Sagittarius, Capricorn, Aquarius, Pisces",
+    "interpretation": "reference controls for McRae's published rule ONLY; no inference about DR-70 calculation or output"
+  },
+  "dr70_output_authentication": false,
+  "dr70_numeric_holdout_eligible": false,
+  "expected_cases": [
+    {
+      "id": "GE-GREENWICH",
+      "location": "Greenwich",
+      "source_longitude_literal": "0 degrees Greenwich",
+      "longitude_east_arcminutes": 0,
+      "expected_absolute_arcminutes": 0,
+      "expected_zodiac_label": "0°00′ Aries"
+    },
+    {
+      "id": "GE-MOSCOW",
+      "location": "Moscow",
+      "source_longitude_literal": "37°E35′",
+      "longitude_east_arcminutes": 2255,
+      "expected_absolute_arcminutes": 2255,
+      "expected_zodiac_label": "7°35′ Taurus"
+    },
+    {
+      "id": "GE-NEW-YORK",
+      "location": "New York",
+      "source_longitude_literal": "73°W57′",
+      "longitude_east_arcminutes": -4437,
+      "expected_absolute_arcminutes": 17163,
+      "expected_zodiac_label": "16°03′ Capricorn"
+    }
+  ],
+  "excluded_source_examples": [
+    {
+      "location": "Berlin",
+      "source_longitude_literal": "02°E20′",
+      "source_geodetic_mc_literal": "02°20′ Aries",
+      "reason": "printed city/longitude pairing is geographically inconsistent; original preserved, excluded pending independent verification",
+      "numeric_assertion_eligible": false
+    }
+  ],
+  "test_status": "NOT_RUN_AGAINST_DR70_NO_GOLDEN",
+  "notes": "This is not a DR-70 session or output; source figure 1 on printed p. 114 / PDF p. 118 is a visual map, not certified printer output."
+}

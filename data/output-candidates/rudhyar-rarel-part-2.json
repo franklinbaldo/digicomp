@@ -1,0 +1,226 @@
+{
+  "format_version": "0.1",
+  "purpose": "Published charts attributed to DR70 recalculation, not native device printouts",
+  "entries": [
+    {
+      "id": "OUT-RUDHYAR-RAEL-J-EDGAR-HOOVER",
+      "family_id": "RUDHYAR-RAEL-ASTROLOGICAL-ASPECTS-APPENDIX-I",
+      "source_url": "https://tibetanbuddhistencyclopedia.com/en/images/b/b8/Dokumen.tips_astrological-aspects.pdf",
+      "locator": "Appendix I — Example Horoscopes — J. Edgar Hoover",
+      "kind": "published_chart_candidate",
+      "attribution": "book_explicitly_attributes_recalculation_to_DR70_not_native_print",
+      "status": "figure_listed_image_not_inspected",
+      "sample_split": "unassigned",
+      "input_complete": false,
+      "output_complete": false,
+      "replayable": false,
+      "numeric_holdout_eligible": false,
+      "literal_fragments": [],
+      "ambiguous": [
+        "individual chart image and numeric glyphs not yet inspected",
+        "publisher graphic drawn/calligraphed by Tony Milner; not printer output",
+        "dates and places of birth may reflect second-hand source"
+      ],
+      "rights": "third-party copyrighted book; record bibliographic locator and short factual fragments only",
+      "notes": "Leyla Raël and Dane Rudhyar, Astrological Aspects, preface dated 1979-03-23. Appendix identifies 20 example horoscopes, reportedly recalculated with Campanus house cusps on DR-70. Preface credits Nicki Michaels with checking on her computer; charts hand-lettered by Tony Milner. Text search confirmed table of contents; visual PDF screenshot failed."
+    },
+    {
+      "id": "OUT-RUDHYAR-RAEL-JERRY-BROWN",
+      "family_id": "RUDHYAR-RAEL-ASTROLOGICAL-ASPECTS-APPENDIX-I",
+      "source_url": "https://tibetanbuddhistencyclopedia.com/en/images/b/b8/Dokumen.tips_astrological-aspects.pdf",
+      "locator": "Appendix I — Example Horoscopes — Jerry Brown",
+      "kind": "published_chart_candidate",
+      "attribution": "book_explicitly_attributes_recalculation_to_DR70_not_native_print",
+      "status": "figure_listed_image_not_inspected",
+      "sample_split": "unassigned",
+      "input_complete": false,
+      "output_complete": false,
+      "replayable": false,
+      "numeric_holdout_eligible": false,
+      "literal_fragments": [],
+      "ambiguous": [
+        "individual chart image and numeric glyphs not yet inspected",
+        "publisher graphic drawn/calligraphed by Tony Milner; not printer output",
+        "dates and places of birth may reflect second-hand source"
+      ],
+      "rights": "third-party copyrighted book; record bibliographic locator and short factual fragments only",
+      "notes": "Leyla Raël and Dane Rudhyar, Astrological Aspects, preface dated 1979-03-23. Appendix identifies 20 example horoscopes, reportedly recalculated with Campanus house cusps on DR-70. Preface credits Nicki Michaels with checking on her computer; charts hand-lettered by Tony Milner. Text search confirmed table of contents; visual PDF screenshot failed."
+    },
+    {
+      "id": "OUT-RUDHYAR-RAEL-JIMMY-CARTER",
+      "family_id": "RUDHYAR-RAEL-ASTROLOGICAL-ASPECTS-APPENDIX-I",
+      "source_url": "https://tibetanbuddhistencyclopedia.com/en/images/b/b8/Dokumen.tips_astrological-aspects.pdf",
+      "locator": "Appendix I — Example Horoscopes — Jimmy Carter",
+      "kind": "published_chart_candidate",
+      "attribution": "book_explicitly_attributes_recalculation_to_DR70_not_native_print",
+      "status": "figure_listed_image_not_inspected",
+      "sample_split": "unassigned",
+      "input_complete": false,
+      "output_complete": false,
+      "replayable": false,
+      "numeric_holdout_eligible": false,
+      "literal_fragments": [],
+      "ambiguous": [
+        "individual chart image and numeric glyphs not yet inspected",
+        "publisher graphic drawn/calligraphed by Tony Milner; not printer output",
+        "dates and places of birth may reflect second-hand source"
+      ],
+      "rights": "third-party copyrighted book; record bibliographic locator and short factual fragments only",
+      "notes": "Leyla Raël and Dane Rudhyar, Astrological Aspects, preface dated 1979-03-23. Appendix identifies 20 example horoscopes, reportedly recalculated with Campanus house cusps on DR-70. Preface credits Nicki Michaels with checking on her computer; charts hand-lettered by Tony Milner. Text search confirmed table of contents; visual PDF screenshot failed."
+    },
+    {
+      "id": "OUT-RUDHYAR-RAEL-KRISHNAMURTI",
+      "family_id": "RUDHYAR-RAEL-ASTROLOGICAL-ASPECTS-APPENDIX-I",
+      "source_url": "https://tibetanbuddhistencyclopedia.com/en/images/b/b8/Dokumen.tips_astrological-aspects.pdf",
+      "locator": "Appendix I — Example Horoscopes — Krishnamurti",
+      "kind": "published_chart_candidate",
+      "attribution": "book_explicitly_attributes_recalculation_to_DR70_not_native_print",
+      "status": "figure_listed_image_not_inspected",
+      "sample_split": "unassigned",
+      "input_complete": false,
+      "output_complete": false,
+      "replayable": false,
+      "numeric_holdout_eligible": false,
+      "literal_fragments": [],
+      "ambiguous": [
+        "individual chart image and numeric glyphs not yet inspected",
+        "publisher graphic drawn/calligraphed by Tony Milner; not printer output",
+        "dates and places of birth may reflect second-hand source"
+      ],
+      "rights": "third-party copyrighted book; record bibliographic locator and short factual fragments only",
+      "notes": "Leyla Raël and Dane Rudhyar, Astrological Aspects, preface dated 1979-03-23. Appendix identifies 20 example horoscopes, reportedly recalculated with Campanus house cusps on DR-70. Preface credits Nicki Michaels with checking on her computer; charts hand-lettered by Tony Milner. Text search confirmed table of contents; visual PDF screenshot failed."
+    },
+    {
+      "id": "OUT-RUDHYAR-RAEL-MOHANDAS-GANDHI",
+      "family_id": "RUDHYAR-RAEL-ASTROLOGICAL-ASPECTS-APPENDIX-I",
+      "source_url": "https://tibetanbuddhistencyclopedia.com/en/images/b/b8/Dokumen.tips_astrological-aspects.pdf",
+      "locator": "Appendix I — Example Horoscopes — Mohandas Gandhi",
+      "kind": "published_chart_candidate",
+      "attribution": "book_explicitly_attributes_recalculation_to_DR70_not_native_print",
+      "status": "figure_listed_image_not_inspected",
+      "sample_split": "unassigned",
+      "input_complete": false,
+      "output_complete": false,
+      "replayable": false,
+      "numeric_holdout_eligible": false,
+      "literal_fragments": [],
+      "ambiguous": [
+        "individual chart image and numeric glyphs not yet inspected",
+        "publisher graphic drawn/calligraphed by Tony Milner; not printer output",
+        "dates and places of birth may reflect second-hand source"
+      ],
+      "rights": "third-party copyrighted book; record bibliographic locator and short factual fragments only",
+      "notes": "Leyla Raël and Dane Rudhyar, Astrological Aspects, preface dated 1979-03-23. Appendix identifies 20 example horoscopes, reportedly recalculated with Campanus house cusps on DR-70. Preface credits Nicki Michaels with checking on her computer; charts hand-lettered by Tony Milner. Text search confirmed table of contents; visual PDF screenshot failed."
+    },
+    {
+      "id": "OUT-RUDHYAR-RAEL-NIELS-BOHR",
+      "family_id": "RUDHYAR-RAEL-ASTROLOGICAL-ASPECTS-APPENDIX-I",
+      "source_url": "https://tibetanbuddhistencyclopedia.com/en/images/b/b8/Dokumen.tips_astrological-aspects.pdf",
+      "locator": "Appendix I — Example Horoscopes — Niels Bohr",
+      "kind": "published_chart_candidate",
+      "attribution": "book_explicitly_attributes_recalculation_to_DR70_not_native_print",
+      "status": "figure_listed_image_not_inspected",
+      "sample_split": "unassigned",
+      "input_complete": false,
+      "output_complete": false,
+      "replayable": false,
+      "numeric_holdout_eligible": false,
+      "literal_fragments": [],
+      "ambiguous": [
+        "individual chart image and numeric glyphs not yet inspected",
+        "publisher graphic drawn/calligraphed by Tony Milner; not printer output",
+        "dates and places of birth may reflect second-hand source"
+      ],
+      "rights": "third-party copyrighted book; record bibliographic locator and short factual fragments only",
+      "notes": "Leyla Raël and Dane Rudhyar, Astrological Aspects, preface dated 1979-03-23. Appendix identifies 20 example horoscopes, reportedly recalculated with Campanus house cusps on DR-70. Preface credits Nicki Michaels with checking on her computer; charts hand-lettered by Tony Milner. Text search confirmed table of contents; visual PDF screenshot failed."
+    },
+    {
+      "id": "OUT-RUDHYAR-RAEL-PAUL-CASE",
+      "family_id": "RUDHYAR-RAEL-ASTROLOGICAL-ASPECTS-APPENDIX-I",
+      "source_url": "https://tibetanbuddhistencyclopedia.com/en/images/b/b8/Dokumen.tips_astrological-aspects.pdf",
+      "locator": "Appendix I — Example Horoscopes — Paul Case",
+      "kind": "published_chart_candidate",
+      "attribution": "book_explicitly_attributes_recalculation_to_DR70_not_native_print",
+      "status": "figure_listed_image_not_inspected",
+      "sample_split": "unassigned",
+      "input_complete": false,
+      "output_complete": false,
+      "replayable": false,
+      "numeric_holdout_eligible": false,
+      "literal_fragments": [],
+      "ambiguous": [
+        "individual chart image and numeric glyphs not yet inspected",
+        "publisher graphic drawn/calligraphed by Tony Milner; not printer output",
+        "dates and places of birth may reflect second-hand source"
+      ],
+      "rights": "third-party copyrighted book; record bibliographic locator and short factual fragments only",
+      "notes": "Leyla Raël and Dane Rudhyar, Astrological Aspects, preface dated 1979-03-23. Appendix identifies 20 example horoscopes, reportedly recalculated with Campanus house cusps on DR-70. Preface credits Nicki Michaels with checking on her computer; charts hand-lettered by Tony Milner. Text search confirmed table of contents; visual PDF screenshot failed."
+    },
+    {
+      "id": "OUT-RUDHYAR-RAEL-RAM-DASS",
+      "family_id": "RUDHYAR-RAEL-ASTROLOGICAL-ASPECTS-APPENDIX-I",
+      "source_url": "https://tibetanbuddhistencyclopedia.com/en/images/b/b8/Dokumen.tips_astrological-aspects.pdf",
+      "locator": "Appendix I — Example Horoscopes — Ram Dass",
+      "kind": "published_chart_candidate",
+      "attribution": "book_explicitly_attributes_recalculation_to_DR70_not_native_print",
+      "status": "figure_listed_image_not_inspected",
+      "sample_split": "unassigned",
+      "input_complete": false,
+      "output_complete": false,
+      "replayable": false,
+      "numeric_holdout_eligible": false,
+      "literal_fragments": [],
+      "ambiguous": [
+        "individual chart image and numeric glyphs not yet inspected",
+        "publisher graphic drawn/calligraphed by Tony Milner; not printer output",
+        "dates and places of birth may reflect second-hand source"
+      ],
+      "rights": "third-party copyrighted book; record bibliographic locator and short factual fragments only",
+      "notes": "Leyla Raël and Dane Rudhyar, Astrological Aspects, preface dated 1979-03-23. Appendix identifies 20 example horoscopes, reportedly recalculated with Campanus house cusps on DR-70. Preface credits Nicki Michaels with checking on her computer; charts hand-lettered by Tony Milner. Text search confirmed table of contents; visual PDF screenshot failed."
+    },
+    {
+      "id": "OUT-RUDHYAR-RAEL-VASLAV-NIJINSKY",
+      "family_id": "RUDHYAR-RAEL-ASTROLOGICAL-ASPECTS-APPENDIX-I",
+      "source_url": "https://tibetanbuddhistencyclopedia.com/en/images/b/b8/Dokumen.tips_astrological-aspects.pdf",
+      "locator": "Appendix I — Example Horoscopes — Vaslav Nijinsky",
+      "kind": "published_chart_candidate",
+      "attribution": "book_explicitly_attributes_recalculation_to_DR70_not_native_print",
+      "status": "figure_listed_image_not_inspected",
+      "sample_split": "unassigned",
+      "input_complete": false,
+      "output_complete": false,
+      "replayable": false,
+      "numeric_holdout_eligible": false,
+      "literal_fragments": [],
+      "ambiguous": [
+        "individual chart image and numeric glyphs not yet inspected",
+        "publisher graphic drawn/calligraphed by Tony Milner; not printer output",
+        "dates and places of birth may reflect second-hand source"
+      ],
+      "rights": "third-party copyrighted book; record bibliographic locator and short factual fragments only",
+      "notes": "Leyla Raël and Dane Rudhyar, Astrological Aspects, preface dated 1979-03-23. Appendix identifies 20 example horoscopes, reportedly recalculated with Campanus house cusps on DR-70. Preface credits Nicki Michaels with checking on her computer; charts hand-lettered by Tony Milner. Text search confirmed table of contents; visual PDF screenshot failed."
+    },
+    {
+      "id": "OUT-RUDHYAR-RAEL-WERNER-ERHARD",
+      "family_id": "RUDHYAR-RAEL-ASTROLOGICAL-ASPECTS-APPENDIX-I",
+      "source_url": "https://tibetanbuddhistencyclopedia.com/en/images/b/b8/Dokumen.tips_astrological-aspects.pdf",
+      "locator": "Appendix I — Example Horoscopes — Werner Erhard",
+      "kind": "published_chart_candidate",
+      "attribution": "book_explicitly_attributes_recalculation_to_DR70_not_native_print",
+      "status": "figure_listed_image_not_inspected",
+      "sample_split": "unassigned",
+      "input_complete": false,
+      "output_complete": false,
+      "replayable": false,
+      "numeric_holdout_eligible": false,
+      "literal_fragments": [],
+      "ambiguous": [
+        "individual chart image and numeric glyphs not yet inspected",
+        "publisher graphic drawn/calligraphed by Tony Milner; not printer output",
+        "dates and places of birth may reflect second-hand source"
+      ],
+      "rights": "third-party copyrighted book; record bibliographic locator and short factual fragments only",
+      "notes": "Leyla Raël and Dane Rudhyar, Astrological Aspects, preface dated 1979-03-23. Appendix identifies 20 example horoscopes, reportedly recalculated with Campanus house cusps on DR-70. Preface credits Nicki Michaels with checking on her computer; charts hand-lettered by Tony Milner. Text search confirmed table of contents; visual PDF screenshot failed."
+    }
+  ]
+}
