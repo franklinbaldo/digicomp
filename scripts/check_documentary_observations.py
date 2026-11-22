@@ -143,10 +143,16 @@ def validate(doc, catalog, golden):
          "DATE REC[...] alongside C1 SEC", "unresolved_not_birth_input"),
         ("right-aspect-grid-first-data-row", "07 54 47",
          "C1 NATAL aspect grid under ORB", "unresolved_not_angular_comparison"),
+        ("left-secondary-c1-sec-first-row", "17 […] 47 05",
+         "first printed row beneath C1 SEC TROP P.LONG KOCH; intermediate glyph unresolved",
+         "unresolved_not_longitude"),
+        ("left-secondary-c1-sec-second-row", "05 […] 52",
+         "second printed row beneath C1 SEC TROP P.LONG KOCH; intermediate glyph unresolved",
+         "unresolved_not_longitude"),
     )
     candidates = doc.get("additional_literal_candidates")
     if not isinstance(candidates, list) or len(candidates) != len(expected_regions):
-        errors.append("additional candidate regions must have two unparsed entries")
+        errors.append("additional candidate regions must have four unparsed entries")
     else:
         allowed = {"region", "literal_candidate", "context", "reading_status",
                    "semantic_role", "interpreted_value"}
@@ -213,7 +219,7 @@ def report(doc):
         "candidate_pairs=6\n"
         # A frozen fingerprint, not a second transcription or a DR-70 result.
         f"candidate_pairs_sha256={hashlib.sha256(rust_pairs(doc).encode('utf-8')).hexdigest()}\n"
-        "additional_unparsed_candidates=2\n"
+        "additional_unparsed_candidates=4\n"
         "additional_interpreted_values=0\n"
         f"apparent_pair_matches={matching}\n"
         f"apparent_pair_differences={6-matching}\n"
