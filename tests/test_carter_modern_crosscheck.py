@@ -162,7 +162,7 @@ class CarterModernControlTest(unittest.TestCase):
         )
         literal = clock["literal"]
         self.assertIsInstance(literal, str)
-        self.assertRegex(literal, r"^(?:[01]?\\d|2[0-3]):[0-5]\\d:[0-5]\\d$")
+        self.assertRegex(literal, r"^(?:[01]?\d|2[0-3]):[0-5]\d:[0-5]\d$")
         hour, minute, second = map(int, literal.split(":"))
         printed_seconds = hour * 3600 + minute * 60 + second
 
