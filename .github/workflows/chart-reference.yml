@@ -34,6 +34,8 @@ jobs:
           python -c "import json; r=json.load(open('/tmp/carter-additional.json')); assert r['dr70_fidelity']=='NOT_RUN_NO_GOLDEN' and r['historical_chart_residual']=='NOT_RUN_NO_INSPECTED_1980_NUMBERS' and [v['modern_deviation_signed_arcseconds'] for v in r['relations']]==[-697,-955,-1966]"
       - name: Pin external Carter timezone disagreement without Swiss
         run: python -S -B -m unittest discover -s tests -p 'test_carter_timezone_variant.py' -v
+      - name: Validate documentary modern table without Swiss
+        run: python -S -B -m unittest discover -s tests -p 'test_carter_modern_table.py' -v
       - name: Install external research-only ephemeris binding
         run: python -m pip install 'pyswisseph==2.10.3.2'
       - name: Test modern output, without DR-70 fidelity claims
@@ -63,3 +65,9 @@ jobs:
         run: |
           python -m scripts.compute_chart_reference --id RAEL1980-CARTER > /tmp/carter-modern.json
           python -c "import json; x=json.load(open('/tmp/carter-modern.json')); assert x['classification']=='MODERN_REFERENCE_NOT_DR70' and x['dr70_fidelity']=='NOT_RUN_NO_GOLDEN' and len(x['cusps_deg'])==12"
+      - name: Render source-labelled 2023 versus modern output, without DR-70 claims
+        run: |
+          python -B -m scripts.carter_modern_table > /tmp/carter-modern-table.txt
+          grep -F 'Modern comparison: 9/9 within ±1 arcsecond' /tmp/carter-modern-table.txt
+          grep -F '1980 printed chart: NOT_RUN_NO_INSPECTED_1980_NUMBERS' /tmp/carter-modern-table.txt
+          grep -F 'DR-70 instrument fidelity: NOT_RUN_NO_GOLDEN' /tmp/carter-modern-table.txt
