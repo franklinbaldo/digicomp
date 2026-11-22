@@ -111,7 +111,7 @@ class CarterTimezoneSourceVariantTest(unittest.TestCase):
         )
         self.assertEqual(alternative_utc.isoformat(), "1924-10-01T12:00:00")
         self.assertEqual(anchor_utc - alternative_utc, timedelta(minutes=60))
-        # Two conventions: neither is verified as the historical legal offset.
+        # This source comparison alone cannot establish the legal clock; see 1919-law test.
         self.assertTrue(
             alternative["comparison_scope"]["source_timezone_convention_disagreement"]
         )
