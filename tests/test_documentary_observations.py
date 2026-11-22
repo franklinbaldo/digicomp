@@ -86,13 +86,13 @@ class DocumentaryCarlsonBridgeTest(unittest.TestCase):
         source["reported_numeric_fragments"][0]["groups"] = ["10", "08"]
         self.assertEqual(validate(altered_doc, altered_catalog, self.golden), [])
         changed_report = report(altered_doc)
-        self.assertIn("apparent_pair_matches=6\\n", changed_report)
+        self.assertIn("apparent_pair_matches=6\n", changed_report)
         self.assertNotEqual(changed_report, self.baseline)
 
         # Negative ablation: without the new digest the old report is identical,
         # even though the emitted TSV has different literal candidate groups.
         def without_digest(value):
-            return "\\n".join(line for line in value.splitlines()
+            return "\n".join(line for line in value.splitlines()
                               if not line.startswith("candidate_pairs_sha256="))
         self.assertEqual(without_digest(changed_report),
                          without_digest(self.baseline))
