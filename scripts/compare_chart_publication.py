@@ -14,6 +14,12 @@ DEFAULT_PUBLICATION = (
 _ALLOWED_FIELDS = {f"cusp_{i}" for i in range(1, 13)} | {
     "ascendant", "midheaven", "sun", "moon", "mercury", "venus", "mars", "jupiter", "saturn"
 }
+_SIGNS = (
+    "Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo",
+    "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"
+)
+_ABSOLUTE = "ecliptic_longitude_0_360_deg"
+_UNRESOLVED = "unresolved_zodiac_notation"
 
 
 def strict_json(path: Path) -> dict:
@@ -49,6 +55,30 @@ def modern_value(reference: dict, field: str) -> float:
     return reference["planet_longitudes"][field]["longitude_deg"]
 
 
+def validate_notation(field: str, observed: float, notation: dict) -> None:
+    """Require traceable printed notation; never guess a missing zodiac sign."""
+    signed_circular_residual(observed, 0)
+    if not isinstance(notation, dict) or not isinstance(notation.get("literal"), str) or not notation["literal"].strip():
+        raise ValueError(f"{field}: printed literal is required for review")
+    kind = notation.get("kind")
+    if kind == "absolute_longitude_0_360_deg":
+        if set(notation) != {"kind", "literal"}:
+            raise ValueError(f"{field}: unexpected absolute-notation keys")
+        return
+    if kind != "zodiac_sign_degree":
+        raise ValueError(f"{field}: unknown zodiac notation kind")
+    if set(notation) != {"kind", "literal", "sign", "degree_within_sign"}:
+        raise ValueError(f"{field}: sign and within-sign degree required")
+    sign = notation["sign"]
+    degree = notation["degree_within_sign"]
+    if sign not in _SIGNS or isinstance(degree, bool) or not isinstance(degree, (int, float)):
+        raise ValueError(f"{field}: invalid sign or within-sign degree")
+    if not math.isfinite(degree) or not 0 <= degree < 30:
+        raise ValueError(f"{field}: within-sign degree must be in [0,30)")
+    if not math.isclose(observed, 30 * _SIGNS.index(sign) + degree, rel_tol=0, abs_tol=1e-9):
+        raise ValueError(f"{field}: absolute longitude disagrees with printed sign+degree")
+
+
 def compare(reference: dict, publication: dict) -> dict:
     if reference.get("classification") != "MODERN_REFERENCE_NOT_DR70":
         raise ValueError("Reference is not explicitly labelled as MODERN_REFERENCE_NOT_DR70")
@@ -72,12 +102,30 @@ def compare(reference: dict, publication: dict) -> dict:
             and source.get("reviewed_by") and source.get("source_url")):
         raise ValueError("Published values require visual inspection, exact page and reviewer")
     values = publication.get("published_values_deg")
+    convention = publication.get("angular_convention")
+    if convention == _UNRESOLVED:
+        pending = publication.get("unresolved_fields")
+        if values != {} or not isinstance(pending, list) or not pending or not all(isinstance(f, str) and f in _ALLOWED_FIELDS for f in pending) or len(pending) != len(set(pending)):
+            raise ValueError("Unresolved zodiac notation requires pending fields and no numeric values")
+        return {
+            "classification": "EDITORIAL_CHART_VS_MODERN_REFERENCE_NOT_DR70",
+            "candidate_id": reference["input_candidate_id"],
+            "status": "NOT_COMPARABLE_UNRESOLVED_ZODIAC_NOTATION",
+            "source_locator": source["page_locator"], "unresolved_fields": sorted(pending),
+            "dr70_fidelity": "NOT_RUN_NO_GOLDEN", "residuals_deg": []
+        }
+    if convention != _ABSOLUTE:
+        raise ValueError("Explicit ecliptic_longitude_0_360_deg convention required for residuals")
     if not isinstance(values, dict) or not values:
         raise ValueError("Manual transcription needs at least one observed chart value")
+    notation = publication.get("source_notation")
+    if not isinstance(notation, dict) or notation.keys() != values.keys():
+        raise ValueError("Each numeric field requires exactly one printed-notation record")
     rows = []
     for field, observed in sorted(values.items()):
         if field not in _ALLOWED_FIELDS:
             raise ValueError(f"Unknown/unsupported field: {field}")
+        validate_notation(field, observed, notation[field])
         modern = modern_value(reference, field)
         delta = signed_circular_residual(observed, modern)
         rows.append({"field": field, "published_deg": observed,
