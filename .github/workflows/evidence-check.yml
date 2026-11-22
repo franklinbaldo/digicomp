@@ -28,6 +28,15 @@ jobs:
         run: |
           cargo run --quiet --manifest-path experiments/evidence-check/Cargo.toml --bin published_layout > /tmp/published-layout.txt
           diff -u experiments/evidence-check/published-layout-baseline.txt /tmp/published-layout.txt
+      - name: Stage pinned canonical catalog for stacked branch without #94
+        run: |
+          if test ! -f data/output-candidates/catalog.json; then
+            git fetch --no-tags --depth=1 origin b4bbb8d034bdd2dfeccb2dde40f901717bb525a1
+            test "$(git rev-parse FETCH_HEAD:data/output-candidates/catalog.json)" = "b037faf3f481ab49872b2bdd6b9f757f096c950a"
+            mkdir -p data/output-candidates
+            git show FETCH_HEAD:data/output-candidates/catalog.json > data/output-candidates/catalog.json
+            echo "Temporary, pinned catalog from main@b4bbb8d; branch tree itself has no #94 catalog"
+          fi
       - name: Verify candidate catalog bridge (positive and adversarial)
         run: |
           python3 -m unittest discover -s experiments/evidence-check/tests -p 'test_catalog_bridge.py' -v
