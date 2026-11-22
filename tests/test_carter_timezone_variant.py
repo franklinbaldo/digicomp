@@ -3,7 +3,8 @@
 The modern AstroDienst chart reproduces 07:00 local / 13:00 UT.
 The current Astro-Charts web page displays 07:00 local / UTC -05:00,
 which implies 12:00 UT. Both are secondary modern chart sources.
-The original civil-time rule and 1980 chart angles are not established.
+A 1919 Georgia statute supports legal Central time in 1924, but no original
+birth record, actual clock practice, or 1980 chart angles were inspected.
 No ephemeris dependency is required for these source-contract tests.
 """
 
@@ -115,6 +116,42 @@ class CarterTimezoneSourceVariantTest(unittest.TestCase):
             alternative["comparison_scope"]["source_timezone_convention_disagreement"]
         )
 
+    def test_georgia_1919_law_supports_legal_cst_without_birth_clock_proof(self):
+        evidence = self.variant["historical_civil_time_evidence"]
+        law = evidence["law"]
+        self.assertEqual(evidence["status"],
+                         "LEGAL_CENTRAL_STANDARD_TIME_SUPPORTED_NO_DIRECT_BIRTH_RECORD_INSPECTION")
+        self.assertEqual(law["official_digitization"],
+                         "https://dlg.usg.edu/record/dlg_zlgl_131769784")
+        self.assertEqual(law["title"],
+                         "Georgia Acts and Resolutions (1919), No. 251, TIME STANDARD FIXED")
+        self.assertEqual(law["printed_page"], 372)
+        self.assertLessEqual(law["legal_clock_effective_date"], evidence["date_in_question"])
+        self.assertEqual(law["prescribed_statewide_standard"], "Central time")
+        self.assertEqual(law["prescribed_utc_offset"], "-06:00")
+        self.assertEqual(evidence["subsequent_change_context"]
+                         ["described_statewide_eastern_time_change_date"], "1941-03-21")
+        catalogue = evidence["independent_birth_chart_catalogue"]
+        self.assertEqual(catalogue["displayed_timezone"],
+                         "CST h6w (is standard time)")
+        self.assertEqual(catalogue["displayed_local_time"], "07:00")
+        self.assertIn("BC/BR in hand", catalogue["displayed_birth_record_claim"])
+        self.assertEqual(evidence["legal_time_conversion_candidate"], {
+            "civil_time": "1924-10-01T07:00",
+            "offset": "-06:00",
+            "corresponding_universal_time": "1924-10-01T13:00",
+        })
+        local = datetime.fromisoformat("1924-10-01T07:00")
+        legal_utc = local - timedelta(minutes=offset_minutes(law["prescribed_utc_offset"]))
+        self.assertEqual(legal_utc.isoformat(), "1924-10-01T13:00:00")
+        self.assertEqual(self.anchor["input_as_published"]["universal_time"], "13:00")
+        # Statute and a secondary catalogue do not authenticate an actual birth clock.
+        for field in ("original_birth_certificate_inspected",
+                      "actual_birth_clock_convention_independently_verified",
+                      "historical_book_chart_numbers_inspected",
+                      "instrument_output_verified"):
+            self.assertIs(evidence[field], False)
+
     def test_four_displayed_angle_gaps_are_minute_resolution_only(self):
         # Deliberately discard seconds from the AstroDienst control too.
         # This reports differences BETWEEN DISPLAYED MINUTE COMPONENTS,
@@ -146,7 +183,7 @@ class CarterTimezoneSourceVariantTest(unittest.TestCase):
                          "NOT_RUN_NO_INSPECTED_1980_NUMBERS")
         self.assertEqual(scope["dr70_fidelity"], "NOT_RUN_NO_GOLDEN")
         self.assertEqual(scope["resolution"],
-                         "UNRESOLVED_WHICH_HISTORICAL_TIMEZONE_APPLIES")
+                         "LEGAL_CST_MINUS_06_SUPPORTED_BIRTH_CLOCK_NOT_INDEPENDENTLY_VERIFIED")
         self.assertIs(scope["golden_instrumental"], False)
         self.assertIs(
             self.anchor["scope"]["golden_instrumental"], False
