@@ -8,5 +8,7 @@
   "state": "INDEXED_CAPTION_ONLY",
   "image_evidence": null,
   "angular_transcriptions": [],
-  "instrumental_status": "NO_DR70_GOLDEN"
+  "instrumental_status": "NO_DR70_GOLDEN",
+  "ocr_isbn": "2-268-02638-8",
+  "edition_identity": "BNF_1997_ISBN_MATCH_NOT_SCAN_AUTHENTICATION"
 }
