@@ -1,0 +1,220 @@
+{
+  "format_version": "1.0",
+  "classification": "PUBLISHED_EDITORIAL_CHART_WITH_REPORTED_DR70_RECALCULATION",
+  "case_id": "RAEL1980-CARTER",
+  "source_family": "RUDHYAR-RAEL-ASTROLOGICAL-ASPECTS-APPENDIX-I",
+  "source": {
+    "work": "Astrological Aspects: A Process-Oriented Approach",
+    "copy": "Mindfire web capture, underlying print edition undetermined",
+    "url": "https://tibetanbuddhistencyclopedia.com/en/images/b/b8/Dokumen.tips_astrological-aspects.pdf",
+    "retrieved_on": "2026-11-23",
+    "sha256": "bb15436c51d12d1524ed8fd9ae0a6db92c553ddde4f6f1a11e3b1917ca85c2fb",
+    "size_bytes": 3139655,
+    "chart_pdf_page": 145,
+    "recalculation_statement_pdf_page": 125,
+    "transcription": "Single visual reading before numerical comparison"
+  },
+  "input_as_published": {
+    "subject": "Jimmy Carter",
+    "date": "Oct. 1, 1924",
+    "time": "13:00 U.T.",
+    "latitude": "32N02",
+    "longitude": "84W24"
+  },
+  "house_system_reported": "Campanus",
+  "historical_cusps": [
+    {
+      "house": 1,
+      "sign": "Libra",
+      "degrees": 26,
+      "minutes": 6
+    },
+    {
+      "house": 2,
+      "sign": "Scorpio",
+      "degrees": 26,
+      "minutes": 39
+    },
+    {
+      "house": 3,
+      "sign": "Sagittarius",
+      "degrees": 27,
+      "minutes": 51
+    },
+    {
+      "house": 4,
+      "sign": "Capricorn",
+      "degrees": 28,
+      "minutes": 28
+    },
+    {
+      "house": 5,
+      "sign": "Aquarius",
+      "degrees": 27,
+      "minutes": 53
+    },
+    {
+      "house": 6,
+      "sign": "Pisces",
+      "degrees": 26,
+      "minutes": 44
+    },
+    {
+      "house": 7,
+      "sign": "Aries",
+      "degrees": 26,
+      "minutes": 6
+    },
+    {
+      "house": 8,
+      "sign": "Taurus",
+      "degrees": 26,
+      "minutes": 39
+    },
+    {
+      "house": 9,
+      "sign": "Gemini",
+      "degrees": 27,
+      "minutes": 51
+    },
+    {
+      "house": 10,
+      "sign": "Cancer",
+      "degrees": 28,
+      "minutes": 28
+    },
+    {
+      "house": 11,
+      "sign": "Leo",
+      "degrees": 27,
+      "minutes": 53
+    },
+    {
+      "house": 12,
+      "sign": "Virgo",
+      "degrees": 26,
+      "minutes": 44
+    }
+  ],
+  "modern_control": {
+    "publication": "Jimmy Carter and the Knight of Pentacles Card",
+    "author": "Naomi Rabinowitz",
+    "chart_provider": "Astrodienst",
+    "chart_date": "2023-02-19",
+    "chart_house_system": "Whole Signs",
+    "pdf_page": 12,
+    "url": "https://static1.squarespace.com/static/625588022bac29595ab0c386/t/652c6205bd50527fa4e8778a/1697407494104/Jimmy%2BCarter%2Band%2Bthe%2BKnight%2Bof%2BPentacles_final.pdf",
+    "sha256": "9ca255290905edc68704948ee3b6fb8f71fd503c1fde8873a40eef1c79c10dc2"
+  },
+  "comparisons": [
+    {
+      "id": "sun",
+      "sign": "Libra",
+      "degrees": 8,
+      "historical_minutes": 4,
+      "modern_minutes": 3,
+      "modern_seconds": 42,
+      "historical_minus_modern_arcseconds": 18
+    },
+    {
+      "id": "moon",
+      "sign": "Scorpio",
+      "degrees": 13,
+      "historical_minutes": 48,
+      "modern_minutes": 47,
+      "modern_seconds": 47,
+      "historical_minus_modern_arcseconds": 13
+    },
+    {
+      "id": "mercury",
+      "sign": "Virgo",
+      "degrees": 21,
+      "historical_minutes": 11,
+      "modern_minutes": 11,
+      "modern_seconds": 20,
+      "historical_minus_modern_arcseconds": -20
+    },
+    {
+      "id": "venus",
+      "sign": "Leo",
+      "degrees": 23,
+      "historical_minutes": 20,
+      "modern_minutes": 19,
+      "modern_seconds": 54,
+      "historical_minus_modern_arcseconds": 6
+    },
+    {
+      "id": "mars",
+      "sign": "Aquarius",
+      "degrees": 25,
+      "historical_minutes": 53,
+      "modern_minutes": 53,
+      "modern_seconds": 5,
+      "historical_minus_modern_arcseconds": -5
+    },
+    {
+      "id": "jupiter",
+      "sign": "Sagittarius",
+      "degrees": 14,
+      "historical_minutes": 26,
+      "modern_minutes": 25,
+      "modern_seconds": 51,
+      "historical_minus_modern_arcseconds": 9
+    },
+    {
+      "id": "saturn",
+      "sign": "Scorpio",
+      "degrees": 1,
+      "historical_minutes": 55,
+      "modern_minutes": 54,
+      "modern_seconds": 52,
+      "historical_minus_modern_arcseconds": 8
+    },
+    {
+      "id": "uranus",
+      "sign": "Pisces",
+      "degrees": 18,
+      "historical_minutes": 47,
+      "modern_minutes": 47,
+      "modern_seconds": 25,
+      "historical_minus_modern_arcseconds": -25
+    },
+    {
+      "id": "neptune",
+      "sign": "Leo",
+      "degrees": 21,
+      "historical_minutes": 48,
+      "modern_minutes": 47,
+      "modern_seconds": 17,
+      "historical_minus_modern_arcseconds": 43
+    },
+    {
+      "id": "pluto",
+      "sign": "Cancer",
+      "degrees": 13,
+      "historical_minutes": 32,
+      "modern_minutes": 31,
+      "modern_seconds": 31,
+      "historical_minus_modern_arcseconds": 29
+    },
+    {
+      "id": "ascendant",
+      "sign": "Libra",
+      "degrees": 26,
+      "historical_minutes": 6,
+      "modern_minutes": 5,
+      "modern_seconds": 38,
+      "historical_minus_modern_arcseconds": 22
+    },
+    {
+      "id": "midheaven",
+      "sign": "Cancer",
+      "degrees": 28,
+      "historical_minutes": 28,
+      "modern_minutes": 27,
+      "modern_seconds": 53,
+      "historical_minus_modern_arcseconds": 7
+    }
+  ],
+  "dr70_fidelity": "NOT_RUN_NO_GOLDEN"
+}

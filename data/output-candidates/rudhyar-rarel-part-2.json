@@ -50,10 +50,10 @@
       "id": "OUT-RUDHYAR-RAEL-JIMMY-CARTER",
       "family_id": "RUDHYAR-RAEL-ASTROLOGICAL-ASPECTS-APPENDIX-I",
       "source_url": "https://tibetanbuddhistencyclopedia.com/en/images/b/b8/Dokumen.tips_astrological-aspects.pdf",
-      "locator": "Appendix I — Example Horoscopes — Jimmy Carter",
+      "locator": "Appendix I — Example Horoscopes — Jimmy Carter, Mindfire PDF page 145",
       "kind": "published_chart_candidate",
       "attribution": "book_explicitly_attributes_recalculation_to_DR70_not_native_print",
-      "status": "figure_listed_image_not_inspected",
+      "status": "published_figure_visually_transcribed",
       "sample_split": "unassigned",
       "input_complete": false,
       "output_complete": false,
@@ -61,12 +61,12 @@
       "numeric_holdout_eligible": false,
       "literal_fragments": [],
       "ambiguous": [
-        "individual chart image and numeric glyphs not yet inspected",
+        "single visual transcription; independent review and as-keyed inputs unavailable",
         "publisher graphic drawn/calligraphed by Tony Milner; not printer output",
         "dates and places of birth may reflect second-hand source"
       ],
       "rights": "third-party copyrighted book; record bibliographic locator and short factual fragments only",
-      "notes": "Leyla Raël and Dane Rudhyar, Astrological Aspects, preface dated 1979-03-23. Appendix identifies 20 example horoscopes, reportedly recalculated with Campanus house cusps on DR-70. Preface credits Nicki Michaels with checking on her computer; charts hand-lettered by Tony Milner. Text search confirmed table of contents; visual PDF screenshot failed."
+      "notes": "Leyla Raël and Dane Rudhyar, Astrological Aspects, preface dated 1979-03-23. Appendix identifies 20 example horoscopes, reportedly recalculated with Campanus house cusps on DR-70. Preface credits Nicki Michaels with checking on her computer; charts hand-lettered by Tony Milner. The English Mindfire composite was inspected visually. See data/documentary-observations/rael-rudhyar-carter.json for printed inputs, cusps and angular comparisons."
     },
     {
       "id": "OUT-RUDHYAR-RAEL-KRISHNAMURTI",
