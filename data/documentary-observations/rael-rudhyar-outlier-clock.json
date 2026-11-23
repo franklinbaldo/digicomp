@@ -1,0 +1,143 @@
+{
+  "classification": "EDITORIAL_SENSITIVITY_ANALYSIS_NOT_DEVICE_FIDELITY",
+  "engine": {
+    "name": "Swiss Ephemeris",
+    "version": "2.10.03",
+    "binding": "pyswisseph==2.10.3.2"
+  },
+  "offset_grid_seconds": [
+    -180,
+    180,
+    1
+  ],
+  "source_sha256": "fdcc1bccc5f7b5145f82e18bc96be2b90ecd8dfdcf430c0c205844f93630c15f",
+  "rows": [
+    {
+      "pdf_page": 138,
+      "subject": "Franklin D. Roosevelt",
+      "figure_caption": {
+        "offset_s": 0,
+        "ascendant_arcsec": 433.62,
+        "midheaven_arcsec": 103.17,
+        "cusp_11_arcsec": 538.0
+      },
+      "best_midheaven_fit": {
+        "offset_s": 7,
+        "ascendant_arcsec": 351.13,
+        "midheaven_arcsec": 5.54,
+        "cusp_11_arcsec": 444.31
+      },
+      "offsets_within_30_arcsec_midheaven": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "offsets_also_within_60_arcsec_ascendant_and_cusp_11": [],
+      "offsets_within_60_arcsec_all_three": []
+    },
+    {
+      "pdf_page": 139,
+      "subject": "George Bernard Shaw",
+      "figure_caption": {
+        "offset_s": 0,
+        "ascendant_arcsec": 113.82,
+        "midheaven_arcsec": 162.55,
+        "cusp_11_arcsec": 222.22
+      },
+      "best_midheaven_fit": {
+        "offset_s": 11,
+        "ascendant_arcsec": -63.26,
+        "midheaven_arcsec": -1.77,
+        "cusp_11_arcsec": 18.79
+      },
+      "offsets_within_30_arcsec_midheaven": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "offsets_also_within_60_arcsec_ascendant_and_cusp_11": [
+        9,
+        10
+      ],
+      "offsets_within_60_arcsec_all_three": [
+        9,
+        10
+      ]
+    },
+    {
+      "pdf_page": 145,
+      "subject": "Jimmy Carter",
+      "figure_caption": {
+        "offset_s": 0,
+        "ascendant_arcsec": 21.99,
+        "midheaven_arcsec": 7.5,
+        "cusp_11_arcsec": -32.88
+      },
+      "best_midheaven_fit": {
+        "offset_s": 1,
+        "ascendant_arcsec": 9.26,
+        "midheaven_arcsec": -6.89,
+        "cusp_11_arcsec": -47.07
+      },
+      "offsets_within_30_arcsec_midheaven": [
+        -1,
+        0,
+        1,
+        2
+      ],
+      "offsets_also_within_60_arcsec_ascendant_and_cusp_11": [
+        -1,
+        0,
+        1
+      ],
+      "offsets_within_60_arcsec_all_three": [
+        -2,
+        -1,
+        0,
+        1
+      ]
+    },
+    {
+      "pdf_page": 149,
+      "subject": "Paul Case",
+      "figure_caption": {
+        "offset_s": 0,
+        "ascendant_arcsec": 864.23,
+        "midheaven_arcsec": 1014.17,
+        "cusp_11_arcsec": 979.83
+      },
+      "best_midheaven_fit": {
+        "offset_s": 73,
+        "ascendant_arcsec": 13.84,
+        "midheaven_arcsec": 2.14,
+        "cusp_11_arcsec": 2.13
+      },
+      "offsets_within_30_arcsec_midheaven": [
+        71,
+        72,
+        73,
+        74,
+        75
+      ],
+      "offsets_also_within_60_arcsec_ascendant_and_cusp_11": [
+        71,
+        72,
+        73,
+        74,
+        75
+      ],
+      "offsets_within_60_arcsec_all_three": [
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77
+      ]
+    }
+  ]
+}
