@@ -132,6 +132,7 @@ class CarterDocumentaryHtmlTest(unittest.TestCase):
         html = render_html(self.report)
         self.assertIn('NOT_RUN_NO_INSPECTED_1980_CHART', html)
         self.assertIn('.status{border-left:.25rem solid GrayText;padding-left:.9rem;margin-top:1.5rem;overflow-wrap:anywhere}', html)
+        self.assertIn('main{max-width:70rem;margin:auto;padding:1.2rem;overflow-wrap:anywhere}', html)
         self.assertIn('class="table-scroll" role="region" tabindex="0"', html)
 
     def test_stdin_rejects_duplicate_keys_and_nonfinite_json(self) -> None:
