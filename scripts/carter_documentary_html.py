@@ -147,7 +147,7 @@ p,li{max-width:80ch}.intro{font-size:1.07rem}.statistics{display:flex;flex-wrap:
 table{border-collapse:collapse;width:100%;min-width:42rem;text-align:left}caption{text-align:left;font-weight:600;padding:.75rem}
 th,td{border-top:1px solid GrayText;padding:.6rem .7rem;vertical-align:top}thead{background:ButtonFace}
 .number{font-variant-numeric:tabular-nums;white-space:nowrap}a{color:LinkText;overflow-wrap:anywhere}
-.status{border-left:.25rem solid GrayText;padding-left:.9rem;margin-top:1.5rem}
+.status{border-left:.25rem solid GrayText;padding-left:.9rem;margin-top:1.5rem;overflow-wrap:anywhere}
 @media print{main{max-width:none}body{font-size:10pt}.table-scroll{overflow:visible}table{min-width:0}.stat{break-inside:avoid}a{color:inherit}}
 </style></head><body><main>
 <header><p>Digicomp DR-70 · pesquisa documental · RAEL1980-CARTER</p>
