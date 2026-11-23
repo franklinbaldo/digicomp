@@ -83,6 +83,12 @@ jobs:
           grep -F 'At 12 UT counterfactual: 2/4' /tmp/carter-documentary.txt
           grep -F 'DR-70 instrument fidelity: NOT_RUN_NO_GOLDEN' /tmp/carter-documentary.txt
 
+      - name: Validate historical Carter caption intake with no angles or implied DR-70 fidelity
+        run: |
+          python -S -B -m unittest discover -s tests -p 'test_carter_historical_intake.py' -v
+          python -S -B -m scripts.carter_historical_intake > /tmp/carter-french-intake.json
+          python -c "import json; r=json.load(open('/tmp/carter-french-intake.json')); assert r['state']=='INDEXED_CAPTION_ONLY' and r['fields_transcribed']==0 and r['angular_comparison']=='NOT_RUN_REQUIRES_BLIND_TRANSCRIPTION_REVIEW' and r['dr70_fidelity']=='NOT_RUN_NO_GOLDEN'"
+
       - name: Test accessible HTML output contract without third-party modules
         run: python -S -B -m unittest discover -s tests -p 'test_carter_documentary_html.py' -v
       - name: Export standalone Carter documentary HTML from real versioned inputs
