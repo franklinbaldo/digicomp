@@ -16,7 +16,7 @@ import re
 STATES = frozenset({"INDEXED_CAPTION_ONLY", "INSPECTED_UNREADABLE", "INSPECTED_TRANSCRIBED"})
 FIELDS = frozenset({"ASC", "MC", "Sun", "Moon", "Mercury", "Venus", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune", "Pluto"})
 SOURCE = "https://fr.scribd.com/document/978057391/Les-Aspects-Astrologiques-Dane-Rudhyar-Leyla-Rael-Z-Library"
-EXPECTED_KEYS = frozenset({"case_id", "source_family", "source_url", "copy_description", "printed_page_candidate_from_ocr", "caption_ocr", "state", "image_evidence", "angular_transcriptions", "instrumental_status"})
+EXPECTED_KEYS = frozenset({"case_id", "source_family", "source_url", "copy_description", "printed_page_candidate_from_ocr", "caption_ocr", "state", "image_evidence", "angular_transcriptions", "instrumental_status", "ocr_isbn", "edition_identity"})
 IMAGE_KEYS = frozenset({"printed_page_read", "digital_page_index", "sha256", "inspected_at_utc"})
 TRANSCRIPTION_KEYS = frozenset({"field", "verbatim"})
 
@@ -45,7 +45,9 @@ def validate(record: object) -> dict:
             or record["copy_description"] != "FRENCH_TRANSLATION_COPYRIGHT_1982_UNAUTHENTICATED_SCAN"
             or record["printed_page_candidate_from_ocr"] != 362
             or record["caption_ocr"] != "Jimmy Carter; 1er oct. 1924; 32°02 N; 84°24 W; 13 h 00 T.U."
-            or record["instrumental_status"] != "NO_DR70_GOLDEN"):
+            or record["instrumental_status"] != "NO_DR70_GOLDEN"
+            or record["ocr_isbn"] != "2-268-02638-8"
+            or record["edition_identity"] != "BNF_1997_ISBN_MATCH_NOT_SCAN_AUTHENTICATION"):
         raise ValueError("Unexpected provenance, editorial copy, or fidelity status")
     state = record["state"]
     rows = record["angular_transcriptions"]
@@ -81,6 +83,7 @@ def validate(record: object) -> dict:
         "case_id": record["case_id"],
         "classification": "EDITORIAL_LOCATOR_OR_TRANSCRIPTION_NOT_DR70_GOLDEN",
         "state": state,
+        "edition_identity": record["edition_identity"],
         "fields_transcribed": len(rows),
         "independent_editorial_families": 1,
         "angular_comparison": "NOT_RUN_REQUIRES_BLIND_TRANSCRIPTION_REVIEW",
