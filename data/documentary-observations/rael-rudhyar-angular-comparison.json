@@ -1,0 +1,411 @@
+{
+  "classification": "EDITORIAL_COMPARISON_NOT_DEVICE_FIDELITY",
+  "engine": {
+    "name": "Swiss Ephemeris",
+    "version": "2.10.03",
+    "binding": "pyswisseph==2.10.3.2"
+  },
+  "mode": "Tropical Campanus, Gregorian dates; extended hours measured from start of the date",
+  "rows": [
+    {
+      "pdf_page": 133,
+      "subject": "Alan Watts",
+      "input_variant": "figure_caption",
+      "comparison": {
+        "ascendant": {
+          "modern_longitude_deg": 257.85683962,
+          "published_minus_modern_arcsec": 2855.38
+        },
+        "midheaven": {
+          "modern_longitude_deg": 200.32171576,
+          "published_minus_modern_arcsec": 3761.82
+        },
+        "cusp_11": {
+          "modern_longitude_deg": 215.1235347,
+          "published_minus_modern_arcsec": 3155.28
+        }
+      }
+    },
+    {
+      "pdf_page": 133,
+      "subject": "Alan Watts",
+      "input_variant": "appendix_text",
+      "comparison": {
+        "ascendant": {
+          "modern_longitude_deg": 258.65496046,
+          "published_minus_modern_arcsec": -17.86
+        },
+        "midheaven": {
+          "modern_longitude_deg": 201.3745547,
+          "published_minus_modern_arcsec": -28.4
+        },
+        "cusp_11": {
+          "modern_longitude_deg": 216.00403745,
+          "published_minus_modern_arcsec": -14.53
+        }
+      }
+    },
+    {
+      "pdf_page": 134,
+      "subject": "Albert Einstein",
+      "input_variant": "figure_caption",
+      "comparison": {
+        "ascendant": {
+          "modern_longitude_deg": 101.6464049,
+          "published_minus_modern_arcsec": -47.06
+        },
+        "midheaven": {
+          "modern_longitude_deg": 342.83986517,
+          "published_minus_modern_arcsec": -23.51
+        },
+        "cusp_11": {
+          "modern_longitude_deg": 6.80527173,
+          "published_minus_modern_arcsec": -18.98
+        }
+      }
+    },
+    {
+      "pdf_page": 135,
+      "subject": "Albert Schweitzer",
+      "input_variant": "figure_caption",
+      "comparison": {
+        "ascendant": {
+          "modern_longitude_deg": 276.81979274,
+          "published_minus_modern_arcsec": 48.75
+        },
+        "midheaven": {
+          "modern_longitude_deg": 219.20874986,
+          "published_minus_modern_arcsec": 28.5
+        },
+        "cusp_11": {
+          "modern_longitude_deg": 232.3262578,
+          "published_minus_modern_arcsec": 25.47
+        }
+      }
+    },
+    {
+      "pdf_page": 136,
+      "subject": "Andrew Carnegie",
+      "input_variant": "figure_caption",
+      "comparison": {
+        "ascendant": {
+          "modern_longitude_deg": 221.80174071,
+          "published_minus_modern_arcsec": 53.73
+        },
+        "midheaven": {
+          "modern_longitude_deg": 151.48378868,
+          "published_minus_modern_arcsec": -1.64
+        },
+        "cusp_11": {
+          "modern_longitude_deg": 172.1525747,
+          "published_minus_modern_arcsec": -9.27
+        }
+      }
+    },
+    {
+      "pdf_page": 138,
+      "subject": "Franklin D. Roosevelt",
+      "input_variant": "figure_caption",
+      "comparison": {
+        "ascendant": {
+          "modern_longitude_deg": 168.21288217,
+          "published_minus_modern_arcsec": 433.62
+        },
+        "midheaven": {
+          "modern_longitude_deg": 76.17134265,
+          "published_minus_modern_arcsec": 103.17
+        },
+        "cusp_11": {
+          "modern_longitude_deg": 105.4005545,
+          "published_minus_modern_arcsec": 538.0
+        }
+      }
+    },
+    {
+      "pdf_page": 138,
+      "subject": "Franklin D. Roosevelt",
+      "input_variant": "appendix_text",
+      "comparison": {
+        "ascendant": {
+          "modern_longitude_deg": 168.40931014,
+          "published_minus_modern_arcsec": -273.52
+        },
+        "midheaven": {
+          "modern_longitude_deg": 76.4037488,
+          "published_minus_modern_arcsec": -733.5
+        },
+        "cusp_11": {
+          "modern_longitude_deg": 105.62361025,
+          "published_minus_modern_arcsec": -265.0
+        }
+      }
+    },
+    {
+      "pdf_page": 138,
+      "subject": "Franklin D. Roosevelt",
+      "input_variant": "same_date_wrapped_hour",
+      "comparison": {
+        "ascendant": {
+          "modern_longitude_deg": 167.44069092,
+          "published_minus_modern_arcsec": 3213.51
+        },
+        "midheaven": {
+          "modern_longitude_deg": 75.25674007,
+          "published_minus_modern_arcsec": 3395.74
+        },
+        "cusp_11": {
+          "modern_longitude_deg": 104.52302123,
+          "published_minus_modern_arcsec": 3697.12
+        }
+      }
+    },
+    {
+      "pdf_page": 139,
+      "subject": "George Bernard Shaw",
+      "input_variant": "figure_caption",
+      "comparison": {
+        "ascendant": {
+          "modern_longitude_deg": 79.70171748,
+          "published_minus_modern_arcsec": 113.82
+        },
+        "midheaven": {
+          "modern_longitude_deg": 311.4548483,
+          "published_minus_modern_arcsec": 162.55
+        },
+        "cusp_11": {
+          "modern_longitude_deg": 324.70493784,
+          "published_minus_modern_arcsec": 222.22
+        }
+      }
+    },
+    {
+      "pdf_page": 140,
+      "subject": "George Sand",
+      "input_variant": "figure_caption",
+      "comparison": {
+        "ascendant": {
+          "modern_longitude_deg": 326.33566028,
+          "published_minus_modern_arcsec": 51.62
+        },
+        "midheaven": {
+          "modern_longitude_deg": 254.87145557,
+          "published_minus_modern_arcsec": -17.24
+        },
+        "cusp_11": {
+          "modern_longitude_deg": 264.75013489,
+          "published_minus_modern_arcsec": -0.49
+        }
+      }
+    },
+    {
+      "pdf_page": 141,
+      "subject": "Henry Ford",
+      "input_variant": "figure_caption",
+      "comparison": {
+        "ascendant": {
+          "modern_longitude_deg": 236.96100956,
+          "published_minus_modern_arcsec": 20.37
+        },
+        "midheaven": {
+          "modern_longitude_deg": 162.05551359,
+          "published_minus_modern_arcsec": -19.85
+        },
+        "cusp_11": {
+          "modern_longitude_deg": 186.20517273,
+          "published_minus_modern_arcsec": -18.62
+        }
+      }
+    },
+    {
+      "pdf_page": 144,
+      "subject": "Jerry Brown",
+      "input_variant": "figure_caption",
+      "comparison": {
+        "ascendant": {
+          "modern_longitude_deg": 119.4705727,
+          "published_minus_modern_arcsec": -14.06
+        },
+        "midheaven": {
+          "modern_longitude_deg": 18.624118,
+          "published_minus_modern_arcsec": -26.82
+        },
+        "cusp_11": {
+          "modern_longitude_deg": 50.59052731,
+          "published_minus_modern_arcsec": -25.9
+        }
+      }
+    },
+    {
+      "pdf_page": 144,
+      "subject": "Jerry Brown",
+      "input_variant": "appendix_text",
+      "comparison": {
+        "ascendant": {
+          "modern_longitude_deg": 123.92864016,
+          "published_minus_modern_arcsec": -16063.1
+        },
+        "midheaven": {
+          "modern_longitude_deg": 18.624118,
+          "published_minus_modern_arcsec": -26.82
+        },
+        "cusp_11": {
+          "modern_longitude_deg": 49.08496348,
+          "published_minus_modern_arcsec": 5394.13
+        }
+      }
+    },
+    {
+      "pdf_page": 145,
+      "subject": "Jimmy Carter",
+      "input_variant": "figure_caption",
+      "comparison": {
+        "ascendant": {
+          "modern_longitude_deg": 206.09389253,
+          "published_minus_modern_arcsec": 21.99
+        },
+        "midheaven": {
+          "modern_longitude_deg": 118.4645837,
+          "published_minus_modern_arcsec": 7.5
+        },
+        "cusp_11": {
+          "modern_longitude_deg": 147.89246741,
+          "published_minus_modern_arcsec": -32.88
+        }
+      }
+    },
+    {
+      "pdf_page": 146,
+      "subject": "Krishnamurti",
+      "input_variant": "figure_caption",
+      "comparison": {
+        "ascendant": {
+          "modern_longitude_deg": 319.89489217,
+          "published_minus_modern_arcsec": 18.39
+        },
+        "midheaven": {
+          "modern_longitude_deg": 238.10080836,
+          "published_minus_modern_arcsec": -2.91
+        },
+        "cusp_11": {
+          "modern_longitude_deg": 263.00980258,
+          "published_minus_modern_arcsec": 24.71
+        }
+      }
+    },
+    {
+      "pdf_page": 147,
+      "subject": "Mohandas Gandhi",
+      "input_variant": "figure_caption",
+      "comparison": {
+        "ascendant": {
+          "modern_longitude_deg": 211.47199534,
+          "published_minus_modern_arcsec": 40.82
+        },
+        "midheaven": {
+          "modern_longitude_deg": 121.86086994,
+          "published_minus_modern_arcsec": 20.87
+        },
+        "cusp_11": {
+          "modern_longitude_deg": 152.38683915,
+          "published_minus_modern_arcsec": 47.38
+        }
+      }
+    },
+    {
+      "pdf_page": 149,
+      "subject": "Paul Case",
+      "input_variant": "figure_caption",
+      "comparison": {
+        "ascendant": {
+          "modern_longitude_deg": 187.5932699,
+          "published_minus_modern_arcsec": 864.23
+        },
+        "midheaven": {
+          "modern_longitude_deg": 99.00161876,
+          "published_minus_modern_arcsec": 1014.17
+        },
+        "cusp_11": {
+          "modern_longitude_deg": 127.22782418,
+          "published_minus_modern_arcsec": 979.83
+        }
+      }
+    },
+    {
+      "pdf_page": 150,
+      "subject": "Ram Das",
+      "input_variant": "figure_caption",
+      "comparison": {
+        "ascendant": {
+          "modern_longitude_deg": 91.04729915,
+          "published_minus_modern_arcsec": 9.72
+        },
+        "midheaven": {
+          "modern_longitude_deg": 336.06167469,
+          "published_minus_modern_arcsec": 17.97
+        },
+        "cusp_11": {
+          "modern_longitude_deg": 1.21569247,
+          "published_minus_modern_arcsec": 3.51
+        }
+      }
+    },
+    {
+      "pdf_page": 151,
+      "subject": "V. Nijinsky",
+      "input_variant": "figure_caption",
+      "comparison": {
+        "ascendant": {
+          "modern_longitude_deg": 221.37043755,
+          "published_minus_modern_arcsec": 46.42
+        },
+        "midheaven": {
+          "modern_longitude_deg": 145.96247166,
+          "published_minus_modern_arcsec": 15.1
+        },
+        "cusp_11": {
+          "modern_longitude_deg": 169.30774864,
+          "published_minus_modern_arcsec": 32.1
+        }
+      }
+    },
+    {
+      "pdf_page": 152,
+      "subject": "Werner Erhard",
+      "input_variant": "figure_caption",
+      "comparison": {
+        "ascendant": {
+          "modern_longitude_deg": 71.90567315,
+          "published_minus_modern_arcsec": -20.42
+        },
+        "midheaven": {
+          "modern_longitude_deg": 317.93982864,
+          "published_minus_modern_arcsec": -23.38
+        },
+        "cusp_11": {
+          "modern_longitude_deg": 340.06459657,
+          "published_minus_modern_arcsec": 7.45
+        }
+      }
+    },
+    {
+      "pdf_page": 152,
+      "subject": "Werner Erhard",
+      "input_variant": "same_date_wrapped_hour",
+      "comparison": {
+        "ascendant": {
+          "modern_longitude_deg": 70.84235119,
+          "published_minus_modern_arcsec": 3807.54
+        },
+        "midheaven": {
+          "modern_longitude_deg": 316.94326397,
+          "published_minus_modern_arcsec": 3564.25
+        },
+        "cusp_11": {
+          "modern_longitude_deg": 338.84081087,
+          "published_minus_modern_arcsec": 4413.08
+        }
+      }
+    }
+  ],
+  "dr70_fidelity": "NOT_RUN_NO_GOLDEN"
+}
