@@ -22,6 +22,8 @@ Subtraindo os valores modernos dos editoriais em segundos de arco, **11 de 12** 
 - Inspeção visual com Poppler 26.07.0. A folha 145 renderizada com `pdftoppm -f 145 -l 145 -scale-to 2500 -png` tem SHA-256 `8c8fdfc12ee8800ddf1ef2a59671378fa30148717d04386200e0ace1f8e7904b`. A transcrição aguarda leitura independente. [PDF consultado](https://tibetanbuddhistencyclopedia.com/en/images/b/b8/Dokumen.tips_astrological-aspects.pdf).
 - SHA-256 do PDF com a referência Astrodienst de 2023: `9ca255290905edc68704948ee3b6fb8f71fd503c1fde8873a40eef1c79c10dc2`. A tabela da folha 12 forneceu os literais modernos a segundos de arco.
 
+A comparação foi ampliada ao ascendente, meio do céu e 11ª cúspide dos 16 mapas com hora e coordenadas na legenda. [Resultados do lote](rudhyar-appendix-angular-comparison.md).
+
 ## Índice visual do apêndice
 
 As folhas 133 a 152 da mesma cópia contêm os vinte mapas abaixo. As legendas foram inspecionadas visualmente. Quatro usam a designação *Solar Chart*. Melville inclui coordenadas, mas a legenda não informa hora. Os horários acima de 24:00 permanecem literais.
