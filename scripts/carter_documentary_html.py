@@ -138,7 +138,7 @@ def render_html(data: dict) -> str:
 <title>Carter | confronto documental | Digicomp</title>
 <style>
 :root{color-scheme:light dark;font-family:system-ui,-apple-system,sans-serif;line-height:1.55}
-body{margin:0;background:Canvas;color:CanvasText}main{max-width:70rem;margin:auto;padding:1.2rem}
+body{margin:0;background:Canvas;color:CanvasText}main{max-width:70rem;margin:auto;padding:1.2rem;overflow-wrap:anywhere}
 h1{font-size:clamp(1.55rem,4vw,2.4rem);line-height:1.2}h2{font-size:1.35rem;margin-top:2rem}
 p,li{max-width:80ch}.intro{font-size:1.07rem}.statistics{display:flex;flex-wrap:wrap;gap:1rem}
 .stat{border:1px solid GrayText;border-radius:.5rem;padding:.8rem 1rem;flex:1 1 10rem}
