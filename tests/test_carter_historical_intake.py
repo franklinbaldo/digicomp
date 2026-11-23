@@ -19,6 +19,21 @@ class CarterHistoricalIntakeTest(unittest.TestCase):
         self.assertEqual(result["state"], "INDEXED_CAPTION_ONLY")
         self.assertEqual(result["angular_comparison"], "NOT_RUN_REQUIRES_BLIND_TRANSCRIPTION_REVIEW")
         self.assertEqual(result["dr70_fidelity"], "NOT_RUN_NO_GOLDEN")
+        self.assertEqual(
+            result["edition_identity"],
+            "BNF_1997_ISBN_MATCH_NOT_SCAN_AUTHENTICATION",
+        )
+
+    def test_isbn_match_does_not_authenticate_scanned_edition(self):
+        for field, changed in (
+            ("ocr_isbn", "2-268-00163-6"),
+            ("edition_identity", "AUTHENTICATED_1997_PRINTING"),
+            ("copy_description", "FRENCH_ORIGINAL_1982_PRINTING"),
+        ):
+            bad = deepcopy(self.original)
+            bad[field] = changed
+            with self.subTest(field=field), self.assertRaises(ValueError):
+                validate(bad)
 
     def test_cannot_attach_angle_or_scan_to_ocr_only(self):
         for key, value in (("angular_transcriptions", [{"field": "Sun", "verbatim": "8° Libra"}]),
