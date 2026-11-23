@@ -18,11 +18,90 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Test source contracts without third-party packages
+        # -S disables site-packages even on runners with cached installations.
+        # Modern numerical comparisons remain in the following full-engine step.
+        run: python -S -B -m unittest discover -s tests -p 'test_carter_modern_crosscheck.py' -v
+      - name: Quantify historical qualitative relation without Swiss
+        run: |
+          python -S -B -m unittest discover -s tests -p 'test_carter_qualitative_relation.py' -v
+          python -S -B -m scripts.carter_qualitative_relation > /tmp/carter-septile.json
+          python -c "import json; r=json.load(open('/tmp/carter-septile.json')); assert r['historical_relation_test']=='INDETERMINATE_NO_INSPECTED_1980_CHART' and r['dr70_fidelity']=='NOT_RUN_NO_GOLDEN' and r['minimum_orb_arcseconds']=={'numerator':29709,'denominator':7} and r['secondary_text_nominal_range_degrees']==[50,53] and r['modern_pair_in_secondary_nominal_range'] is True"
+      - name: Quantify three additional 2023 qualitative pairs without Swiss
+        run: |
+          python -S -B -m unittest discover -s tests -p 'test_carter_qualitative_additional.py' -v
+          python -S -B -m scripts.carter_qualitative_additional > /tmp/carter-additional.json
+          python -c "import json; r=json.load(open('/tmp/carter-additional.json')); assert r['dr70_fidelity']=='NOT_RUN_NO_GOLDEN' and r['historical_chart_residual']=='NOT_RUN_NO_INSPECTED_1980_NUMBERS' and [v['modern_deviation_signed_arcseconds'] for v in r['relations']]==[-697,-955,-1966]"
+      - name: Pin external Carter timezone disagreement without Swiss
+        run: python -S -B -m unittest discover -s tests -p 'test_carter_timezone_variant.py' -v
+      - name: Validate documentary modern table without Swiss
+        run: python -S -B -m unittest discover -s tests -p 'test_carter_modern_table.py' -v
       - name: Install external research-only ephemeris binding
         run: python -m pip install 'pyswisseph==2.10.3.2'
       - name: Test modern output, without DR-70 fidelity claims
         run: python -B -m unittest discover -s tests -p 'test_compute_chart_reference.py' -v
+      - name: Test nine published modern positions (never historical DR-70)
+        run: python -B -m unittest discover -s tests -p 'test_carter_modern_crosscheck.py' -v
+      - name: Isolate one-hour UTC shift against both modern source charts
+        run: python -B -m unittest discover -s tests -p 'test_carter_one_variable_utc.py' -v
+      - name: Compare Carter historical house prose with two UTC variants
+        run: |
+          python -B -m unittest discover -s tests -p 'test_carter_historical_house_claims.py' -v
+          python -B -m scripts.carter_historical_house_claims > /tmp/carter-house.json
+          python -c "import json; x=json.load(open('/tmp/carter-house.json')); assert x['published_input']['matched_claims']==4 and x['one_hour_counterfactual']['matched_claims']==2 and all(r['dr70_fidelity']=='NOT_RUN_NO_GOLDEN' for r in x.values())"
+      - name: Scan non-unique Carter four-house time interval (modern only)
+        run: |
+          python -B -m unittest discover -s tests -p 'test_carter_house_time_envelope.py' -v
+          python -B -m scripts.carter_house_time_envelope > /tmp/carter-house-window.json
+          python -c "import json; r=json.load(open('/tmp/carter-house-window.json')); assert r['center_all_four_intervals_utc_minutes_inclusive']==[[755,843]] and len(r['coordinate_controls'])==9 and all(c['matches_12_00_ut']==2 and c['matches_13_00_ut']==4 for c in r['coordinate_controls']) and r['dr70_fidelity']=='NOT_RUN_NO_GOLDEN'"
+
+      - name: Refine non-unique modern house interval to one-second samples
+        run: |
+          python -B -m unittest discover -s tests -p 'test_carter_house_subminute_edges.py' -v
+          python -B -m scripts.carter_house_subminute_edges > /tmp/carter-subminute.json
+          python -c "import json; r=json.load(open('/tmp/carter-subminute.json')); assert r['all_four_sampled_utc_seconds_inclusive']==[[45270,50602]] and r['matching_sample_count']==5333 and r['dr70_fidelity']=='NOT_RUN_NO_GOLDEN'"
+
       - name: Produce an explicitly labelled modern result
         run: |
           python -m scripts.compute_chart_reference --id RAEL1980-CARTER > /tmp/carter-modern.json
           python -c "import json; x=json.load(open('/tmp/carter-modern.json')); assert x['classification']=='MODERN_REFERENCE_NOT_DR70' and x['dr70_fidelity']=='NOT_RUN_NO_GOLDEN' and len(x['cusps_deg'])==12"
+      - name: Render source-labelled 2023 versus modern output, without DR-70 claims
+        run: |
+          python -B -m scripts.carter_modern_table > /tmp/carter-modern-table.txt
+          grep -F 'Modern comparison: 9/9 within ±1 arcsecond' /tmp/carter-modern-table.txt
+          grep -F '1980 printed chart: NOT_RUN_NO_INSPECTED_1980_NUMBERS' /tmp/carter-modern-table.txt
+          grep -F 'DR-70 instrument fidelity: NOT_RUN_NO_GOLDEN' /tmp/carter-modern-table.txt
+
+      - name: Test two-tier Carter output guards without Swiss
+        run: python -S -B -m unittest discover -s tests -p 'test_carter_documentary_dashboard.py' -v
+      - name: Render documentary 1980 house prose alongside modern 2023 chart
+        run: |
+          python -B -m scripts.carter_documentary_dashboard --format json > /tmp/carter-documentary.json
+          python -c "import json; x=json.load(open('/tmp/carter-documentary.json')); h=x['historical_house_prose']; assert x['classification']=='DOCUMENTARY_TWO_TIER_RESEARCH_OUTPUT_NOT_DR70_FIDELITY' and x['modern_2023']['within_tolerance']==9 and h['matches_13_ut']==4 and h['matches_12_ut_counterfactual']==2 and h['independent_editorial_families']==1 and x['dr70_instrumental_comparison']=='NOT_RUN_NO_GOLDEN' and x['historical_chart_numeric_comparison']=='NOT_RUN_NO_INSPECTED_1980_CHART'"
+          python -B -m scripts.carter_documentary_dashboard > /tmp/carter-documentary.txt
+          grep -F 'Historical-category consistency at 13 UT: 4/4' /tmp/carter-documentary.txt
+          grep -F 'At 12 UT counterfactual: 2/4' /tmp/carter-documentary.txt
+          grep -F 'DR-70 instrument fidelity: NOT_RUN_NO_GOLDEN' /tmp/carter-documentary.txt
+
+      - name: Validate historical Carter caption intake with no angles or implied DR-70 fidelity
+        run: |
+          python -S -B -m unittest discover -s tests -p 'test_carter_historical_intake.py' -v
+          python -S -B -m scripts.carter_historical_intake > /tmp/carter-french-intake.json
+          python -c "import json; r=json.load(open('/tmp/carter-french-intake.json')); assert r['state']=='INDEXED_CAPTION_ONLY' and r['fields_transcribed']==0 and r['angular_comparison']=='NOT_RUN_REQUIRES_BLIND_TRANSCRIPTION_REVIEW' and r['dr70_fidelity']=='NOT_RUN_NO_GOLDEN'"
+
+      - name: Test accessible HTML output contract without third-party modules
+        run: python -S -B -m unittest discover -s tests -p 'test_carter_documentary_html.py' -v
+      - name: Export standalone Carter documentary HTML from real versioned inputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B -m scripts.carter_documentary_dashboard --format json |
+            python -S -B -m scripts.carter_documentary_html > /tmp/carter-documentary.html
+          python -c "from pathlib import Path; t=Path('/tmp/carter-documentary.html').read_text(); assert t.startswith('<!doctype html>') and '<table>' in t and '9/9' in t and '4/4' in t and '2/4' in t and 'NOT_RUN_NO_GOLDEN' in t and 'NOT_RUN_NO_INSPECTED_1980_CHART' in t"
+      - name: Attach standalone research report (not a published site)
+        uses: actions/upload-artifact@v4
+        with:
+          name: carter-two-tier-offline-html
+          path: /tmp/carter-documentary.html
+          if-no-files-found: error
+          retention-days: 7

@@ -1,0 +1,124 @@
+{
+  "format_version": "0.1",
+  "classification": "MODERN_CHART_CONTROL_NOT_DR70_OUTPUT",
+  "case_id": "RAEL1980-CARTER",
+  "source": {
+    "title": "Jimmy Carter and the Knight of Pentacles Card",
+    "author": "Naomi Rabinowitz",
+    "publication_year": 2023,
+    "chart_provider": "AstroDienst",
+    "chart_date": "2023-02-19",
+    "url": "https://static1.squarespace.com/static/625588022bac29595ab0c386/t/652c6205bd50527fa4e8778a/1697407494104/Jimmy%2BCarter%2Band%2Bthe%2BKnight%2Bof%2BPentacles_final.pdf",
+    "locator": "PDF printed p. 12 (file page index 11), Natal chart, planetary positions and house cusps/angles",
+    "extraction": "Text/indexed PDF plus direct rendered-page inspection (22 Nov 2026) of printed p. 12: all nine planetary/ASC/MC values, UT, coordinates, Whole Signs and chart date visually corroborated; corroborating independent visual check by Lagarto on digicomp PR #148. PDF bytes not downloaded locally; original-file SHA-256 NOT_OBTAINED. Pluto (Cancer 13°31′31″) additionally read from the same modern chart for qualitative arithmetic only; it is NOT an added modern-reference comparison field.",
+    "source_pdf_sha256": null
+  },
+  "input_as_published": {
+    "date": "1924-10-01",
+    "universal_time": "13:00",
+    "latitude": "32N02",
+    "longitude": "84W24"
+  },
+  "sidereal_clock": {
+    "classification": "MODERN_PUBLISHED_AUXILIARY_CLOCK_NOT_DR70",
+    "literal": "8:02:19",
+    "locator": "PDF printed p. 12, Natal chart header: Sid. Time",
+    "tolerance_seconds": 1
+  },
+  "chart_house_system": "Whole Signs",
+  "positions": {
+    "ascendant": {
+      "sign": "Libra",
+      "degrees": 26,
+      "minutes": 5,
+      "seconds": 38,
+      "literal": "26° 5′ 38″"
+    },
+    "midheaven": {
+      "sign": "Cancer",
+      "degrees": 28,
+      "minutes": 27,
+      "seconds": 53,
+      "literal": "28° 27′ 53″"
+    },
+    "sun": {
+      "sign": "Libra",
+      "degrees": 8,
+      "minutes": 3,
+      "seconds": 42,
+      "literal": "8° 3′ 42″"
+    },
+    "moon": {
+      "sign": "Scorpio",
+      "degrees": 13,
+      "minutes": 47,
+      "seconds": 47,
+      "literal": "13° 47′ 47″"
+    },
+    "mercury": {
+      "sign": "Virgo",
+      "degrees": 21,
+      "minutes": 11,
+      "seconds": 20,
+      "literal": "21° 11′ 20″"
+    },
+    "venus": {
+      "sign": "Leo",
+      "degrees": 23,
+      "minutes": 19,
+      "seconds": 54,
+      "literal": "23° 19′ 54″"
+    },
+    "mars": {
+      "sign": "Aquarius",
+      "degrees": 25,
+      "minutes": 53,
+      "seconds": 5,
+      "literal": "25° 53′ 5″"
+    },
+    "jupiter": {
+      "sign": "Sagittarius",
+      "degrees": 14,
+      "minutes": 25,
+      "seconds": 51,
+      "literal": "14° 25′ 51″"
+    },
+    "saturn": {
+      "sign": "Scorpio",
+      "degrees": 1,
+      "minutes": 54,
+      "seconds": 52,
+      "literal": "1° 54′ 52″"
+    }
+  },
+  "scope": {
+    "comparison_only": [
+      "ascendant",
+      "midheaven",
+      "sun",
+      "moon",
+      "mercury",
+      "venus",
+      "mars",
+      "jupiter",
+      "saturn"
+    ],
+    "excluded": "House cusps: modern cited chart uses Whole Signs whereas reference experiment uses Campanus",
+    "tolerance_arcseconds": 1,
+    "engine_independence": "NOT_ESTABLISHED: AstroDienst and swisseph may share the same Swiss Ephemeris engine",
+    "relation_to_1980": "MODERN_2023_CONTROL_ONLY; not a transcription of the 1980 Rael/Rudhyar book chart",
+    "dr70_native_output": false,
+    "golden_instrumental": false,
+    "historical_chart_residuals": "NOT_RUN_NO_INSPECTED_1980_NUMBERS",
+    "dr70_fidelity": "NOT_RUN_NO_GOLDEN"
+  },
+  "auxiliary_qualitative_positions": {
+    "pluto": {
+      "sign": "Cancer",
+      "degrees": 13,
+      "minutes": 31,
+      "seconds": 31,
+      "literal": "13° 31′ 31″"
+    }
+  }
+}
