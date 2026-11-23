@@ -1,0 +1,267 @@
+{
+  "format_version": "1.0",
+  "classification": "PUBLISHED_EDITORIAL_CHARTS_WITH_REPORTED_DR70_RECALCULATION",
+  "source_family": "RUDHYAR-RAEL-ASTROLOGICAL-ASPECTS-APPENDIX-I",
+  "source": {
+    "url": "https://tibetanbuddhistencyclopedia.com/en/images/b/b8/Dokumen.tips_astrological-aspects.pdf",
+    "sha256": "bb15436c51d12d1524ed8fd9ae0a6db92c553ddde4f6f1a11e3b1917ca85c2fb",
+    "pdf_page_base": 1,
+    "transcription": "Single visual reading of cusps 1, 10 and 11 before modern calculations. Signs named from glyphs; dates and times normalized typographically without changing the written day or hour."
+  },
+  "fields": [
+    "ascendant",
+    "midheaven",
+    "cusp_11"
+  ],
+  "cases": [
+    {
+      "pdf_page": 133,
+      "subject": "Alan Watts",
+      "figure_input": {
+        "date": "1915-01-05",
+        "time": "06:20",
+        "latitude": "51N25",
+        "longitude": "0W00"
+      },
+      "published_angles": {
+        "ascendant": "Sagittarius 18 39",
+        "midheaven": "Libra 21 22",
+        "cusp_11": "Scorpio 6 00"
+      },
+      "appendix_variant": {
+        "date": "1915-01-06"
+      }
+    },
+    {
+      "pdf_page": 134,
+      "subject": "Albert Einstein",
+      "figure_input": {
+        "date": "1879-03-14",
+        "time": "10:50",
+        "latitude": "48N24",
+        "longitude": "10E00"
+      },
+      "published_angles": {
+        "ascendant": "Cancer 11 38",
+        "midheaven": "Pisces 12 50",
+        "cusp_11": "Aries 6 48"
+      }
+    },
+    {
+      "pdf_page": 135,
+      "subject": "Albert Schweitzer",
+      "figure_input": {
+        "date": "1875-01-14",
+        "time": "06:22",
+        "latitude": "48N45",
+        "longitude": "8E00"
+      },
+      "published_angles": {
+        "ascendant": "Capricorn 6 50",
+        "midheaven": "Scorpio 9 13",
+        "cusp_11": "Scorpio 22 20"
+      }
+    },
+    {
+      "pdf_page": 136,
+      "subject": "Andrew Carnegie",
+      "figure_input": {
+        "date": "1835-11-25",
+        "time": "06:14",
+        "latitude": "56N04",
+        "longitude": "3W28"
+      },
+      "published_angles": {
+        "ascendant": "Scorpio 11 49",
+        "midheaven": "Virgo 1 29",
+        "cusp_11": "Virgo 22 09"
+      }
+    },
+    {
+      "pdf_page": 138,
+      "subject": "Franklin D. Roosevelt",
+      "figure_input": {
+        "date": "1882-01-30",
+        "time": "25:15",
+        "latitude": "41N48",
+        "longitude": "73W56"
+      },
+      "published_angles": {
+        "ascendant": "Virgo 18 20",
+        "midheaven": "Gemini 16 12",
+        "cusp_11": "Cancer 15 33"
+      },
+      "appendix_variant": {
+        "time": "25:16"
+      }
+    },
+    {
+      "pdf_page": 139,
+      "subject": "George Bernard Shaw",
+      "figure_input": {
+        "date": "1856-07-26",
+        "time": "01:05",
+        "latitude": "53N20",
+        "longitude": "6W15"
+      },
+      "published_angles": {
+        "ascendant": "Gemini 19 44",
+        "midheaven": "Aquarius 11 30",
+        "cusp_11": "Aquarius 24 46"
+      }
+    },
+    {
+      "pdf_page": 140,
+      "subject": "George Sand",
+      "figure_input": {
+        "date": "1804-07-01",
+        "time": "22:06",
+        "latitude": "48N50",
+        "longitude": "2E20"
+      },
+      "published_angles": {
+        "ascendant": "Aquarius 26 21",
+        "midheaven": "Sagittarius 14 52",
+        "cusp_11": "Sagittarius 24 45"
+      }
+    },
+    {
+      "pdf_page": 141,
+      "subject": "Henry Ford",
+      "figure_input": {
+        "date": "1863-07-30",
+        "time": "19:55",
+        "latitude": "42N18",
+        "longitude": "83W15"
+      },
+      "published_angles": {
+        "ascendant": "Scorpio 26 58",
+        "midheaven": "Virgo 12 03",
+        "cusp_11": "Libra 6 12"
+      }
+    },
+    {
+      "pdf_page": 144,
+      "subject": "Jerry Brown",
+      "figure_input": {
+        "date": "1938-04-07",
+        "time": "20:00",
+        "latitude": "34N03",
+        "longitude": "118W15"
+      },
+      "published_angles": {
+        "ascendant": "Cancer 29 28",
+        "midheaven": "Aries 18 37",
+        "cusp_11": "Taurus 20 35"
+      },
+      "appendix_variant": {
+        "latitude": "43N03"
+      }
+    },
+    {
+      "pdf_page": 145,
+      "subject": "Jimmy Carter",
+      "figure_input": {
+        "date": "1924-10-01",
+        "time": "13:00",
+        "latitude": "32N02",
+        "longitude": "84W24"
+      },
+      "published_angles": {
+        "ascendant": "Libra 26 06",
+        "midheaven": "Cancer 28 28",
+        "cusp_11": "Leo 27 53"
+      }
+    },
+    {
+      "pdf_page": 146,
+      "subject": "Krishnamurti",
+      "figure_input": {
+        "date": "1895-05-11",
+        "time": "19:05",
+        "latitude": "13N05",
+        "longitude": "80E17"
+      },
+      "published_angles": {
+        "ascendant": "Aquarius 19 54",
+        "midheaven": "Scorpio 28 06",
+        "cusp_11": "Sagittarius 23 01"
+      }
+    },
+    {
+      "pdf_page": 147,
+      "subject": "Mohandas Gandhi",
+      "figure_input": {
+        "date": "1869-10-02",
+        "time": "02:53",
+        "latitude": "21N30",
+        "longitude": "70E00"
+      },
+      "published_angles": {
+        "ascendant": "Scorpio 1 29",
+        "midheaven": "Leo 1 52",
+        "cusp_11": "Virgo 2 24"
+      }
+    },
+    {
+      "pdf_page": 149,
+      "subject": "Paul Case",
+      "figure_input": {
+        "date": "1844-10-03",
+        "time": "11:00",
+        "latitude": "43N06",
+        "longitude": "77W27"
+      },
+      "published_angles": {
+        "ascendant": "Libra 7 50",
+        "midheaven": "Cancer 9 17",
+        "cusp_11": "Leo 7 30"
+      }
+    },
+    {
+      "pdf_page": 150,
+      "subject": "Ram Das",
+      "figure_input": {
+        "date": "1931-04-06",
+        "time": "14:20",
+        "latitude": "42N22",
+        "longitude": "71W04"
+      },
+      "published_angles": {
+        "ascendant": "Cancer 1 03",
+        "midheaven": "Pisces 6 04",
+        "cusp_11": "Aries 1 13"
+      }
+    },
+    {
+      "pdf_page": 151,
+      "subject": "V. Nijinsky",
+      "figure_input": {
+        "date": "1890-03-12",
+        "time": "20:29",
+        "latitude": "50N27",
+        "longitude": "30E32"
+      },
+      "published_angles": {
+        "ascendant": "Scorpio 11 23",
+        "midheaven": "Leo 25 58",
+        "cusp_11": "Virgo 19 19"
+      }
+    },
+    {
+      "pdf_page": 152,
+      "subject": "Werner Erhard",
+      "figure_input": {
+        "date": "1935-09-05",
+        "time": "27:25",
+        "latitude": "39N57",
+        "longitude": "75W10"
+      },
+      "published_angles": {
+        "ascendant": "Gemini 11 54",
+        "midheaven": "Aquarius 17 56",
+        "cusp_11": "Pisces 10 04"
+      }
+    }
+  ]
+}

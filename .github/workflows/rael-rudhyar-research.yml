@@ -1,0 +1,101 @@
+name: Compare published Rael-Rudhyar house angles
+on:
+  push:
+    branches: [research/rael-rudhyar-angular-comparison]
+    paths:
+      - .github/workflows/rael-rudhyar-research.yml
+      - data/documentary-observations/rael-rudhyar-angles.json
+permissions:
+  contents: read
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - name: Compare editorial angles with Swiss Ephemeris
+        shell: bash
+        run: |
+          uv run --no-project --python 3.12 --with pyswisseph==2.10.3.2 python - <<'PY'
+          from datetime import date
+          import json
+          from pathlib import Path
+          import re
+
+          import swisseph as swe
+
+          SIGNS = ("Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra",
+                   "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces")
+
+
+          def coordinate(literal: str) -> float:
+              match = re.fullmatch(r"(\d+)([NSEW])(\d{2})", literal)
+              assert match is not None, literal
+              degrees, hemisphere, minutes = match.groups()
+              assert 0 <= int(minutes) < 60, literal
+              magnitude = int(degrees) + int(minutes) / 60
+              return -magnitude if hemisphere in "SW" else magnitude
+
+
+          def angle(literal: str) -> float:
+              sign, degrees, minutes = literal.split()
+              assert 0 <= int(degrees) < 30 and 0 <= int(minutes) < 60, literal
+              return 30 * SIGNS.index(sign) + int(degrees) + int(minutes) / 60
+
+
+          source = Path("data/documentary-observations/rael-rudhyar-angles.json").read_bytes()
+          cases = json.loads(source)["cases"]
+          assert len({case["pdf_page"] for case in cases}) == len(cases) == 16
+          fields = ("ascendant", "midheaven", "cusp_11")
+          rows = []
+          for case in cases:
+              figure = case["figure_input"]
+              variants = {"figure_caption": figure}
+              if "appendix_variant" in case:
+                  variants["appendix_text"] = figure | case["appendix_variant"]
+              hours, minutes = map(int, figure["time"].split(":"))
+              if hours >= 24:
+                  variants["same_date_wrapped_hour"] = figure | {"time": f"{hours - 24:02}:{minutes:02}"}
+              for label, values in variants.items():
+                  day = date.fromisoformat(values["date"])
+                  hours, minutes = map(int, values["time"].split(":"))
+                  assert 0 <= hours <= 47 and 0 <= minutes < 60
+                  jd = swe.julday(day.year, day.month, day.day, hours + minutes / 60, swe.GREG_CAL)
+                  lat = coordinate(values["latitude"])
+                  lon = coordinate(values["longitude"])
+                  assert abs(lat) <= 90 and abs(lon) <= 180
+                  cusps, axes = swe.houses_ex(jd, lat, lon, b"C", 0)
+                  assert abs(cusps[0] - axes[0]) < 1e-9 and abs(cusps[9] - axes[1]) < 1e-9
+                  comparisons = {}
+                  for field, modern in zip(fields, (axes[0], axes[1], cusps[10]), strict=True):
+                      published = angle(case["published_angles"][field])
+                      delta = (published - modern + 180) % 360 - 180
+                      comparisons[field] = {
+                          "modern_longitude_deg": round(modern, 8),
+                          "published_minus_modern_arcsec": round(delta * 3600, 2),
+                      }
+                  rows.append({
+                      "pdf_page": case["pdf_page"],
+                      "subject": case["subject"],
+                      "input_variant": label,
+                      "comparison": comparisons,
+                  })
+
+          result = {
+              "classification": "EDITORIAL_COMPARISON_NOT_DEVICE_FIDELITY",
+              "engine": {"name": "Swiss Ephemeris", "version": swe.version, "binding": "pyswisseph==2.10.3.2"},
+              "mode": "Tropical Campanus, Gregorian dates; extended hours measured from start of the date",
+              "rows": rows,
+              "dr70_fidelity": "NOT_RUN_NO_GOLDEN",
+          }
+          Path("rael-rudhyar-comparison.json").write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
+          for row in rows:
+              deltas = [v["published_minus_modern_arcsec"] for v in row["comparison"].values()]
+              print(row["pdf_page"], row["input_variant"], deltas)
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: rael-rudhyar-comparison
+          path: rael-rudhyar-comparison.json
+          if-no-files-found: error
