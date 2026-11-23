@@ -1,0 +1,126 @@
+name: Check clock shifts in Rael-Rudhyar outliers
+on:
+  push:
+    branches: [research/rael-rudhyar-outlier-clock]
+    paths:
+      - .github/workflows/rael-outlier-clock.yml
+      - data/documentary-observations/rael-rudhyar-angles.json
+permissions:
+  contents: read
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - name: Compare editorial angles with Swiss Ephemeris
+        shell: bash
+        run: |
+          uv run --no-project --python 3.12 --with pyswisseph==2.10.3.2 python - <<'PY'
+          from dataclasses import dataclass
+          from datetime import date
+          import json
+          from pathlib import Path
+          import re
+
+          import swisseph as swe
+
+          SIGNS = ("Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra",
+                   "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces")
+
+
+          def coordinate(literal: str) -> float:
+              match = re.fullmatch(r"(\d+)([NSEW])(\d{2})", literal)
+              assert match is not None, literal
+              degrees, hemisphere, minutes = match.groups()
+              assert 0 <= int(minutes) < 60, literal
+              magnitude = int(degrees) + int(minutes) / 60
+              return -magnitude if hemisphere in "SW" else magnitude
+
+
+          def angle(literal: str) -> float:
+              sign, degrees, minutes = literal.split()
+              assert 0 <= int(degrees) < 30 and 0 <= int(minutes) < 60, literal
+              return 30 * SIGNS.index(sign) + int(degrees) + int(minutes) / 60
+
+
+          @dataclass(frozen=True)
+          class Trial:
+              offset_s: int
+              ascendant_arcsec: float
+              midheaven_arcsec: float
+              cusp_11_arcsec: float
+
+              def within(self, bounds: tuple[float, float, float]) -> bool:
+                  errors = (self.ascendant_arcsec, self.midheaven_arcsec, self.cusp_11_arcsec)
+                  return all(abs(error) <= limit for error, limit in zip(errors, bounds, strict=True))
+
+              def record(self) -> dict[str, float | int]:
+                  return {
+                      "offset_s": self.offset_s,
+                      "ascendant_arcsec": round(self.ascendant_arcsec, 2),
+                      "midheaven_arcsec": round(self.midheaven_arcsec, 2),
+                      "cusp_11_arcsec": round(self.cusp_11_arcsec, 2),
+                  }
+
+
+          def residual(published: float, modern: float) -> float:
+              return ((published - modern + 180) % 360 - 180) * 3600
+
+
+          source = Path("data/documentary-observations/rael-rudhyar-angles.json")
+          cases = json.loads(source.read_bytes())["cases"]
+          output = []
+          for case in cases:
+              if case["pdf_page"] not in {138, 139, 145, 149}:
+                  continue
+              values = case["figure_input"]
+              day = date.fromisoformat(values["date"])
+              hours, minutes = map(int, values["time"].split(":"))
+              jd = swe.julday(day.year, day.month, day.day, hours + minutes / 60, swe.GREG_CAL)
+              lat = coordinate(values["latitude"])
+              lon = coordinate(values["longitude"])
+              asc, mc, cusp = (
+                  angle(case["published_angles"][key])
+                  for key in ("ascendant", "midheaven", "cusp_11")
+              )
+              trials = []
+              for offset_s in range(-180, 181):
+                  cusps, axes = swe.houses_ex(jd + offset_s / 86400, lat, lon, b"C", 0)
+                  trials.append(Trial(offset_s, residual(asc, axes[0]), residual(mc, axes[1]),
+                                      residual(cusp, cusps[10])))
+              best = min(trials, key=lambda trial: abs(trial.midheaven_arcsec))
+              mc_window = [trial for trial in trials if abs(trial.midheaven_arcsec) <= 30]
+              compatible = [trial.offset_s for trial in mc_window if trial.within((60, 30, 60))]
+              all_within_60 = [trial.offset_s for trial in trials if trial.within((60, 60, 60))]
+              assert mc_window, case["subject"]
+              assert abs(best.offset_s) < 180, case["subject"]
+              output.append({
+                  "pdf_page": case["pdf_page"],
+                  "subject": case["subject"],
+                  "figure_caption": trials[180].record(),
+                  "best_midheaven_fit": best.record(),
+                  "offsets_within_30_arcsec_midheaven": [trial.offset_s for trial in mc_window],
+                  "offsets_also_within_60_arcsec_ascendant_and_cusp_11": compatible,
+                  "offsets_within_60_arcsec_all_three": all_within_60,
+              })
+
+          assert len(output) == 4
+          assert 0 in next(row for row in output if row["pdf_page"] == 145)["offsets_also_within_60_arcsec_ascendant_and_cusp_11"]
+          result = {
+              "classification": "EDITORIAL_SENSITIVITY_ANALYSIS_NOT_DEVICE_FIDELITY",
+              "engine": {"name": "Swiss Ephemeris", "version": swe.version, "binding": "pyswisseph==2.10.3.2"},
+              "offset_grid_seconds": [-180, 180, 1],
+              "source_sha256": __import__("hashlib").sha256(source.read_bytes()).hexdigest(),
+              "rows": output,
+          }
+          serialized = json.dumps(result, indent=2) + "\n"
+          Path("rael-outlier-clock.json").write_text(serialized, encoding="utf-8")
+          print(serialized)
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: rael-outlier-clock
+          path: rael-outlier-clock.json
+          if-no-files-found: error
