@@ -48,6 +48,19 @@ Diferenças em segundos de arco, calculadas como valor publicado menos referênc
 - **Erhard e Roosevelt.** Contar as horas a partir da meia-noite da data escrita leva Erhard às 03:25 do dia 6, compatível com os três ângulos dentro de 30″. Para Roosevelt, tanto 25:15 quanto 25:16 deixam diferenças acima de um minuto de arco em todos os campos. Máximo de cerca de 9′ com a primeira hora e 12′ com a segunda. [Erhard](https://tibetanbuddhistencyclopedia.com/en/images/b/b8/Dokumen.tips_astrological-aspects.pdf#page=152) · [Roosevelt](https://tibetanbuddhistencyclopedia.com/en/images/b/b8/Dokumen.tips_astrological-aspects.pdf#page=138).
 - **Shaw e Case.** Os resíduos máximos são de 3′42″ e 16′54″, respectivamente. O primeiro confronto preserva as entradas das legendas, inclusive nos casos que divergem. [Shaw](https://tibetanbuddhistencyclopedia.com/en/images/b/b8/Dokumen.tips_astrological-aspects.pdf#page=139) · [Case](https://tibetanbuddhistencyclopedia.com/en/images/b/b8/Dokumen.tips_astrological-aspects.pdf#page=149).
 
+## Um deslocamento de hora explica as diferenças?
+
+Para Roosevelt, Shaw e Case, calculei os ângulos Campanus em passos de 1 segundo, de −3 a +3 minutos em torno da hora da figura, mantendo data e coordenadas conforme o ensaio anterior. Carter serviu de controle. Selecionei os horários que deixavam o meio do céu a até 30″ da figura, metade da unidade com que o livro registra os ângulos. Só então conferi se o ascendente e a 11ª cúspide também ficavam dentro de ±60″. [Resultados e intervalos em JSON](../data/documentary-observations/rael-rudhyar-outlier-clock.json) · [Execução pública](https://github.com/franklinbaldo/digicomp/actions/runs/45249557054) · [Rotina executada](https://github.com/franklinbaldo/digicomp/blob/daba6676e121bfc2b366c8a3b34afc4b78309cf0/.github/workflows/rael-outlier-clock.yml).
+
+| Mapa | Deslocamento compatível com os três critérios | Leitura |
+| --- | --- | --- |
+| George Bernard Shaw | +9 a +10 s | A partir de 01:05 U.T., ambos os deslocamentos aproximam os três ângulos. |
+| Paul Case | +71 a +75 s | A partir de 11:00 U.T., +73 s deixa resíduos de +13,84″ no ascendente, +2,14″ no meio do céu e +2,13″ na 11ª cúspide. |
+| Franklin D. Roosevelt | Nenhum | A partir de 25:15 U.T., +7 s aproxima o meio do céu a 5,54″. O ascendente ainda difere em 5′51″ e a 11ª cúspide em 7′24″. Nenhum segundo da grade deixa os três ângulos dentro de ±60″, mesmo ampliando a tolerância para o meio do céu. |
+| Jimmy Carter | −1 a +1 s | A hora da legenda já satisfaz os três critérios. |
+
+O ajuste identifica horários modernos compatíveis com a figura dentro da janela testada. Uma diferença de longitude ou de convenção de tempo sideral também pode deslocar esses ângulos. A origem das discrepâncias e a hora efetivamente usada para produzir cada mapa continuam em aberto. As horas publicadas seguem no registro de transcrição.
+
 ## Reprodução e limites
 
 O cálculo usou Swiss Ephemeris 2.10.03, com `pyswisseph==2.10.3.2`, calendário gregoriano, longitudes leste positivas, zodíaco tropical e `houses_ex` em Campanus. As horas acima de 24:00 foram passadas ao dia juliano como horas decorridas desde o início da data impressa. A execução verificou a igualdade entre as cúspides 1 e 10 e os ângulos correspondentes na referência moderna. O resultado completo tem SHA-256 `e4669a62acdccc495224ad894bc2e73b83f7d56aaeff9f0076b6db89689defb2`. [Rotina executada sobre as leituras fixadas](https://github.com/franklinbaldo/digicomp/blob/fe598a514ae7ebf1715c7a001c663397e8277062/.github/workflows/rael-rudhyar-research.yml) · [Execução pública](https://github.com/franklinbaldo/digicomp/actions/runs/45185697489) · [Manual da Swiss Ephemeris](https://www.astro.com/swisseph/swephprg.htm#_Toc112949182).
