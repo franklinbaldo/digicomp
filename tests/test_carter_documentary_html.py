@@ -125,6 +125,15 @@ class CarterDocumentaryHtmlTest(unittest.TestCase):
         self.assertIn("8/9", out)
         self.assertIn("Diverge", out)
 
+    def test_status_text_reflows_without_horizontal_document_scroll(self) -> None:
+        # Long machine-readable statuses and section titles must wrap at 200%
+        # text size. A Chromium 320 CSS px probe previously found document
+        # scrollWidth=569 without this rule (overflow inside the status box).
+        html = render_html(self.report)
+        self.assertIn('NOT_RUN_NO_INSPECTED_1980_CHART', html)
+        self.assertIn('.status{border-left:.25rem solid GrayText;padding-left:.9rem;margin-top:1.5rem;overflow-wrap:anywhere}', html)
+        self.assertIn('class="table-scroll" role="region" tabindex="0"', html)
+
     def test_stdin_rejects_duplicate_keys_and_nonfinite_json(self) -> None:
         for incoming in ('{"case_id":1,"case_id":2}', '{"x":NaN}', '{"x":1e999}'):
             with self.subTest(incoming=incoming):
