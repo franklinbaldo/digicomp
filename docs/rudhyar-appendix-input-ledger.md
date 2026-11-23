@@ -8,6 +8,8 @@ estado: provisorio
 
 # Seis entradas declaradas para mapas de Raël/Rudhyar
 
+**Atualização de 23/11/2026.** A cópia Mindfire preserva as vinte figuras. A inspeção visual confirmou as divergências de Watts, Roosevelt e Brown e permitiu comparar valores angulares de Carter. [Índice das figuras e resultados](rudhyar-carter-facsimile.md).
+
 ## Fonte, custódia e classe da evidência
 
 **🦇 Morcego R145 · leitura de texto HTML em 21/11/2026.** A edição de *Astrological Aspects: A Process-Oriented Approach*, de Leyla Raël e Dane Rudhyar (copyright 1980), declara no **Apêndice I, "Example Horoscopes"**, que os exemplos foram recalculados com cúspides Campanus em um computador astrológico DR-70. O prefácio de 23/03/1979 agradece a Nicki Michaels pela conferência dos mapas no computador e a Tony Milner pela caligrafia dos desenhos. **Nenhuma dessas declarações atribui a tipografia dos gráficos a uma impressora DR-70.**
